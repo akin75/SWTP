@@ -1,4 +1,5 @@
 # SWTP
 Softwaretechnik-Projekt
-# Team
+
+# AUTOREN
 Akin, Ufuk, Andre, Martin
