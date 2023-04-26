@@ -23,20 +23,20 @@ public class PlayerController : MonoBehaviour
 
         moveDirection = new Vector2(moveX, moveY).normalized;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
-        
-        
-        // Raycast (fehlerhaft: Ray nur bis zur Maus)
-        /*
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-        if (hit.collider != null && hit.collider.CompareTag("Enemy") && Input.GetMouseButton(0))
-        {
-            Debug.Log("hit");
-            Destroy(hit.collider.gameObject);
-        }
-            */
+
+        FollowPlayer();
     }
         
+    
+    void FollowPlayer()
+    {
+        Vector3 playerPos = transform.position;
+        Vector3 cameraPos = cam.transform.position;
+
+        cameraPos.x = playerPos.x;
+        cameraPos.y = playerPos.y;
+        cam.transform.position = cameraPos;
+    }
 
 
     // Update is called once per frame
