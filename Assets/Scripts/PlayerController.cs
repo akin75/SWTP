@@ -1,51 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public Rigidbody2D rb;
     public Weapon weapon;
-
-    Vector2 moveDirection;
-    Vector2 mousePosition;
-
-    
     public Camera cam;
-
     
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
     void Update()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        moveDirection = new Vector2(moveX, moveY).normalized;
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (moveInput != Vector2.zero)
+        {
+            rb.MovePosition(rb.position + moveInput.normalized * moveSpeed * Time.deltaTime);
+        }
 
-        FollowPlayer();
-    }
+        weapon.transform.position = rb.transform.position;
+        // Richte das Waffenobjekt auf den Mauszeiger aus
+        Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+        //mousePosition.z = 0f;
+        weapon.Aim(mousePosition);
         
-    
-    void FollowPlayer()
-    {
-        Vector3 playerPos = transform.position;
-        Vector3 cameraPos = cam.transform.position;
-
-        cameraPos.x = playerPos.x;
-        cameraPos.y = playerPos.y;
-        cam.transform.position = cameraPos;
-    }
-
-
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
-
-        Vector2 aimDirection = mousePosition - rb.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = aimAngle;
+        Debug.Log("Mausposition" + mousePosition);
     }
 }
