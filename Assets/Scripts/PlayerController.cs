@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         weapon.transform.position = rb.transform.position;
         // Richte das Waffenobjekt auf den Mauszeiger aus
         Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
-        //mousePosition.z = 0f;
+        mousePosition.z = 0f;
         weapon.Aim(mousePosition);
         
         Debug.Log("Mausposition" + mousePosition);
