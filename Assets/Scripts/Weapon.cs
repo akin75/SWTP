@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     public float timeBetweenShots = 0.02f;
     public float maxDeviation = 10f;
     private float timeSinceLastShot;
-    public static int damage = 40;
+    public static int damage = 20;
 
     
 

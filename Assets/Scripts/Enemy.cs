@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 
     public int maxHealth = 100;
     public int currentHealth;
-    public int damage = 1;
+    public int damage = 2;
 
     public HealthBar healthBar;
 
@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(Weapon.damage);
+            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
         }
     }
 
