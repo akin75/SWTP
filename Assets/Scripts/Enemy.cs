@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 
     public int maxHealth = 100;
     public int currentHealth;
+    public int damage = 1;
 
     public HealthBar healthBar;
 
@@ -17,7 +18,16 @@ public class Enemy : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-    public void TakeDamage(int damage) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<Player>().TakeDamage(Weapon.damage);
+        }
+    }
+
+    public void TakeDamage(int damage) 
+    {
         currentHealth = currentHealth - damage;
         healthBar.SetHealth(currentHealth);
 

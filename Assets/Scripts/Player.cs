@@ -17,15 +17,8 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage) 
     {
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            TakeDamage(20);
-        }
-    }
-
-    void TakeDamage(int damage) {
         currentHealth = currentHealth - damage;
         healthBar.SetHealth(currentHealth);
 
