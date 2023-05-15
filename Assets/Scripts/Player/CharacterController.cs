@@ -9,6 +9,7 @@ public class CharacterController : MonoBehaviour
     public Camera cam;
     public float timeBetweenShots = 0.02f;
     public float maxDeviation = 10f;
+    public static int damage = 20;
     private float timeSinceLastShot = 0f;
     
     private Rigidbody2D rb;
