@@ -250,7 +250,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   damage: 2
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 4865728092242802950}
 --- !u!1001 &9016285316643830969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -377,3 +377,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
   m_PrefabInstance: {fileID: 9016285316643830969}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4865728092242802950 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4514522528804586943, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+  m_PrefabInstance: {fileID: 9016285316643830969}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2584996bd7961749830a27164413b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
