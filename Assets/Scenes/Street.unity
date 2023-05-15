@@ -10131,7 +10131,19 @@ PrefabInstance:
       objectReference: {fileID: 1009138217}
     - target: {fileID: 1265832831496038814, guid: a205b9df3e859134ca1f3fb8965ca2d3, type: 3}
       propertyPath: moveSpeed
-      value: 10
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964286142829886402, guid: a205b9df3e859134ca1f3fb8965ca2d3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964286142829886402, guid: a205b9df3e859134ca1f3fb8965ca2d3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194799618159517665, guid: a205b9df3e859134ca1f3fb8965ca2d3, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a205b9df3e859134ca1f3fb8965ca2d3, type: 3}
