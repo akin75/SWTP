@@ -7,6 +7,7 @@ public class CharacterController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public Camera cam;
+    public PauseMenu pm;
     public float timeBetweenShots = 0.02f;
     public float maxDeviation = 10f;
     public int damage = 20;
@@ -42,9 +43,11 @@ public class CharacterController : MonoBehaviour
 
     void Aim()
     {
+       // if(!pm.gameIsPaused){
         Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePosition - rb.position).normalized;
         transform.up = direction;
+       // }
     }
 
     void Move()
