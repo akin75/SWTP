@@ -9,7 +9,7 @@ public class CharacterController : MonoBehaviour
     public Camera cam;
     public float timeBetweenShots = 0.02f;
     public float maxDeviation = 10f;
-    public static int damage = 20;
+    public int damage = 20;
     private float timeSinceLastShot = 0f;
     
     private Rigidbody2D rb;
@@ -78,5 +78,16 @@ public class CharacterController : MonoBehaviour
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         newBullet.transform.right = bulletDirection;
         newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
+    }
+
+    public void setDamage(int value)
+    {
+        damage = damage + value;
+        //Debug.Log("WeaponDamage: " + damage);
+    }
+    public void setMoveSpeed(int value)
+    {
+        moveSpeed = moveSpeed + value;
+        //Debug.Log("MoveSpeed: " + moveSpeed);
     }
 }

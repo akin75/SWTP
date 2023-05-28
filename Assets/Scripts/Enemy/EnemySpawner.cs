@@ -6,14 +6,28 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab; 
     public float spawnRate = 2f;
+    // spawnCount 0 = unendlich
+    public int spawnCount = 0; 
+    private bool endless = false;
     private float nextSpawnTime;
+
+    void Start()
+    {
+        if (spawnCount == 0) 
+        {
+            spawnCount = 1;
+            endless = true;
+        }
+    }
 
     private void Update()
     {
-        if (Time.time > nextSpawnTime)
+        if (Time.time > nextSpawnTime && spawnCount > 0)
         {
             SpawnEnemy();
             nextSpawnTime = Time.time + spawnRate;
+            if (!endless) spawnCount = spawnCount - 1;
+
         }
     }
 

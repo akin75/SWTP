@@ -214,6 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf1bb4d582ec2d449de0af5d98a3fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 200
+  nextWaypointDistance: 3
 --- !u!50 &-3939219405517817229
 Rigidbody2D:
   serializedVersion: 4
@@ -250,6 +252,8 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   damage: 2
+  itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
+  dropChance: 25
   healthBar: {fileID: 8610740355228082374}
 --- !u!1001 &5321478949851161977
 PrefabInstance:
