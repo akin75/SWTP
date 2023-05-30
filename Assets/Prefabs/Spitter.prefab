@@ -258,7 +258,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  damage: 2
+  damage: 5
+  itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
+  dropChance: 25
   healthBar: {fileID: 8610740355228082374}
 --- !u!114 &-5806012942085649495
 MonoBehaviour:
