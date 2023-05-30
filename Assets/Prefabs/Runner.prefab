@@ -188,7 +188,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf1bb4d582ec2d449de0af5d98a3fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:Assets/Prefabs/Runner.prefab
   speed: 300
+=======
+  speed: 200
+>>>>>>> 9bd1807e7e06bd8399252e8a66f7e3bb2c5eb695:Assets/Prefabs/Enemy 1.prefab
   nextWaypointDistance: 3
 --- !u!50 &4128780949270874401
 Rigidbody2D:
@@ -226,6 +230,8 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   damage: 2
+  itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
+  dropChance: 50
   healthBar: {fileID: 4865728092242802950}
 --- !u!58 &5052718155849231697
 CircleCollider2D:
