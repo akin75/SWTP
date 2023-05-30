@@ -10,15 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 2329167089764508728}
   - component: {fileID: 2329167089764508731}
-  - component: {fileID: 2329167089764508730}
   - component: {fileID: 7388925112091674825}
   - component: {fileID: 2588838026328952131}
   - component: {fileID: -1580184658092363284}
   - component: {fileID: 3523369455722484632}
   - component: {fileID: -3939219405517817229}
   - component: {fileID: 8084985735418968613}
+  - component: {fileID: -2979630653874237575}
   m_Layer: 0
-  m_Name: Enemy2
+  m_Name: Zombie Mini
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 2329167089764508733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.28, y: 2.7, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 826019710942515346}
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1691112112, guid: 9563792eac59bd749974f19f8d207592, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.3301887, b: 0.018128045, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,32 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2329167089764508730
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2329167089764508733}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.00020319223}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.39, y: 0.43}
-    newSize: {x: 0.39, y: 0.43}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.39900076, y: 0.43761456}
-  m_EdgeRadius: 0
 --- !u!114 &7388925112091674825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf1bb4d582ec2d449de0af5d98a3fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 400
+  nextWaypointDistance: 3
 --- !u!50 &-3939219405517817229
 Rigidbody2D:
   serializedVersion: 4
@@ -247,10 +223,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 388d54e0f566db2448095f7386eb4b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 20
   currentHealth: 0
   damage: 2
   healthBar: {fileID: 8610740355228082374}
+--- !u!58 &-2979630653874237575
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329167089764508733}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.215
 --- !u!1001 &5321478949851161977
 PrefabInstance:
   m_ObjectHideFlags: 0
