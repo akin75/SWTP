@@ -20,22 +20,22 @@ public class CharacterController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
     }
 
     void Update()
     {
         Aim();
         Move();
-        
+
         timeSinceLastShot += Time.deltaTime;
         if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
         {
-            Shoot(); 
+            Shoot();
             timeSinceLastShot = 0f;
-
-        } 
+        }
     }
-    
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         rb.velocity = Vector2.zero;
