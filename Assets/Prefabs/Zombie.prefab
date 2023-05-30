@@ -227,7 +227,7 @@ MonoBehaviour:
   currentHealth: 0
   damage: 2
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
-  dropChance: 25
+  dropChance: 50
   healthBar: {fileID: 8610740355228082374}
 --- !u!58 &-2979630653874237575
 CircleCollider2D:
