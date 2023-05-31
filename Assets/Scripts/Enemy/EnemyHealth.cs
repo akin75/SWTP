@@ -9,6 +9,9 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;
     public int damage = 2;
 
+    public GameObject itemDrop;
+    public int dropChance;
+
     public HealthBar healthBar;
 
     // Start is called before the first frame update
@@ -33,6 +36,10 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHealth <= 0) {
             Destroy(gameObject);
+            if (dropChance >= Random.Range(0, 100)) 
+            {
+                Instantiate(itemDrop, transform.position, Quaternion.identity);
+            }
         }
     }
 }
