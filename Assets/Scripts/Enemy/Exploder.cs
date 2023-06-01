@@ -1,90 +1,119 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Exploder : MonoBehaviour
 {
-    private Transform player; // Spielerreferenz
-    public SpriteRenderer spriteRenderer; // SpriteRenderer des Zombies
+    public ParticleSystem explosionParticles;
+    public ParticleSystem smokeParticles;
+    public SpriteRenderer enemySr;
+    public Rigidbody2D exploder;
+    public Collider2D explosionRadius;
+    public Collider2D blinkingRadius;
+    private SpriteRenderer spriteRenderer;
+    private bool isBlinking = false;
 
-    public float blinkRate1 = 1f; // Blinkrate in Sekunden bei 15 Abstand
-    public float blinkRate2 = 0.5f; // Blinkrate in Sekunden bei 10 Abstand
-
-    public float destroyDistance = 5f; // Abstand, bei dem das Objekt zerstört werden soll
-
-    private float currentBlinkRate; // Aktuelle Blinkrate
-
-    private bool isBlinking = false; // Flag für Blinkzustand
-    private bool isDestroyed = false; // Flag für Zerstörungszustand
+    public int damage = 100;
 
     private void Start()
     {
-        currentBlinkRate = blinkRate1; // Initialisiere Blinkrate
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform; // Suchen des Spielers als Ziel
-        
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (!isDestroyed)
+        if (collision.CompareTag("Player"))
         {
-            // Überprüfe Abstand zum Spieler
-            if (distanceToPlayer <= destroyDistance)
+            Debug.Log("Player found");
+            if (collision.gameObject == blinkingRadius.gameObject)
             {
-                DestroyZombie();
-            }
-            else if (distanceToPlayer <= 5f)
-            {
-                // Entfernung von 5 erreicht - Zerstöre das Objekt
-                Destroy(gameObject);
-            }
-            else if (distanceToPlayer <= 10f)
-            {
-                // Entfernung von 10 erreicht - Blinkrate erhöhen
-                currentBlinkRate = blinkRate2;
+                isBlinking = true;
                 StartBlinking();
             }
-            else if (distanceToPlayer <= 15f)
+            /*if (collision.gameObject == blinkingRadius.gameObject)
             {
-                // Entfernung von 15 erreicht - Blinkrate zurücksetzen
-                currentBlinkRate = blinkRate1;
+                isBlinking = true;
                 StartBlinking();
             }
-            else
+            else */
+            /*
+            if (collision.gameObject == explosionRadius.gameObject)
             {
-                StopBlinking();
+                Debug.Log("Explosion area entered");
+                // Der Spieler ist im Explosionsradius, führe die Explosion aus
+                Explode();
             }
+            */
         }
     }
-
+    
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        /*
+        if (collision.CompareTag("Player") && collision == blinkingRadius)
+        {
+            isBlinking = false;
+            StopBlinking();
+        }
+        */
+    }
+    
     private void StartBlinking()
     {
-        if (!isBlinking)
-        {
-            isBlinking = true;
-            InvokeRepeating("ToggleSpriteVisibility", currentBlinkRate, currentBlinkRate);
-        }
+        // Starte das Blinken, indem du die Farbe des Sprites änderst
+        StartCoroutine(BlinkCoroutine());
     }
 
     private void StopBlinking()
     {
-        if (isBlinking)
+        // Stoppe das Blinken, indem du die Koroutine beendest und die Farbe des Sprites zurücksetzt
+        StopCoroutine(BlinkCoroutine());
+        spriteRenderer.color = Color.white;
+    }
+
+    private IEnumerator BlinkCoroutine()
+    {
+        while (isBlinking)
         {
-            isBlinking = false;
-            CancelInvoke("ToggleSpriteVisibility");
-            spriteRenderer.enabled = true; // Stelle sicher, dass das Sprite sichtbar ist
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(0.5f);
+            spriteRenderer.color = Color.white;
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
-    private void ToggleSpriteVisibility()
+    private void Explode()
     {
-        spriteRenderer.enabled = !spriteRenderer.enabled;
+        Debug.Log("Boom");
+        if (smokeParticles != null)
+        {
+            var mainModule = smokeParticles.main;
+            var durE = mainModule.duration;
+            var emE = smokeParticles.emission;
+
+            exploder.simulated = false;
+
+            
+            explosionParticles.Play();
+            smokeParticles.Play();
+            
+            
+            
+            /*
+            Destroy(enemySr);
+            Invoke("DestroyObj", durE);
+            */
+        }
+
+        // Füge dem Spieler Schaden hinzu oder führe andere Aktionen aus
+
+        
+        // Zerstöre den Zombie
     }
 
-    private void DestroyZombie()
+    void DestroyObj()
     {
-        isDestroyed = true;
-        // Hier kannst du die Logik für die Zombie-Explosion oder andere Effekte einfügen
-        // Zum Beispiel: Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        GetComponent<EnemyHealth>().currentHealth = 0;
+        Destroy(gameObject);
     }
 }

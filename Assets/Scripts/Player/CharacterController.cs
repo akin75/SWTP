@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour
     public float timeBetweenShots = 0.02f;
     public float maxDeviation = 10f;
     public int damage = 20;
+    //public ParticleSystem muzzle;
     private float timeSinceLastShot = 0f;
     
     private Rigidbody2D rb;

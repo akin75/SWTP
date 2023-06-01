@@ -9,6 +9,8 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;
     public int damage = 2;
 
+    public Rigidbody2D rb;
+
     public GameObject itemDrop;
     public int dropChance;
 
