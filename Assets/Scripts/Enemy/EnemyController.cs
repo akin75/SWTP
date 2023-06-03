@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
     public float speed = 200f; // Bewegungsgeschwindigkeit des Gegners
     public float nextWaypointDistance = 3f; // Abstand zum nächsten Wegpunkt
     private int currentWaypoint = 0; // Aktueller Wegpunkt auf dem Pfad
-    private bool reachedEndOfPath = false; // Flag, um festzustellen, ob das Ende des Pfads erreicht wurde
+    //private bool reachedEndOfPath = false; // Flag, um festzustellen, ob das Ende des Pfads erreicht wurde
 
     private Transform target; // Das Ziel, auf das der Gegner zuläuft
     private Path path; // Der Pfad, den der Gegner folgt
@@ -28,7 +28,10 @@ public class EnemyController : MonoBehaviour
     {
         if (seeker.IsDone())
         {
-            seeker.StartPath(rb.position, target.position, OnPathComplete); // Erstellung eines neuen Pfads
+            if (target != null)
+            {
+                seeker.StartPath(rb.position, target.position, OnPathComplete); // Erstellung eines neuen Pfads
+            }
         }
     }
 
@@ -47,12 +50,12 @@ public class EnemyController : MonoBehaviour
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
-            reachedEndOfPath = true; // Flag setzen, wenn das Ende des Pfads erreicht wurde
+            //reachedEndOfPath = true; // Flag setzen, wenn das Ende des Pfads erreicht wurde
             return;
         }
         else
         {
-            reachedEndOfPath = false; // Zurücksetzen des Flags, wenn es nicht das Ende des Pfads ist
+            //reachedEndOfPath = false; // Zurücksetzen des Flags, wenn es nicht das Ende des Pfads ist
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized; // Richtung zum nächsten Wegpunkt
