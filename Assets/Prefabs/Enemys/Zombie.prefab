@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1691112112, guid: 9563792eac59bd749974f19f8d207592, type: 3}
-  m_Color: {r: 0.66060495, g: 1, b: 0.6556604, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -226,6 +226,8 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   damage: 2
+  bloodSplatter: {fileID: 1371572389595951175, guid: 532043777f3df2a4987e4632115b0273, type: 3}
+  rb: {fileID: 0}
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 50
   healthBar: {fileID: 8610740355228082374}

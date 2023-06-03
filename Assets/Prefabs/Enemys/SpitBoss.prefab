@@ -53,7 +53,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9c0721c9b4f3c4cb894656485acb9228, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,7 +74,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.4
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -83,7 +83,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.09298808
+        value: 0.23187357
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -91,21 +91,21 @@ TrailRenderer:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.56785715
+        time: 1
         value: 0
-        inSlope: -0.30882353
-        outSlope: -0.30882353
+        inSlope: 0.22027858
+        outSlope: 0.22027858
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.42767298
+        inWeight: 0.090073526
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.6792453, g: 0, b: 0.0056612627, a: 0.25882354}
+      key1: {r: 1, g: 0, b: 0.41361904, a: 0.015686275}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -121,7 +121,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
+      atime1: 52043
       atime2: 0
       atime3: 0
       atime4: 0
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 4904241496881015717}
   - component: {fileID: -5038421475701589220}
   m_Layer: 0
-  m_Name: Spit
+  m_Name: SpitBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ Transform:
   m_GameObject: {fileID: 4788063231812238716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5158, y: 2.2987, z: -0.023714881}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1411958524061843209}
@@ -218,7 +218,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 48b02e748e464d04b8016c728d0032a2, type: 3}
-  m_Color: {r: 0.43204877, g: 0.6886792, b: 0.49117643, a: 0.24705882}
+  m_Color: {r: 1, g: 0.044444446, b: 0, a: 0.18431373}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

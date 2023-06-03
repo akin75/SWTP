@@ -6,7 +6,10 @@ public class Spitter : MonoBehaviour
     public Transform firePoint; // Punkt, an dem das Projektil erscheinen soll
     public float projectileSpeed = 10f; // Geschwindigkeit des Projektils
     public float shootingInterval = 1f; // Zeitabstand zwischen den Schüssen
+    public int damage;
     public Rigidbody2D rb;
+    public Collider2D shootingRange;
+    public Collider2D standingRange;
     
     private Transform player; // Referenz auf den Spieler
 
@@ -19,9 +22,17 @@ public class Spitter : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            rb.constraints = RigidbodyConstraints2D.FreezePosition;
-            InvokeRepeating("ShootProjectile", shootingInterval, shootingInterval);
-            Debug.Log("Player entered Shooting Range");
+            if (shootingRange.IsTouching(collision))
+            {
+                Debug.Log("Shooting Range");
+                InvokeRepeating("ShootProjectile", shootingInterval, shootingInterval);
+            }
+
+            if (standingRange.IsTouching(collision))
+            {
+                Debug.Log("Standing Range");
+                rb.constraints = RigidbodyConstraints2D.FreezePosition;
+            }
         }
     }
 
@@ -29,9 +40,12 @@ public class Spitter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            rb.constraints = RigidbodyConstraints2D.None;
-            CancelInvoke("ShootProjectile");
-            Debug.Log("Player exited Shooting Range");
+            if (shootingRange.IsTouching(other))
+            {
+                rb.constraints = RigidbodyConstraints2D.None;
+                CancelInvoke("ShootProjectile");
+                //Debug.Log("Player exited Shooting Range");
+            }
         }
     }
 

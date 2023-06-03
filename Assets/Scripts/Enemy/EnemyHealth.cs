@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;
     public int damage = 2;
 
+    public ParticleSystem bloodSplatter;
     public Rigidbody2D rb;
 
     public GameObject itemDrop;
@@ -33,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage) 
     {
+        Instantiate(bloodSplatter, transform.position, Quaternion.identity);
         currentHealth = currentHealth - damage;
         healthBar.SetHealth(currentHealth);
 

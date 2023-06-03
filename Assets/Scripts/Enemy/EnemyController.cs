@@ -28,7 +28,10 @@ public class EnemyController : MonoBehaviour
     {
         if (seeker.IsDone())
         {
-            seeker.StartPath(rb.position, target.position, OnPathComplete); // Erstellung eines neuen Pfads
+            if (target != null)
+            {
+                seeker.StartPath(rb.position, target.position, OnPathComplete); // Erstellung eines neuen Pfads
+            }
         }
     }
 

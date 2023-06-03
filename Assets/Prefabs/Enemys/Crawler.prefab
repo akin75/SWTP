@@ -232,7 +232,6 @@ MonoBehaviour:
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 0
   healthBar: {fileID: 8610740355228082374}
-  DeadSprite: {fileID: 1855664556, guid: 9563792eac59bd749974f19f8d207592, type: 3}
 --- !u!58 &-2979630653874237575
 CircleCollider2D:
   m_ObjectHideFlags: 0

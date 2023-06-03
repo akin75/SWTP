@@ -137,7 +137,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 7
+  maxSpeed: 6
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -227,6 +227,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   damage: 2
+  rb: {fileID: 0}
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 50
   healthBar: {fileID: 8610740355228082374}
