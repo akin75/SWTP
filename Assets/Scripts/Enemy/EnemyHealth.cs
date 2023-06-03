@@ -17,11 +17,15 @@ public class EnemyHealth : MonoBehaviour
 
     public HealthBar healthBar;
 
+    KillCounter killCounter;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        killCounter = FindObjectOfType<KillCounter>();
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,6 +44,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHealth <= 0) {
             Destroy(gameObject);
+            killCounter.IncreaseKillCount();
             if (dropChance >= Random.Range(0, 100)) 
             {
                 Instantiate(itemDrop, transform.position, Quaternion.identity);
