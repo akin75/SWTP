@@ -21,12 +21,15 @@ public class EnemyHealth : MonoBehaviour
     private SpriteRenderer sprite;
     private Quaternion deathRotation; // Speichert die Rotation des Objekts vor der Zerstörung
     private Vector3 deathScale; // Speichert die Skalierung des Objekts vor der Zerstörung
+    KillCounter killCounter;
 
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         sprite = GetComponent<SpriteRenderer>();
+        killCounter = FindObjectOfType<KillCounter>();
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -64,6 +67,8 @@ public class EnemyHealth : MonoBehaviour
             Destroy(gameObject);
 
             if (dropChance >= Random.Range(0, 100))
+            killCounter.IncreaseKillCount();
+            if (dropChance >= Random.Range(0, 100)) 
             {
                 Instantiate(itemDrop, transform.position, Quaternion.identity);
             }

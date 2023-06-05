@@ -1,6 +1,7 @@
 name: Game CI
 
-on: [push]
+on: 
+  workflow_dispatch: {}
 
 jobs:
   build:
@@ -14,24 +15,25 @@ jobs:
           lfs: true
 
       # Cache
-      - uses: actions/cache@v2
+      - uses: actions/cache@v1.2.1
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
 
-      # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v2
+       # Test
+      - name: Unity - Test runner
+        uses: game-ci/unity-test-runner@v2.1.1
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
+      
       # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v2
+      - name: Unity - Builder
+        uses: game-ci/unity-builder@v2.2.0
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
