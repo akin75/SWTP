@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public ParticleSystem hitObjectParticles;
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Debug.Log(collision.gameObject);
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().damage);
-            // Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().damage);
+        }
+        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Bullet"))
+        {
+            Instantiate(hitObjectParticles, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
     }
 }
-
-/*
-Raycast fehlgeschlagen 2 Probleme:
-    1. Raycast ging nur bis zur Maus
-    2. Raycast ging instant, die Kugel braucht jedoch einen Moment bis zum Objekt
-*/

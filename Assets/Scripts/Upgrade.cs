@@ -23,14 +23,14 @@ public class Upgrade : MonoBehaviour
                 case UpgradeType.movespeed:
                     if (Player.currency >= cost)
                     {
-                        trigger.gameObject.GetComponent<CharacterController>().setMoveSpeed(value);
+                        trigger.gameObject.GetComponent<PlayerController>().setMoveSpeed(value);
                         trigger.gameObject.GetComponent<Player>().setCurrency(-cost);
                     }
                     break;
                 case UpgradeType.damage:
                     if (Player.currency >= cost)
                     {
-                        trigger.gameObject.GetComponent<CharacterController>().setDamage(value);
+                        trigger.gameObject.GetComponent<PlayerController>().setDamage(value);
                         trigger.gameObject.GetComponent<Player>().setCurrency(-cost);
                     }
                     break;

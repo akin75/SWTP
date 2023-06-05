@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 200
   nextWaypointDistance: 3
+  playerController: {fileID: 0}
 --- !u!50 &-3939219405517817229
 Rigidbody2D:
   serializedVersion: 4
@@ -228,7 +229,10 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   damage: 2
+  bloodSplatter: {fileID: 1371572389595951175, guid: 532043777f3df2a4987e4632115b0273, type: 3}
+  deathParticles: {fileID: 1371572389595951175, guid: 8b7d87747b8567049aa30f7042c4d1d3, type: 3}
   rb: {fileID: -3939219405517817229}
+  deadZombiePrefab: {fileID: 4372698498858929153, guid: 837b317608c0cfb4aa22760ca768afb1, type: 3}
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 0
   healthBar: {fileID: 8610740355228082374}
@@ -364,8 +368,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 0.3137255}
-      key1: {r: 1, g: 0, b: 0, a: 0.19607843}
+      key0: {r: 1, g: 0, b: 0, a: 0.19607843}
+      key1: {r: 1, g: 0, b: 0, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -380,17 +384,17 @@ TrailRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 45875
-      atime1: 58982
+      atime0: 11758
+      atime1: 65535
       atime2: 65535
-      atime3: 0
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 3
+      m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0

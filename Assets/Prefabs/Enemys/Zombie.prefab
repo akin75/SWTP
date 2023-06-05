@@ -190,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 200
   nextWaypointDistance: 3
+  playerController: {fileID: 3018274187864165048, guid: 053ec6e76f02dec4ca7fa84b13925cc2, type: 3}
 --- !u!50 &-3939219405517817229
 Rigidbody2D:
   serializedVersion: 4
@@ -227,7 +228,9 @@ MonoBehaviour:
   currentHealth: 0
   damage: 2
   bloodSplatter: {fileID: 1371572389595951175, guid: 532043777f3df2a4987e4632115b0273, type: 3}
+  deathParticles: {fileID: 1371572389595951175, guid: 8b7d87747b8567049aa30f7042c4d1d3, type: 3}
   rb: {fileID: 0}
+  deadZombiePrefab: {fileID: 4372698498858929153, guid: 837b317608c0cfb4aa22760ca768afb1, type: 3}
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 50
   healthBar: {fileID: 8610740355228082374}

@@ -11,18 +11,30 @@ public class EnemyController : MonoBehaviour
     private Transform target; // Das Ziel, auf das der Gegner zuläuft
     private Path path; // Der Pfad, den der Gegner folgt
     private Seeker seeker; // Das Objekt, das den Pfad findet
+    public Player playerController;
 
     private Rigidbody2D rb; // Rigidbody2D-Komponente des Gegners
 
-    private void Start()
+    private void Awake()
     {
         seeker = GetComponent<Seeker>(); // Initialisierung des Seekers
         rb = GetComponent<Rigidbody2D>(); // Initialisierung des Rigidbody2D
 
-        target = GameObject.FindGameObjectWithTag("Player").transform; // Suchen des Spielers als Ziel
+        // Suchen des Spielers als Ziel
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            playerController = playerObject.GetComponent<Player>();
+        }
+
+        if (playerController != null && !playerController.GetIsDead())
+        {
+            target = playerController.transform;
+        }
 
         InvokeRepeating("UpdatePath", 0f, 0.5f); // Aktualisierung des Pfads alle 0,5 Sekunden
     }
+
 
     private void UpdatePath()
     {
