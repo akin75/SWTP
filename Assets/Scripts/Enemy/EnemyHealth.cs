@@ -65,8 +65,6 @@ public class EnemyHealth : MonoBehaviour
             }
 
             Destroy(gameObject);
-
-            if (dropChance >= Random.Range(0, 100))
             killCounter.IncreaseKillCount();
             if (dropChance >= Random.Range(0, 100)) 
             {
