@@ -10,10 +10,15 @@ public class Player : MonoBehaviour
     public static int currency;
 
     public HealthBar healthBar;
-
+    public SpriteRenderer playerSprite;
+    public GameObject DeadPlayer;
+    public Color hitColor = new Color(1f, 0.5f, 0.5f);
+    public float hitDuration = 0.2f;
+    
     public float impactForceMultiplier = 1f;
 
     private Rigidbody2D rb;
+    private bool isDead = false;
 
 
     // Start is called before the first frame update
@@ -32,13 +37,36 @@ public class Player : MonoBehaviour
             currentHealth = maxHealth;
         }
         healthBar.SetHealth(currentHealth);
-
+        
+        StartCoroutine(HitFlash());
+        
         //Debug.Log("currentHealth " + currentHealth);
-        if (currentHealth <= 0) {
+        if (currentHealth <= 0)
+        {
+            isDead = true;
+            Instantiate(DeadPlayer, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
         ApplyImpact(damage * impactForceMultiplier);
     }
+
+    public bool GetIsDead()
+    {
+        return isDead;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+    
+    private IEnumerator HitFlash()
+    {
+        playerSprite.color = hitColor;
+        yield return new WaitForSeconds(hitDuration);
+        playerSprite.color = Color.white;
+    }
+    
 
     private void ApplyImpact(float force)
     {

@@ -40,7 +40,7 @@ public class Exploder : MonoBehaviour
                 StartBlinking();
                 StartFastBlinking();
 
-                StartCoroutine(Inflate());
+                //StartCoroutine(Inflate());
             }
             if (explosionRadius.IsTouching(collision))
             {
@@ -62,10 +62,6 @@ public class Exploder : MonoBehaviour
         {
             Vector3 newScale = transform.localScale + new Vector3(scaleFactor, scaleFactor, scaleFactor);
             transform.localScale = newScale;
-
-            // Kurze Verzögerung zwischen den Schritten für eine langsame Animation
-            // Du kannst die Wartezeit anpassen, um die Geschwindigkeit der Größenänderung zu steuern
-            // Zum Beispiel: yield return new WaitForSeconds(0.01f) für eine schnellere Animation
             yield return new WaitForSeconds(0.05f);
         }
     }

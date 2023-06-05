@@ -11,11 +11,13 @@ public class Spitter : MonoBehaviour
     public Collider2D shootingRange;
     public Collider2D standingRange;
     
-    private Transform player; // Referenz auf den Spieler
+    private Transform playerTransform; // Referenz auf den Spieler
+    private Player playerHealth;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform; // Spielerreferenz erhalten
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Spielerreferenz erhalten
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -51,14 +53,17 @@ public class Spitter : MonoBehaviour
 
     private void ShootProjectile()
     {
-        // Erstelle ein Projektil und initialisiere es
-        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-
-        // Richtung zum Spieler berechnen
-        Vector3 direction = (player.position - firePoint.position).normalized;
-
-        // Projektil in die berechnete Richtung schießen
-        Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
-        projectileRb.velocity = direction * projectileSpeed;
+        if (playerHealth.GetCurrentHealth() > 0)
+        {
+            // Erstelle ein Projektil und initialisiere es
+            GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+    
+            // Richtung zum Spieler berechnen
+            Vector3 direction = (playerTransform.position - firePoint.position).normalized;
+    
+            // Projektil in die berechnete Richtung schießen
+            Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+            projectileRb.velocity = direction * projectileSpeed;
+        }
     }
 }
