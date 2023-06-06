@@ -17,11 +17,13 @@ public class EnemyHealth : MonoBehaviour
     public int dropChance;
 
     public HealthBar healthBar;
-
+    public TransformToCrawler transformToCrawler;
+    private CursorFeedback cursorFeedback;
+    
     private SpriteRenderer sprite;
     private Quaternion deathRotation; // Speichert die Rotation des Objekts vor der Zerstörung
     private Vector3 deathScale; // Speichert die Skalierung des Objekts vor der Zerstörung
-    KillCounter killCounter;
+    private KillCounter killCounter;
 
     void Start()
     {
@@ -29,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         sprite = GetComponent<SpriteRenderer>();
         killCounter = FindObjectOfType<KillCounter>();
-        
+        cursorFeedback = FindObjectOfType<CursorFeedback>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,29 +46,30 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-
+        Debug.Log(gameObject);
         StartCoroutine(HitEffect());
 
         if (currentHealth <= 0)
         {
             if (deadZombiePrefab != null)
             {
-                // Speichere die Rotation und Skalierung des Objekts
+                cursorFeedback.StartCursorFeedback(); // Starte die Coroutine für die Todesszene
+
                 deathRotation = transform.rotation;
                 deathScale = transform.localScale;
 
                 GameObject deadZombie = Instantiate(deadZombiePrefab, transform.position, deathRotation);
                 deadZombie.transform.localScale = deathScale;
+                //transformToCrawler.Transformation();
             }
 
             if (deathParticles != null)
             {
                 Instantiate(deathParticles, transform.position, Quaternion.identity);
             }
-
             Destroy(gameObject);
             killCounter.IncreaseKillCount();
-            if (dropChance >= Random.Range(0, 100)) 
+            if (dropChance >= Random.Range(0, 100) && itemDrop != null) 
             {
                 Instantiate(itemDrop, transform.position, Quaternion.identity);
             }

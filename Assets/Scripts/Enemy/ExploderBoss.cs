@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ExploderBoss : MonoBehaviour
 {
-    public ParticleSystem explosionParticles;
-    public ParticleSystem smokeParticles;
+    public ParticleSystem explosionParticlesBoss;
+    public ParticleSystem smokeParticlesBoss;
     public SpriteRenderer enemySr;
     public Rigidbody2D exploder;
     public Collider2D explosionRadius;
@@ -84,22 +84,11 @@ public class ExploderBoss : MonoBehaviour
     private void Explode()
     {
         //Debug.Log("Boom");
-        if (smokeParticles != null)
-        {
-            var mainModule = smokeParticles.main;
-            var durE = mainModule.duration * 2;
-            var emE = smokeParticles.emission;
-
-            exploder.simulated = false;
-            
-            explosionParticles.Play();
-            smokeParticles.Play();
-            SpawningMinis();
-            Destroy(enemySr);
-            Destroy(hB);
-            Destroy(trail);
-            Invoke("DestroyObj", durE);
-        }
+        exploder.simulated = false;
+        Instantiate(smokeParticlesBoss, transform.position, Quaternion.identity);
+        Instantiate(explosionParticlesBoss, transform.position, Quaternion.identity);
+        SpawningMinis();
+        DestroyObj();
     }
 
     void DestroyObj()

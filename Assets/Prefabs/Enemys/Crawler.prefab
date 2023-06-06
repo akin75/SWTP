@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  damage: 2
+  damage: 20
   bloodSplatter: {fileID: 1371572389595951175, guid: 532043777f3df2a4987e4632115b0273, type: 3}
   deathParticles: {fileID: 1371572389595951175, guid: 8b7d87747b8567049aa30f7042c4d1d3, type: 3}
   rb: {fileID: -3939219405517817229}
@@ -236,6 +236,7 @@ MonoBehaviour:
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 0
   healthBar: {fileID: 8610740355228082374}
+  transformToCrawler: {fileID: 0}
 --- !u!58 &-2979630653874237575
 CircleCollider2D:
   m_ObjectHideFlags: 0

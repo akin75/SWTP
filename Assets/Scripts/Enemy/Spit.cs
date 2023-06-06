@@ -24,7 +24,7 @@ public class Spit : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
             collision.gameObject.GetComponent<Player>().TakeDamage(damage);
             //collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(GameObject.FindGameObjectWithTag("Player").GetComponent<EnemyHealth>().damage);
             //Destroy(collision.gameObject);

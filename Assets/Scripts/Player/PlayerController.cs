@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
         {
             Shoot();
-            Debug.Log(cameraShake);
+            //Debug.Log(cameraShake);
             if (cameraShake != null)
             {
                 Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -91,11 +91,11 @@ public class PlayerController : MonoBehaviour
         float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
         Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * transform.up;
         
-        muzzleParticles.Play();
-
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         newBullet.transform.right = bulletDirection;
         newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
+        
+        muzzleParticles.Play();
     }
 
     public void setDamage(int value)

@@ -10,14 +10,14 @@ public class Spitter : MonoBehaviour
     public Rigidbody2D rb;
     public Collider2D shootingRange;
     public Collider2D standingRange;
-    
+    public Player player;
+
     private Transform playerTransform; // Referenz auf den Spieler
-    private Player playerHealth;
 
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Spielerreferenz erhalten
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,13 +26,13 @@ public class Spitter : MonoBehaviour
         {
             if (shootingRange.IsTouching(collision))
             {
-                Debug.Log("Shooting Range");
+                //Debug.Log("Shooting Range");
                 InvokeRepeating("ShootProjectile", shootingInterval, shootingInterval);
             }
 
-            if (standingRange.IsTouching(collision))
+            if (standingRange.IsTouching(collision) && !player.GetIsDead())
             {
-                Debug.Log("Standing Range");
+                //Debug.Log("Standing Range");
                 rb.constraints = RigidbodyConstraints2D.FreezePosition;
             }
         }
@@ -53,17 +53,19 @@ public class Spitter : MonoBehaviour
 
     private void ShootProjectile()
     {
-        if (playerHealth.GetCurrentHealth() > 0)
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, playerTransform.position - transform.position);
+        if (player.GetCurrentHealth() > 0)
         {
             // Erstelle ein Projektil und initialisiere es
             GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-    
-            // Richtung zum Spieler berechnen
-            Vector3 direction = (playerTransform.position - firePoint.position).normalized;
-    
-            // Projektil in die berechnete Richtung schießen
-            Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
-            projectileRb.velocity = direction * projectileSpeed;
+            if (!player.GetIsDead())
+            {
+                // Richtung zum Spieler berechnen
+                Vector3 direction = (playerTransform.position - firePoint.position).normalized;
+                // Projektil in die berechnete Richtung schießen
+                Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+                projectileRb.velocity = direction * projectileSpeed;
+            }
         }
     }
 }
