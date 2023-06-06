@@ -370,6 +370,7 @@ MonoBehaviour:
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 25
   healthBar: {fileID: 8610740355228082374}
+  transformToCrawler: {fileID: 0}
 --- !u!114 &-5806012942085649495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,6 +391,7 @@ MonoBehaviour:
   rb: {fileID: -3939219405517817229}
   shootingRange: {fileID: 6614129435392740467}
   standingRange: {fileID: 5965284994469923880}
+  player: {fileID: 3018274187864165048, guid: 053ec6e76f02dec4ca7fa84b13925cc2, type: 3}
 --- !u!58 &7852736416389277705
 CircleCollider2D:
   m_ObjectHideFlags: 0

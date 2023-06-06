@@ -52,19 +52,6 @@ public class Exploder : MonoBehaviour
         }
     }
 
-    private IEnumerator  Inflate()
-    {
-        float scaleFactor = 0.05f; // Skalierungsfaktor für die Größenänderung
-        float targetScale = 4f; // Zielgröße des Objekts
-
-        // Schleife, die die Größe des Objekts schrittweise ändert
-        while (transform.localScale.x < targetScale)
-        {
-            Vector3 newScale = transform.localScale + new Vector3(scaleFactor, scaleFactor, scaleFactor);
-            transform.localScale = newScale;
-            yield return new WaitForSeconds(0.05f);
-        }
-    }
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -125,22 +112,14 @@ public class Exploder : MonoBehaviour
     private void Explode()
     {
         StopBlinking();
-        //Debug.Log("Boom");
-        if (smokeParticles != null)
-        {
-            var mainModule = smokeParticles.main;
-            var durE = mainModule.duration * 2;
-            var emE = smokeParticles.emission;
 
-            exploder.simulated = false;
-            
-            explosionParticles.Play();
-            smokeParticles.Play();
-            Destroy(enemySr);
-            Destroy(hB);
-            Destroy(trail);
-            Invoke("DestroyObj", durE);
-        }
+        exploder.simulated = false;
+
+        Debug.Log(explosionParticles, smokeParticles);
+        Instantiate(explosionParticles, transform.position, Quaternion.identity);
+        Instantiate(smokeParticles, transform.position, Quaternion.identity);
+        DestroyObj();
+        //Destroy(gameObject);
     }
 
     void DestroyObj()

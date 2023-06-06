@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
     public SpriteRenderer playerSprite;
-    public GameObject DeadPlayer;
+    public GameObject deadPlayer;
     public Color hitColor = new Color(1f, 0.5f, 0.5f);
     public float hitDuration = 0.2f;
     
@@ -19,7 +19,9 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isDead = false;
+    private Quaternion initialRotation; // Speichert die Rotation des ursprünglichen Objekts
 
+    
 
     // Start is called before the first frame update
     void Start()
@@ -33,21 +35,23 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage) 
     {
         currentHealth = currentHealth - damage;
-        if (currentHealth > maxHealth) {
-            currentHealth = maxHealth;
-        }
-        healthBar.SetHealth(currentHealth);
-        
-        StartCoroutine(HitFlash());
-        
+            if (currentHealth > maxHealth) {
+                currentHealth = maxHealth;
+            }
+            healthBar.SetHealth(currentHealth);
+            ApplyImpact(damage * impactForceMultiplier);
+            StartCoroutine(HitFlash());
+
+
         //Debug.Log("currentHealth " + currentHealth);
         if (currentHealth <= 0)
         {
             isDead = true;
-            Instantiate(DeadPlayer, transform.position, Quaternion.identity);
+            playerSprite.color = Color.red;
+            initialRotation = transform.rotation; // Speichere die Rotation des ursprünglichen Objekts
+            Instantiate(deadPlayer, transform.position, initialRotation); // Verwende die gespeicherte Rotation
             Destroy(gameObject);
         }
-        ApplyImpact(damage * impactForceMultiplier);
     }
 
     public bool GetIsDead()

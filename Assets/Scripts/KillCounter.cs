@@ -37,14 +37,14 @@ public class KillCounter : MonoBehaviour
 
     public void IncreaseKillCount()
     {
-            Debug.Log("Increased Kill Count!");
+            //Debug.Log("Increased Kill Count!");
             killsCounter++;
             UpdateKillCount();
     }
 
     public void UpdateKillCount()
     {
-        Debug.Log("Updated Kill Count!");
+        //Debug.Log("Updated Kill Count!");
         killCounterText.text = "Kills: " + killsCounter.ToString();
     }
 }

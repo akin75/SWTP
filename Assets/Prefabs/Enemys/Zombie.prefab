@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -3939219405517817229}
   - component: {fileID: 8084985735418968613}
   - component: {fileID: -2979630653874237575}
+  - component: {fileID: 1642046387127829927}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  damage: 2
+  damage: 5
   bloodSplatter: {fileID: 1371572389595951175, guid: 532043777f3df2a4987e4632115b0273, type: 3}
   deathParticles: {fileID: 1371572389595951175, guid: 8b7d87747b8567049aa30f7042c4d1d3, type: 3}
   rb: {fileID: 0}
@@ -234,6 +235,8 @@ MonoBehaviour:
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 50
   healthBar: {fileID: 8610740355228082374}
+  transformToCrawler: {fileID: 1642046387127829927}
+  sprite: {fileID: 2329167089764508731}
 --- !u!58 &-2979630653874237575
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -250,6 +253,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.215
+--- !u!114 &1642046387127829927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329167089764508733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1111aff8ccfde5e46add42dfbee24a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crawlerPrefab: {fileID: 2329167089764508733, guid: 121d768ac324ef3478089e7f3dfbe2a8, type: 3}
+  deadEnemyPrefab: {fileID: 4372698498858929153, guid: 837b317608c0cfb4aa22760ca768afb1, type: 3}
+  transformationChance: 50
 --- !u!1001 &5321478949851161977
 PrefabInstance:
   m_ObjectHideFlags: 0
