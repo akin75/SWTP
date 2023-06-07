@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 306570466270053118}
   - component: {fileID: 1257646269973694501}
   - component: {fileID: 8558370388806599669}
+  - component: {fileID: 1514714529522723347}
   m_Layer: 0
   m_Name: SmokeParticles
   m_TagString: Untagged
@@ -4824,3 +4825,15 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
+--- !u!114 &1514714529522723347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131888681503578110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd22c4ba0cfd464487076814df9613f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Spitter : MonoBehaviour
@@ -22,19 +23,32 @@ public class Spitter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            if (shootingRange.IsTouching(collision))
-            {
-                //Debug.Log("Shooting Range");
-                InvokeRepeating("ShootProjectile", shootingInterval, shootingInterval);
-            }
+        Vector2 direction = playerTransform.position - firePoint.position;
+        var toFilter = LayerMask.GetMask("Player");
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, toFilter);
 
-            if (standingRange.IsTouching(collision) && !player.GetIsDead())
+        if (hit.collider.IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
+        {
+            Debug.Log("Player Found");
+            if (collision.CompareTag("Player") && player != null)
             {
-                //Debug.Log("Standing Range");
-                rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                if (shootingRange.IsTouching(collision))
+                {
+                    Debug.Log("Shooting Range");
+                    InvokeRepeating("ShootProjectile", shootingInterval, shootingInterval);
+                }
+
+                if (standingRange.IsTouching(collision) && !player.GetIsDead())
+                {
+                    Debug.Log("Standing Range");
+                    rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                }
             }
+        }
+        else
+        {
+            Debug.DrawRay(firePoint.position, direction.normalized * 10f, Color.red, 0.1f);
+            //Debug.Log("Missed Player");
         }
     }
 
@@ -53,7 +67,18 @@ public class Spitter : MonoBehaviour
 
     private void ShootProjectile()
     {
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, playerTransform.position - transform.position);
+        //Collider2D[] result = new Collider2D[] { GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>() };
+
+        //Debug.Log(hit.collider.IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()));
+        //Debug.Log(hit.collider.GetContacts(result));
+        Vector2 direction = playerTransform.position - firePoint.position;
+        //List<Collider2D> res = new List<Collider2D>();
+        //filter.IsFilteringLayerMask(GameObject.FindGameObjectWithTag("Player"));
+        //var test = hit.collider.OverlapCollider(filter, res);
+        //Debug.Log(hit.collider.IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()));
+        //Debug.Log(hit.collider);
+        //    Debug.DrawLine(firePoint.position, hit.point, Color.green, 0.1f);
+
         if (player.GetCurrentHealth() > 0)
         {
             // Erstelle ein Projektil und initialisiere es
@@ -61,7 +86,7 @@ public class Spitter : MonoBehaviour
             if (!player.GetIsDead())
             {
                 // Richtung zum Spieler berechnen
-                Vector3 direction = (playerTransform.position - firePoint.position).normalized;
+                direction = (playerTransform.position - firePoint.position).normalized;
                 // Projektil in die berechnete Richtung schießen
                 Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
                 projectileRb.velocity = direction * projectileSpeed;

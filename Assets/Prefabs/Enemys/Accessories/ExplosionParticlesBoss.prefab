@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3919488503761365336}
   - component: {fileID: 2770640660817977374}
   - component: {fileID: 2031305757363815669}
+  - component: {fileID: -4597327834837282556}
   m_Layer: 0
   m_Name: ExplosionParticlesBoss
   m_TagString: Untagged
@@ -4882,3 +4883,15 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
+--- !u!114 &-4597327834837282556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840936389235742931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd22c4ba0cfd464487076814df9613f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,11 +14,13 @@ public class Player : MonoBehaviour
     public GameObject deadPlayer;
     public Color hitColor = new Color(1f, 0.5f, 0.5f);
     public float hitDuration = 0.2f;
-    
+    public ParticleSystem smallBloodPuddle;
+    public ParticleSystem bigBloodPuddle;
     public float impactForceMultiplier = 1f;
 
     private Rigidbody2D rb;
     private bool isDead = false;
+    private bool impactForceBool = false;
     private Quaternion initialRotation; // Speichert die Rotation des ursprünglichen Objekts
 
     
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
             Instantiate(deadPlayer, transform.position, initialRotation); // Verwende die gespeicherte Rotation
             Destroy(gameObject);
         }
+        impactForceBool = false;
     }
 
     public bool GetIsDead()
@@ -74,6 +77,8 @@ public class Player : MonoBehaviour
 
     private void ApplyImpact(float force)
     {
+        this.impactForceBool = true;
+        //Debug.Log(this.impactForceBool);
         Vector2 impactDirection = -transform.up; // Richtung, in die der Player zurückgeworfen wird
         Vector2 impactForce = impactDirection * force;
 
@@ -82,6 +87,11 @@ public class Player : MonoBehaviour
 
         //Debug.Log("Impact Force: " + impactForce);
         rb.AddForce(impactForce, ForceMode2D.Impulse);
+    }
+
+    public bool GetImpactForceBool()
+    {
+        return impactForceBool;
     }
 
 

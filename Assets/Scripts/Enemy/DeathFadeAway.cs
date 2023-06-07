@@ -5,6 +5,7 @@ using UnityEngine;
 public class DeathFadeAway : MonoBehaviour
 {
     public float fadeDuration = 3.5f; // Dauer des Ausblendens
+    public ParticleSystem bloodPuddle;
     private Renderer objectRenderer; // Renderer-Komponente des Gameobjekts
     private Color originalColor; // Ursprüngliche Farbe des Gameobjekts
     private bool fading = false; // Gibt an, ob das Ausblenden im Gange ist
@@ -14,6 +15,7 @@ public class DeathFadeAway : MonoBehaviour
         objectRenderer = GetComponent<Renderer>();
         originalColor = objectRenderer.material.color;
         StartFade();
+        Instantiate(bloodPuddle, transform.position, Quaternion.identity);
     }
 
     void Update()

@@ -66,17 +66,17 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-
-        if (Mathf.Approximately(horizontalInput, 0f) && Mathf.Approximately(verticalInput, 0f))
-        {
-            rb.velocity = Vector2.zero;
-        }
-        else
-        {
-            Vector2 direction = new Vector2(horizontalInput, verticalInput).normalized;
-            rb.velocity = direction * moveSpeed;
-        }
+            float verticalInput = Input.GetAxisRaw("Vertical");
+    
+            if (Mathf.Approximately(horizontalInput, 0f) && Mathf.Approximately(verticalInput, 0f))
+            {
+                rb.velocity = Vector2.zero;
+            }
+            else
+            {
+                Vector2 direction = new Vector2(horizontalInput, verticalInput).normalized;
+                rb.velocity = direction * moveSpeed;
+            }
     }
 
     void Shoot()
@@ -94,8 +94,11 @@ public class PlayerController : MonoBehaviour
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         newBullet.transform.right = bulletDirection;
         newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
-        
-        muzzleParticles.Play();
+
+        if (muzzleParticles != null)
+        {
+            muzzleParticles.Play();
+        }
     }
 
     public void setDamage(int value)

@@ -115,7 +115,7 @@ public class Exploder : MonoBehaviour
 
         exploder.simulated = false;
 
-        Debug.Log(explosionParticles, smokeParticles);
+        //Debug.Log(explosionParticles, smokeParticles);
         Instantiate(explosionParticles, transform.position, Quaternion.identity);
         Instantiate(smokeParticles, transform.position, Quaternion.identity);
         DestroyObj();

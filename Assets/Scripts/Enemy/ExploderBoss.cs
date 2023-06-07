@@ -52,7 +52,7 @@ public class ExploderBoss : MonoBehaviour
         float spawnRadius = 1f; // Radius des Spawnbereichs
         for (int i = 0; i < spawnCount; i++)
         {
-            Debug.Log("Zombie " + i + " is Spawning:");
+            //Debug.Log("Zombie " + i + " is Spawning:");
             Vector2 spawnPosition = (Vector2)transform.position + UnityEngine.Random.insideUnitCircle * spawnRadius;
             Instantiate(zombieMini, spawnPosition, Quaternion.identity);
         }

@@ -442,6 +442,7 @@ MonoBehaviour:
   dropChance: 10
   healthBar: {fileID: 8610740355228082374}
   transformToCrawler: {fileID: 0}
+  bloodPuddleHit: {fileID: 1950607216614953820, guid: 52ec8f3c7f50e4247944d5d0885612eb, type: 3}
 --- !u!58 &-2979630653874237575
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -479,7 +480,7 @@ MonoBehaviour:
   fastBlinkingRadius: {fileID: 1611748015207401877}
   hB: {fileID: 8187290449774679097}
   trail: {fileID: 4205205478767379790}
-  explosionDamage: 25
+  explosionDamage: 30
 --- !u!1 &4136541495321728567
 GameObject:
   m_ObjectHideFlags: 0
