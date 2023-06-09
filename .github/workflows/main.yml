@@ -1,48 +1,49 @@
-name: Game CI
+name: CI
 
-on: 
+on:
+  push:
+    paths:
+      - 'Assets/**'
+      - 'Packages/**'
+      - 'ProjectSettings/**'
   workflow_dispatch: {}
 
 jobs:
   build:
-    name: Build my project 
-    runs-on: ubuntu-latest
+    name: ${{ matrix.target-platform }}
+    runs-on: ${{ matrix.os }}
     steps:
-      # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
-          lfs: true
-
-      # Cache
-      - uses: actions/cache@v1.2.1
-        with:
-          path: Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-
-
-       # Test
-      - name: Unity - Test runner
-        uses: game-ci/unity-test-runner@v2.1.1
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      
-      # Build
-      - name: Unity - Builder
-        uses: game-ci/unity-builder@v2.2.0
+          path: VideoGameCi/Library
+          key: Library-${{ matrix.unity-version }}-${{ matrix.target-platform }}
+      - uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: WebGL
-
-      # Output
-      - uses: actions/upload-artifact@v2
+          targetPlatform: ${{ matrix.target-platform }}
+          projectPath: VideoGameCi
+          unityVersion: ${{ matrix.unity-version }}
+          buildName: VideoGameCi
+      - uses: actions/upload-artifact@v3
         with:
-          name: Build
-          path: build
+          name: ${{ matrix.target-platform }}-${{ matrix.unity-version }}
+          path: build/${{ matrix.target-platform }}
+    strategy:
+      matrix:
+        unity-version:
+          - 2022.1.23f1
+        os:
+          - windows-2019
+          - macos-12
+          - ubuntu-latest
+        include:
+          - os: windows-2019
+            target-platform: StandaloneWindows64
+          - os: macos-12
+            target-platform: StandaloneOSX
+          - os: ubuntu-latest
+            target-platform: StandaloneLinux64
