@@ -14,24 +14,84 @@ public class Spitter : MonoBehaviour
     public Player player;
 
     private Transform playerTransform; // Referenz auf den Spieler
+    private float lastShotTime; // Variable, um den letzten Zeitpunkt des Schusses zu speichern
 
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Spielerreferenz erhalten
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        
+        if (player != null)
+        {
+            InvokeRepeating("CheckShootingConditions", 0f, 0.1f); // Überprüfung der Schusslinie und des Schießens alle 0.1 Sekunden
+        }
     }
 
+    
+    private void CheckShootingConditions()
+    {
+        if (!player.GetIsDead())
+        {
+          Vector2 direction = playerTransform.position - firePoint.position;
+    
+            LayerMask enemyLayerMask = LayerMask.GetMask("Enemy");
+            enemyLayerMask = ~enemyLayerMask;
+    
+            RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, Mathf.Infinity, enemyLayerMask);
+    
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            {
+                //Debug.DrawLine(firePoint.position, hit.point, Color.green, 0.1f);
+    
+                if (shootingRange.IsTouching(player.GetComponent<Collider2D>()) && Time.time - lastShotTime >= shootingInterval)
+                {
+                    //Debug.Log("Shooting Range");
+                    ShootProjectile();
+                    lastShotTime = Time.time;
+                }
+    
+                if (standingRange.IsTouching(player.GetComponent<Collider2D>()) && !player.GetIsDead())
+                {
+                    //Debug.Log("Standing Range");
+                    rb.constraints = RigidbodyConstraints2D.FreezePosition;
+                }
+                else
+                {
+                    rb.constraints = RigidbodyConstraints2D.None;
+                }
+            }
+            else
+            {
+                rb.constraints = RigidbodyConstraints2D.None;
+            }
+        }
+        else
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+        }
+    }
+    
+    
+    
+    
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Vector2 direction = playerTransform.position - firePoint.position;
-        var toFilter = LayerMask.GetMask("Player");
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, toFilter);
-
-        if (hit.collider.IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()))
+        // Überprüfen, ob es sich beim kollidierenden Objekt um den Player handelt
+        if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player Found");
-            if (collision.CompareTag("Player") && player != null)
+            Vector2 direction = playerTransform.position - firePoint.position;
+
+            // Erstellen einer Layer-Mask, die den Layer "Enemy" ausschließt
+            LayerMask enemyLayerMask = LayerMask.GetMask("Enemy");
+            enemyLayerMask = ~enemyLayerMask;
+
+            RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, Mathf.Infinity, enemyLayerMask);
+
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
+                Debug.DrawLine(firePoint.position, hit.point, Color.green, 0.1f);
+
                 if (shootingRange.IsTouching(collision))
                 {
                     Debug.Log("Shooting Range");
@@ -45,12 +105,14 @@ public class Spitter : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.DrawRay(firePoint.position, direction.normalized * 10f, Color.red, 0.1f);
-            //Debug.Log("Missed Player");
-        }
     }
+    */
+
+
+
+
+
+
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -72,12 +134,6 @@ public class Spitter : MonoBehaviour
         //Debug.Log(hit.collider.IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()));
         //Debug.Log(hit.collider.GetContacts(result));
         Vector2 direction = playerTransform.position - firePoint.position;
-        //List<Collider2D> res = new List<Collider2D>();
-        //filter.IsFilteringLayerMask(GameObject.FindGameObjectWithTag("Player"));
-        //var test = hit.collider.OverlapCollider(filter, res);
-        //Debug.Log(hit.collider.IsTouching(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>()));
-        //Debug.Log(hit.collider);
-        //    Debug.DrawLine(firePoint.position, hit.point, Color.green, 0.1f);
 
         if (player.GetCurrentHealth() > 0)
         {

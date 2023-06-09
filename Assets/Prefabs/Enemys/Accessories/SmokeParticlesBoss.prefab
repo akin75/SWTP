@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1185197544582292361}
   - component: {fileID: 380426948682819922}
   - component: {fileID: 3522864408752586152}
-  - component: {fileID: 3558493465538021236}
   m_Layer: 0
   m_Name: SmokeParticlesBoss
   m_TagString: Untagged
@@ -45,7 +44,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4825,15 +4824,3 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
---- !u!114 &3558493465538021236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578250927552558729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dd22c4ba0cfd464487076814df9613f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if (!player.GetIsDead())
+        //if (!player.GetIsDead())
         {
             // Position des Spawnpunkts (hier: das Zentrum des Spawners)
             Vector3 spawnPosition = transform.position;

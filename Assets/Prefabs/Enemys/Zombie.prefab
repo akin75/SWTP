@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8084985735418968613}
   - component: {fileID: -2979630653874237575}
   - component: {fileID: 1642046387127829927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1691112112, guid: 9563792eac59bd749974f19f8d207592, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -291,6 +291,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.31201172
       objectReference: {fileID: 0}
+    - target: {fileID: 2566621770971409784, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747601621897776412, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2980682702532178697, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -302,6 +310,10 @@ PrefabInstance:
     - target: {fileID: 4055115019797164352, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055115019797164352, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_Pivot.x
@@ -386,6 +398,10 @@ PrefabInstance:
     - target: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7328945208972401877, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}

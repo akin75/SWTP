@@ -70,7 +70,10 @@ public class EnemyHealth : MonoBehaviour
                 Instantiate(deathParticles, transform.position, Quaternion.identity);
             }
             Destroy(gameObject);
-            killCounter.IncreaseKillCount();
+            if (killCounter != null)
+            {
+                killCounter.IncreaseKillCount();
+            }
             if (dropChance >= Random.Range(0, 100) && itemDrop != null) 
             {
                 Instantiate(itemDrop, transform.position, Quaternion.identity);
