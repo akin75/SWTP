@@ -25,9 +25,8 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.target-platform }}
-          projectPath: VideoGameCi
           unityVersion: ${{ matrix.unity-version }}
-          buildName: VideoGameCi
+          buildName: SWTP-Game
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.target-platform }}-${{ matrix.unity-version }}
@@ -35,7 +34,7 @@ jobs:
     strategy:
       matrix:
         unity-version:
-          - 2022.1.23f1
+          - 2021.1.23f1
         os:
           - windows-2019
           - macos-12
