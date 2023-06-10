@@ -9,7 +9,9 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
 
     public GameObject PauseMenuUI;
-
+    public GameObject GameOverScreen;
+    public HealthBar healthBar;
+    public Player player;
     public AudioSource testsound;
 
     // Update is called once per frame
@@ -46,6 +48,22 @@ public class PauseMenu : MonoBehaviour
         testsound.Play();
     }
 
+    public void GameOver()
+    {
+        Debug.Log("Spieler Gestorben");
+        GameOverScreen.SetActive(true);
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+    }
+
+public void RestartGame()
+    {
+        Debug.Log("Spiel neugestartet");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameOverScreen.SetActive(false);
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+    }
     public void QuitGame()
     {
         Debug.Log("Bip Bop, Spiel geschlossen.");

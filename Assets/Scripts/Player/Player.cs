@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
     public SpriteRenderer playerSprite;
     public GameObject deadPlayer;
+    public PauseMenu pauseMenu;
     public Color hitColor = new Color(1f, 0.5f, 0.5f);
     public float hitDuration = 0.2f;
     
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
             playerSprite.color = Color.red;
             initialRotation = transform.rotation; // Speichere die Rotation des ursprünglichen Objekts
             Instantiate(deadPlayer, transform.position, initialRotation); // Verwende die gespeicherte Rotation
+            pauseMenu.GameOver();
             Destroy(gameObject);
         }
     }
@@ -64,6 +66,10 @@ public class Player : MonoBehaviour
         return currentHealth;
     }
     
+     public int GetMaxHealth(){
+        return maxHealth;
+    }
+
     private IEnumerator HitFlash()
     {
         playerSprite.color = hitColor;
@@ -84,6 +90,10 @@ public class Player : MonoBehaviour
         rb.AddForce(impactForce, ForceMode2D.Impulse);
     }
 
+
+    public void SetCurrentHealth(int currentHealth){
+        this.currentHealth = currentHealth;
+    }
 
     public void setCurrency(int value) {
         currency = currency + value;
