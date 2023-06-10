@@ -1,48 +1,38 @@
 name: CI
 
-on:
-  push:
-    paths:
-      - 'Assets/**'
-      - 'Packages/**'
-      - 'ProjectSettings/**'
-  workflow_dispatch: {}
+on: [push]
 
 jobs:
-  build:
-    name: ${{ matrix.target-platform }}
-    runs-on: ${{ matrix.os }}
+  buildForAllSupportedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
+          - StandaloneWindows # Build a Windows standalone.
+          - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          - StandaloneLinux64 # Build a Linux 64-bit standalone.
+          - iOS # Build an iOS player.
+          - Android # Build an Android .apk standalone app.
+          - WebGL # WebGL.
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+      - uses: actions/checkout@v2
         with:
-          path: VideoGameCi/Library
-          key: Library-${{ matrix.unity-version }}-${{ matrix.target-platform }}
+          fetch-depth: 0
+          lfs: true
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-${{ matrix.targetPlatform }}
+          restore-keys: Library-
       - uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: ${{ matrix.target-platform }}
-          unityVersion: ${{ matrix.unity-version }}
-          buildName: SWTP-Game
-      - uses: actions/upload-artifact@v3
+          targetPlatform: ${{ matrix.targetPlatform }}
+      - uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.target-platform }}-${{ matrix.unity-version }}
-          path: build/${{ matrix.target-platform }}
-    strategy:
-      matrix:
-        unity-version:
-          - 2021.1.23f1
-        os:
-          - windows-2019
-          - macos-12
-          - ubuntu-latest
-        include:
-          - os: windows-2019
-            target-platform: StandaloneWindows64
-          - os: macos-12
-            target-platform: StandaloneOSX
-          - os: ubuntu-latest
-            target-platform: StandaloneLinux64
+          name: Build-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
