@@ -4,7 +4,7 @@ using UnityEngine.Animations;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public Camera cam;
+    private Camera cam;
     public PauseMenu pm;
 
     private Rigidbody2D rb;
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     private void Update()

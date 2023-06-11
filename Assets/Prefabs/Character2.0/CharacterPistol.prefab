@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 631574714682393331}
   - component: {fileID: 2371906098273877362}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftArmLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8369988401115770072}
   - component: {fileID: 8040094308597725446}
-  m_Layer: 0
+  - component: {fileID: 1304208122151115901}
+  m_Layer: 7
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,6 +170,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1304208122151115901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990691567499793299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2694f0c1032d48b43b0f5dcac468c494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireForce: 40
+  bulletPrefab: {fileID: 6851814959954085267, guid: 2f38f22b0b3e1114f94bfd195569a968, type: 3}
+  firePoint: {fileID: 5467017829412770030}
+  timeBetweenShots: 0.02
+  maxDeviation: 10
+  damage: 20
 --- !u!1 &3642124589739912965
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3620291336655057483}
   - component: {fileID: 5275149019077068721}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeftArmUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6064838837581576884}
   - component: {fileID: 4446017044393483126}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8108588209391109358}
   - component: {fileID: 4641910731801774797}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightArmUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,11 +452,10 @@ GameObject:
   - component: {fileID: 9104439054294088377}
   - component: {fileID: 7347122331325089633}
   - component: {fileID: 882125476379152320}
-  - component: {fileID: 6455804616420587426}
-  - component: {fileID: 5112014770026749737}
-  m_Layer: 0
+  - component: {fileID: 4731870390495272595}
+  m_Layer: 7
   m_Name: CharacterPistol
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -522,10 +540,10 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   hitColor: {r: 1, g: 0.5, b: 0.5, a: 1}
   hitDuration: 0.2
-  smallBloodPuddle: {fileID: 0}
-  bigBloodPuddle: {fileID: 0}
+  smallBloodPuddle: {fileID: 1950607216614953820, guid: 52ec8f3c7f50e4247944d5d0885612eb, type: 3}
+  bigBloodPuddle: {fileID: 1950607216614953820, guid: fb9a446563a97f245a5b5abde5245f60, type: 3}
   impactForceMultiplier: 1
---- !u!114 &6455804616420587426
+--- !u!114 &4731870390495272595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,31 +552,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5892547445761753197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7a28cb3b1ec08e4792c93357b6914da, type: 3}
+  m_Script: {fileID: 11500000, guid: 65d928704c9ba6644b36964c7cb01cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  cam: {fileID: 0}
   pm: {fileID: 0}
---- !u!114 &5112014770026749737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5892547445761753197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2694f0c1032d48b43b0f5dcac468c494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireForce: 25
-  bulletPrefab: {fileID: 6851814959954085267, guid: 2f38f22b0b3e1114f94bfd195569a968, type: 3}
-  firePoint: {fileID: 5467017829412770030}
-  cam: {fileID: 0}
-  timeBetweenShots: 0.02
-  maxDeviation: 10
-  damage: 20
 --- !u!1 &7923893972232520697
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2731140230488003402}
   - component: {fileID: 1276941901799803553}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RightArmLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8482753361115108691}
   - component: {fileID: 4504424128111567656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,7 +734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5467017829412770030}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -765,6 +763,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4802766330279112586}
     m_Modifications:
+    - target: {fileID: 2566621770971409784, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747601621897776412, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2980682702532178697, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -776,6 +782,10 @@ PrefabInstance:
     - target: {fileID: 4055115019797164352, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055115019797164352, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_Pivot.x
@@ -847,7 +857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 256.5
+      value: 255
       objectReference: {fileID: 0}
     - target: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -860,6 +870,10 @@ PrefabInstance:
     - target: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7328945208972401877, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}

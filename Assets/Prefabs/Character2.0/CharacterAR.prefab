@@ -93,7 +93,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  cam: {fileID: 0}
   pm: {fileID: 0}
 --- !u!114 &8961525283862336039
 MonoBehaviour:
@@ -112,6 +111,7 @@ MonoBehaviour:
   healthBar: {fileID: 4290657933757483498}
   playerSprite: {fileID: 3034276822249319176}
   deadPlayer: {fileID: 5892547445761753197, guid: a72a3ed2723dfcc4f8241824b0c1eba6, type: 3}
+  pauseMenu: {fileID: 0}
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   hitDuration: 0.2
   smallBloodPuddle: {fileID: 1950607216614953820, guid: 52ec8f3c7f50e4247944d5d0885612eb, type: 3}
@@ -379,6 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6161296934275646089}
   - component: {fileID: 2880560266649834321}
+  - component: {fileID: 1363525227798989002}
   m_Layer: 7
   m_Name: AssaultRifle
   m_TagString: Untagged
@@ -454,6 +455,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1363525227798989002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4630416648515290198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2694f0c1032d48b43b0f5dcac468c494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireForce: 40
+  bulletPrefab: {fileID: 6851814959954085267, guid: 2f38f22b0b3e1114f94bfd195569a968, type: 3}
+  firePoint: {fileID: 4674681156062693472}
+  timeBetweenShots: 0.2
+  maxDeviation: 5
+  damage: 20
 --- !u!1 &7858525873889721767
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 254.9
+      value: 255
       objectReference: {fileID: 0}
     - target: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
