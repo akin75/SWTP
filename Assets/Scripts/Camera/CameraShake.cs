@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 
 public class CameraShake : MonoBehaviour
 {
-    public float shakeIntensity = 0.1f; // Intensität der Kamerabewegung
-    public float shakeDuration = 0.2f; // Dauer der Kamerabewegung
+    public float shakeIntensity = 0.05f; // Intensität der Kamerabewegung
+    public float shakeDuration = 0.02f; // Dauer der Kamerabewegung
 
     public void StartShaking(Vector2 shotDirection)
     {

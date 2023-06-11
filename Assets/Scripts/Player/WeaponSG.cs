@@ -1,17 +1,18 @@
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class WeaponSG : MonoBehaviour
 {
-    public float fireForce = 40f;
+    public float fireForce = 25f;
     public GameObject bulletPrefab;
     public Transform firePoint;
     private Camera cam;
-    public float timeBetweenShots = 0.02f;
-    public float maxDeviation = 10f;
-    public int damage = 20;
+    public float timeBetweenShots = 0.5f;
+    public float maxDeviation = 20f;
+    public int damage = 10;
     private float timeSinceLastShot = 0f;
     private CameraShake cameraShake;
     private ParticleSystem muzzleParticles;
+    public int FirePointCount = 5;
 
     private void Start()
     {
@@ -36,12 +37,17 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
-        float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
-        Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
+        for (int i = 0; i < FirePointCount; i++)
+        {
+            float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
+            Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
+            float randomOffset = Random.Range(-0.2f, 0.2f);
+            Vector3 spawnPosition = new Vector3(firePoint.position.x + randomOffset, firePoint.position.y, firePoint.position.z);
+            GameObject newBullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
+            newBullet.transform.right = bulletDirection;
+            newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
+        }
 
-        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        newBullet.transform.right = bulletDirection;
-        newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
 
         if (muzzleParticles != null)
         {
