@@ -53,8 +53,9 @@ public class Player : MonoBehaviour
             playerSprite.color = Color.red;
             initialRotation = transform.rotation; // Speichere die Rotation des ursprünglichen Objekts
             Instantiate(deadPlayer, transform.position, initialRotation); // Verwende die gespeicherte Rotation
-            pauseMenu.GameOver();
             Destroy(gameObject);
+            pauseMenu.GameOver();
+            
         }
         impactForceBool = false;
     }
