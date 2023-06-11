@@ -491,7 +491,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Headless
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2754588126695535520, guid: 532043777f3df2a4987e4632115b0273, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 532043777f3df2a4987e4632115b0273, type: 3}
 --- !u!4 &5253675925324436258 stripped
 Transform:
@@ -577,7 +578,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BloodSplatter
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2754588126695535520, guid: 532043777f3df2a4987e4632115b0273, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 532043777f3df2a4987e4632115b0273, type: 3}
 --- !u!4 &4993754449425483033 stripped
 Transform:

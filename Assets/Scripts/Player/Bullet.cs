@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
         //Debug.Log(collision.gameObject);
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().damage);
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(GameObject.FindGameObjectWithTag("Player").GetComponent<Weapon>().damage);
         }
         else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Bullet"))
         {

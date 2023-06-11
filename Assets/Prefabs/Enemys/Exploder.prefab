@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5296939298891649176}
   - component: {fileID: 3627700302083379424}
   - component: {fileID: 4559039453609051523}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ExplosionRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 6740804598285339590}
   - component: {fileID: 2562999486764318559}
   - component: {fileID: 8073816963039443057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlinkingRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 8084985735418968613}
   - component: {fileID: -2979630653874237575}
   - component: {fileID: 6849903325813201984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Exploder
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1947042965, guid: 9563792eac59bd749974f19f8d207592, type: 3}
   m_Color: {r: 0.6776918, g: 0.9339623, b: 0.64760596, a: 1}
   m_FlipX: 0
@@ -442,6 +442,7 @@ MonoBehaviour:
   dropChance: 10
   healthBar: {fileID: 8610740355228082374}
   transformToCrawler: {fileID: 0}
+  bloodPuddleHit: {fileID: 1950607216614953820, guid: 52ec8f3c7f50e4247944d5d0885612eb, type: 3}
 --- !u!58 &-2979630653874237575
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -479,7 +480,7 @@ MonoBehaviour:
   fastBlinkingRadius: {fileID: 1611748015207401877}
   hB: {fileID: 8187290449774679097}
   trail: {fileID: 4205205478767379790}
-  explosionDamage: 25
+  explosionDamage: 30
 --- !u!1 &4136541495321728567
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +492,7 @@ GameObject:
   - component: {fileID: 6302300814168524722}
   - component: {fileID: 1611748015207401877}
   - component: {fileID: 3195957352079578729}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FastBlinkingRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2851134989143293169}
   - component: {fileID: 9221115695668142697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,6 +745,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.31201172
       objectReference: {fileID: 0}
+    - target: {fileID: 2566621770971409784, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747601621897776412, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2980682702532178697, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -755,6 +764,10 @@ PrefabInstance:
     - target: {fileID: 4055115019797164352, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055115019797164352, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4055115019797164352, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_TagString
@@ -843,6 +856,10 @@ PrefabInstance:
     - target: {fileID: 4805108143718397419, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7328945208972401877, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e12f5cd912360b4c9effb4c766d590d, type: 3}

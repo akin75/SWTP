@@ -1,69 +1,27 @@
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float fireForce = 40f;
-    public GameObject bulletPrefab;
-    public Transform firePoint;
     public Camera cam;
     public PauseMenu pm;
-    public float timeBetweenShots = 0.02f;
-    public float maxDeviation = 10f;
-    public int damage = 20;
-    private float timeSinceLastShot = 0f;
-    private CameraShake cameraShake;
-    private ParticleSystem muzzleParticles;
 
     private Rigidbody2D rb;
-    private float nextFireTime;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        cameraShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
-        Transform firePointChild = transform.Find("Firepoint");
-        if (firePointChild != null)
-        {
-            muzzleParticles = firePointChild.GetComponentInChildren<ParticleSystem>();
-        }    
     }
 
-    void Update()
+    private void Update()
     {
-        Aim();
         Move();
-
-        timeSinceLastShot += Time.deltaTime;
-        if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
-        {
-            Shoot();
-            //Debug.Log(cameraShake);
-            if (cameraShake != null)
-            {
-                Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
-                Vector2 shotDirection = (mousePosition - rb.position).normalized;
-                cameraShake.StartShaking(shotDirection);
-            }
-            timeSinceLastShot = 0f;
-        }
-    }
-    
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        rb.velocity = Vector2.zero;
+        Aim();
     }
 
-    void Aim()
-    {
-        Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = (mousePosition - rb.position).normalized;
-        transform.up = direction;
-    }
-
-    void Move()
+    private void Move()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
@@ -78,32 +36,15 @@ public class PlayerController : MonoBehaviour
             rb.velocity = direction * moveSpeed;
         }
     }
-
-    void Shoot()
+    
+    void Aim()
     {
-        if (Time.time < nextFireTime)
-        {
-            return;
-        }
-
-        nextFireTime = Time.time + timeBetweenShots;
-
-        float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
-        Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * transform.up;
-        
-        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        newBullet.transform.right = bulletDirection;
-        newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
-        
-        muzzleParticles.Play();
+        Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePosition - rb.position).normalized;
+        transform.up = direction;
     }
 
-    public void setDamage(int value)
-    {
-        damage = damage + value;
-    }
-
-    public void setMoveSpeed(int value)
+    public void SetMoveSpeed(int value)
     {
         moveSpeed = moveSpeed + value;
     }

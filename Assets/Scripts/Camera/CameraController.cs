@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Camera cam;
-    public Transform target;
+    private Transform target;
     public float camSize = 10;
     public float cameraOffsetFactor = 0.25f;
 
@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         cam.orthographicSize = camSize;
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     void Update()

@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
     public HealthBar healthBar;
     public TransformToCrawler transformToCrawler;
     private CursorFeedback cursorFeedback;
+    public ParticleSystem bloodPuddleHit;
     
     private SpriteRenderer sprite;
     private Quaternion deathRotation; // Speichert die Rotation des Objekts vor der Zerstörung
@@ -46,8 +47,9 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-        Debug.Log(gameObject);
+        //Debug.Log(gameObject);
         StartCoroutine(HitEffect());
+        Instantiate(bloodPuddleHit, transform.position, Quaternion.identity);
 
         if (currentHealth <= 0)
         {
@@ -68,7 +70,10 @@ public class EnemyHealth : MonoBehaviour
                 Instantiate(deathParticles, transform.position, Quaternion.identity);
             }
             Destroy(gameObject);
-            killCounter.IncreaseKillCount();
+            if (killCounter != null)
+            {
+                killCounter.IncreaseKillCount();
+            }
             if (dropChance >= Random.Range(0, 100) && itemDrop != null) 
             {
                 Instantiate(itemDrop, transform.position, Quaternion.identity);
@@ -82,8 +87,9 @@ public class EnemyHealth : MonoBehaviour
 
     private IEnumerator HitEffect()
     {
+        Color originalColor = sprite.color; // Speichere die ursprüngliche Farbe des Sprites
         sprite.color = Color.grey;
         yield return new WaitForSeconds(0.1f);
-        sprite.color = Color.white;
+        sprite.color = originalColor;
     }
 }
