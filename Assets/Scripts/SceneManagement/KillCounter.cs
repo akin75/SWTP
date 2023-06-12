@@ -14,9 +14,7 @@ public class KillCounter : MonoBehaviour
     private TextMeshProUGUI killCounterText;
 
     private Transform mainCameraTransform;
-
-    private EnemyHealth EnemyHealth;
-
+    
     // Start is called before the first frame update
     void Start()
     {

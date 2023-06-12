@@ -82,4 +82,9 @@ public class EnemyController : MonoBehaviour
             currentWaypoint++; // Erhöhen des aktuellen Wegpunkts, wenn der nächste erreicht wurde
         }
     }
+    
+    public void SetTarget(Transform t)
+    {
+        target = t;
+    }
 }

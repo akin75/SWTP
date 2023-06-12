@@ -95,10 +95,10 @@ GameObject:
   - component: {fileID: 5342744140458710340}
   - component: {fileID: 8278102820976099514}
   - component: {fileID: 7592394267994328902}
-  - component: {fileID: 3875426939387996951}
   - component: {fileID: 8024650309853052232}
+  - component: {fileID: 9141947917533685541}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletSG
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,19 +194,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3875426939387996951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6851814959954085267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c1e4dd917a79f4ab0a5178f82051d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitObjectParticles: {fileID: 1371572389595951175, guid: c4344089be85c9e48af9d857f66e2c24, type: 3}
 --- !u!58 &8024650309853052232
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -223,6 +210,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &9141947917533685541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6851814959954085267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d7106884c769342aa2f79309df4b33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitObjectParticles: {fileID: 1371572389595951175, guid: c4344089be85c9e48af9d857f66e2c24, type: 3}
 --- !u!1 &7935192748915898113
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.98039216, g: 0.81758255, b: 0, a: 0.22352941}
+      key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 0.9606118, b: 0, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -353,7 +353,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 964
-      atime1: 65535
+      atime1: 44911
       atime2: 65535
       atime3: 0
       atime4: 0
