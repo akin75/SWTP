@@ -185,8 +185,8 @@ MonoBehaviour:
   fireForce: 40
   bulletPrefab: {fileID: 6851814959954085267, guid: 2f38f22b0b3e1114f94bfd195569a968, type: 3}
   firePoint: {fileID: 5467017829412770030}
-  timeBetweenShots: 0.02
-  maxDeviation: 10
+  timeBetweenShots: 0.3
+  maxDeviation: 1
   damage: 20
 --- !u!1 &3642124589739912965
 GameObject:
