@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - HealthBar
+  - Bullet
+  - DeadPlayer
   layers:
   - Default
   - TransparentFX
@@ -12,9 +15,9 @@ TagManager:
   - Obstacle
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - PostPr
   - 
   - 
   - 
@@ -41,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Character
+    uniqueID: 1122447067
+    locked: 0
+  - name: Mine
+    uniqueID: 3508191807
     locked: 0

@@ -1,36 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public Weapon weapon;
-    public Camera cam;
-    
+    private Camera cam;
+    public PauseMenu pm;
+
     private Rigidbody2D rb;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
-    void Update()
+    private void Update()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Move();
+        Aim();
+    }
 
-        if (moveInput != Vector2.zero)
+    private void Move()
+    {
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (Mathf.Approximately(horizontalInput, 0f) && Mathf.Approximately(verticalInput, 0f))
         {
-            rb.MovePosition(rb.position + moveInput.normalized * moveSpeed * Time.deltaTime);
+            rb.velocity = Vector2.zero;
         }
+        else
+        {
+            Vector2 direction = new Vector2(horizontalInput, verticalInput).normalized;
+            rb.velocity = direction * moveSpeed;
+        }
+    }
+    
+    void Aim()
+    {
+        Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePosition - rb.position).normalized;
+        transform.up = direction;
+    }
 
-        weapon.transform.position = rb.transform.position;
-        // Richte das Waffenobjekt auf den Mauszeiger aus
-        Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f;
-        weapon.Aim(mousePosition);
-        
-        Debug.Log("Mausposition" + mousePosition);
+    public void SetMoveSpeed(int value)
+    {
+        moveSpeed = moveSpeed + value;
     }
 }

@@ -10,9 +10,11 @@ public class EnemySpawner : MonoBehaviour
     public int spawnCount = 0; 
     private bool endless = false;
     private float nextSpawnTime;
+    private Player player;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if (spawnCount == 0) 
         {
             spawnCount = 1;
@@ -33,11 +35,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        // Position des Spawnpunkts (hier: das Zentrum des Spawners)
-        Vector3 spawnPosition = transform.position;
-
-        // Erzeugen des Feindes aus dem Prefab
-        GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-    }
+        //if (!player.GetIsDead())
+        {
+            // Position des Spawnpunkts (hier: das Zentrum des Spawners)
+            Vector3 spawnPosition = transform.position;
     
+            // Erzeugen des Feindes aus dem Prefab
+            GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        }
+    }
 }

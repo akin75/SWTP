@@ -2,51 +2,61 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Transform firePoint;
-    public GameObject bulletPrefab;
     public float fireForce = 40f;
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+    private Camera cam;
     public float timeBetweenShots = 0.02f;
     public float maxDeviation = 10f;
-    private float timeSinceLastShot;
-    public static int damage = 20;
+    public int damage = 20;
+    private float timeSinceLastShot = 0f;
+    private CameraShake cameraShake;
+    private ParticleSystem muzzleParticles;
 
-    
-
-
-    void Update()
+    private void Start()
     {
-        // Fire weapon
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cameraShake = Camera.main.GetComponent<CameraShake>();
+        Transform firePointChild = transform.Find("Firepoint");
+        if (firePointChild != null)
+        {
+            muzzleParticles = firePointChild.GetComponentInChildren<ParticleSystem>();
+        }
+    }
+
+    private void Update()
+    {
         timeSinceLastShot += Time.deltaTime;
         if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
         {
-            Fire();
+            Shoot();
             timeSinceLastShot = 0f;
         }
-        
-        // Weapon flip
-        // Check if mouse is on left side of screen
-        bool isMouseOnLeft = Input.mousePosition.x < Screen.width / 2f;
-
-        // Flip weapon object if mouse is on left
-        transform.localScale = new Vector3(0.4f, isMouseOnLeft ? -0.4f : 0.4f, 1f);
     }
 
-    void Fire()
+    private void Shoot()
     {
-        // Random deviation angle
         float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
-        Quaternion deviation = Quaternion.Euler(0f, 0f, deviationAngle);
+        Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
 
-        // Create bullet and apply deviation to rotation
-        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation * deviation);
-        newBullet.GetComponent<Rigidbody2D>().AddForce(newBullet.transform.right * fireForce, ForceMode2D.Impulse);
+        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        newBullet.transform.right = bulletDirection;
+        newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
+
+        if (muzzleParticles != null)
+        {
+            muzzleParticles.Play();
+        }
+
+        if (cameraShake != null)
+        {
+            Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 shotDirection = (mousePosition - (Vector2)firePoint.position).normalized;
+            cameraShake.StartShaking(shotDirection);
+        }
     }
-
-    public void Aim(Vector3 targetPosition)
+    public void SetDamage(int value)
     {
-        Vector3 direction = targetPosition - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rb.rotation = angle;
+        damage = damage + value;
     }
 }
