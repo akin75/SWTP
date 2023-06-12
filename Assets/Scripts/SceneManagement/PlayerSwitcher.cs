@@ -9,11 +9,12 @@ public class PlayerSwitcher : MonoBehaviour
     private GameObject currentPlayer; // Referenz auf den aktuellen Player
     private UnityEngine.Vector3 playerPosition;
     private Quaternion playerRotation;
-    public CameraController camController;
+    private CameraController camController;
     //public EnemyController enemController;
 
     private void Start()
     {
+        camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         // Den ersten Player auswählen
         currentPlayer = GameObject.FindGameObjectWithTag("Player");
     }
