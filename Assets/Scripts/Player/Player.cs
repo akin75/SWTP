@@ -73,7 +73,10 @@ public class Player : MonoBehaviour
      public int GetMaxHealth(){
         return maxHealth;
     }
-
+    public int GetCoins()
+    {
+        return currency;
+    }
     private IEnumerator HitFlash()
     {
         playerSprite.color = hitColor;
