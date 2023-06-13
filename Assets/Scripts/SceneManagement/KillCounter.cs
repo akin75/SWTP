@@ -45,4 +45,8 @@ public class KillCounter : MonoBehaviour
         //Debug.Log("Updated Kill Count!");
         killCounterText.text = "Kills: " + killsCounter.ToString();
     }
+
+    public int GetKills(){
+        return killsCounter;
+    }
 }
