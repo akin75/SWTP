@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     public int damage = 20;
     private float timeSinceLastShot = 0f;
     private CameraShake cameraShake;
+    private Recoil recoil;
     private ParticleSystem muzzleParticles;
 
     private void Start()
@@ -22,6 +23,7 @@ public class Weapon : MonoBehaviour
         {
             muzzleParticles = firePointChild.GetComponentInChildren<ParticleSystem>();
         }
+        recoil = GetComponentInParent<Recoil>();
     }
 
     private void Update()
@@ -53,6 +55,15 @@ public class Weapon : MonoBehaviour
             Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
             Vector2 shotDirection = (mousePosition - (Vector2)firePoint.position).normalized;
             cameraShake.StartShaking(shotDirection);
+        }
+
+        if (recoil != null)
+        {
+            recoil.StartRecoil();
+        }
+        else
+        {
+            Debug.Log("recoil missing");
         }
     }
     public void SetDamage(int value)

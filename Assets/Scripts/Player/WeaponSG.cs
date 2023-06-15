@@ -9,10 +9,12 @@ public class WeaponSG : MonoBehaviour
     public float timeBetweenShots = 0.5f;
     public float maxDeviation = 20f;
     public int damage = 10;
-    private float timeSinceLastShot = 0f;
+    private float timeSinceLastShot = Mathf.Infinity; // Anfangswert auf unendlich setzen
+    private bool isFirstShot = true; // Variable, um den ersten Schuss zu verfolgen
     private CameraShake cameraShake;
+    private Recoil recoil;
     private ParticleSystem muzzleParticles;
-    public int FirePointCount = 5;
+    public int firePointCount = 5;
 
     private void Start()
     {
@@ -23,10 +25,19 @@ public class WeaponSG : MonoBehaviour
         {
             muzzleParticles = firePointChild.GetComponentInChildren<ParticleSystem>();
         }
+        recoil = GetComponentInParent<Recoil>();
     }
 
     private void Update()
     {
+        if (isFirstShot)
+        {
+            // Der erste Schuss erfolgt sofort
+            Shoot();
+            isFirstShot = false;
+            return;
+        }
+
         timeSinceLastShot += Time.deltaTime;
         if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
         {
@@ -37,7 +48,7 @@ public class WeaponSG : MonoBehaviour
 
     private void Shoot()
     {
-        for (int i = 0; i < FirePointCount; i++)
+        for (int i = 0; i < firePointCount; i++)
         {
             float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
             Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
@@ -47,7 +58,6 @@ public class WeaponSG : MonoBehaviour
             newBullet.transform.right = bulletDirection;
             newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
         }
-
 
         if (muzzleParticles != null)
         {
@@ -60,7 +70,12 @@ public class WeaponSG : MonoBehaviour
             Vector2 shotDirection = (mousePosition - (Vector2)firePoint.position).normalized;
             cameraShake.StartShaking(shotDirection);
         }
+        if (recoil != null)
+        {
+            recoil.StartRecoil();
+        }
     }
+
     public void SetDamage(int value)
     {
         damage = damage + value;
