@@ -27,13 +27,13 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         //pauseMenuUI = GameObject.Find("PauseScreen");
-        hud.SetActive(true);
+        //hud.SetActive(true);
     }
 
     void Update()
     {
-        heal.SetText("Health: " + player.GetCurrentHealth());
-        coin.SetText(""+player.GetCoins());
+        //heal.SetText("Health: " + player.GetCurrentHealth());
+        //coin.SetText(""+player.GetCoins());
         if (Input.GetKeyDown("escape"))
         {
             if (gameIsPaused)
