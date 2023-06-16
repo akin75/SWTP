@@ -13,16 +13,23 @@ public class Weapon : MonoBehaviour
     private CameraShake cameraShake;
     private Recoil recoil;
     private ParticleSystem muzzleParticles;
+    private bool canShoot = false; // Variable zur Steuerung des Schussstatus
 
     private void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
-        Transform firePointChild = transform.Find("Firepoint");
+        Transform firePointChild = transform.Find("FirePoint");
         if (firePointChild != null)
         {
             muzzleParticles = firePointChild.GetComponentInChildren<ParticleSystem>();
         }
+        else
+        {
+            Debug.Log("Muzzle null");
+        }
+        muzzleParticles.gameObject.SetActive(false);
+
         recoil = GetComponentInParent<Recoil>();
     }
 
@@ -31,6 +38,8 @@ public class Weapon : MonoBehaviour
         timeSinceLastShot += Time.deltaTime;
         if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
         {
+            muzzleParticles.gameObject.SetActive(true);
+            canShoot = true;
             Shoot();
             timeSinceLastShot = 0f;
         }
@@ -49,6 +58,10 @@ public class Weapon : MonoBehaviour
         {
             muzzleParticles.Play();
         }
+        else
+        {
+            Debug.Log("Muzzle Particles Missing");
+        }
 
         if (cameraShake != null)
         {
@@ -63,11 +76,18 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            Debug.Log("recoil missing");
+            Debug.Log("Recoil Missing");
         }
     }
+
     public void SetDamage(int value)
     {
         damage = damage + value;
+    }
+
+    // Methode zum Aktivieren des Schießens
+    public void EnableShooting()
+    {
+        canShoot = true;
     }
 }
