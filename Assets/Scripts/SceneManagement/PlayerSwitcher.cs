@@ -6,6 +6,7 @@ using Vector3 = System.Numerics.Vector3;
 public class PlayerSwitcher : MonoBehaviour
 {
     public GameObject[] playerPrefabs; // Array der Player-Prefabs
+    public GameObject playerIdlePrefab;
     private GameObject currentPlayer; // Referenz auf den aktuellen Player
     private UnityEngine.Vector3 playerPosition;
     private Quaternion playerRotation;

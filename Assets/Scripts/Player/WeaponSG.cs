@@ -10,7 +10,6 @@ public class WeaponSG : MonoBehaviour
     public float maxDeviation = 20f;
     public int damage = 10;
     private float timeSinceLastShot = Mathf.Infinity; // Anfangswert auf unendlich setzen
-    private bool isFirstShot = true; // Variable, um den ersten Schuss zu verfolgen
     private CameraShake cameraShake;
     private Recoil recoil;
     private ParticleSystem muzzleParticles;
@@ -20,27 +19,26 @@ public class WeaponSG : MonoBehaviour
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
-        Transform firePointChild = transform.Find("Firepoint");
+        Transform firePointChild = transform.Find("FirePoint");
         if (firePointChild != null)
         {
             muzzleParticles = firePointChild.GetComponentInChildren<ParticleSystem>();
         }
+        else
+        {
+            Debug.Log("Muzzle = null");
+        }
+        muzzleParticles.gameObject.SetActive(false);
         recoil = GetComponentInParent<Recoil>();
     }
 
     private void Update()
     {
-        if (isFirstShot)
-        {
-            // Der erste Schuss erfolgt sofort
-            Shoot();
-            isFirstShot = false;
-            return;
-        }
 
         timeSinceLastShot += Time.deltaTime;
         if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
         {
+            muzzleParticles.gameObject.SetActive(true);
             Shoot();
             timeSinceLastShot = 0f;
         }
@@ -62,6 +60,10 @@ public class WeaponSG : MonoBehaviour
         if (muzzleParticles != null)
         {
             muzzleParticles.Play();
+        }        
+        else
+        {
+            Debug.Log("Muzzle Particles Missing");
         }
 
         if (cameraShake != null)

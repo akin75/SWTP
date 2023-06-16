@@ -50,4 +50,4 @@ MonoBehaviour:
   - {fileID: 425695750378635383, guid: da3daa6deb3e17b41980c99e24983b6c, type: 3}
   - {fileID: 425695750378635383, guid: f8fa8d70a43883f48b1e9561a33ef5e2, type: 3}
   - {fileID: 425695750378635383, guid: f8fa8d70a43883f48b1e9561a33ef5e2, type: 3}
-  camController: {fileID: 0}
+  playerIdlePrefab: {fileID: 425695750378635383, guid: f3a12cc43ae686f41803cda69f987c8a, type: 3}
