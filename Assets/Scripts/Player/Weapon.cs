@@ -13,7 +13,6 @@ public class Weapon : MonoBehaviour
     private CameraShake cameraShake;
     private Recoil recoil;
     private ParticleSystem muzzleParticles;
-    private bool canShoot = false; // Variable zur Steuerung des Schussstatus
 
     private void Start()
     {
@@ -39,7 +38,6 @@ public class Weapon : MonoBehaviour
         if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
         {
             muzzleParticles.gameObject.SetActive(true);
-            canShoot = true;
             Shoot();
             timeSinceLastShot = 0f;
         }
@@ -83,11 +81,5 @@ public class Weapon : MonoBehaviour
     public void SetDamage(int value)
     {
         damage = damage + value;
-    }
-
-    // Methode zum Aktivieren des Schießens
-    public void EnableShooting()
-    {
-        canShoot = true;
     }
 }

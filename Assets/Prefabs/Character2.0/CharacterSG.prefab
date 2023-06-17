@@ -322,7 +322,7 @@ MonoBehaviour:
   timeBetweenShots: 1
   maxDeviation: 20
   damage: 10
-  firePointCount: 5
+  firePointCount: 20
 --- !u!1 &1951664781426303919
 GameObject:
   m_ObjectHideFlags: 0
