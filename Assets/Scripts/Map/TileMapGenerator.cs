@@ -50,7 +50,7 @@ public class TileMapGenerator
             //if(min.tileArray.Length== 0) Debug.Log("Position: " + min.positionInMap + "  Test: " + min.tileCell);
             
             var coords = rand.Next(0, min.tileContacts.Count);
-            Debug.Log("Coords;  " + coords);
+            Debug.Log("Coords;  " + min.positionInMap + " Collapse with piece" + min.tileContacts[coords].ContactTile.name);
             min.Collapse(coords); // Improvement Idea likely to select more path over than obstacles
             visited = new HashSet<Vector3Int>();
             Propagate(min);
