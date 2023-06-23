@@ -12,39 +12,13 @@ public class WeaponSG : MonoBehaviour
     private float timeSinceLastShot = Mathf.Infinity; // Anfangswert auf unendlich setzen
     private CameraShake cameraShake;
     private Recoil recoil;
-    private ParticleSystem muzzleParticles;
+    public ParticleSystem muzzleParticles;
     public int firePointCount = 5;
-
-    private void Start()
-    {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        cameraShake = Camera.main.GetComponent<CameraShake>();
-        Transform firePointChild = transform.Find("FirePoint");
-        if (firePointChild != null)
-        {
-            muzzleParticles = firePointChild.GetComponentInChildren<ParticleSystem>();
-        }
-        else
-        {
-            Debug.Log("Muzzle = null");
-        }
-        muzzleParticles.gameObject.SetActive(false);
-        recoil = GetComponentInParent<Recoil>();
-    }
-
-    private void Update()
-    {
-
-        timeSinceLastShot += Time.deltaTime;
-        if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
-        {
-            muzzleParticles.gameObject.SetActive(true);
-            Shoot();
-            timeSinceLastShot = 0f;
-        }
-    }
-
-    private void Shoot()
+    private int level = 1;
+    
+    
+    
+    public void Shoot()
     {
         for (int i = 0; i < firePointCount; i++)
         {
@@ -81,5 +55,10 @@ public class WeaponSG : MonoBehaviour
     public void SetDamage(int value)
     {
         damage = damage + value;
+    }
+
+    public void AddLevel(int level)
+    {
+        this.level += level;
     }
 }

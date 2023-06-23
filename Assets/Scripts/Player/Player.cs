@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 
     public int maxHealth = 100;
     public int currentHealth;
-    public static int currency;
+    public static int currency = 100;
 
     public HealthBar healthBar;
     public SpriteRenderer playerSprite;
@@ -23,15 +23,23 @@ public class Player : MonoBehaviour
     private bool isDead = false;
     private bool impactForceBool = false;
     private Quaternion initialRotation; // Speichert die Rotation des ursprünglichen Objekts
-
+    private PlayerSwitcher playerManager;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
+        playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
+        PlayerClass playerClass = playerManager.playerClass;
+        currentHealth = playerClass.maxHealth;
+        currency = playerClass.GetCurrency();
+        Debug.Log("maxHealth " + maxHealth);
         healthBar.SetMaxHealth(maxHealth);
-        
+        if (currentHealth < maxHealth)
+        {
+            //Debug.Log("True");
+            healthBar.SetHealth(currentHealth);
+        }
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -42,11 +50,12 @@ public class Player : MonoBehaviour
                 currentHealth = maxHealth;
             }
             healthBar.SetHealth(currentHealth);
+            playerManager.playerClass.SetHealth(currentHealth);
             ApplyImpact(damage * impactForceMultiplier);
             StartCoroutine(HitFlash());
 
 
-        //Debug.Log("currentHealth " + currentHealth);
+        Debug.Log("currentHealth " + currentHealth);
         if (currentHealth <= 0)
         {
             isDead = true;
@@ -75,7 +84,7 @@ public class Player : MonoBehaviour
     }
     public int GetCoins()
     {
-        return currency;
+        return playerManager.playerClass.GetCurrency();
     }
     private IEnumerator HitFlash()
     {
@@ -111,6 +120,7 @@ public class Player : MonoBehaviour
 
     public void setCurrency(int value) {
         currency = currency + value;
+        playerManager.playerClass.SetCurrency(currency);
         //Debug.Log("Currency: " + currency);
     }
 

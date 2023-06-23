@@ -25,6 +25,8 @@ public class EnemyHealth : MonoBehaviour
     private Quaternion deathRotation; // Speichert die Rotation des Objekts vor der Zerstörung
     private Vector3 deathScale; // Speichert die Skalierung des Objekts vor der Zerstörung
     private KillCounter killCounter;
+    public int experiencePoint;
+    private PlayerSwitcher playerManager;
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class EnemyHealth : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         killCounter = FindObjectOfType<KillCounter>();
         cursorFeedback = FindObjectOfType<CursorFeedback>();
+        playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -78,6 +81,8 @@ public class EnemyHealth : MonoBehaviour
             {
                 Instantiate(itemDrop, transform.position, Quaternion.identity);
             }
+            Debug.Log("Experience Points given: " + experiencePoint);
+            playerManager.playerClass.AddExpPoints(experiencePoint);
         }
         else
         {
