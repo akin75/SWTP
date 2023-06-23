@@ -13,7 +13,11 @@ public class BulletSG : MonoBehaviour
             //Debug.Log(collision.gameObject);
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<WeaponSG>().damage);
+                var enemy = collision.gameObject.GetComponent<EnemyHealth>();
+                if (enemy.currentHealth > 0)
+                {
+                    enemy.TakeDamage(GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<WeaponSG>().damage);
+                }
             }
             else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Bullet"))
             {
