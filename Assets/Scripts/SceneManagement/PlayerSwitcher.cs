@@ -16,7 +16,7 @@ public class PlayerSwitcher : MonoBehaviour
     private float damageAR;
     public EnemyController enemController;
 
-    private void Start()
+    private void Awake()
     {
         camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         // Den ersten Player auswählen
@@ -41,11 +41,11 @@ public class PlayerSwitcher : MonoBehaviour
         {
             SwitchPlayer(0);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2)&& playerClass.GetLevel() >= 2)
         {
             SwitchPlayer(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && playerClass.GetLevel() >= 3)
         {
             SwitchPlayer(2);
         }

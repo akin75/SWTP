@@ -14,15 +14,18 @@ public class WeaponUpgrade : MonoBehaviour
     private GameObject text;
     private Vector3 offset = new Vector3(0, -2.5f);
     public TextMeshProUGUI coinText;
+    public TextMeshProUGUI levelText;
     public GameObject shopUI;
     public List<Upgrades> upgradesList;
-    private bool shopState = false;
+    public bool shopState = false;
     public GameObject shopItemPrefab;
     public Transform shopContent;
     private Weapon weapon;
+    private PlayerSwitcher playerManager;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
         text = Instantiate(upgradeTextPrefab, GameObject.Find("IconManager").transform);
         text.SetActive(false);
         weapon = player.GetComponentInChildren<Weapon>();
@@ -64,6 +67,7 @@ public class WeaponUpgrade : MonoBehaviour
             {
                 BuyUpgrade(upgrades);
             });
+            item.GetComponent<Button>().interactable = false;
         }
         
     }
@@ -105,14 +109,28 @@ public class WeaponUpgrade : MonoBehaviour
             text.SetActive(true);
             text.transform.position = Camera.main.WorldToScreenPoint(player.transform.position + offset);
             shopState = true;
+            UpdateShop();
         }
         
     }
-    
 
+
+    private void UpdateShop()
+    {
+        foreach (Upgrades upgrades in upgradesList)
+        {
+            if (playerManager.playerClass.GetLevel() >= upgrades.levelToBuy)
+            {
+                upgrades.itemRef.GetComponent<Button>().interactable = true;
+                upgrades.itemRef.transform.GetChild(6).GetComponent<Image>().color = new Color(46, 32, 32, 0);
+            }
+        }
+    }
     private void OnGUI()
     {
         coinText.text = "Coins: " + player.GetComponent<Player>().GetCoins();
+        levelText.text = "Level: " + playerManager.playerClass.GetLevel();
+        
     }
 
     private void Update()
@@ -154,4 +172,5 @@ public class Upgrades
     public Sprite image;
     [HideInInspector] public GameObject itemRef;
     public GameObject weapon;
+    public int levelToBuy;
 }

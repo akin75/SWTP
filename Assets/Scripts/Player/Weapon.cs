@@ -15,11 +15,13 @@ public class Weapon : MonoBehaviour
     private ParticleSystem muzzleParticles;
     private int level = 1;
     private WeaponSG newInstance;
+    private WeaponUpgrade weaponUpgrade;
 
     private void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
         Transform firePointChild = transform.Find("FirePoint");
         level = 1;
         if (firePointChild != null)
@@ -45,7 +47,7 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
-        if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots)
+        if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots && !weaponUpgrade.shopState)
         {
             muzzleParticles.gameObject.SetActive(true);
             if (newInstance != null && transform.gameObject.name == "Shotgun")
