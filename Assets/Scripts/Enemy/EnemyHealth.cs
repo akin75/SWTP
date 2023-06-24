@@ -81,7 +81,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 Instantiate(itemDrop, transform.position, Quaternion.identity);
             }
-            Debug.Log("Experience Points given: " + experiencePoint);
+//            Debug.Log("Experience Points given: " + experiencePoint);
             playerManager.playerClass.AddExpPoints(experiencePoint);
         }
         else

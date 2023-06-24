@@ -54,7 +54,7 @@ public class PlayerSwitcher : MonoBehaviour
             SwitchPlayer(3);
         }
     }
-
+/*
     private void SwitchPlayer(int index)
     {
         // Überprüfen, ob der Index gültig ist
@@ -71,7 +71,7 @@ public class PlayerSwitcher : MonoBehaviour
             // Das neue Player-Prefab instanziieren und als aktuellen Player setzen
             currentPlayer.SetActive(false);
             int health = currentPlayer.GetComponent<Player>().currentHealth;
-            currentPlayer = transform.GetComponentInChildren<Transform>().Find(playerPrefabs[index].name).GameObject();
+            currentPlayer = transform.GetComponentInChildren<Transform>().Find(playerPrefabs[index].name).gameObject;
             currentPlayer.SetActive(true);
             currentPlayer.transform.position = playerPosition;
             currentPlayer.transform.rotation = playerRotation;
@@ -81,6 +81,30 @@ public class PlayerSwitcher : MonoBehaviour
             //playerClass.SetPosition(currentPlayer.transform.position);
             //camController.SetTarget(currentPlayer.transform);
             //enemController.SetTarget(currentPlayer.transform);
+        }
+    }
+    */
+    private void SwitchPlayer(int index)
+    {
+        // Überprüfen, ob der Index gültig ist
+        if (index >= 0 && index < playerPrefabs.Length)
+        {
+            // Das neue Player-Prefab instanziieren und als neuen Player setzen
+            GameObject newPlayer = Instantiate(playerPrefabs[index], playerPosition, playerRotation);
+
+            // Die Position und Rotation des aktuellen Players auf den neuen Player übertragen
+            newPlayer.transform.position = currentPlayer.transform.position;
+            newPlayer.transform.rotation = currentPlayer.transform.rotation;
+
+            // Aktiviere den neuen Player und deaktiviere den alten Player
+            newPlayer.SetActive(true);
+            currentPlayer.SetActive(false);
+
+            // Den neuen Player als den aktuellen Player setzen
+            currentPlayer = newPlayer;
+
+            // Kameracontroller auf den neuen Player ausrichten
+            camController.SetTarget(currentPlayer.transform);
         }
     }
 }

@@ -7441,6 +7441,10 @@ PrefabInstance:
       propertyPath: camController
       value: 
       objectReference: {fileID: 539376405}
+    - target: {fileID: 1053933440284512770, guid: 46cd35304131c0c4ba0193e77ee06579, type: 3}
+      propertyPath: playerPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1053933440284512771, guid: 46cd35304131c0c4ba0193e77ee06579, type: 3}
       propertyPath: m_RootOrder
       value: 8
