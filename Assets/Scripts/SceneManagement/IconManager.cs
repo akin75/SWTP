@@ -7,10 +7,12 @@ public class IconManager : MonoBehaviour
     // Start is called before the first frame update
     public Image prefabImage;
     private Image uiUse;
-    private Vector3 offset = new Vector3(0, 1);
+    public Vector3 offset = new Vector3(0, 1);
+    public GameObject iconManager;
+    
     void Start()
     {
-        uiUse = Instantiate(prefabImage, GameObject.Find("IconManager").transform).GetComponent<Image>();
+        uiUse = Instantiate(prefabImage, iconManager.transform).GetComponent<Image>();
     }
 
     // Update is called once per frame

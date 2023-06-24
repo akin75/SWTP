@@ -59,7 +59,12 @@ public class PlayerClass
 
     public void SetExpPoints(int exp)
     {
-        expPoints = 0;
+        expPoints = exp;
+    }
+
+    public int GetLevel()
+    {
+        return playerLevel;
     }
     
     public void hasLeveledUp()

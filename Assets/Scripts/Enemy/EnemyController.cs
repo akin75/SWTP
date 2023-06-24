@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
 
     private Rigidbody2D rb; // Rigidbody2D-Komponente des Gegners
 
-    private void Awake()
+    private void Start()
     {
         seeker = GetComponent<Seeker>(); // Initialisierung des Seekers
         rb = GetComponent<Rigidbody2D>(); // Initialisierung des Rigidbody2D
