@@ -10,7 +10,7 @@ public class WeaponSG : MonoBehaviour
     public float maxDeviation = 20f;
     public int damage = 10;
     private float timeSinceLastShot = Mathf.Infinity; // Anfangswert auf unendlich setzen
-    private CameraShake cameraShake;
+    private CameraController cameraController;
     private Recoil recoil;
     public ParticleSystem muzzleParticles;
     public int firePointCount = 5;
@@ -40,11 +40,11 @@ public class WeaponSG : MonoBehaviour
             Debug.Log("Muzzle Particles Missing");
         }
 
-        if (cameraShake != null)
+        if (cameraController != null)
         {
             Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
             Vector2 shotDirection = (mousePosition - (Vector2)firePoint.position).normalized;
-            cameraShake.StartShaking(shotDirection);
+            cameraController.StartShaking(shotDirection);
         }
         if (recoil != null)
         {

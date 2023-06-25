@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     public float maxDeviation = 10f;
     public int damage = 20;
     private float timeSinceLastShot = 0f;
-    private CameraShake cameraShake;
+    private CameraController cameraController;
     private Recoil recoil;
     private ParticleSystem muzzleParticles;
     private int level = 1;
@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        cameraShake = Camera.main.GetComponent<CameraShake>();
+        cameraController = Camera.main.GetComponent<CameraController>();
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
         Transform firePointChild = transform.Find("FirePoint");
         level = 1;
@@ -81,11 +81,11 @@ public class Weapon : MonoBehaviour
             Debug.Log("Muzzle Particles Missing");
         }
 
-        if (cameraShake != null)
+        if (cameraController != null)
         {
             Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
             Vector2 shotDirection = (mousePosition - (Vector2)firePoint.position).normalized;
-            cameraShake.StartShaking(shotDirection);
+            cameraController.StartShaking(shotDirection);
         }
 
         if (recoil != null)
