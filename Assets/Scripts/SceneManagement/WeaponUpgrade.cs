@@ -128,9 +128,11 @@ public class WeaponUpgrade : MonoBehaviour
     }
     private void OnGUI()
     {
-        coinText.text = "Coins: " + player.GetComponent<Player>().GetCoins();
-        levelText.text = "Level: " + playerManager.playerClass.GetLevel();
-        
+        if (player != null)
+        {
+            coinText.text = "Coins: " + player.GetComponent<Player>().GetCoins();
+            levelText.text = "Level: " + playerManager.playerClass.GetLevel();
+        }
     }
 
     private void Update()
@@ -141,11 +143,12 @@ public class WeaponUpgrade : MonoBehaviour
             
             Debug.Log($"Weapon {weapon.gameObject.name}");
         }
-        
-        player = GameObject.FindGameObjectWithTag("Player");
-        weapon = player.GetComponentInChildren<Weapon>();
 
-        
+        if (player != null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            weapon = player.GetComponentInChildren<Weapon>();
+        }
     }
     
     
