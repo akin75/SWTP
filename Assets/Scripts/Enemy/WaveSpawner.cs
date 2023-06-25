@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public enum spawnState { SPAWNING, WAITING, COUNTING };
+    public enum spawnState { SPAWNING, WAITING, COUNTING, COMPLETE };
 
     [System.Serializable]
     public class Wave
-    {
-        public string waveName;
-        public Transform enemy;
-        public int spawnCount;
+    {    
+        public string waveName;     
+        public List<Enemys> enemyList = new List<Enemys>();
         public float spawnRate;
+    }
+
+    [System.Serializable]
+    public class Enemys
+    {
+        public Transform enemy;
+        public int count;
     }
 
     public Wave[] waves;
@@ -28,7 +34,7 @@ public class WaveSpawner : MonoBehaviour
     private spawnState state = spawnState.COUNTING;
 
     void Start()
-    {
+    { 
         if (spawnPoints.Length == 0)
         {
             Debug.LogError("No Spawn Points!");
@@ -38,6 +44,10 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+        if (state == spawnState.COMPLETE)
+        {
+            return;
+        }
         if (state == spawnState.WAITING) 
         {
             if (!enemyIsAlive())
@@ -81,13 +91,17 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Spawn Wave: " + _wave.waveName);
         state = spawnState.SPAWNING;
-
-        for (int i=0; i < _wave.spawnCount; i++)
+        int i = 0;
+        while (i < _wave.enemyList.Count)
         {
-            spawnEnemy(_wave.enemy);
+            spawnEnemy(_wave.enemyList[i].enemy);
+            _wave.enemyList[i].count -= 1;
             yield return new WaitForSeconds(1f/_wave.spawnRate);
+            if (_wave.enemyList[i].count == 0)
+            {
+                i += 1;
+            }
         }
-
         state = spawnState.WAITING;
         yield break;
     }
@@ -101,7 +115,8 @@ public class WaveSpawner : MonoBehaviour
         if (nextWave + 1 > waves.Length - 1)
         {
             nextWave = 0;
-            Debug.Log("All Waves Complete! Looping...");
+            state = spawnState.COMPLETE;
+            Debug.Log("All Waves Complete!");
         }
         else
         {
