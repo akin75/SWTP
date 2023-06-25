@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public enum weaponState { READY, RELOADING };
+    private weaponState state = weaponState.READY;
     public float fireForce = 40f;
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -9,6 +12,9 @@ public class Weapon : MonoBehaviour
     public float timeBetweenShots = 0.02f;
     public float maxDeviation = 10f;
     public int damage = 20;
+    public int ammo = 20;
+    private int maxAmmo;
+    public int reloadTime = 2;
     private float timeSinceLastShot = 0f;
     private CameraController cameraController;
     private Recoil recoil;
@@ -42,6 +48,7 @@ public class Weapon : MonoBehaviour
         }
         muzzleParticles.gameObject.SetActive(false);
         recoil = GetComponentInParent<Recoil>();
+        maxAmmo = ammo;
     }
 
     private void Update()
@@ -61,10 +68,19 @@ public class Weapon : MonoBehaviour
             
             timeSinceLastShot = 0f;
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            state = weaponState.RELOADING;
+            StartCoroutine(Reload());
+        }
     }
 
     private void Shoot()
-    {
+    {  
+        if (state == weaponState.RELOADING)
+        {
+                return;
+        }
         float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
         Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
 
@@ -96,6 +112,22 @@ public class Weapon : MonoBehaviour
         {
             Debug.Log("Recoil Missing");
         }
+
+        ammo -= 1;
+        if (ammo == 0)
+        {
+            state = weaponState.RELOADING;
+            StartCoroutine(Reload());
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        Debug.Log("Reloading!");
+        yield return new WaitForSeconds(reloadTime);
+        ammo = maxAmmo;
+        state = weaponState.READY;
+        yield break;
     }
 
     public void SetDamage(int value)
