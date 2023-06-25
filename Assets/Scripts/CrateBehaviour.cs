@@ -44,9 +44,11 @@ public class CrateBehaviour : MonoBehaviour
     }
     private IEnumerator HitEffect()
     {
-        Color originalColor = sprite.color; // Speichere die ursprüngliche Farbe des Sprites
-        sprite.color = Color.grey;
+        var color = sprite.color;
+        Color originalColor = color; // Speichere die ursprüngliche Farbe des Sprites
+        color = Color.grey;
         yield return new WaitForSeconds(0.05f);
-        sprite.color = originalColor;
+        color = originalColor;
+        sprite.color = color;
     }
 }
