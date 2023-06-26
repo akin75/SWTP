@@ -22,7 +22,7 @@ public class PlayerSwitcher : MonoBehaviour
         // Den ersten Player auswählen
         currentPlayer = GameObject.FindGameObjectWithTag("Player");
         //enemController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
-        playerClass = new PlayerClass(currentPlayer.GetComponent<Player>().maxHealth, currentPlayer);
+        playerClass = new PlayerClass(currentPlayer.GetComponent<Player>().maxHealth, currentPlayer, currentPlayer.GetComponent<PlayerController>().moveSpeed);
         camController.SetTarget(playerClass.position);
         
         //enemController.SetTarget(playerClass.position);
@@ -89,9 +89,13 @@ public class PlayerSwitcher : MonoBehaviour
         // Überprüfen, ob der Index gültig ist
         if (index >= 0 && index < playerPrefabs.Length)
         {
+            if (currentPlayer.gameObject.name == playerPrefabs[index].name)
+            {
+                return;
+            }
             // Das neue Player-Prefab instanziieren und als neuen Player setzen
-            GameObject newPlayer = Instantiate(playerPrefabs[index], playerPosition, playerRotation);
-
+            GameObject newPlayer = playerPrefabs[index];
+            
             // Die Position und Rotation des aktuellen Players auf den neuen Player übertragen
             newPlayer.transform.position = currentPlayer.transform.position;
             newPlayer.transform.rotation = currentPlayer.transform.rotation;
@@ -102,9 +106,25 @@ public class PlayerSwitcher : MonoBehaviour
 
             // Den neuen Player als den aktuellen Player setzen
             currentPlayer = newPlayer;
-
+            UpdatePlayer();
             // Kameracontroller auf den neuen Player ausrichten
             camController.SetTarget(currentPlayer.transform);
         }
     }
+
+
+    void UpdatePlayer()
+    {
+        var player = currentPlayer.GetComponent<Player>();
+        currentPlayer.GetComponent<PlayerController>().moveSpeed = playerClass.GetMoveSpeed();
+        player.SetMaxHealth(playerClass.GetMaxHealth());
+        player.SetCurrentHealth(playerClass.GetCurrentHealth());
+        
+    }
+
+    public GameObject GetCurrentPlayer()
+    {
+        return currentPlayer;
+    }
+    
 }

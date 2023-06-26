@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,39 +25,41 @@ public class Player : MonoBehaviour
     private bool impactForceBool = false;
     private Quaternion initialRotation; // Speichert die Rotation des ursprünglichen Objekts
     private PlayerSwitcher playerManager;
-    
+
+
+    private void Awake()
+    {
+        if (playerManager == null)
+        {
+            playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
         PlayerClass playerClass = playerManager.playerClass;
-        currentHealth = playerClass.maxHealth;
+        SetMaxHealth(GetMaxHealth());
+        SetCurrentHealth(GetCurrentHealth());
+        Debug.Log($"Max {GetMaxHealth()}  Current {GetCurrentHealth()}");
         currency = playerClass.GetCurrency();
-        Debug.Log("maxHealth " + maxHealth);
-        healthBar.SetMaxHealth(maxHealth);
-        if (currentHealth < maxHealth)
-        {
-            //Debug.Log("True");
-            healthBar.SetHealth(currentHealth);
-        }
+        transform.GetComponent<PlayerController>().moveSpeed = playerClass.GetMoveSpeed();
+        //Debug.Log("maxHealth " + maxHealth);
         rb = GetComponent<Rigidbody2D>();
     }
 
     public void TakeDamage(int damage) 
     {
-        currentHealth = currentHealth - damage;
-            if (currentHealth > maxHealth) {
-                currentHealth = maxHealth;
-            }
-            healthBar.SetHealth(currentHealth);
-            playerManager.playerClass.SetHealth(currentHealth);
-            ApplyImpact(damage * impactForceMultiplier);
-            StartCoroutine(HitFlash());
+        
+        SetCurrentHealth(GetCurrentHealth() - damage);
+        Debug.Log("currentHealth " + GetCurrentHealth());
+        ApplyImpact(damage * impactForceMultiplier);
+        StartCoroutine(HitFlash());
 
 
-        Debug.Log("currentHealth " + currentHealth);
-        if (currentHealth <= 0)
+        
+        if (GetCurrentHealth() <= 0)
         {
             isDead = true;
             playerSprite.color = Color.red;
@@ -69,18 +72,21 @@ public class Player : MonoBehaviour
         impactForceBool = false;
     }
 
+
+    
+
     public bool GetIsDead()
     {
         return isDead;
     }
 
-    public float GetCurrentHealth()
+    public int GetCurrentHealth()
     {
-        return currentHealth;
+        return playerManager.playerClass.GetCurrentHealth();
     }
     
      public int GetMaxHealth(){
-        return maxHealth;
+        return playerManager.playerClass.GetMaxHealth();
     }
     public int GetCoins()
     {
@@ -115,7 +121,9 @@ public class Player : MonoBehaviour
 
 
     public void SetCurrentHealth(int currentHealth){
-        this.currentHealth = currentHealth;
+        
+        playerManager.playerClass.SetHealth(currentHealth);
+        healthBar.SetHealth(currentHealth);
     }
 
     public void setCurrency(int value) {
@@ -125,9 +133,15 @@ public class Player : MonoBehaviour
     }
 
     public void setMaxHealth(int value) {
-        maxHealth = maxHealth + value;
         healthBar.SetMaxHealth(maxHealth);
-        currentHealth = currentHealth + value;
-        //Debug.Log("currentHealth: " + currentHealth + "\nmaxHealth: " + maxHealth);
+        SetMaxHealth(GetMaxHealth() + value);
+        SetCurrentHealth(GetCurrentHealth() + value);
+        Debug.Log($"CurrentHealth is {GetCurrentHealth()}");
+    }
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        playerManager.playerClass.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(playerManager.playerClass.GetMaxHealth());
     }
 }

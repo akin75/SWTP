@@ -1,65 +1,60 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mime;
 using UnityEngine;
-using UnityEngine.UI;
+using Unity.UI;
 using TMPro;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
-public class WeaponUpgrade : MonoBehaviour
+public class PerkUpgrade : MonoBehaviour
 {
     // Start is called before the first frame update
-    private GameObject player;
+     private GameObject player;
     public GameObject upgradeTextPrefab;
     private GameObject text;
     private Vector3 offset = new Vector3(0, -2.5f);
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI levelText;
     public GameObject shopUI;
-    public List<Upgrades> upgradesList;
+    public List<Perks> upgradesList;
     public bool shopState = false;
     public GameObject shopItemPrefab;
     public Transform shopContent;
     private Weapon weapon;
     private PlayerSwitcher playerManager;
+    private decimal constantMultiplier = 0.2m;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        
         playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
+        player = playerManager.GetCurrentPlayer();
         text = Instantiate(upgradeTextPrefab, GameObject.Find("IconManager").transform);
         text.SetActive(false);
         weapon = player.GetComponentInChildren<Weapon>();
         Debug.Log($"Test: {weapon.GetLevel()}");
 
-        foreach (Upgrades upgrades in upgradesList)
+        foreach (Perks upgrades in upgradesList)
         {
             GameObject item = Instantiate(shopItemPrefab, shopContent);
             upgrades.itemRef = item;
             foreach (Transform child in item.transform)
             {
-                if (child.gameObject.name == "LevelText")
+                if (child.gameObject.name == "PerkName")
                 {
-                    child.gameObject.GetComponent<Text>().text = upgrades.name + " Level: " + upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel();
+                    child.gameObject.GetComponent<TextMeshProUGUI>().text = upgrades.name + " Level: " + upgrades.perkLevel;
                 }
                 if (child.gameObject.name == "Image")
                 {
                     child.gameObject.GetComponent<Image>().sprite = upgrades.image;
                 }
-                if (child.gameObject.name == "LevelTo")
+                if (child.gameObject.name == "PerkUpgrade")
                 {
-                    child.gameObject.GetComponent<Text>().text = "Level      " + $"{upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel()} -->  {(upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel() + 1)}";
+                    child.gameObject.GetComponent<TextMeshProUGUI>().text = $"{upgrades.name}      " + $"{upgrades.perkLevel}  -->  {upgrades.perkLevel + 1}" ; // Needs to be done with a better UI
                 }
-                if (child.gameObject.name == "DamageTo")
+                if (child.gameObject.name == "PerkCost")
                 {
-                    child.gameObject.GetComponent<Text>().text += upgrades.weapon.GetComponentInChildren<Weapon>().damage + "  -->  " + (upgrades.weapon.GetComponentInChildren<Weapon>().damage + 10) ;
-                }
-                if (child.gameObject.name == "FireRateTo")
-                {
-                    child.gameObject.GetComponent<Text>().text += upgrades.weapon.GetComponentInChildren<Weapon>().timeBetweenShots + "  -->  " + (upgrades.weapon.GetComponentInChildren<Weapon>().timeBetweenShots - 0.005f);
-                }
-                if (child.gameObject.name == "Cost")
-                {
-                    child.gameObject.GetComponent<Text>().text = "Cost: " + upgrades.cost ;
+                    child.gameObject.GetComponent<TextMeshProUGUI>().text = "Cost: " + upgrades.cost ;
                 }
             }
             
@@ -74,31 +69,40 @@ public class WeaponUpgrade : MonoBehaviour
 
     
 
-    public void BuyUpgrade(Upgrades upgrades)
+    public void BuyUpgrade(Perks upgrades)
     {
         var playerComponent = player.GetComponent<Player>();
         if (playerComponent.GetCoins() >= upgrades.cost)
         {
             Debug.Log("Test");
             playerComponent.setCurrency(-upgrades.cost);
-            upgrades.weapon.GetComponentInChildren<Weapon>().AddLevel(1);
-            upgrades.weapon.GetComponentInChildren<Weapon>().SetDamage(10);
-            upgrades.weapon.GetComponentInChildren<Weapon>().SetTimeBetweenShots(0.005f);
-            Debug.Log($"Weapon Upgrades: Damage {upgrades.weapon.GetComponentInChildren<Weapon>().damage}  Level {upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel()}");
             ApplyUpgrade(upgrades);
 
         }
     }
 
-    private void ApplyUpgrade(Upgrades upgrades)
+    private void ApplyUpgrade(Perks upgrades)
     {
         decimal multiplier = (upgrades.cost + 1m)  * 1.10m;
         upgrades.cost = (int)Math.Round(multiplier);
-        upgrades.itemRef.transform.GetChild(4).GetComponent<Text>().text = upgrades.name + " Level: " + upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel();
-        upgrades.itemRef.transform.GetChild(1).GetComponent<Text>().text = "Level      " + $"{upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel()} -->  {(upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel() + 1)}";
-        upgrades.itemRef.transform.GetChild(2).GetComponent<Text>().text = "Damage      " + upgrades.weapon.GetComponentInChildren<Weapon>().damage + "  -->  " + (upgrades.weapon.GetComponentInChildren<Weapon>().damage + 10) ;
-        upgrades.itemRef.transform.GetChild(3).GetComponent<Text>().text = "Fire Rate      " + upgrades.weapon.GetComponentInChildren<Weapon>().timeBetweenShots + "  -->  " + (upgrades.weapon.GetComponentInChildren<Weapon>().timeBetweenShots - 0.005f); ;
-        upgrades.itemRef.transform.GetChild(5).GetComponent<Text>().text = "Cost: " + upgrades.cost;
+        upgrades.perkLevel++;
+        upgrades.itemRef.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{upgrades.name}      " + $"{upgrades.perkLevel}  -->  {upgrades.perkLevel + 1}" ;
+        upgrades.itemRef.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"Cost:   " + $"{upgrades.cost}" ;
+        Invoke(upgrades.name + "Upgrade", 0f);
+    }
+
+    private void MaxHealthUpgrade()
+    {
+        decimal multiplier = playerManager.playerClass.maxHealth * constantMultiplier;
+        player.GetComponent<Player>().setMaxHealth((int)Math.Round(multiplier));
+    }
+
+    private void SpeedUpgrade()
+    {
+        var speed = player.GetComponent<PlayerController>().moveSpeed;
+        decimal multiplier = (decimal)speed * constantMultiplier;
+        player.GetComponent<PlayerController>().SetMoveSpeed((int)Math.Round(multiplier));
+        playerManager.playerClass.SetMoveSpeed(player.GetComponent<PlayerController>().moveSpeed);
     }
 
     // Update is called once per frame
@@ -117,12 +121,12 @@ public class WeaponUpgrade : MonoBehaviour
 
     private void UpdateShop()
     {
-        foreach (Upgrades upgrades in upgradesList)
+        foreach (Perks upgrades in upgradesList)
         {
             if (playerManager.playerClass.GetLevel() >= upgrades.levelToBuy)
             {
                 upgrades.itemRef.GetComponent<Button>().interactable = true;
-                upgrades.itemRef.transform.GetChild(6).GetComponent<Image>().color = new Color(46, 32, 32, 0);
+                upgrades.itemRef.transform.GetChild(1).GetComponent<Image>().color = new Color(46, 32, 32, 0.4f);
             }
         }
     }
@@ -141,14 +145,13 @@ public class WeaponUpgrade : MonoBehaviour
         {
             shopUI.SetActive(true);
             
-            Debug.Log($"Weapon {weapon.gameObject.name}");
         }
-
+        
         if (player != null)
         {
             player = playerManager.GetCurrentPlayer();
-            weapon = player.GetComponentInChildren<Weapon>();
         }
+        
     }
     
     
@@ -163,17 +166,17 @@ public class WeaponUpgrade : MonoBehaviour
         }
     }
 
-   
 }
 
-
 [System.Serializable]
-public class Upgrades
+public class Perks
 {
     public string name;
     public int cost;
     public Sprite image;
     [HideInInspector] public GameObject itemRef;
-    public GameObject weapon;
+    [HideInInspector] public Object toUpgrade;
+    public bool isUniquePerk;
     public int levelToBuy;
+    public int perkLevel;
 }
