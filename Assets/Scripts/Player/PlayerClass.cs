@@ -7,7 +7,7 @@ using UnityEngine;
 // Nur eine Übergeordnete Klasse im Player findet der eigentliche attribute statt.
 public class PlayerClass
 {
-    public int maxHealth;
+    public int currentHealth;
     //public List<GameObject> prefabList;
     private GameObject prefab;
     public Transform position;
@@ -15,21 +15,35 @@ public class PlayerClass
     private int playerLevel;
     private int toLevelUp;
     private int currency;
-    public PlayerClass(int maxHealth, GameObject prefab)
+    public int maxHealth;
+    private float moveSpeed;
+    public PlayerClass(int maxHealth, GameObject prefab, float moveSpeed)
     {
         this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth;
         this.prefab = prefab;
         position = prefab.transform;
         playerLevel = 1;
         toLevelUp = 100;
         expPoints = 0;
         currency = 100;
+        this.moveSpeed = moveSpeed;
     }
 
 
     void SwitchPrefab(GameObject prefab)
     {
         this.prefab = prefab;
+    }
+
+    public void SetMoveSpeed(float value)
+    {
+        moveSpeed = value;
+    }
+
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
     }
 
     public void SetPosition(Vector3 pos)
@@ -39,12 +53,27 @@ public class PlayerClass
 
     public void SetHealth(int health)
     {
-        this.maxHealth = health;
+        this.currentHealth = health;
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
     }
 
     public void SetCurrency(int currency)
     {
         this.currency = currency;
+    }
+
+    public void SetMaxHealth(int health)
+    {
+        this.maxHealth = health;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
     }
 
     public int GetCurrency()
