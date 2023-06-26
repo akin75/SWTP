@@ -16,6 +16,8 @@ public class EnemyHealth : MonoBehaviour
     public GameObject itemDrop;
     public int dropChance;
 
+    private bool playerCanTakeDamage = true;
+
     public HealthBar healthBar;
     public TransformToCrawler transformToCrawler;
     private CursorFeedback cursorFeedback;
@@ -27,6 +29,7 @@ public class EnemyHealth : MonoBehaviour
     private KillCounter killCounter;
     public int experiencePoint;
     private PlayerSwitcher playerManager;
+    private Player player;
 
     void Start()
     {
@@ -36,13 +39,29 @@ public class EnemyHealth : MonoBehaviour
         killCounter = FindObjectOfType<KillCounter>();
         cursorFeedback = FindObjectOfType<CursorFeedback>();
         playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            //collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            if (player != null)
+            {
+                StartCoroutine(PlayerTakesDamage(collision));
+            }
+        }
+    }
+    
+    private IEnumerator PlayerTakesDamage(Collision2D collision)
+    {
+        if (playerCanTakeDamage && player != null)
+        {
+            playerCanTakeDamage = false;
             collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            yield return new WaitForSeconds(0.5f);
+            playerCanTakeDamage = true;
         }
     }
 
@@ -81,7 +100,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 Instantiate(itemDrop, transform.position, Quaternion.identity);
             }
-            Debug.Log("Experience Points given: " + experiencePoint);
+//            Debug.Log("Experience Points given: " + experiencePoint);
             playerManager.playerClass.AddExpPoints(experiencePoint);
         }
         else

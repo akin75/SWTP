@@ -22,7 +22,7 @@ public class PlayerSwitcher : MonoBehaviour
         // Den ersten Player auswählen
         currentPlayer = GameObject.FindGameObjectWithTag("Player");
         //enemController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
-        playerClass = new PlayerClass(currentPlayer.GetComponent<Player>().maxHealth, currentPlayer);
+        playerClass = new PlayerClass(currentPlayer.GetComponent<Player>().maxHealth, currentPlayer, currentPlayer.GetComponent<PlayerController>().moveSpeed);
         camController.SetTarget(playerClass.position);
         
         //enemController.SetTarget(playerClass.position);
@@ -54,7 +54,7 @@ public class PlayerSwitcher : MonoBehaviour
             SwitchPlayer(3);
         }
     }
-
+/*
     private void SwitchPlayer(int index)
     {
         // Überprüfen, ob der Index gültig ist
@@ -71,7 +71,7 @@ public class PlayerSwitcher : MonoBehaviour
             // Das neue Player-Prefab instanziieren und als aktuellen Player setzen
             currentPlayer.SetActive(false);
             int health = currentPlayer.GetComponent<Player>().currentHealth;
-            currentPlayer = transform.GetComponentInChildren<Transform>().Find(playerPrefabs[index].name).GameObject();
+            currentPlayer = transform.GetComponentInChildren<Transform>().Find(playerPrefabs[index].name).gameObject;
             currentPlayer.SetActive(true);
             currentPlayer.transform.position = playerPosition;
             currentPlayer.transform.rotation = playerRotation;
@@ -83,4 +83,48 @@ public class PlayerSwitcher : MonoBehaviour
             //enemController.SetTarget(currentPlayer.transform);
         }
     }
+    */
+    private void SwitchPlayer(int index)
+    {
+        // Überprüfen, ob der Index gültig ist
+        if (index >= 0 && index < playerPrefabs.Length)
+        {
+            if (currentPlayer.gameObject.name == playerPrefabs[index].name)
+            {
+                return;
+            }
+            // Das neue Player-Prefab instanziieren und als neuen Player setzen
+            GameObject newPlayer = playerPrefabs[index];
+            
+            // Die Position und Rotation des aktuellen Players auf den neuen Player übertragen
+            newPlayer.transform.position = currentPlayer.transform.position;
+            newPlayer.transform.rotation = currentPlayer.transform.rotation;
+
+            // Aktiviere den neuen Player und deaktiviere den alten Player
+            newPlayer.SetActive(true);
+            currentPlayer.SetActive(false);
+
+            // Den neuen Player als den aktuellen Player setzen
+            currentPlayer = newPlayer;
+            UpdatePlayer();
+            // Kameracontroller auf den neuen Player ausrichten
+            camController.SetTarget(currentPlayer.transform);
+        }
+    }
+
+
+    void UpdatePlayer()
+    {
+        var player = currentPlayer.GetComponent<Player>();
+        currentPlayer.GetComponent<PlayerController>().moveSpeed = playerClass.GetMoveSpeed();
+        player.SetMaxHealth(playerClass.GetMaxHealth());
+        player.SetCurrentHealth(playerClass.GetCurrentHealth());
+        
+    }
+
+    public GameObject GetCurrentPlayer()
+    {
+        return currentPlayer;
+    }
+    
 }
