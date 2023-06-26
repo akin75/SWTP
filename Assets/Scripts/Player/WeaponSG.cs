@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class WeaponSG : MonoBehaviour
 {
+    public enum weaponState { READY, RELOADING };
+    private weaponState state = weaponState.READY;
     public float fireForce = 25f;
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -9,6 +12,9 @@ public class WeaponSG : MonoBehaviour
     public float timeBetweenShots = 0.5f;
     public float maxDeviation = 20f;
     public int damage = 10;
+    public int ammo = 8;
+    private int maxAmmo = 8;
+    public int reloadTime = 2;
     private float timeSinceLastShot = Mathf.Infinity; // Anfangswert auf unendlich setzen
     private CameraController cameraController;
     private Recoil recoil;
@@ -17,9 +23,21 @@ public class WeaponSG : MonoBehaviour
     private int level = 1;
     
     
-    
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            state = weaponState.RELOADING;
+            StartCoroutine(Reload());
+        }
+    }
+
     public void Shoot()
     {
+        if (state == weaponState.RELOADING)
+        {
+                return;
+        }
         for (int i = 0; i < firePointCount; i++)
         {
             float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
@@ -50,6 +68,22 @@ public class WeaponSG : MonoBehaviour
         {
             recoil.StartRecoil();
         }
+
+        ammo -= 1;
+        if (ammo == 0)
+        {
+            state = weaponState.RELOADING;
+            StartCoroutine(Reload());
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        Debug.Log("Reloading!");
+        yield return new WaitForSeconds(reloadTime);
+        ammo = maxAmmo;
+        state = weaponState.READY;
+        yield break;
     }
 
     public void SetDamage(int value)
