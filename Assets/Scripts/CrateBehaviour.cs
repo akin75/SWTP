@@ -22,6 +22,7 @@ public class CrateBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
+            playerDamage = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Weapon>().damage;
             health = health - playerDamage;
             Instantiate(crateHit, transform.position, Quaternion.identity);
             StartCoroutine(HitEffect());
