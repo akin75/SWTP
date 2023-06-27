@@ -6,7 +6,7 @@ public class CrateBehaviour : MonoBehaviour
 {
     public float health;
     private float playerDamage;
-    private SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     public ParticleSystem crateHit;
     public ParticleSystem crateDestroy;
     public GameObject coin;
@@ -15,7 +15,7 @@ public class CrateBehaviour : MonoBehaviour
     private void Start()
     {
         playerDamage = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Weapon>().damage;
-        sprite = GetComponent<SpriteRenderer>();
+       // sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
