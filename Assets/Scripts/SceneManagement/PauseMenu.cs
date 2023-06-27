@@ -17,23 +17,26 @@ public class PauseMenu : MonoBehaviour
     public HealthBar healthBar;
     public Player player;
     public AudioSource testsound;
+    public WaveSpawner ws;
    
    // public KillCounter kc;
     public TMP_Text heal;
     public TMP_Text coin;
     public TMP_Text kills;
+    public TMP_Text waveInfo;
 
 
     private void Start()
     {
         //pauseMenuUI = GameObject.Find("PauseScreen");
-        //hud.SetActive(true);
+        hud.SetActive(true);
     }
 
     void Update()
     {
-        //heal.SetText("Health: " + player.GetCurrentHealth());
-        //coin.SetText(""+player.GetCoins());
+        heal.SetText("Health: " + player.GetCurrentHealth());
+        coin.SetText(""+player.GetCoins());
+        waveInfo.SetText("Next Wave in: "+ws.GetWaveInfo());
         if (Input.GetKeyDown("escape"))
         {
             if (gameIsPaused)
@@ -71,7 +74,10 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
+         SceneManager.LoadScene("MainMenu");
         Debug.Log("Bip Bop, Menü geladen.");
+        Time.timeScale = 1f;
+        gameIsPaused = false;
         testsound.Play();
     }
 

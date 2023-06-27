@@ -31,6 +31,8 @@ public class EnemyHealth : MonoBehaviour
     private PlayerSwitcher playerManager;
     private Player player;
 
+    private bool isDestroyed;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -92,6 +94,7 @@ public class EnemyHealth : MonoBehaviour
                 Instantiate(deathParticles, transform.position, Quaternion.identity);
             }
             Destroy(gameObject);
+            isDestroyed = true;
             if (killCounter != null)
             {
                 killCounter.IncreaseKillCount();
@@ -115,5 +118,20 @@ public class EnemyHealth : MonoBehaviour
         sprite.color = Color.grey;
         yield return new WaitForSeconds(0.1f);
         sprite.color = originalColor;
+    }
+
+    public int getCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public bool IsDestroyed()
+    {
+        return isDestroyed;
+    }
+
+    public void setKillCounter(KillCounter counter)
+    {
+        killCounter = counter;
     }
 }
