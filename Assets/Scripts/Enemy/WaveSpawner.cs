@@ -12,6 +12,9 @@ public class WaveSpawner : MonoBehaviour
         public string waveName;     
         public List<Enemys> enemyList = new List<Enemys>();
         public float spawnRate;
+
+    
+
     }
 
     [System.Serializable]
@@ -25,7 +28,7 @@ public class WaveSpawner : MonoBehaviour
     private int nextWave = 0;
 
     public Transform[] spawnPoints;
-
+    
     public float timeBetweenWaves = 5f;
     private float waveCountdown;
 
@@ -131,4 +134,8 @@ public class WaveSpawner : MonoBehaviour
         Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
         Instantiate(_enemy, _sp.position, _sp.rotation);
     }
+     public float GetWaveInfo (){
+        return (int)waveCountdown;
+    }
+   
 }
