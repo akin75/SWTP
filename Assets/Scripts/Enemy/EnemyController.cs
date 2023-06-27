@@ -89,4 +89,9 @@ public class EnemyController : MonoBehaviour
     {
         target = t;
     }
+
+    public Transform GetTarget()
+    {
+        return target;
+    }
 }
