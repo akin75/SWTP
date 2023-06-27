@@ -20,6 +20,9 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene("PixelDungeon");//Ruft die Scene in der Klammer auf
         
     }
+
+
+
    /* IEnumerator LoadLevel()
     {
         transition.setTrigger("Start");
