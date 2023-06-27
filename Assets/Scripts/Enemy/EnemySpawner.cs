@@ -14,7 +14,10 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if (player != null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        }
         if (spawnCount == 0) 
         {
             spawnCount = 1;
@@ -29,7 +32,6 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemy();
             nextSpawnTime = Time.time + spawnRate;
             if (!endless) spawnCount = spawnCount - 1;
-
         }
     }
 

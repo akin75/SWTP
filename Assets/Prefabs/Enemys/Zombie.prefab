@@ -237,6 +237,7 @@ MonoBehaviour:
   healthBar: {fileID: 8610740355228082374}
   transformToCrawler: {fileID: 1642046387127829927}
   bloodPuddleHit: {fileID: 1950607216614953820, guid: 52ec8f3c7f50e4247944d5d0885612eb, type: 3}
+  experiencePoint: 20
 --- !u!58 &-2979630653874237575
 CircleCollider2D:
   m_ObjectHideFlags: 0

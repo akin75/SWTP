@@ -16,6 +16,8 @@ public class EnemyHealth : MonoBehaviour
     public GameObject itemDrop;
     public int dropChance;
 
+    private bool playerCanTakeDamage = true;
+
     public HealthBar healthBar;
     public TransformToCrawler transformToCrawler;
     private CursorFeedback cursorFeedback;
@@ -25,6 +27,11 @@ public class EnemyHealth : MonoBehaviour
     private Quaternion deathRotation; // Speichert die Rotation des Objekts vor der Zerstörung
     private Vector3 deathScale; // Speichert die Skalierung des Objekts vor der Zerstörung
     private KillCounter killCounter;
+    public int experiencePoint;
+    private PlayerSwitcher playerManager;
+    private Player player;
+
+    private bool isDestroyed;
 
     void Start()
     {
@@ -33,13 +40,30 @@ public class EnemyHealth : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         killCounter = FindObjectOfType<KillCounter>();
         cursorFeedback = FindObjectOfType<CursorFeedback>();
+        playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            //collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            if (player != null)
+            {
+                StartCoroutine(PlayerTakesDamage(collision));
+            }
+        }
+    }
+    
+    private IEnumerator PlayerTakesDamage(Collision2D collision)
+    {
+        if (playerCanTakeDamage && player != null)
+        {
+            playerCanTakeDamage = false;
             collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            yield return new WaitForSeconds(0.5f);
+            playerCanTakeDamage = true;
         }
     }
 
@@ -70,6 +94,7 @@ public class EnemyHealth : MonoBehaviour
                 Instantiate(deathParticles, transform.position, Quaternion.identity);
             }
             Destroy(gameObject);
+            isDestroyed = true;
             if (killCounter != null)
             {
                 killCounter.IncreaseKillCount();
@@ -78,6 +103,8 @@ public class EnemyHealth : MonoBehaviour
             {
                 Instantiate(itemDrop, transform.position, Quaternion.identity);
             }
+//            Debug.Log("Experience Points given: " + experiencePoint);
+            playerManager.playerClass.AddExpPoints(experiencePoint);
         }
         else
         {
@@ -91,5 +118,20 @@ public class EnemyHealth : MonoBehaviour
         sprite.color = Color.grey;
         yield return new WaitForSeconds(0.1f);
         sprite.color = originalColor;
+    }
+
+    public int getCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public bool IsDestroyed()
+    {
+        return isDestroyed;
+    }
+
+    public void setKillCounter(KillCounter counter)
+    {
+        killCounter = counter;
     }
 }

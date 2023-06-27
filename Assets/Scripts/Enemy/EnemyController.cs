@@ -15,13 +15,15 @@ public class EnemyController : MonoBehaviour
 
     private Rigidbody2D rb; // Rigidbody2D-Komponente des Gegners
 
-    private void Awake()
+    private void Start()
     {
         seeker = GetComponent<Seeker>(); // Initialisierung des Seekers
         rb = GetComponent<Rigidbody2D>(); // Initialisierung des Rigidbody2D
 
         // Suchen des Spielers als Ziel
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        PlayerSwitcher playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
+        
         if (playerObject != null)
         {
             playerController = playerObject.GetComponent<Player>();
@@ -29,7 +31,7 @@ public class EnemyController : MonoBehaviour
 
         if (playerController != null && !playerController.GetIsDead())
         {
-            target = playerController.transform;
+            target = playerManager.playerClass.position;
         }
 
         InvokeRepeating("UpdatePath", 0f, 0.5f); // Aktualisierung des Pfads alle 0,5 Sekunden
@@ -81,5 +83,15 @@ public class EnemyController : MonoBehaviour
         {
             currentWaypoint++; // Erhöhen des aktuellen Wegpunkts, wenn der nächste erreicht wurde
         }
+    }
+    
+    public void SetTarget(Transform t)
+    {
+        target = t;
+    }
+
+    public Transform GetTarget()
+    {
+        return target;
     }
 }
