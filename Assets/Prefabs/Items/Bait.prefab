@@ -191,8 +191,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 48b02e748e464d04b8016c728d0032a2, type: 3}
-  m_Color: {r: 0.5372549, g: 0.4392157, b: 0.09411765, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b9e39b8ea9936e841ab33af6b2a66161, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baitArea: {fileID: 587162757308011089}
-  baitTime: 3
+  baitTime: 20
 --- !u!50 &5952577742334340562
 Rigidbody2D:
   serializedVersion: 4

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WeaponSG : MonoBehaviour
 {
@@ -30,6 +32,11 @@ public class WeaponSG : MonoBehaviour
             state = weaponState.RELOADING;
             StartCoroutine(Reload());
         }
+    }
+
+    private void Start()
+    {
+        recoil = GetComponentInParent<Recoil>();
     }
 
     public void Shoot()
@@ -67,6 +74,10 @@ public class WeaponSG : MonoBehaviour
         if (recoil != null)
         {
             recoil.StartRecoil();
+        }
+        else
+        {
+            Debug.Log("Recoil missing in ChSG");
         }
 
         ammo -= 1;
