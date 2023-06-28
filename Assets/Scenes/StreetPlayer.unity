@@ -7319,6 +7319,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1858062137}
     - target: {fileID: 638986450684664453, guid: 9b4d87a50d0b1b84f943be5b824fa35e, type: 3}
+      propertyPath: upgradeTextPrefab
+      value: 
+      objectReference: {fileID: 4911467194234829770, guid: f096858bf97a9e649bb7e892cebb0fb8, type: 3}
+    - target: {fileID: 638986450684664453, guid: 9b4d87a50d0b1b84f943be5b824fa35e, type: 3}
       propertyPath: upgradesList.Array.data[0].weapon
       value: 
       objectReference: {fileID: 863204987}
@@ -7390,6 +7394,10 @@ PrefabInstance:
       propertyPath: iconManager
       value: 
       objectReference: {fileID: 1929323124}
+    - target: {fileID: 638986450684664456, guid: 9b4d87a50d0b1b84f943be5b824fa35e, type: 3}
+      propertyPath: prefabImage
+      value: 
+      objectReference: {fileID: 1103310028635343182, guid: df37cc46b9fd6c04a92641fb1864df4e, type: 3}
     - target: {fileID: 638986450684664459, guid: 9b4d87a50d0b1b84f943be5b824fa35e, type: 3}
       propertyPath: m_Name
       value: CartBox
