@@ -323,6 +323,8 @@ MonoBehaviour:
   timeBetweenShots: 1
   maxDeviation: 20
   damage: 10
+  ammo: 8
+  reloadTime: 2
   muzzleParticles: {fileID: 0}
   firePointCount: 20
 --- !u!114 &3046411758469487390
@@ -343,6 +345,8 @@ MonoBehaviour:
   timeBetweenShots: 0.3
   maxDeviation: 10
   damage: 20
+  ammo: 20
+  reloadTime: 2
 --- !u!1 &1951664781426303919
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,7 +37,10 @@ public class MineBehaviour : MonoBehaviour
 
         foreach (var enemy in enemiesToDamage)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+            if (enemy != null)
+            {
+                enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
         }
 
         enemiesInDamageArea.Clear();
