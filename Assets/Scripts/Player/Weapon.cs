@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -22,6 +23,7 @@ public class Weapon : MonoBehaviour
     private int level = 1;
     private WeaponSG newInstance;
     private WeaponUpgrade weaponUpgrade;
+    private AudioSource reloadSfx;
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class Weapon : MonoBehaviour
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
         Transform firePointChild = transform.Find("FirePoint");
         level = 1;
+        reloadSfx = GetComponent<AudioSource>();
         if (firePointChild != null)
         {
             muzzleParticles = firePointChild.GetComponentInChildren<ParticleSystem>();
@@ -124,6 +127,14 @@ public class Weapon : MonoBehaviour
     IEnumerator Reload()
     {
         Debug.Log("Reloading!");
+        if (reloadSfx != null)
+        {
+            reloadSfx.Play();
+        }
+        else
+        {
+            Debug.Log("SFX missing");
+        }
         yield return new WaitForSeconds(reloadTime);
         ammo = maxAmmo;
         state = weaponState.READY;
