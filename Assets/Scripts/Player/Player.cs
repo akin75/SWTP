@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         PlayerClass playerClass = playerManager.playerClass;
         SetMaxHealth(GetMaxHealth());
         SetCurrentHealth(GetCurrentHealth());
-        Debug.Log($"Max {GetMaxHealth()}  Current {GetCurrentHealth()}");
+        //Debug.Log($"Max {GetMaxHealth()}  Current {GetCurrentHealth()}");
         currency = playerClass.GetCurrency();
         transform.GetComponent<PlayerController>().moveSpeed = playerClass.GetMoveSpeed();
         //Debug.Log("maxHealth " + maxHealth);

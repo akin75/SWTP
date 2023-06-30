@@ -17,6 +17,7 @@ public class Exploder : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isBlinking = false;
     public int explosionDamage = 40;
+    public GameObject explosionSfx;
 
     private void Start()
     {
@@ -116,6 +117,7 @@ public class Exploder : MonoBehaviour
         exploder.simulated = false;
 
         //Debug.Log(explosionParticles, smokeParticles);
+        Instantiate(explosionSfx, transform.position, Quaternion.identity);
         Instantiate(explosionParticles, transform.position, Quaternion.identity);
         Instantiate(smokeParticles, transform.position, Quaternion.identity);
         DestroyObj();

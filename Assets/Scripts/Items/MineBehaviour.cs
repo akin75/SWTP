@@ -10,10 +10,11 @@ public class MineBehaviour : MonoBehaviour
     public ParticleSystem explosionParticles;
     public ParticleSystem smokeParticles;
     public int damage = 50;
+    public GameObject explosionSfx;
+
 
     private void Start()
     {
-        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,7 +33,7 @@ public class MineBehaviour : MonoBehaviour
         //Debug.Log("Boom");
         Instantiate(explosionParticles, transform.position, Quaternion.identity);
         Instantiate(smokeParticles, transform.position, Quaternion.identity);
-
+        Instantiate(explosionSfx, transform.position, Quaternion.identity);
         List<GameObject> enemiesToDamage = new List<GameObject>(enemiesInDamageArea);
 
         foreach (var enemy in enemiesToDamage)
