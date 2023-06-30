@@ -119,11 +119,28 @@ public class TileMapCell
         }
         //Debug.Log("Position: " + positionInMap.y + " , " + positionInMap.x + "  Length" + tileContacts.Count);
         tileContacts.Remove(toDelete);
+        Debug.Log(ToString());
         //Debug.Log("Length After: " + tileContacts.Count);
         if (tileContacts.Count == 1)
         {
             Collapse(0);
         }
+    }
+
+
+    override 
+    public String ToString()
+    {
+        String s = "";
+        int i = 0;
+        foreach (var tile in tileContacts)
+        {
+            s += "  | " + tile.ContactTile.name + "  |  ";
+            if (i % 4 == 0) s += "\n";
+            i++;
+        }
+
+        return s;
     }
 
 

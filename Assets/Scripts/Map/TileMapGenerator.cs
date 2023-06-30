@@ -19,7 +19,7 @@ public class TileMapGenerator
         this.tileContactsList = tileContactsList;
         this.mapSize = mapSize;
         this.tilemap = tilemap;
-        tileMapCells = new TileMapCell[mapSize.x, mapSize.y];
+        tileMapCells = new TileMapCell[mapSize.y, mapSize.x];
         InitializeCellsArray();
     }
 
@@ -91,7 +91,7 @@ public class TileMapGenerator
                 {
                     if (!possibleNeighbours.Contains(other.ContactTile))
                     {
-                        Debug.Log("Doesnt Contain");
+                        Debug.Log($"Selected Tile {tileMapCells[currentTile.y,currentTile.x].ToString()} \n   Other Tile {tileMapCells[d.y,d.x]}"  );
                         tileMapCells[d.y,d.x].Constrain(other);
                         if(!stack.Contains(tileMapCells[d.y,d.x].positionInMap)) stack.Add(tileMapCells[d.y,d.x].positionInMap);
                     }
@@ -121,7 +121,7 @@ public class TileMapGenerator
         List<Vector3Int> valid = new List<Vector3Int>();
         foreach (var a in adj)
         {
-            if (!tileMapCells[a.y,a.x].isCollapsed && !visited.Contains(tileMapCells[a.y,a.x].positionInMap))
+            if (!tileMapCells[a.y,a.x].isCollapsed && !stack.Contains(tileMapCells[a.y,a.x].positionInMap))
             {
                 valid.Add(tileMapCells[a.y,a.x].positionInMap);
                 visited.Add(tileMapCells[a.y, a.x].positionInMap);
