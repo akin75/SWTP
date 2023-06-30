@@ -22,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
     public TransformToCrawler transformToCrawler;
     private CursorFeedback cursorFeedback;
     public ParticleSystem bloodPuddleHit;
+    public GameObject deathSfx;
     
     private SpriteRenderer sprite;
     private Quaternion deathRotation; // Speichert die Rotation des Objekts vor der Zerstörung
@@ -80,7 +81,7 @@ public class EnemyHealth : MonoBehaviour
             if (deadZombiePrefab != null)
             {
                 cursorFeedback.StartCursorFeedback(); // Starte die Coroutine für die Todesszene
-
+                GameObject deathSfx = Instantiate(this.deathSfx, transform.position, Quaternion.identity);
                 deathRotation = transform.rotation;
                 deathScale = transform.localScale;
 

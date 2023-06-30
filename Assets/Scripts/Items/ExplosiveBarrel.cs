@@ -13,6 +13,7 @@ public class ExplosiveBarrel : MonoBehaviour
     public ParticleSystem smokeParticles;
     private bool hasExploded = false;
     public int damage = 50;
+    public GameObject explosionSfx;
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class ExplosiveBarrel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("Hit Barrel");
+            //Debug.Log("Hit Barrel");
             playerDamage = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Weapon>().damage;
             health = health - playerDamage;
             if (health <= 0)
@@ -37,12 +38,16 @@ public class ExplosiveBarrel : MonoBehaviour
     {
         Instantiate(explosionParticles, transform.position, Quaternion.identity);
         Instantiate(smokeParticles, transform.position, Quaternion.identity);
+        Instantiate(explosionSfx, transform.position, Quaternion.identity);
 
         List<GameObject> enemiesToDamage = new List<GameObject>(enemiesInDamageArea);
 
         foreach (var enemy in enemiesToDamage)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+            if (enemy != null)
+            {
+                enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
         }
 
         enemiesInDamageArea.Clear();
@@ -59,8 +64,8 @@ public class ExplosiveBarrel : MonoBehaviour
                 if (!enemiesInDamageArea.Contains(collision.gameObject))
                 {
                     enemiesInDamageArea.Add(collision.gameObject);
-                    Debug.Log(enemiesInDamageArea);
-                    Debug.Log("Enemy entered DamageArea: " + collision.gameObject.name);
+                    //Debug.Log(enemiesInDamageArea);
+                    //Debug.Log("Enemy entered DamageArea: " + collision.gameObject.name);
                 }
             }
         }
@@ -74,7 +79,7 @@ public class ExplosiveBarrel : MonoBehaviour
             if (enemiesInDamageArea.Contains(collision.gameObject))
             {
                 enemiesInDamageArea.Remove(collision.gameObject);
-                Debug.Log("Enemy exited DamageArea: " + collision.gameObject.name);
+                //Debug.Log("Enemy exited DamageArea: " + collision.gameObject.name);
             }
         }
     }
@@ -83,7 +88,7 @@ public class ExplosiveBarrel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Collision with Enemy");
+            //Debug.Log("Collision with Enemy");
         }
     }
 }

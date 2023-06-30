@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -22,6 +23,8 @@ public class Weapon : MonoBehaviour
     private int level = 1;
     private WeaponSG newInstance;
     private WeaponUpgrade weaponUpgrade;
+    public AudioSource reloadSfx;
+    public AudioSource shotSfx;
 
     private void Start()
     {
@@ -30,6 +33,7 @@ public class Weapon : MonoBehaviour
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
         Transform firePointChild = transform.Find("FirePoint");
         level = 1;
+        reloadSfx = GetComponent<AudioSource>();
         if (firePointChild != null)
         {
             muzzleParticles = firePointChild.GetComponentInChildren<ParticleSystem>();
@@ -83,7 +87,7 @@ public class Weapon : MonoBehaviour
         }
         float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
         Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
-
+        shotSfx.Play();
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         newBullet.transform.right = bulletDirection;
         newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
@@ -124,6 +128,14 @@ public class Weapon : MonoBehaviour
     IEnumerator Reload()
     {
         Debug.Log("Reloading!");
+        if (reloadSfx != null)
+        {
+            reloadSfx.Play();
+        }
+        else
+        {
+            Debug.Log("SFX missing");
+        }
         yield return new WaitForSeconds(reloadTime);
         ammo = maxAmmo;
         state = weaponState.READY;

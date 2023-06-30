@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WeaponSG : MonoBehaviour
 {
@@ -21,6 +23,9 @@ public class WeaponSG : MonoBehaviour
     public ParticleSystem muzzleParticles;
     public int firePointCount = 5;
     private int level = 1;
+    public AudioSource reloadSfx;
+    public AudioSource shotSfx;
+    public AudioSource shotgunPumpSfx;
     
     
     private void Update()
@@ -32,12 +37,18 @@ public class WeaponSG : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        recoil = GetComponentInParent<Recoil>();
+    }
+
     public void Shoot()
     {
         if (state == weaponState.RELOADING)
         {
-                return;
+            return;
         }
+
         for (int i = 0; i < firePointCount; i++)
         {
             float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
@@ -48,11 +59,12 @@ public class WeaponSG : MonoBehaviour
             newBullet.transform.right = bulletDirection;
             newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
         }
+        shotSfx.Play();
 
         if (muzzleParticles != null)
         {
             muzzleParticles.Play();
-        }        
+        }
         else
         {
             Debug.Log("Muzzle Particles Missing");
@@ -64,9 +76,14 @@ public class WeaponSG : MonoBehaviour
             Vector2 shotDirection = (mousePosition - (Vector2)firePoint.position).normalized;
             cameraController.StartShaking(shotDirection);
         }
+
         if (recoil != null)
         {
             recoil.StartRecoil();
+        }
+        else
+        {
+            Debug.Log("Recoil missing in ChSG");
         }
 
         ammo -= 1;
@@ -74,6 +91,10 @@ public class WeaponSG : MonoBehaviour
         {
             state = weaponState.RELOADING;
             StartCoroutine(Reload());
+        }
+        else
+        {
+            StartCoroutine(PlayShotgunPumpSound(0.2f));
         }
     }
 
@@ -83,7 +104,14 @@ public class WeaponSG : MonoBehaviour
         yield return new WaitForSeconds(reloadTime);
         ammo = maxAmmo;
         state = weaponState.READY;
+        reloadSfx.Play();
         yield break;
+    }
+
+    IEnumerator PlayShotgunPumpSound(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        shotgunPumpSfx.Play();
     }
 
     public void SetDamage(int value)
