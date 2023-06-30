@@ -208,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitObjectParticles: {fileID: 1371572389595951175, guid: c4344089be85c9e48af9d857f66e2c24, type: 3}
   zombieHitSfx: {fileID: 676000828316244113, guid: 5a12b5ca527ed014b9958caf7696301b, type: 3}
+  zombieMissSfx: {fileID: 676000828316244113, guid: 9abc0107b801cb94783eece454b160a1, type: 3}
 --- !u!58 &8024650309853052232
 CircleCollider2D:
   m_ObjectHideFlags: 0

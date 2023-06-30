@@ -45,7 +45,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -142,6 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxArray:
-  - {fileID: 8300000, guid: ab20c9ae152a69045b71adb5add9d6fe, type: 3}
+  - {fileID: 8300000, guid: 27ed1f163b9b9cb4792c19435be639ca, type: 3}
   minPitch: 1
   maxPitch: 1

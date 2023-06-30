@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public ParticleSystem hitObjectParticles;
     public GameObject zombieHitSfx;
+    public GameObject zombieMissSfx;
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -18,6 +19,7 @@ public class Bullet : MonoBehaviour
         else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Bullet"))
         {
             Instantiate(hitObjectParticles, transform.position, Quaternion.identity);
+            GameObject zombieMissSfx = Instantiate(this.zombieMissSfx, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
     }

@@ -335,6 +335,9 @@ MonoBehaviour:
   reloadTime: 2
   muzzleParticles: {fileID: 0}
   firePointCount: 20
+  reloadSfx: {fileID: 2403635115022927997}
+  shotSfx: {fileID: 4980952608075741611}
+  shotgunPumpSfx: {fileID: 6460875038270748798}
 --- !u!114 &3046411758469487390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +353,7 @@ MonoBehaviour:
   fireForce: 40
   bulletPrefab: {fileID: 6851814959954085267, guid: 32c153dc629fd6d41b9d137b1e388035, type: 3}
   firePoint: {fileID: 5558555831162425253}
-  timeBetweenShots: 0.3
+  timeBetweenShots: 1
   maxDeviation: 10
   damage: 20
   ammo: 20
