@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7968471940820029243}
   m_Layer: 6
   m_Name: ShootingRange
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: 48b02e748e464d04b8016c728d0032a2, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.05490196}
+  m_Color: {r: 0, g: 1, b: 0.07667947, a: 0.05490196}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -373,6 +373,7 @@ MonoBehaviour:
   healthBar: {fileID: 8610740355228082374}
   transformToCrawler: {fileID: 0}
   bloodPuddleHit: {fileID: 1950607216614953820, guid: 52ec8f3c7f50e4247944d5d0885612eb, type: 3}
+  experiencePoint: 0
 --- !u!114 &-5806012942085649495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,7 +455,7 @@ GameObject:
   - component: {fileID: 7180348931584919014}
   m_Layer: 6
   m_Name: StandingRange
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
