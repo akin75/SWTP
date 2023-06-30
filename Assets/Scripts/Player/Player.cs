@@ -11,7 +11,12 @@ public class Player : MonoBehaviour
     public static int currency = 100;
 
     public HealthBar healthBar;
-    public SpriteRenderer playerSprite;
+    public SpriteRenderer playerBody;
+    public SpriteRenderer playerHead;
+    public SpriteRenderer playerRau;
+    public SpriteRenderer playerRal;
+    public SpriteRenderer playerLau;
+    public SpriteRenderer playerLal;
     public GameObject deadPlayer;
     public PauseMenu pauseMenu;
     public Color hitColor = new Color(1f, 0.5f, 0.5f);
@@ -62,7 +67,7 @@ public class Player : MonoBehaviour
         if (GetCurrentHealth() <= 0)
         {
             isDead = true;
-            playerSprite.color = Color.red;
+            playerBody.color = Color.red;
             initialRotation = transform.rotation; // Speichere die Rotation des ursprünglichen Objekts
             Instantiate(deadPlayer, transform.position, initialRotation); // Verwende die gespeicherte Rotation
             Destroy(gameObject);
@@ -94,9 +99,19 @@ public class Player : MonoBehaviour
     }
     private IEnumerator HitFlash()
     {
-        playerSprite.color = hitColor;
+        playerHead.color = hitColor;
+        playerBody.color = hitColor;
+        playerRau.color = hitColor;
+        playerRal.color = hitColor;
+        playerLau.color = hitColor;
+        playerLal.color = hitColor;
         yield return new WaitForSeconds(hitDuration);
-        playerSprite.color = Color.white;
+        playerHead.color = Color.white;
+        playerRau.color = Color.white;
+        playerRal.color = Color.white;
+        playerLau.color = Color.white;
+        playerLal.color = Color.white;
+        playerBody.color = Color.white;
     }
     
 

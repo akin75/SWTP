@@ -23,7 +23,8 @@ public class Weapon : MonoBehaviour
     private int level = 1;
     private WeaponSG newInstance;
     private WeaponUpgrade weaponUpgrade;
-    private AudioSource reloadSfx;
+    public AudioSource reloadSfx;
+    public AudioSource shotSfx;
 
     private void Start()
     {
@@ -86,7 +87,7 @@ public class Weapon : MonoBehaviour
         }
         float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
         Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
-
+        shotSfx.Play();
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         newBullet.transform.right = bulletDirection;
         newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
