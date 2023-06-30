@@ -124,5 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1a9300b02bcc4418bb76e34078aa8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemCollectSfx: {fileID: 0}
+  medikitCollectSfx: {fileID: 676000828316244113, guid: d910084ac99b68144a97295133beac48, type: 3}
   itemType: 1
-  value: 5
+  value: 20

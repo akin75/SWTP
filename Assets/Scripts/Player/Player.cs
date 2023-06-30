@@ -56,7 +56,6 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage) 
     {
-        
         SetCurrentHealth(GetCurrentHealth() - damage);
         Debug.Log("currentHealth " + GetCurrentHealth());
         ApplyImpact(damage * impactForceMultiplier);
@@ -75,6 +74,11 @@ public class Player : MonoBehaviour
             
         }
         impactForceBool = false;
+    }
+    public void heal(int value) 
+    {
+        SetCurrentHealth(GetCurrentHealth() + value);
+        StartCoroutine(HealFlash());
     }
 
 
@@ -105,6 +109,22 @@ public class Player : MonoBehaviour
         playerRal.color = hitColor;
         playerLau.color = hitColor;
         playerLal.color = hitColor;
+        yield return new WaitForSeconds(hitDuration);
+        playerHead.color = Color.white;
+        playerRau.color = Color.white;
+        playerRal.color = Color.white;
+        playerLau.color = Color.white;
+        playerLal.color = Color.white;
+        playerBody.color = Color.white;
+    }
+        private IEnumerator HealFlash()
+    {
+        playerHead.color = Color.green;
+        playerBody.color = Color.green;
+        playerRau.color = Color.green;
+        playerRal.color = Color.green;
+        playerLau.color = Color.green;
+        playerLal.color = Color.green;
         yield return new WaitForSeconds(hitDuration);
         playerHead.color = Color.white;
         playerRau.color = Color.white;

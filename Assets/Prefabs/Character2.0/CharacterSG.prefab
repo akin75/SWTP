@@ -334,7 +334,7 @@ MonoBehaviour:
   ammo: 8
   reloadTime: 2
   muzzleParticles: {fileID: 0}
-  firePointCount: 20
+  firePointCount: 5
   reloadSfx: {fileID: 2403635115022927997}
   shotSfx: {fileID: 4980952608075741611}
   shotgunPumpSfx: {fileID: 6460875038270748798}

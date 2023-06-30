@@ -8,6 +8,8 @@ TagManager:
   - HealthBar
   - Bullet
   - DeadPlayer
+  - Metal
+  - Wood
   layers:
   - Default
   - TransparentFX

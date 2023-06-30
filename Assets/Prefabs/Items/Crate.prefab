@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 1581614826111064042}
   m_Layer: 0
   m_Name: Crate
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca21b33e507be3f4f86a4a3b90c8b423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
   sprite: {fileID: 6112310054785611601}
   crateHit: {fileID: 253657398150035550, guid: 40bc37379870a4c4d891aba1df5db350, type: 3}
   crateDestroy: {fileID: 4287158554583824832, guid: 08731f0fa79f66b40b4226d645ebfbe8, type: 3}

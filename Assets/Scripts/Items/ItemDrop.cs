@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
+    public GameObject itemCollectSfx;
+    public GameObject medikitCollectSfx;
     public enum ItemType
     {
         coin,
@@ -20,10 +22,12 @@ public class ItemDrop : MonoBehaviour
                 switch (itemType)
                 {
                     case ItemType.coin:
+                        GameObject itemCollectSfx = Instantiate(this.itemCollectSfx, transform.position, Quaternion.identity);
                         trigger.gameObject.GetComponent<Player>().setCurrency(value);
                         break;
                     case ItemType.heal:
-                        trigger.gameObject.GetComponent<Player>().TakeDamage(-value);
+                        GameObject medikitCollectSfx = Instantiate(this.medikitCollectSfx, transform.position, Quaternion.identity);
+                        trigger.gameObject.GetComponent<Player>().heal(value);
                         break;
                     default:
                         break;
