@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     private Path path; // Der Pfad, den der Gegner folgt
     private Seeker seeker; // Das Objekt, das den Pfad findet
     public Player playerController;
+    public GameObject zombieInstSfx;
 
     private Rigidbody2D rb; // Rigidbody2D-Komponente des Gegners
 
@@ -23,12 +24,13 @@ public class EnemyController : MonoBehaviour
         // Suchen des Spielers als Ziel
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         PlayerSwitcher playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
+        GameObject instSfx = Instantiate(zombieInstSfx, transform.position, Quaternion.identity);
         
         if (playerObject != null)
         {
             playerController = playerObject.GetComponent<Player>();
         }
-
+        
         if (playerController != null && !playerController.GetIsDead())
         {
             target = playerManager.playerClass.position;

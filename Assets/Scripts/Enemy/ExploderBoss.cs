@@ -19,6 +19,7 @@ public class ExploderBoss : MonoBehaviour
     public int spawnCount;
     public int explosionDamage = 40;
     private Rigidbody2D rb;
+    public GameObject explosionSfx;
 
     private void Start()
     {
@@ -85,6 +86,7 @@ public class ExploderBoss : MonoBehaviour
     {
         //Debug.Log("Boom");
         exploder.simulated = false;
+        Instantiate(explosionSfx, transform.position, Quaternion.identity);
         Instantiate(smokeParticlesBoss, transform.position, Quaternion.identity);
         Instantiate(explosionParticlesBoss, transform.position, Quaternion.identity);
         SpawningMinis();

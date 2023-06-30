@@ -53,6 +53,7 @@ MonoBehaviour:
   explosionParticles: {fileID: 3433415844352109921, guid: 4fd2393dc1ca78243b8a2ed9e7803bb6, type: 3}
   smokeParticles: {fileID: 306570466270053118, guid: 2ca1cd6169633254ca866b3bd3468986, type: 3}
   damage: 50
+  explosionSfx: {fileID: 4215268554375360898, guid: 333631098f4c27a40b26df7432e20aba, type: 3}
 --- !u!58 &7072695582190374783
 CircleCollider2D:
   m_ObjectHideFlags: 0
