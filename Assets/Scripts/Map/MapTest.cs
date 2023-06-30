@@ -35,7 +35,7 @@ public class MapTest : MonoBehaviour
             }
             else
             {
-                output.SetTile(v.positionInMap, v.tileCell);
+                output.SetTile(v.positionInMap + new Vector3Int(-6, -9), v.tileCell);
             }
 
         }
