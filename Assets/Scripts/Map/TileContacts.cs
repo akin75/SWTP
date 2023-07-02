@@ -16,10 +16,11 @@ public class TileContacts
     [SerializeField] public List<Tile> posY = new List<Tile>();
     [SerializeField] public List<Tile> negY = new List<Tile>();
     [SerializeField] public bool isCollider;
+    [SerializeField] public double probability;
     private int[] direction = new int[4];
     
     public Tile ContactTile => tile;
-
+    
     public HashSet<Tile> PosX => new HashSet<Tile>(posX);
     public HashSet<Tile> PosY => new HashSet<Tile>(posY);
     public HashSet<Tile> NegX => new HashSet<Tile>(negX);

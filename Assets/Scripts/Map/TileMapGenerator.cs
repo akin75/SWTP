@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 public class TileMapGenerator
@@ -47,8 +48,8 @@ public class TileMapGenerator
             
             min = GetMinEntropy();
             //if(min.tileArray.Length== 0) Debug.Log("Position: " + min.positionInMap + "  Test: " + min.tileCell);
-            
-            var coords = rand.Next(0, min.tileContacts.Count);
+
+            var coords = GetPiece(min);
             Debug.Log("Coords;  " + min.positionInMap + " Collapse with piece" + min.tileContacts[coords].ContactTile.name);
             min.Collapse(coords); // Improvement Idea likely to select more path over than obstacles
             visited = new HashSet<Vector3Int>();
@@ -143,4 +144,24 @@ public class TileMapGenerator
     {
         return tileMapCells.Cast<TileMapCell>().All((x) => x.isCollapsed);
     }
+
+
+    private int GetPiece(TileMapCell min)
+    {
+        var rand = new System.Random();
+        var prob = rand.NextDouble();
+        Debug.Log($"Probab: {prob}");
+        var list = min.tileContacts.FindAll(x => prob < x.probability);
+        if (list.Count != 0)
+        {
+            var minContact = list.OrderBy(x => x.probability).LastOrDefault();
+            return min.tileContacts.FindIndex(x => x.ContactTile.name == minContact.ContactTile.name);
+        }
+        else
+        {
+            return rand.Next(0, min.tileContacts.Count);
+        }
+
+    }
+    
 }
