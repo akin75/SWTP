@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 8084985735418968613}
   - component: {fileID: -5806012942085649495}
   - component: {fileID: 7852736416389277705}
+  - component: {fileID: 6432054434478303508}
   m_Layer: 6
   m_Name: Spitter
   m_TagString: Enemy
@@ -197,7 +198,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -413,6 +414,46 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.24
+--- !u!114 &6432054434478303508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329167089764508733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000db2ee7423fc21ad1
+  m_ShapePath:
+  - {x: -0.1356358, y: -0.20319444, z: 0}
+  - {x: -0.14979175, y: -0.10682136, z: 0}
+  - {x: -0.20944296, y: -0.024785336, z: 0}
+  - {x: -0.13583189, y: 0.23851566, z: 0}
+  - {x: -0.055142812, y: 0.23426895, z: 0}
+  - {x: -0.093363985, y: 0.075722024, z: 0}
+  - {x: 0.09349486, y: 0.08138437, z: 0}
+  - {x: 0.05244257, y: 0.24276257, z: 0}
+  - {x: 0.13563569, y: 0.23858441, z: 0}
+  - {x: 0.18833992, y: 0.10686521, z: 0}
+  - {x: 0.20216873, y: -0.07720624, z: 0}
+  - {x: 0.16002795, y: -0.09273406, z: 0}
+  - {x: 0.13171603, y: -0.21872216, z: 0}
+  - {x: 0.0014810282, y: -0.23712493, z: 0}
+  m_ShapePathHash: 947747034
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -37722
+  m_LocalBounds:
+    m_Center: {x: -0.0036371201, y: 0.002818808, z: 0}
+    m_Extent: {x: 0.20580584, y: 0.23994374, z: 0}
 --- !u!1 &3674215012390158001
 GameObject:
   m_ObjectHideFlags: 0

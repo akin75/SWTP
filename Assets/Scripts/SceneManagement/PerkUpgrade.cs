@@ -28,7 +28,7 @@ public class PerkUpgrade : MonoBehaviour
         playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
         player = playerManager.GetCurrentPlayer();
         weapon = player.GetComponentInChildren<Weapon>();
-        Debug.Log($"Test: {weapon.GetLevel()}");
+        //Debug.Log($"Test: {weapon.GetLevel()}");
 
         foreach (Perks upgrades in upgradesList)
         {

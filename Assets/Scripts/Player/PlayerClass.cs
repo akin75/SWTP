@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.CodeEditor;
 using UnityEngine;
 
 
@@ -128,5 +129,4 @@ public class PlayerClass
 
         return false;
     }
-    
 }

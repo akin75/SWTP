@@ -81,6 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2056728442595131124}
   - component: {fileID: 7715353571663357416}
+  - component: {fileID: 6863738700132680414}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -155,3 +156,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6863738700132680414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7918254715660399258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000db2ee7423fc21ad1
+  m_ShapePath:
+  - {x: -0.064838566, y: -0.06949229, z: 0}
+  - {x: -0.09979642, y: 0.00025853998, z: 0}
+  - {x: -0.0689752, y: 0.065355636, z: 0}
+  - {x: -0.0015512396, y: 0.101606205, z: 0}
+  - {x: 0.071560614, y: 0.06483857, z: 0}
+  - {x: 0.10186473, y: 0.00077562, z: 0}
+  - {x: 0.07156061, y: -0.07052644, z: 0}
+  - {x: 0.0005170799, y: -0.10108912, z: 0}
+  m_ShapePathHash: -1214287666
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -13872
+  m_LocalBounds:
+    m_Center: {x: 0.0010341555, y: 0.0002585426, z: 0}
+    m_Extent: {x: 0.10083058, y: 0.10134766, z: 0}

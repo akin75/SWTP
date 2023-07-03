@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 8084985735418968613}
   - component: {fileID: -2979630653874237575}
   - component: {fileID: 4154434420750496393}
+  - component: {fileID: 25093714147526220}
   m_Layer: 6
   m_Name: ExploderBoss
   m_TagString: Enemy
@@ -266,7 +267,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -485,6 +486,43 @@ MonoBehaviour:
   spawnCount: 3
   explosionDamage: 40
   explosionSfx: {fileID: 4215268554375360898, guid: dc8f8f093c977bd459f12895040efc30, type: 3}
+--- !u!114 &25093714147526220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329167089764508733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000db2ee7423fc21ad1
+  m_ShapePath:
+  - {x: -0.17927943, y: -0.14548647, z: 0}
+  - {x: -0.18377101, y: 0.02309046, z: 0}
+  - {x: -0.10106077, y: 0.097130716, z: 0}
+  - {x: -0.095446244, y: -0.032002617, z: 0}
+  - {x: 0.00000009483762, y: 0.007298832, z: 0}
+  - {x: 0.08607879, y: -0.037546113, z: 0}
+  - {x: 0.052776325, y: 0.19257703, z: 0}
+  - {x: 0.1437311, y: 0.20380607, z: 0}
+  - {x: 0.19313864, y: 0.02301941, z: 0}
+  - {x: 0.18826255, y: -0.14324068, z: 0}
+  - {x: 0.0033687905, y: -0.20829764, z: 0}
+  m_ShapePathHash: 860501401
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -33852
+  m_LocalBounds:
+    m_Center: {x: 0.0046838224, y: -0.0022457838, z: 0}
+    m_Extent: {x: 0.18845484, y: 0.20605186, z: 0}
 --- !u!1 &4205205478767379790
 GameObject:
   m_ObjectHideFlags: 0
