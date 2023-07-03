@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.CodeEditor;
 using UnityEngine;
 
 
@@ -111,5 +112,4 @@ public class PlayerClass
             Debug.Log($"Debug  Multiplier: {multiplier}  toAdd: {toAdd} levelUp: {toLevelUp} expPoints: {expPoints} ");
         }
     }
-    
 }

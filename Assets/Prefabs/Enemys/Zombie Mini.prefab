@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: -3939219405517817229}
   - component: {fileID: 8084985735418968613}
   - component: {fileID: -2979630653874237575}
+  - component: {fileID: 2493774285718336846}
   m_Layer: 6
   m_Name: Zombie Mini
   m_TagString: Enemy
@@ -210,7 +211,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -341,7 +342,7 @@ MonoBehaviour:
   speed: 400
   nextWaypointDistance: 3
   playerController: {fileID: 0}
-  zombieInstSfx: {fileID: 0}
+  zombieInstSfx: {fileID: 676000828316244113, guid: c23c38a4aff02404c8a7ad07241ab087, type: 3}
 --- !u!50 &-3939219405517817229
 Rigidbody2D:
   serializedVersion: 4
@@ -405,6 +406,46 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.215
+--- !u!114 &2493774285718336846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329167089764508733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000db2ee7423fc21ad1
+  m_ShapePath:
+  - {x: -0.1973847, y: -0.11603543, z: 0}
+  - {x: -0.19976935, y: 0.04330249, z: 0}
+  - {x: -0.13831206, y: 0.2235647, z: 0}
+  - {x: -0.056040224, y: 0.21998762, z: 0}
+  - {x: -0.0906182, y: 0.022058334, z: 0}
+  - {x: 0.09896465, y: 0.02444305, z: 0}
+  - {x: 0.048886143, y: 0.21641055, z: 0}
+  - {x: 0.13950434, y: 0.21521819, z: 0}
+  - {x: 0.19619234, y: 0.040917777, z: 0}
+  - {x: 0.1878459, y: -0.111266, z: 0}
+  - {x: 0.124003895, y: -0.16275515, z: 0}
+  - {x: 0.063194305, y: -0.20687185, z: 0}
+  - {x: -0.05723258, y: -0.20806421, z: 0}
+  - {x: -0.1275809, y: -0.16037042, z: 0}
+  m_ShapePathHash: 1975042093
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -50434
+  m_LocalBounds:
+    m_Center: {x: -0.001788497, y: 0.007750243, z: 0}
+    m_Extent: {x: 0.19798085, y: 0.21581446, z: 0}
 --- !u!1001 &5321478949851161977
 PrefabInstance:
   m_ObjectHideFlags: 0
