@@ -22,7 +22,7 @@ public class WeaponSG : MonoBehaviour
     private Recoil recoil;
     public ParticleSystem muzzleParticles;
     public int firePointCount = 5;
-    private int level = 1;
+    private int level = 0;
     public AudioSource reloadSfx;
     public AudioSource shotSfx;
     public AudioSource shotgunPumpSfx;

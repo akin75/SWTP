@@ -15,6 +15,7 @@ public class WeaponUpgrade : MonoBehaviour
     private Vector3 offset = new Vector3(0, -2.5f);
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI descriptionText;
     public GameObject shopUI;
     public List<Upgrades> upgradesList;
     public bool shopState = false;
@@ -22,6 +23,8 @@ public class WeaponUpgrade : MonoBehaviour
     public Transform shopContent;
     private Weapon weapon;
     private PlayerSwitcher playerManager;
+    public Sprite progressBar;
+    private bool inRadius = false;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -35,31 +38,22 @@ public class WeaponUpgrade : MonoBehaviour
         {
             GameObject item = Instantiate(shopItemPrefab, shopContent);
             upgrades.itemRef = item;
-            foreach (Transform child in item.transform)
+            var weaponArea = item.transform.GetChild(0);
+            weaponArea.GetComponent<DescriptionHandler>().SetDescription(descriptionText);
+            weaponArea.GetComponent<DescriptionHandler>().SetUpgrades(upgrades);
+            foreach (Transform child in weaponArea.transform)
             {
-                if (child.gameObject.name == "LevelText")
+                if (child.gameObject.name == "Level")
                 {
-                    child.gameObject.GetComponent<Text>().text = upgrades.name + " Level: " + upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel();
+                    child.gameObject.GetComponent<TextMeshProUGUI>().text = upgrades.name + " Level: " + upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel();
                 }
                 if (child.gameObject.name == "Image")
                 {
                     child.gameObject.GetComponent<Image>().sprite = upgrades.image;
                 }
-                if (child.gameObject.name == "LevelTo")
-                {
-                    child.gameObject.GetComponent<Text>().text = "Level      " + $"{upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel()} -->  {(upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel() + 1)}";
-                }
-                if (child.gameObject.name == "DamageTo")
-                {
-                    child.gameObject.GetComponent<Text>().text += upgrades.weapon.GetComponentInChildren<Weapon>().damage + "  -->  " + (upgrades.weapon.GetComponentInChildren<Weapon>().damage + 10) ;
-                }
-                if (child.gameObject.name == "FireRateTo")
-                {
-                    child.gameObject.GetComponent<Text>().text += upgrades.weapon.GetComponentInChildren<Weapon>().timeBetweenShots + "  -->  " + (upgrades.weapon.GetComponentInChildren<Weapon>().timeBetweenShots - 0.005f);
-                }
                 if (child.gameObject.name == "Cost")
                 {
-                    child.gameObject.GetComponent<Text>().text = "Cost: " + upgrades.cost ;
+                    child.gameObject.GetComponent<TextMeshProUGUI>().text = "Cost: " + upgrades.cost ;
                 }
             }
             
@@ -84,7 +78,7 @@ public class WeaponUpgrade : MonoBehaviour
             upgrades.weapon.GetComponentInChildren<Weapon>().AddLevel(1);
             upgrades.weapon.GetComponentInChildren<Weapon>().SetDamage(10);
             upgrades.weapon.GetComponentInChildren<Weapon>().SetTimeBetweenShots(0.005f);
-            Debug.Log($"Weapon Upgrades: Damage {upgrades.weapon.GetComponentInChildren<Weapon>().damage}  Level {upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel()}");
+            Debug.Log($"Weapon Level {upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel()}");
             ApplyUpgrade(upgrades);
 
         }
@@ -94,11 +88,17 @@ public class WeaponUpgrade : MonoBehaviour
     {
         decimal multiplier = (upgrades.cost + 1m)  * 1.10m;
         upgrades.cost = (int)Math.Round(multiplier);
-        upgrades.itemRef.transform.GetChild(4).GetComponent<Text>().text = upgrades.name + " Level: " + upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel();
-        upgrades.itemRef.transform.GetChild(1).GetComponent<Text>().text = "Level      " + $"{upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel()} -->  {(upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel() + 1)}";
-        upgrades.itemRef.transform.GetChild(2).GetComponent<Text>().text = "Damage      " + upgrades.weapon.GetComponentInChildren<Weapon>().damage + "  -->  " + (upgrades.weapon.GetComponentInChildren<Weapon>().damage + 10) ;
-        upgrades.itemRef.transform.GetChild(3).GetComponent<Text>().text = "Fire Rate      " + upgrades.weapon.GetComponentInChildren<Weapon>().timeBetweenShots + "  -->  " + (upgrades.weapon.GetComponentInChildren<Weapon>().timeBetweenShots - 0.005f); ;
-        upgrades.itemRef.transform.GetChild(5).GetComponent<Text>().text = "Cost: " + upgrades.cost;
+        var child = upgrades.itemRef.transform.GetChild(0);
+        var childProgressBar = child.transform.GetChild(3);
+        child.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = upgrades.name + " Level: " + upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel();
+        child.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Cost: " + upgrades.cost;
+        foreach (Transform progressBar in childProgressBar.transform)
+        {
+            if (progressBar.gameObject.name == $"Bar lvl {upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel()}")
+            {
+                progressBar.gameObject.GetComponent<Image>().sprite = this.progressBar;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -107,9 +107,10 @@ public class WeaponUpgrade : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             text.SetActive(true);
-            text.transform.position = Camera.main.WorldToScreenPoint(player.transform.position + offset);
-            shopState = true;
             UpdateShop();
+            text.transform.position = Camera.main.WorldToScreenPoint(player.transform.position + offset);
+            inRadius = true;
+
         }
         
     }
@@ -122,7 +123,6 @@ public class WeaponUpgrade : MonoBehaviour
             if (playerManager.playerClass.GetLevel() >= upgrades.levelToBuy)
             {
                 upgrades.itemRef.GetComponent<Button>().interactable = true;
-                upgrades.itemRef.transform.GetChild(6).GetComponent<Image>().color = new Color(46, 32, 32, 0);
             }
         }
     }
@@ -130,18 +130,30 @@ public class WeaponUpgrade : MonoBehaviour
     {
         if (player != null)
         {
-            coinText.text = "Coins: " + player.GetComponent<Player>().GetCoins();
-            levelText.text = "Level: " + playerManager.playerClass.GetLevel();
+            coinText.text = " " + playerManager.playerClass.GetCurrency();
+            levelText.text = "Level:  " + playerManager.playerClass.GetLevel();
         }
     }
 
     private void Update()
     {
-        if (shopState && Input.GetKeyDown(KeyCode.E))
+        if (inRadius)
         {
-            shopUI.SetActive(true);
-            
-            Debug.Log($"Weapon {weapon.gameObject.name}");
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (!shopUI.activeSelf)
+                {
+                    shopUI.SetActive(true);
+                    shopState = true;
+                }
+                else
+                {
+                    shopUI.SetActive(false);
+                    shopState = false;
+                }
+                
+                
+            }
         }
 
         if (player != null)
@@ -160,6 +172,7 @@ public class WeaponUpgrade : MonoBehaviour
             text.SetActive(false);
             shopUI.SetActive(false);
             shopState = false;
+            inRadius = false;
         }
     }
 
@@ -176,4 +189,6 @@ public class Upgrades
     [HideInInspector] public GameObject itemRef;
     public GameObject weapon;
     public int levelToBuy;
+    public string description;
+    
 }

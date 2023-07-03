@@ -71,9 +71,18 @@ public class PlayerClass
         this.maxHealth = health;
     }
 
+    public int GetMaximumExp()
+    {
+        return toLevelUp;
+    }
     public int GetMaxHealth()
     {
         return maxHealth;
+    }
+
+    public int GetCurrentExp()
+    {
+        return expPoints;
     }
 
     public int GetCurrency()
@@ -95,8 +104,13 @@ public class PlayerClass
     {
         return playerLevel;
     }
+
+    public void SetLevel(int level)
+    {
+        playerLevel = level;
+    }
     
-    public void hasLeveledUp()
+    public bool hasLeveledUp()
     {
         // Check if player has reached the targetExperience points
         
@@ -109,7 +123,10 @@ public class PlayerClass
             decimal toAdd = multiplier * toLevelUp;
             toLevelUp += (int)Math.Round(toAdd);
             Debug.Log($"Debug  Multiplier: {multiplier}  toAdd: {toAdd} levelUp: {toLevelUp} expPoints: {expPoints} ");
+            return true;
         }
+
+        return false;
     }
     
 }

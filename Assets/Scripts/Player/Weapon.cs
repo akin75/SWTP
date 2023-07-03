@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     private CameraController cameraController;
     private Recoil recoil;
     private ParticleSystem muzzleParticles;
-    private int level = 1;
+    private int level = 0;
     private WeaponSG newInstance;
     private WeaponUpgrade weaponUpgrade;
     public AudioSource reloadSfx;
@@ -32,7 +32,7 @@ public class Weapon : MonoBehaviour
         cameraController = Camera.main.GetComponent<CameraController>();
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
         Transform firePointChild = transform.Find("FirePoint");
-        level = 1;
+        level = GetLevel();
         reloadSfx = GetComponent<AudioSource>();
         if (firePointChild != null)
         {
