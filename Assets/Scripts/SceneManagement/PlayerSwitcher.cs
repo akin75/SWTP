@@ -15,6 +15,8 @@ public class PlayerSwitcher : MonoBehaviour
     public PlayerClass playerClass;
     private float damageAR;
     public EnemyController enemController;
+    public PerkUpgrade perkUpgrade;
+    public GameObject perkCanvas;
 
     private void Awake()
     {
@@ -25,13 +27,14 @@ public class PlayerSwitcher : MonoBehaviour
         playerClass = new PlayerClass(currentPlayer.GetComponent<Player>().maxHealth, currentPlayer, currentPlayer.GetComponent<PlayerController>().moveSpeed);
         camController.SetTarget(playerClass.position);
         
+        //Temporarily
+        
         //enemController.SetTarget(playerClass.position);
     }
 
     private void Update()
     {
         // Player wechseln basierend auf den Tasteneingaben
-        playerClass.hasLeveledUp();
         if (currentPlayer != null)
         {
             playerClass.SetPosition(currentPlayer.transform.position);
@@ -102,6 +105,7 @@ public class PlayerSwitcher : MonoBehaviour
 
             // Aktiviere den neuen Player und deaktiviere den alten Player
             newPlayer.SetActive(true);
+            Debug.Log("Passed");
             currentPlayer.SetActive(false);
 
             // Den neuen Player als den aktuellen Player setzen
