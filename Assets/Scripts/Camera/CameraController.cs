@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour
     {
         cam.orthographicSize = camSize;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        Debug.Log(target);
     }
 
     void Update()
@@ -36,6 +37,11 @@ public class CameraController : MonoBehaviour
     public void SetTarget(Transform t)
     {
         target = t;
+    }
+
+    public Transform GetTarget()
+    {
+        return target;
     }
     
     public void StartShaking(Vector2 shotDirection)

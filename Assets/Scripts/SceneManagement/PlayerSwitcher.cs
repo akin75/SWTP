@@ -111,8 +111,10 @@ public class PlayerSwitcher : MonoBehaviour
             // Den neuen Player als den aktuellen Player setzen
             currentPlayer = newPlayer;
             UpdatePlayer();
+            Debug.Log($"{currentPlayer.gameObject.name}");
             // Kameracontroller auf den neuen Player ausrichten
             camController.SetTarget(currentPlayer.transform);
+            Debug.Log($"{camController.GetTarget()}");
         }
     }
 

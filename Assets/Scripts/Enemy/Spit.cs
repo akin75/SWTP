@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spit : MonoBehaviour
 {
     public int damage = 10;
+    public GameObject spitHitSfx;
     private void Start()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -26,10 +27,10 @@ public class Spit : MonoBehaviour
         {
             //Debug.Log("Hit");
             collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            Instantiate(spitHitSfx, transform.position, Quaternion.identity);
             //collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(GameObject.FindGameObjectWithTag("Player").GetComponent<EnemyHealth>().damage);
             //Destroy(collision.gameObject);
         }
-
         Destroy(gameObject);
     }
 }

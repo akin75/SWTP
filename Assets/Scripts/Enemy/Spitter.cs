@@ -12,6 +12,7 @@ public class Spitter : MonoBehaviour
     public Collider2D shootingRange;
     public Collider2D standingRange;
     public Player player;
+    public GameObject spitSfx;
 
     private Transform playerTransform; // Referenz auf den Spieler
     private float lastShotTime; // Variable, um den letzten Zeitpunkt des Schusses zu speichern
@@ -139,6 +140,7 @@ public class Spitter : MonoBehaviour
         {
             // Erstelle ein Projektil und initialisiere es
             GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            Instantiate(spitSfx, transform.position, Quaternion.identity);
             if (!player.GetIsDead())
             {
                 // Richtung zum Spieler berechnen

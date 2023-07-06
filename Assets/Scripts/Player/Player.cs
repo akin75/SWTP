@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public ParticleSystem smallBloodPuddle;
     public ParticleSystem bigBloodPuddle;
     public float impactForceMultiplier = 1f;
+    public GameObject hitSfx;
 
     private Rigidbody2D rb;
     private bool isDead = false;
@@ -60,6 +61,7 @@ public class Player : MonoBehaviour
         Debug.Log("currentHealth " + GetCurrentHealth());
         ApplyImpact(damage * impactForceMultiplier);
         StartCoroutine(HitFlash());
+        Instantiate(hitSfx, transform.position, Quaternion.identity);
 
 
         
