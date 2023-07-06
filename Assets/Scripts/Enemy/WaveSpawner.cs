@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -12,9 +16,8 @@ public class WaveSpawner : MonoBehaviour
         public string waveName;     
         public List<Enemys> enemyList = new List<Enemys>();
         public float spawnRate;
-
-    
-
+        public int waveToSpawn;
+        
     }
 
     [System.Serializable]
@@ -29,10 +32,14 @@ public class WaveSpawner : MonoBehaviour
 
     public Transform[] spawnPoints;
     
-    public float timeBetweenWaves = 5f;
+    public float timeBetweenWaves = 7f;
     private float waveCountdown;
-
+    private int waveTracker = 0;
     private float searchCountdown = 1f;
+    public List<Enemys> bossEnemy;
+    [SerializeField] private AnimationCurve waveSpawner;
+    [SerializeField] private AnimationCurve damageMultiplier;
+    [SerializeField] private AnimationCurve healthMultiplier;
 
     private spawnState state = spawnState.COUNTING;
 
@@ -43,6 +50,9 @@ public class WaveSpawner : MonoBehaviour
             Debug.LogError("No Spawn Points!");
         }
         waveCountdown = timeBetweenWaves;
+
+
+
     }
 
     void Update()
@@ -72,7 +82,9 @@ public class WaveSpawner : MonoBehaviour
         }
         else
         {
+            SetNearestSpawnerToActive();
             waveCountdown -= Time.deltaTime;
+            
         }
     }
 
@@ -95,6 +107,13 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Spawn Wave: " + _wave.waveName);
         state = spawnState.SPAWNING;
         int i = 0;
+        SetEnemyCount(_wave);
+        if (waveTracker % 10 == 0 && waveTracker != 0)
+        {
+            var rand = new System.Random();
+            spawnEnemy(bossEnemy[rand.Next(0,bossEnemy.Count)].enemy);
+        }
+        
         while (i < _wave.enemyList.Count)
         {
             spawnEnemy(_wave.enemyList[i].enemy);
@@ -123,19 +142,95 @@ public class WaveSpawner : MonoBehaviour
         }
         else
         {
-            nextWave++;
+            if (waves[nextWave].waveToSpawn != 0)
+            {
+                waves[nextWave].waveToSpawn--;
+            }
+            else
+            {
+                
+                nextWave++;
+            }
+            
+            waveTracker++;
         }
+    }
+
+    public void SetNearestSpawnerToActive()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        foreach (var spawn in spawnPoints)
+        {
+            float dist = Vector3.Distance(spawn.position, player.transform.position);
+            if(dist <= 20f) spawn.gameObject.SetActive(true);
+            else
+            {
+                spawn.gameObject.SetActive(false);
+            }
+        }
+
+        if (!IsAnySpawnerActive())
+        {
+            List<(int, float)> dist = new List<(int, float)>();
+            for (int i = 0; i < spawnPoints.Length; i++)
+            {
+                dist.Add((i, Vector3.Distance(spawnPoints[i].position, player.transform.position)));
+                
+            }
+
+            var t = dist.OrderBy(x => x.Item2).Take(3);
+            var asList = t.ToList();
+            foreach (var a in asList)
+            {
+                spawnPoints[a.Item1].gameObject.SetActive(true);
+            }
+        }
+        
+    }
+
+    public bool IsAnySpawnerActive()
+    {
+        return spawnPoints.ToList().FindAll(x => x.gameObject.activeSelf).Count != 0;
     }
 
     void spawnEnemy(Transform _enemy)
     {
         Debug.Log("Spawning Enemy" + _enemy.name);
 
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(_enemy, _sp.position, _sp.rotation);
+        var spawner = GetActiveSpawnPoints();
+        Transform _sp = spawner[Random.Range(0,spawner.Count)];
+        Transform enemy = Instantiate(_enemy, _sp.position, _sp.rotation);
+        enemy.gameObject.GetComponent<EnemyHealth>().SetDamage(Mathf.RoundToInt(damageMultiplier.Evaluate(waveTracker)));
+        enemy.gameObject.GetComponent<EnemyHealth>().AddHealth(Mathf.RoundToInt(healthMultiplier.Evaluate(waveTracker)));
+        Debug.Log($"Enemy Health {enemy.gameObject.GetComponent<EnemyHealth>().maxHealth}");
     }
      public float GetWaveInfo (){
         return (int)waveCountdown;
     }
+
+
+     public List<Transform> GetActiveSpawnPoints()
+     {
+         List<Transform> newSpawner = new List<Transform>();
+         foreach (var spawn in spawnPoints)
+         {
+             if(spawn.gameObject.activeSelf) newSpawner.Add(spawn);
+         }
+
+         return newSpawner;
+     }
+
+
+     void SetEnemyCount(Wave _wave)
+     {
+         int enemyToSpawn = Mathf.RoundToInt(waveSpawner.Evaluate(waveTracker));
+         Debug.Log($"Enemy Count {enemyToSpawn}");
+         var rand = new System.Random();
+         for (int i = 0; i < enemyToSpawn; i++)
+         {
+             var index = rand.Next(0, _wave.enemyList.Count());
+             _wave.enemyList[index].count++;
+         }
+     }
    
 }

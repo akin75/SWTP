@@ -18,17 +18,20 @@ public class PlayerClass
     private int currency;
     public int maxHealth;
     private float moveSpeed;
-    public PlayerClass(int maxHealth, GameObject prefab, float moveSpeed)
+    private AnimationCurve lvlCurve;
+    public PlayerClass(int maxHealth, GameObject prefab, float moveSpeed, AnimationCurve lvlCurve)
     {
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.prefab = prefab;
         position = prefab.transform;
+        this.lvlCurve = lvlCurve;
         playerLevel = 1;
-        toLevelUp = 100;
+        toLevelUp = Mathf.RoundToInt(this.lvlCurve.Evaluate(playerLevel));
         expPoints = 0;
         currency = 100;
         this.moveSpeed = moveSpeed;
+        
     }
 
 
@@ -60,6 +63,11 @@ public class PlayerClass
     public int GetCurrentHealth()
     {
         return currentHealth;
+    }
+
+    public void SetLevelCurve(int curve)
+    {
+        toLevelUp = curve;
     }
 
     public void SetCurrency(int currency)
@@ -120,10 +128,8 @@ public class PlayerClass
             playerLevel++;
             Debug.Log($"Level: {playerLevel}");
             SetExpPoints(0);
-            decimal multiplier = playerLevel / 10m;
-            decimal toAdd = multiplier * toLevelUp;
-            toLevelUp += (int)Math.Round(toAdd);
-            Debug.Log($"Debug  Multiplier: {multiplier}  toAdd: {toAdd} levelUp: {toLevelUp} expPoints: {expPoints} ");
+            SetLevelCurve(Mathf.RoundToInt(this.lvlCurve.Evaluate(GetLevel())));
+            Debug.Log($"Debug  levelUp: {toLevelUp} expPoints: {expPoints} ");
             return true;
         }
 

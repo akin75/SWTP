@@ -126,6 +126,11 @@ public class EnemyHealth : MonoBehaviour
         return currentHealth;
     }
 
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
+
     public bool IsDestroyed()
     {
         return isDestroyed;
@@ -134,5 +139,10 @@ public class EnemyHealth : MonoBehaviour
     public void setKillCounter(KillCounter counter)
     {
         killCounter = counter;
+    }
+
+    public void AddHealth(int health)
+    {
+        maxHealth += health;
     }
 }
