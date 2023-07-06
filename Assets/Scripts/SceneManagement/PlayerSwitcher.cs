@@ -17,6 +17,7 @@ public class PlayerSwitcher : MonoBehaviour
     public EnemyController enemController;
     public PerkUpgrade perkUpgrade;
     public GameObject perkCanvas;
+    [SerializeField] private AnimationCurve expController;
 
     private void Awake()
     {
@@ -24,7 +25,7 @@ public class PlayerSwitcher : MonoBehaviour
         // Den ersten Player auswählen
         currentPlayer = GameObject.FindGameObjectWithTag("Player");
         //enemController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
-        playerClass = new PlayerClass(currentPlayer.GetComponent<Player>().maxHealth, currentPlayer, currentPlayer.GetComponent<PlayerController>().moveSpeed);
+        playerClass = new PlayerClass(currentPlayer.GetComponent<Player>().maxHealth, currentPlayer, currentPlayer.GetComponent<PlayerController>().moveSpeed, expController);
         camController.SetTarget(playerClass.position);
         
         //Temporarily

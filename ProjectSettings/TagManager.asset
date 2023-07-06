@@ -14,13 +14,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Obstacle
+  - Ground
   - Water
   - UI
+  - Collider
   - Enemy
   - Player
   - PostPr
-  - 
   - 
   - 
   - 
@@ -47,9 +47,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Map
+    uniqueID: 441247727
+    locked: 0
   - name: Character
     uniqueID: 1122447067
-    locked: 0
-  - name: Mine
-    uniqueID: 3508191807
     locked: 0
