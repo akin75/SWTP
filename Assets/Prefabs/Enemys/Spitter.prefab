@@ -398,6 +398,7 @@ MonoBehaviour:
   shootingRange: {fileID: 6614129435392740467}
   standingRange: {fileID: 5965284994469923880}
   player: {fileID: 3018274187864165048, guid: 053ec6e76f02dec4ca7fa84b13925cc2, type: 3}
+  spitSfx: {fileID: 676000828316244113, guid: 31448e82ac7d7dd4e8b6893d6271a7e9, type: 3}
 --- !u!58 &7852736416389277705
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -450,7 +451,7 @@ MonoBehaviour:
   - {x: 0.0014810282, y: -0.23712493, z: 0}
   m_ShapePathHash: 947747034
   m_Mesh: {fileID: 0}
-  m_InstanceId: -37722
+  m_InstanceId: 158280
   m_LocalBounds:
     m_Center: {x: -0.0036371201, y: 0.002818808, z: 0}
     m_Extent: {x: 0.20580584, y: 0.23994374, z: 0}
