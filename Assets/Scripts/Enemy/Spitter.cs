@@ -12,6 +12,7 @@ public class Spitter : MonoBehaviour
     public Collider2D shootingRange;
     public Collider2D standingRange;
     public Player player;
+    public GameObject spitSfx;
 
     private Transform playerTransform; // Referenz auf den Spieler
     private float lastShotTime; // Variable, um den letzten Zeitpunkt des Schusses zu speichern
@@ -144,6 +145,7 @@ public class Spitter : MonoBehaviour
                 // Richtung zum Spieler berechnen
                 direction = (playerTransform.position - firePoint.position).normalized;
                 // Projektil in die berechnete Richtung schießen
+                Instantiate(spitSfx, transform.position, Quaternion.identity);
                 Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
                 projectileRb.velocity = direction * projectileSpeed;
             }

@@ -263,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
+  hitSfx: {fileID: 676000828316244113, guid: 573a851743b511e42bce67d83944f496, type: 3}
 --- !u!58 &-5038421475701589220
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -6,11 +6,13 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     private Camera cam;
     public PauseMenu pm;
+    private AudioSource stepSfx;
 
     private Rigidbody2D rb;
 
     private void Start()
     {
+        stepSfx = gameObject.GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -30,11 +32,13 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Approximately(horizontalInput, 0f) && Mathf.Approximately(verticalInput, 0f))
         {
             rb.velocity = Vector2.zero;
+            stepSfx.mute = true;
         }
         else
         {
             Vector2 direction = new Vector2(horizontalInput, verticalInput).normalized;
             rb.velocity = direction * moveSpeed;
+            stepSfx.mute = false;
         }
     }
     
