@@ -13,17 +13,15 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject hud;
     public CameraController cameraController;
-    private GameObject gameOverScreen;
+    public GameObject gameOverScreen;
     public HealthBar healthBar;
     public Player player;
     public AudioSource testsound;
-    public WaveSpawner ws;
    
    // public KillCounter kc;
     public TMP_Text heal;
     public TMP_Text coin;
     public TMP_Text kills;
-    public TMP_Text waveInfo;
 
 
     private void Start()
@@ -36,9 +34,9 @@ public class PauseMenu : MonoBehaviour
     {
         heal.SetText("Health: " + player.GetCurrentHealth());
         coin.SetText(""+player.GetCoins());
-        waveInfo.SetText("Next Wave in: "+ws.GetWaveInfo());
         if (Input.GetKeyDown("escape"))
         {
+           
             if (gameIsPaused)
             {
                 Resume();
@@ -48,11 +46,24 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
+    void Pause()
+    {
+        if (pauseMenuUI != null)
+        {
+            hud.SetActive(false);
+            pauseMenuUI.SetActive(true);
+        }        
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+        cameraController.enabled = false;
+    }
+    
     public void Resume()
     {
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(false);
+             hud.SetActive(true);
             
 
         }
@@ -61,31 +72,22 @@ public class PauseMenu : MonoBehaviour
         cameraController.enabled = true;
     }
 
-    void Pause()
-    {
-        if (pauseMenuUI != null)
-        {
-            pauseMenuUI.SetActive(true);
-        }        
-        Time.timeScale = 0f;
-        gameIsPaused = true;
-        cameraController.enabled = false;
-    }
+    
 
     public void LoadMainMenu()
     {
-         SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu");
         Debug.Log("Bip Bop, Menü geladen.");
-        Time.timeScale = 1f;
-        gameIsPaused = false;
         testsound.Play();
+        Resume();
     }
 
     public void GameOver()
     {
+        hud.SetActive(false);
         Debug.Log("Spieler Gestorben");
         gameOverScreen.SetActive(true);
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0.3f;
         gameIsPaused = true;
     }
 
@@ -93,6 +95,7 @@ public void RestartGame()
     {
         Debug.Log("Spiel neugestartet");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        hud.SetActive(true);
         gameOverScreen.SetActive(false);
         cameraController.enabled = true;
         Time.timeScale = 1f;
