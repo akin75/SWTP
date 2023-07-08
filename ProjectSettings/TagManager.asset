@@ -10,6 +10,7 @@ TagManager:
   - DeadPlayer
   - Metal
   - Wood
+  - Light
   layers:
   - Default
   - TransparentFX
