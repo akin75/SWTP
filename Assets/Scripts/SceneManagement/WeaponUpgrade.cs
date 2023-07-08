@@ -73,7 +73,7 @@ public class WeaponUpgrade : MonoBehaviour
         var playerComponent = player.GetComponent<Player>();
         if (playerComponent.GetCoins() >= upgrades.cost)
         {
-            Debug.Log("Test");
+            //Debug.Log("Test");
             playerComponent.setCurrency(-upgrades.cost);
             upgrades.weapon.GetComponentInChildren<Weapon>().AddLevel(1);
             upgrades.weapon.GetComponentInChildren<Weapon>().SetDamage(10);

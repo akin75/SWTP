@@ -5,24 +5,20 @@ using UnityEngine;
 public class Tank : MonoBehaviour
 {
     public EnemyHealth enemyHealth;
-    private SpriteRenderer armorSprite;
+    private GameObject armor;
 
     // Start is called before the first frame update
     void Start()
     {
-        Transform armorTransform = transform.Find("Armor"); // Finde das Kindobjekt "Armor"
-        if (armorTransform != null)
-        {
-            armorSprite = armorTransform.GetComponent<SpriteRenderer>(); // Erhalte den SpriteRenderer des Kindobjekts "Armor"
-        }
+        armor = transform.Find("Armor").gameObject; // Finde das Child-Objekt "Armor"
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (armorSprite != null && enemyHealth.currentHealth < enemyHealth.maxHealth * 0.5f)
+        if (enemyHealth.currentHealth < enemyHealth.maxHealth * 0.5f)
         {
-            Destroy(armorSprite);
+            Destroy(armor); // Zerstöre das gesamte Child-Objekt "Armor"
         }
     }
 }

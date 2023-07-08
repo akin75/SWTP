@@ -127,7 +127,7 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Reload()
     {
-        Debug.Log("Reloading!");
+        //Debug.Log("Reloading!");
         if (reloadSfx != null)
         {
             reloadSfx.Play();

@@ -8,7 +8,9 @@ using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour
 {
+
     public enum spawnState { SPAWNING, WAITING, COUNTING, COMPLETE };
+
 
     [System.Serializable]
     public class Wave
@@ -17,7 +19,7 @@ public class WaveSpawner : MonoBehaviour
         public List<Enemys> enemyList = new List<Enemys>();
         public float spawnRate;
         public int waveToSpawn;
-        
+
     }
 
     [System.Serializable]
