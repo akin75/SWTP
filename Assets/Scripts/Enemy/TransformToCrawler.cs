@@ -10,19 +10,7 @@ public class TransformToCrawler : MonoBehaviour
     public float transformationChance = 10;
     private Quaternion enemyRotation;
     private Vector3 deathScale;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void Transformation()
     {
         enemyRotation = transform.rotation;
