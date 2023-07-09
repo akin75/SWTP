@@ -6,12 +6,14 @@ public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
-    public int damage = 2;
+    public int damage;
 
     public ParticleSystem bloodSplatter;
     public ParticleSystem deathParticles;
+    public GameObject crawlerPrefab;
     public Rigidbody2D rb;
     public GameObject deadZombiePrefab;
+    public float transformationChance = 10;
 
     public GameObject itemDrop;
     public int dropChance;
@@ -19,7 +21,7 @@ public class EnemyHealth : MonoBehaviour
     private bool playerCanTakeDamage = true;
 
     public HealthBar healthBar;
-    public TransformToCrawler transformToCrawler;
+    public bool canTransformToCrawler = false;
     private CursorFeedback cursorFeedback;
     public ParticleSystem bloodPuddleHit;
     public GameObject deathSfx;
@@ -31,7 +33,6 @@ public class EnemyHealth : MonoBehaviour
     public int experiencePoint;
     private PlayerSwitcher playerManager;
     private Player player;
-
     private bool isDestroyed;
 
     void Start()
@@ -85,9 +86,15 @@ public class EnemyHealth : MonoBehaviour
                 deathRotation = transform.rotation;
                 deathScale = transform.localScale;
 
-                GameObject deadZombie = Instantiate(deadZombiePrefab, transform.position, deathRotation);
-                deadZombie.transform.localScale = deathScale;
-                //transformToCrawler.Transformation();
+                if (canTransformToCrawler && transformationChance >= Random.Range(0, 100))
+                {
+                    Instantiate(crawlerPrefab, transform.position, deathRotation);
+                }
+                else
+                {
+                    GameObject deadZombie = Instantiate(deadZombiePrefab, transform.position, deathRotation);
+                    deadZombie.transform.localScale = deathScale;
+                }
             }
 
             if (deathParticles != null)

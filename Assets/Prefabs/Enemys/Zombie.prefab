@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: -3939219405517817229}
   - component: {fileID: 8084985735418968613}
   - component: {fileID: -2979630653874237575}
-  - component: {fileID: 1642046387127829927}
   - component: {fileID: 4661249608475373428}
   m_Layer: 7
   m_Name: Zombie
@@ -229,15 +228,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  damage: 5
+  damage: 20
   bloodSplatter: {fileID: 1371572389595951175, guid: 532043777f3df2a4987e4632115b0273, type: 3}
   deathParticles: {fileID: 1371572389595951175, guid: 8b7d87747b8567049aa30f7042c4d1d3, type: 3}
+  crawlerPrefab: {fileID: 2329167089764508733, guid: 121d768ac324ef3478089e7f3dfbe2a8, type: 3}
   rb: {fileID: 0}
   deadZombiePrefab: {fileID: 4372698498858929153, guid: 837b317608c0cfb4aa22760ca768afb1, type: 3}
+  transformationChance: 10
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 50
   healthBar: {fileID: 8610740355228082374}
-  transformToCrawler: {fileID: 1642046387127829927}
+  canTransformToCrawler: 1
   bloodPuddleHit: {fileID: 1950607216614953820, guid: 52ec8f3c7f50e4247944d5d0885612eb, type: 3}
   deathSfx: {fileID: 676000828316244113, guid: d019fa8f6e05cbb45b303c43f87a442c, type: 3}
   experiencePoint: 20
@@ -257,21 +258,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.215
---- !u!114 &1642046387127829927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2329167089764508733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1111aff8ccfde5e46add42dfbee24a60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crawlerPrefab: {fileID: 2329167089764508733, guid: 121d768ac324ef3478089e7f3dfbe2a8, type: 3}
-  deadEnemyPrefab: {fileID: 4372698498858929153, guid: 837b317608c0cfb4aa22760ca768afb1, type: 3}
-  transformationChance: 50
 --- !u!114 &4661249608475373428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +293,7 @@ MonoBehaviour:
   - {x: -0.11112993, y: -0.17096911, z: 0}
   m_ShapePathHash: -1297658664
   m_Mesh: {fileID: 0}
-  m_InstanceId: 150080
+  m_InstanceId: 213022
   m_LocalBounds:
     m_Center: {x: 0.0037399381, y: -0.000000014901161, z: 0}
     m_Extent: {x: 0.19608015, y: 0.21157427, z: 0}
