@@ -8,9 +8,12 @@ using UnityEngine.Rendering.Universal;
 public class DayToNight : MonoBehaviour
 {
     private Light2D light2D;
+    private WaveSpawner spawner;
+    [SerializeField] private AnimationCurve intesityCurve;
     void Start()
     {
         light2D = gameObject.GetComponent<Light2D>();
+        spawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
     }
 
     public void DecreaseLight(float value)
@@ -23,9 +26,14 @@ public class DayToNight : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha9))
+        if (spawner.state == WaveSpawner.spawnState.WAITING)
         {
-            DecreaseLight(0.05f);
+            SetIntensity(intesityCurve.Evaluate(spawner.waveTracker));
         }
+    }
+
+    private void SetIntensity(float value)
+    {
+        light2D.intensity = value;
     }
 }
