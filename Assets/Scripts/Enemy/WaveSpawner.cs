@@ -84,7 +84,11 @@ public class WaveSpawner : MonoBehaviour
         }
         else
         {
-            SetNearestSpawnerToActive();
+            if (!IsAnySpawnerActive())
+            {
+                SetNearestSpawnerToActive();
+            }
+            
             waveCountdown -= Time.deltaTime;
             
         }
@@ -147,6 +151,7 @@ public class WaveSpawner : MonoBehaviour
             if (waves[nextWave].waveToSpawn != 0)
             {
                 waves[nextWave].waveToSpawn--;
+                SetAllSpawnerActive();
             }
             else
             {
@@ -161,33 +166,29 @@ public class WaveSpawner : MonoBehaviour
     public void SetNearestSpawnerToActive()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        foreach (var spawn in spawnPoints)
+        List<(int, float)> dist = new List<(int, float)>();
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            float dist = Vector3.Distance(spawn.position, player.transform.position);
-            if(dist <= 20f) spawn.gameObject.SetActive(true);
-            else
-            {
-                spawn.gameObject.SetActive(false);
-            }
+            dist.Add((i, Vector3.Distance(spawnPoints[i].position, player.transform.position)));
+                
         }
 
-        if (!IsAnySpawnerActive())
+        var t = dist.OrderBy(x => x.Item2).Take(5);
+        var asList = t.ToList();
+        foreach (var a in asList)
         {
-            List<(int, float)> dist = new List<(int, float)>();
-            for (int i = 0; i < spawnPoints.Length; i++)
-            {
-                dist.Add((i, Vector3.Distance(spawnPoints[i].position, player.transform.position)));
-                
-            }
-
-            var t = dist.OrderBy(x => x.Item2).Take(3);
-            var asList = t.ToList();
-            foreach (var a in asList)
-            {
-                spawnPoints[a.Item1].gameObject.SetActive(true);
-            }
+            spawnPoints[a.Item1].gameObject.SetActive(true);
         }
         
+        
+    }
+
+    public void SetAllSpawnerActive()
+    {
+        foreach (var spawn in spawnPoints)
+        {
+            spawn.gameObject.SetActive(false);
+        }
     }
 
     public bool IsAnySpawnerActive()
