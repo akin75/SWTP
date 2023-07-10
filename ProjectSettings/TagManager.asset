@@ -11,6 +11,7 @@ TagManager:
   - Metal
   - Wood
   - Light
+  - GlobalVolume
   layers:
   - Default
   - TransparentFX

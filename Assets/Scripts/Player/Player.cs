@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public ParticleSystem bigBloodPuddle;
     public float impactForceMultiplier = 1f;
     public GameObject playerTakesDamageSfx;
+    public GameObject postProcessing;
     
     private Rigidbody2D rb;
     private bool isDead = false;
@@ -63,8 +64,6 @@ public class Player : MonoBehaviour
         StartCoroutine(HitFlash());
         Instantiate(playerTakesDamageSfx, transform.position, Quaternion.identity);
 
-
-        
         if (GetCurrentHealth() <= 0)
         {
             isDead = true;
