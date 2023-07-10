@@ -234,5 +234,10 @@ public class WaveSpawner : MonoBehaviour
              _wave.enemyList[index].count++;
          }
      }
+
+     public int GetWave()
+     {
+        return nextWave + 1;
+     }
    
 }
