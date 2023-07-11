@@ -36,14 +36,14 @@ public class WaveSpawner : MonoBehaviour
     
     public float timeBetweenWaves = 7f;
     private float waveCountdown;
-    private int waveTracker = 0;
+    public int waveTracker = 0;
     private float searchCountdown = 1f;
     public List<Enemys> bossEnemy;
     [SerializeField] private AnimationCurve waveSpawner;
     [SerializeField] private AnimationCurve damageMultiplier;
     [SerializeField] private AnimationCurve healthMultiplier;
 
-    private spawnState state = spawnState.COUNTING;
+    public spawnState state = spawnState.COUNTING;
 
     void Start()
     { 
@@ -90,7 +90,7 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    bool enemyIsAlive()
+    public bool enemyIsAlive()
     {   
         searchCountdown -= Time.deltaTime;
         if (searchCountdown <= 0f)

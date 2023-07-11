@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using Vector3 = System.Numerics.Vector3;
 
+
 public class PlayerSwitcher : MonoBehaviour
 {
     public GameObject[] playerPrefabs; // Array der Player-Prefabs
@@ -106,7 +107,7 @@ public class PlayerSwitcher : MonoBehaviour
 
             // Aktiviere den neuen Player und deaktiviere den alten Player
             newPlayer.SetActive(true);
-            Debug.Log("Passed");
+            //Debug.Log("Passed");
             currentPlayer.SetActive(false);
 
             // Den neuen Player als den aktuellen Player setzen

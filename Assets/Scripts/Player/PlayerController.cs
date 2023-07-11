@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     public PauseMenu pm;
     private AudioSource stepSfx;
-
     private Rigidbody2D rb;
 
     private void Start()
