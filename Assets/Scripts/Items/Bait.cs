@@ -8,12 +8,17 @@ public class Bait : MonoBehaviour
     private List<GameObject> enemiesInBaitArea = new List<GameObject>();
     private EnemyController enemyController;
     public float baitTime = 3f;
+    public ParticleSystem explosionParticles;
+    public ParticleSystem smokeParticles;
+    public GameObject explosionSfx;
+    public int damage = 50;
+
 
     private Transform originalTarget; // Variable zur Speicherung des ursprünglichen Targets
 
     private void Start()
     {
-        StartCoroutine(DestroyAfterDelay(baitTime));
+        StartCoroutine(ExplodeAfterDelay(baitTime));
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -75,6 +80,33 @@ public class Bait : MonoBehaviour
             {
                 if (enemyController != null && enemy != null)
                 {
+                    EnemyController enemyController = enemy.GetComponent<EnemyController>();
+                    enemyController.SetTarget(originalTarget);
+                }
+            }
+            Debug.Log("Target wieder player");
+        }
+        Destroy(gameObject);
+    }
+    
+    private IEnumerator ExplodeAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Instantiate(explosionParticles, transform.position, Quaternion.identity);
+        Instantiate(smokeParticles, transform.position, Quaternion.identity);
+        Instantiate(explosionSfx, transform.position, Quaternion.identity);
+
+        List<GameObject> enemiesToDamage = new List<GameObject>(enemiesInBaitArea);
+
+        
+        // Wiederherstellen des ursprünglichen Targets
+        if (enemyController != null)
+        {
+            foreach (var enemy in enemiesInBaitArea)
+            {
+                if (enemyController != null && enemy != null)
+                {
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
                     EnemyController enemyController = enemy.GetComponent<EnemyController>();
                     enemyController.SetTarget(originalTarget);
                 }
