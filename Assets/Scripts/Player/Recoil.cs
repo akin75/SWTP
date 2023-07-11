@@ -12,6 +12,8 @@ public class Recoil : MonoBehaviour
     public GameObject weapon2;
     public float recoilDistance = 5;
     public float recoilDuration = 0.05f;
+    public bool isDual = false;
+    public bool leftRecoilDone = false;
     
     private Vector3 lArmUOriginalPosition;
     private Vector3 lArmLOriginalPosition;
@@ -46,41 +48,74 @@ public class Recoil : MonoBehaviour
     
     private IEnumerator RecoilCoroutine()
     {
+        
         //Debug.Log("Start Recoil");
         //float elapsedTime = 0f;
         //Vector3 recoilOffset = Vector3.back * recoilDistance;
         Vector3 recoilDirection = new Vector3(0, -1f, 0).normalized / 100;
         Vector3 recoilOffset = recoilDirection * recoilDistance;
-        
-        // Verschiebe die Gameobjects um recoilOffset nach hinten
-        lArmU.transform.localPosition = lArmUOriginalPosition + recoilOffset;
-        lArmL.transform.localPosition = lArmLOriginalPosition + recoilOffset + new Vector3(0,-0.02f,0);
-        rArmL.transform.localPosition = rArmLOriginalPosition + recoilOffset + new Vector3(0,-0.02f,0);
-        rArmU.transform.localPosition = rArmUOriginalPosition + recoilOffset;
 
-        // Überprüfe, ob weapon1 vorhanden ist und verschiebe es ebenfalls
-        if (weapon1 != null)
-            weapon1.transform.localPosition = weapon1OriginalPosition + recoilOffset;
-        
-        // Überprüfe, ob weapon2 vorhanden ist und verschiebe es ebenfalls
-        if (weapon2 != null)
-            weapon2.transform.localPosition = weapon2OriginalPosition + recoilOffset;
+        if (!isDual)
+        {
+            // Verschiebe die Gameobjects um recoilOffset nach hinten
+            lArmU.transform.localPosition = lArmUOriginalPosition + recoilOffset;
+            lArmL.transform.localPosition = lArmLOriginalPosition + recoilOffset + new Vector3(0,-0.02f,0);
+            rArmL.transform.localPosition = rArmLOriginalPosition + recoilOffset + new Vector3(0,-0.02f,0);
+            rArmU.transform.localPosition = rArmUOriginalPosition + recoilOffset;
+    
+            // Überprüfe, ob weapon1 vorhanden ist und verschiebe es ebenfalls
+            if (weapon1 != null)
+                weapon1.transform.localPosition = weapon1OriginalPosition + recoilOffset;
+            
+            // Überprüfe, ob weapon2 vorhanden ist und verschiebe es ebenfalls
+            if (weapon2 != null)
+                weapon2.transform.localPosition = weapon2OriginalPosition + recoilOffset;
+    
+            yield return new WaitForSeconds(recoilDuration);
+    
+            // Zurücksetzen der Position der Gameobjects auf ihre ursprünglichen Positionen
+            lArmU.transform.localPosition = lArmUOriginalPosition;
+            lArmL.transform.localPosition = lArmLOriginalPosition;
+            rArmL.transform.localPosition = rArmLOriginalPosition;
+            rArmU.transform.localPosition = rArmUOriginalPosition;
+    
+            // Überprüfe, ob weapon1 vorhanden ist und setze die Position zurück
+            if (weapon1 != null)
+                weapon1.transform.localPosition = weapon1OriginalPosition;
+    
+            // Überprüfe, ob weapon2 vorhanden ist und setze die Position zurück
+            if (weapon2 != null)
+                weapon2.transform.localPosition = weapon2OriginalPosition;
+        } else if (isDual)
+        {
+            if (!leftRecoilDone)
+            {
+                lArmU.transform.localPosition = lArmUOriginalPosition + recoilOffset;
+                lArmL.transform.localPosition = lArmLOriginalPosition + recoilOffset + new Vector3(0,-0.02f,0);
+                if (weapon2 != null)
+                    weapon2.transform.localPosition = weapon2OriginalPosition + recoilOffset;
+                yield return new WaitForSeconds(recoilDuration);
+                lArmU.transform.localPosition = lArmUOriginalPosition;
+                lArmL.transform.localPosition = lArmLOriginalPosition;
+                if (weapon2 != null)
+                    weapon2.transform.localPosition = weapon2OriginalPosition;
+                leftRecoilDone = true;
+            }
+            else
+            {
+                rArmU.transform.localPosition = rArmUOriginalPosition + recoilOffset;
+                rArmL.transform.localPosition = rArmLOriginalPosition + recoilOffset + new Vector3(0,-0.02f,0);
+                if (weapon1 != null)
+                    weapon1.transform.localPosition = weapon1OriginalPosition + recoilOffset;
+                yield return new WaitForSeconds(recoilDuration);
+                rArmU.transform.localPosition = rArmUOriginalPosition;
+                rArmL.transform.localPosition = rArmLOriginalPosition;
+                if (weapon1 != null)
+                    weapon1.transform.localPosition = weapon1OriginalPosition;
+                leftRecoilDone = false;
+            }
 
-        yield return new WaitForSeconds(recoilDuration);
-
-        // Zurücksetzen der Position der Gameobjects auf ihre ursprünglichen Positionen
-        lArmU.transform.localPosition = lArmUOriginalPosition;
-        lArmL.transform.localPosition = lArmLOriginalPosition;
-        rArmL.transform.localPosition = rArmLOriginalPosition;
-        rArmU.transform.localPosition = rArmUOriginalPosition;
-
-        // Überprüfe, ob weapon1 vorhanden ist und setze die Position zurück
-        if (weapon1 != null)
-            weapon1.transform.localPosition = weapon1OriginalPosition;
-
-        // Überprüfe, ob weapon2 vorhanden ist und setze die Position zurück
-        if (weapon2 != null)
-            weapon2.transform.localPosition = weapon2OriginalPosition;
+        }
     }
     
     public void StartRecoil()
