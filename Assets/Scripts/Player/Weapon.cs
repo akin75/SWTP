@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public enum weaponState { READY, RELOADING };
-    private weaponState state = weaponState.READY;
+    public enum WeaponSide { WeaponL, WeaponR }
+    public WeaponSide weaponSide;
+
+    private enum WeaponState { Ready, Reloading };
+    private WeaponState state = WeaponState.Ready;
     public float fireForce = 40f;
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -23,6 +26,7 @@ public class Weapon : MonoBehaviour
     private int level = 0;
     private WeaponSG newInstance;
     private WeaponUpgrade weaponUpgrade;
+    public AudioSource draw;
     public AudioSource reloadSfx;
     public AudioSource shotSfx;
 
@@ -31,6 +35,7 @@ public class Weapon : MonoBehaviour
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraController = Camera.main.GetComponent<CameraController>();
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
+        float delay = timeBetweenShots / 2;
         Transform firePointChild = transform.Find("FirePoint");
         level = GetLevel();
         reloadSfx = GetComponent<AudioSource>();
@@ -43,6 +48,8 @@ public class Weapon : MonoBehaviour
             Debug.Log("Muzzle null");
         }
 
+        StartCoroutine(DrawWeaponSound());
+        
         if (transform.gameObject.TryGetComponent<WeaponSG>(out WeaponSG instance))
         {
             newInstance = instance;
@@ -53,6 +60,20 @@ public class Weapon : MonoBehaviour
         muzzleParticles.gameObject.SetActive(false);
         recoil = GetComponentInParent<Recoil>();
         maxAmmo = ammo;
+    }
+
+    private IEnumerator DrawWeaponSound()
+    {
+        float delay = timeBetweenShots / 2;
+        if (weaponSide == WeaponSide.WeaponR)
+        {
+            yield return new WaitForSeconds(delay);
+            draw.Play();
+        }
+        else
+        {
+            draw.Play();
+        }
     }
 
     private void Update()
@@ -74,32 +95,80 @@ public class Weapon : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            state = weaponState.RELOADING;
+            state = WeaponState.Reloading;
             StartCoroutine(Reload());
         }
     }
 
-    private void Shoot()
-    {  
-        if (state == weaponState.RELOADING)
+    private IEnumerator DelayShooting()
+    {
+        float delay = timeBetweenShots / 2;
+        if (weaponSide == WeaponSide.WeaponR)
         {
-                return;
-        }
-        float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
-        Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
-        shotSfx.Play();
-        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        newBullet.transform.right = bulletDirection;
-        newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
-
-        if (muzzleParticles != null)
-        {
-            muzzleParticles.Play();
+            yield return new WaitForSeconds(delay);
+            float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
+            Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
+            shotSfx.Play();
+            GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            newBullet.transform.right = bulletDirection;
+            newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
+            
+            if (muzzleParticles != null)
+            {
+                muzzleParticles.Play();
+            }
+            else
+            {
+                Debug.Log("Muzzle Particles Missing");
+            }
+            
+            if (recoil != null)
+            {
+                recoil.StartRecoil();
+            }
+            else
+            {
+                Debug.Log("Recoil Missing");
+            }
+            ammo -= 1;
         }
         else
         {
-            Debug.Log("Muzzle Particles Missing");
+            float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
+            Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
+            shotSfx.Play();
+            GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            newBullet.transform.right = bulletDirection;
+            newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
+            
+            if (muzzleParticles != null)
+            {
+                muzzleParticles.Play();
+            }
+            else
+            {
+                Debug.Log("Muzzle Particles Missing");
+            }
+            if (recoil != null)
+            {
+                recoil.StartRecoil();
+            }
+            else
+            {
+                Debug.Log("Recoil Missing");
+            }
+            ammo -= 1;
+            yield return null;
         }
+    }
+    private void Shoot()
+    {
+        if (state == WeaponState.Reloading)
+        {
+            return;
+        }
+
+        StartCoroutine(DelayShooting());
 
         if (cameraController != null)
         {
@@ -107,20 +176,10 @@ public class Weapon : MonoBehaviour
             Vector2 shotDirection = (mousePosition - (Vector2)firePoint.position).normalized;
             cameraController.StartShaking(shotDirection);
         }
-
-        if (recoil != null)
-        {
-            recoil.StartRecoil();
-        }
-        else
-        {
-            Debug.Log("Recoil Missing");
-        }
-
-        ammo -= 1;
+        
         if (ammo == 0)
         {
-            state = weaponState.RELOADING;
+            state = WeaponState.Reloading;
             StartCoroutine(Reload());
         }
     }
@@ -138,7 +197,7 @@ public class Weapon : MonoBehaviour
         }
         yield return new WaitForSeconds(reloadTime);
         ammo = maxAmmo;
-        state = weaponState.READY;
+        state = WeaponState.Ready;
         yield break;
     }
 
@@ -168,10 +227,5 @@ public class Weapon : MonoBehaviour
     public int GetLevel()
     {
         return level;
-    }
-
-    public int GetAmmo()
-    {
-        return ammo;
     }
 }

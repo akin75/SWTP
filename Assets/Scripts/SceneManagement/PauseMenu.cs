@@ -17,13 +17,12 @@ public class PauseMenu : MonoBehaviour
     public HealthBar healthBar;
     public Player player;
     public AudioSource testsound;
-
-    // public KillCounter kc;
+   
+   // public KillCounter kc;
     public TMP_Text heal;
     public TMP_Text coin;
     public TMP_Text kills;
-    public TMP_Text ammo;
-    public TMP_Text wave;
+
 
     private void Start()
     {
@@ -33,9 +32,8 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        heal.SetText("" + player.GetCurrentHealth());
-        coin.SetText("" + player.GetCoins());
-        ammo.SetText("" + player.GetComponentInChildren<Weapon>().GetAmmo());
+        heal.SetText("Health: " + player.GetCurrentHealth());
+        coin.SetText(""+player.GetCoins());
         if (Input.GetKeyDown("escape"))
         {
            

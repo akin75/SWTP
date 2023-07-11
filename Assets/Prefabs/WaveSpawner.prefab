@@ -46,38 +46,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveName: Crawler Wave
-    enemyList: []
+    enemy: {fileID: 2329167089764508728, guid: 121d768ac324ef3478089e7f3dfbe2a8, type: 3}
+    spawnCount: 2
     spawnRate: 1
-    waveToSpawn: 0
   - waveName: Zombie Wave
-    enemyList: []
+    enemy: {fileID: 2329167089764508728, guid: dadf13e63b4db9745afc95e4f0a45719, type: 3}
+    spawnCount: 4
     spawnRate: 1
-    waveToSpawn: 0
   - waveName: Runner Wave
-    enemyList: []
+    enemy: {fileID: 2329167089764508728, guid: 9a1b1077c7908bc47b4eaed6af5a66df, type: 3}
+    spawnCount: 6
     spawnRate: 1
-    waveToSpawn: 0
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   timeBetweenWaves: 5
-  bossEnemy: []
-  waveSpawner:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  damageMultiplier:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  healthMultiplier:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
