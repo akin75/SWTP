@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
     public PauseMenu pm;
     private AudioSource stepSfx;
     private Rigidbody2D rb;
+    public GameObject bait;
+    public GameObject mine;
+    private int baitCount = 1;
+    private int mineCount = 1;
 
     private void Start()
     {
@@ -21,6 +25,8 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Aim();
+        ThrowMine();
+        ThrowBait();
     }
 
     private void Move()
@@ -51,5 +57,28 @@ public class PlayerController : MonoBehaviour
     public void SetMoveSpeed(int value)
     {
         moveSpeed = moveSpeed + value;
+    }
+
+    private void ThrowMine()
+    {
+        if (Input.GetKeyDown("q"))
+        {
+            if (mineCount > 0)
+            {
+                Instantiate(mine, transform.position, Quaternion.identity);
+                mineCount--;
+            }
+        }
+    }
+    private void ThrowBait()
+    {
+        if (Input.GetKeyDown("e"))
+        {
+            if (baitCount > 0)
+            {
+                Instantiate(bait, transform.position, Quaternion.identity);
+                baitCount--;
+            }
+        }
     }
 }
