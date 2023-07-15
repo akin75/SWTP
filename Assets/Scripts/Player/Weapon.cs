@@ -29,13 +29,14 @@ public class Weapon : MonoBehaviour
     public AudioSource draw;
     public AudioSource reloadSfx;
     public AudioSource shotSfx;
+    public float delay;
 
     private void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraController = Camera.main.GetComponent<CameraController>();
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
-        float delay = timeBetweenShots / 2;
+        delay = timeBetweenShots / 2;
         Transform firePointChild = transform.Find("FirePoint");
         level = GetLevel();
         reloadSfx = GetComponent<AudioSource>();
@@ -48,7 +49,8 @@ public class Weapon : MonoBehaviour
             Debug.Log("Muzzle null");
         }
 
-        StartCoroutine(DrawWeaponSound());
+        delay = timeBetweenShots / 2;
+        StartCoroutine(DrawWeaponSound(delay));
         
         if (transform.gameObject.TryGetComponent<WeaponSG>(out WeaponSG instance))
         {
@@ -62,18 +64,18 @@ public class Weapon : MonoBehaviour
         maxAmmo = ammo;
     }
 
-    private IEnumerator DrawWeaponSound()
+    private IEnumerator DrawWeaponSound(float delay)
     {
-        float delay = timeBetweenShots / 2;
         if (weaponSide == WeaponSide.WeaponR)
         {
             yield return new WaitForSeconds(delay);
-            draw.Play();
         }
-        else
-        {
-            draw.Play();
-        }
+        draw.Play();
+    }
+
+    public void DrawWeapon()
+    {
+        StartCoroutine(DrawWeaponSound(delay));
     }
 
     private void Update()

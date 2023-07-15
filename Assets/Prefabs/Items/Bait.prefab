@@ -223,3 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baitArea: {fileID: 587162757308011089}
   baitTime: 3
+  explosionParticles: {fileID: 3433415844352109921, guid: 4b9a132cbc09b484f9b3efe71031bd87, type: 3}
+  smokeParticles: {fileID: 306570466270053118, guid: 2739e7addb7ef5c4398641e5413916f0, type: 3}
+  explosionSfx: {fileID: 4215268554375360898, guid: 333631098f4c27a40b26df7432e20aba, type: 3}
+  damage: 50

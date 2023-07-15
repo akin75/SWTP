@@ -12,7 +12,7 @@ public class ExplosiveBarrel : MonoBehaviour
     public ParticleSystem explosionParticles;
     public ParticleSystem smokeParticles;
     private bool hasExploded = false;
-    public int damage = 50;
+    public int damage = 100;
     public GameObject explosionSfx;
 
     void Start()
