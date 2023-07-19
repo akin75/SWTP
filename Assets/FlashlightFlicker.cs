@@ -40,7 +40,7 @@ public class FlashlightFlicker : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
             var newInstance = player.GetComponentInChildren<Light2D>();
-            if (spawner.waveTracker >= 20)
+            if (spawner.waveTracker >= 7)
             {
                 
                 // Intensität auf 0 oder 1 setzen
@@ -53,13 +53,13 @@ public class FlashlightFlicker : MonoBehaviour
                 yield return new WaitForSeconds(randomFlickerSpeed);
             }
 
-            if (spawner.waveTracker >= 10 && spawner.waveTracker <= 19)
+            if (spawner.waveTracker >= 3 && spawner.waveTracker <= 6)
             {
                 lightComponent = newInstance;
                 lightComponent.intensity = 0.5f;
                 yield return new WaitForSeconds(1f);
             }
-            if (spawner.waveTracker < 10)
+            if (spawner.waveTracker < 2)
             {
                 lightComponent = newInstance;
                 lightComponent.intensity = 0f; //

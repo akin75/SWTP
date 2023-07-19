@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7542476036367944902}
-  - component: {fileID: 7409930880774810914}
   - component: {fileID: 475456672530067287}
   m_Layer: 0
   m_Name: BackgroundMusic
@@ -33,22 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7409930880774810914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2790586462296413751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b15d7dc7dc66bd4cb5273e1569e1459, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sfxArray:
-  - {fileID: 8300000, guid: 483cb07da31117147aefc724227f12e0, type: 3}
-  backgroundSound: {fileID: 8300000, guid: e58057967d5979e4d85e02e39fc92a85, type: 3}
-  fadeDuration: 2
 --- !u!82 &475456672530067287
 AudioSource:
   m_ObjectHideFlags: 0
