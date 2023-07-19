@@ -70,7 +70,9 @@ public class Player : MonoBehaviour
             playerBody.color = Color.red;
             initialRotation = transform.rotation; // Speichere die Rotation des ursprünglichen Objekts
             Instantiate(deadPlayer, transform.position, initialRotation); // Verwende die gespeicherte Rotation
+            Time.timeScale = 0.0f;
             Destroy(gameObject);
+            
             pauseMenu.GameOver();
             
         }
