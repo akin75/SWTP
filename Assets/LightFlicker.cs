@@ -23,14 +23,14 @@ public class LightFlicker : MonoBehaviour
         float intensity = light2D.intensity;
         while (true)
         {
-            if (spawner.waveTracker >= 3)
+            if (spawner.waveTracker > 1)
             {
                 this.light2D.intensity = (light2D.intensity == 0) ? intensity : 0;
                 float randomFlickerSpeed = Random.Range(minFlickerSpeed, maxFlickerSpeed);
                 yield return new WaitForSeconds(randomFlickerSpeed);
-            } else if (spawner.waveTracker >= 7)
+            } else if (spawner.waveTracker > 2)
             {
-                light2D.intensity = 0f;
+                light2D.intensity = 0.2f;
                 yield return new WaitForSeconds(1.0f);
             }
             else
