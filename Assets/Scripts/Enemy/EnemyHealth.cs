@@ -50,24 +50,26 @@ public class EnemyHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //collision.gameObject.GetComponent<Player>().TakeDamage(damage);
-            if (player != null)
+            if (player != null) // Überprüfe, ob 'player' nicht null ist
             {
                 StartCoroutine(PlayerTakesDamage(collision));
             }
         }
     }
-    
+
     private IEnumerator PlayerTakesDamage(Collision2D collision)
     {
-        if (playerCanTakeDamage && player != null)
+        if (playerCanTakeDamage && player != null) // Überprüfe, ob 'player' nicht null ist
         {
             playerCanTakeDamage = false;
             collision.gameObject.GetComponent<Player>().TakeDamage(damage);
             yield return new WaitForSeconds(0.5f);
             playerCanTakeDamage = true;
         }
+
+        yield return null;
     }
+
 
     public void TakeDamage(int damage)
     {
