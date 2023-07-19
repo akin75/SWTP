@@ -113,6 +113,15 @@ public class WaveSpawner : MonoBehaviour
         int i = 0;
         SetEnemyCount(_wave);
         int enemyToSpawn = Mathf.RoundToInt(waveSpawner.Evaluate(waveTracker));
+
+        if (waveTracker % 1 == 0 && waveTracker != 0)
+        {
+            var spawner = GetActiveSpawnPoints();
+            var boss = Random.Range(0, bossEnemy.Count);
+            spawnEnemy(bossEnemy[i].enemy, spawner[Random.Range(0,spawner.Count)]);
+            i++;
+        }
+        
         while (enemyToSpawn > 0)
         {
             var spawner = GetActiveSpawnPoints();
