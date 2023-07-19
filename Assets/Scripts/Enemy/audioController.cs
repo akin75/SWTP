@@ -8,7 +8,7 @@ public class audioController : MonoBehaviour
     private AudioSource audioSource;
     public float minPitch = -0.5f;
     public float maxPitch = 0.5f;
-    public float volume;
+    private float volume = 1;
 
     private void Awake()
     {
@@ -17,6 +17,7 @@ public class audioController : MonoBehaviour
 
     private void Start()
     {
+        volume = audioSource.volume;
         if (sfxArray.Length > 0)
         {
             int randomIndex = Random.Range(0, sfxArray.Length);
@@ -26,8 +27,6 @@ public class audioController : MonoBehaviour
         {
             Debug.LogWarning("No sound effects assigned to the array!");
         }
-
-        volume = audioSource.volume;
     }
 
     private void PlayRandomSfx(int index)
