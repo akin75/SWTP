@@ -88,7 +88,7 @@ public class PauseMenu : MonoBehaviour
         hud.SetActive(false);
         Debug.Log("Spieler Gestorben");
         gameOverScreen.SetActive(true);
-        Time.timeScale = 0.3f;
+        Time.timeScale = 0.0f;
         gameIsPaused = true;
     }
 

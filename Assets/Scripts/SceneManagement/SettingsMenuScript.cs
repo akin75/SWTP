@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class SettingsMenuScript : MonoBehaviour
 {
-   
+public static bool HealthBarOn = true;
 public Toggle toogle_Mute;
+public Toggle toogle_HealthBar;
+public Toggle toogle_FullScreen;
     // Update is called once per frame
     void Update()
     {
@@ -20,8 +22,21 @@ public Toggle toogle_Mute;
 
 		else
 			AudioListener.volume = 1f;
-    SceneManager.LoadScene("MainMenu");//Ruft die Scene in der Klammer auf
+
+       if (toogle_HealthBar.isOn)
+		    HealthBarOn = true;
+
+		else
+        HealthBarOn = false;
+//
+       if (toogle_FullScreen.isOn);
+		//doo something
+
+    SceneManager.LoadScene("MainMenu");//Ruft die Szene in der Klammer auf
      }
 
+    public bool HealthBarIsEnabled(){
+        return HealthBarOn;
+    } 
      
 }
