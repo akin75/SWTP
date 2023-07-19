@@ -17,11 +17,12 @@ public class PauseMenu : MonoBehaviour
     public HealthBar healthBar;
     public Player player;
     public AudioSource testsound;
-   
-   // public KillCounter kc;
-    public TMP_Text heal;
+       
+    //public KillCounter kc;
+    //public TMP_Text heal;
     public TMP_Text coin;
-    public TMP_Text kills;
+    //public TMP_Text kills;
+    //public TMP_Text ammo;
 
 
     private void Start()
@@ -32,7 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        heal.SetText("Health: " + player.GetCurrentHealth());
+        //heal.SetText("Health: " + player.GetCurrentHealth());
         coin.SetText(""+player.GetCoins());
         if (Input.GetKeyDown("escape"))
         {
@@ -87,7 +88,7 @@ public class PauseMenu : MonoBehaviour
         hud.SetActive(false);
         Debug.Log("Spieler Gestorben");
         gameOverScreen.SetActive(true);
-        Time.timeScale = 0.3f;
+        Time.timeScale = 0.0f;
         gameIsPaused = true;
     }
 
