@@ -59,14 +59,15 @@ public class FlashlightFlicker : MonoBehaviour
                 lightComponent.intensity = 0.5f;
                 yield return new WaitForSeconds(1f);
             }
-            if (spawner.waveTracker < 2)
+            if (spawner.waveTracker <= 2)
             {
                 lightComponent = newInstance;
                 lightComponent.intensity = 0f; //
                 yield return new WaitForSeconds(0.01f);
             }
 
-            
+            yield return new WaitForSeconds(1f);
+
         }
     }
 }

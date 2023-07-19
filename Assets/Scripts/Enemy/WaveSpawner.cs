@@ -77,6 +77,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (waveCountdown <= 0) 
         {
+            Debug.Log("Test");
             if (state != spawnState.SPAWNING)
             {
                 StartCoroutine(spawnWave(waves[nextWave]));
@@ -84,6 +85,7 @@ public class WaveSpawner : MonoBehaviour
         }
         else
         {
+            Debug.Log("Test22");
             SetNearestSpawnerToActive();
             waveCountdown -= Time.deltaTime;
             
