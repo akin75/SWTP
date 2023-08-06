@@ -1,3 +1,4 @@
+
 name: CI
 
 on: 
@@ -12,16 +13,13 @@ jobs:
       matrix:
         targetPlatform:
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          #- StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-          - StandaloneLinux64 # Build a Linux 64-bit standalone.
-          - WebGL # WebGL.
- 
+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
         with:
-          #fetch-depth: 0
+          fetch-depth: 0
           lfs: true
-      - uses: actions/cache@v3
+      - uses: actions/cache@v2
         with:
           path: Library
           key: Library-${{ matrix.targetPlatform }}
@@ -29,12 +27,8 @@ jobs:
       - uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL}}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD}}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
-          unityVersion: 2021.3.25f1
-          buildName: YouAreNotSafe
       - uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}
