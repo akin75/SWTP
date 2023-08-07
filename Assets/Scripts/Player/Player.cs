@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public float impactForceMultiplier = 1f;
     public AudioSource playerHitSfx;
     
+    private string currentWeapon = "Pistol"; // Setze hier den initialen Waffentyp
     private Rigidbody2D rb;
     private bool isDead = false;
     private bool impactForceBool = false;
@@ -82,7 +83,15 @@ public class Player : MonoBehaviour
         StartCoroutine(HealFlash());
     }
 
-
+    public void ChangeWeapon(string newWeapon)
+    {
+        currentWeapon = newWeapon;
+    }
+    
+    public string GetCurrentWeapon()
+    {
+        return currentWeapon;
+    }
     
 
     public bool GetIsDead()

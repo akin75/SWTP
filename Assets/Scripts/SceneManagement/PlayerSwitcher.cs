@@ -18,10 +18,12 @@ public class PlayerSwitcher : MonoBehaviour
     public EnemyController enemController;
     public PerkUpgrade perkUpgrade;
     public GameObject perkCanvas;
+    private Player player;
     [SerializeField] private AnimationCurve expController;
 
     private void Awake()
     {
+        player = FindObjectOfType<Player>().GetComponent<Player>();
         camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         // Den ersten Player auswählen
         currentPlayer = GameObject.FindGameObjectWithTag("Player");
@@ -45,18 +47,22 @@ public class PlayerSwitcher : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SwitchPlayer(0);
+            player.ChangeWeapon("Pistol");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2)&& playerClass.GetLevel() >= 2)
         {
             SwitchPlayer(1);
+            player.ChangeWeapon("DP");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && playerClass.GetLevel() >= 3)
         {
             SwitchPlayer(2);
+            player.ChangeWeapon("AR");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             SwitchPlayer(3);
+            player.ChangeWeapon("Shotgun");
         }
     }
 /*
