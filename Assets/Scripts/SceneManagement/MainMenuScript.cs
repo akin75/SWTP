@@ -5,13 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
-
-    // Update is called once per frame
-    void Update()
+   [SerializeField] private Texture2D cursorSprite;
+   private Vector2 cursorHotspot;
+    void Start()
     {
-        
+        cursorHotspot = new Vector2(0, 0);
+        Cursor.SetCursor(cursorSprite, cursorHotspot, CursorMode.Auto);
     }
 
     public void StartGame(){

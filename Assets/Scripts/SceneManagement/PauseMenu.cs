@@ -23,11 +23,13 @@ public class PauseMenu : MonoBehaviour
     public TMP_Text coin;
     //public TMP_Text kills;
     //public TMP_Text ammo;
-
+    [SerializeField] private Texture2D cursorSprite;
+   private Vector2 cursorHotspot;
 
     private void Start()
     {
-        //pauseMenuUI = GameObject.Find("PauseScreen");
+        cursorHotspot = new Vector2(0, 0);
+        Cursor.SetCursor(cursorSprite, cursorHotspot, CursorMode.Auto);
         hud.SetActive(true);
     }
 
