@@ -17,7 +17,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Street.unity
     guid: 6a8526c2884668f49b76ab5e3766c1bf
-  - enabled: 0
-    path: Assets/Scenes/PixelDungeon.unity
-    guid: 97498f81fb273934886d228c2abf9e92
   m_configObjects: {}
