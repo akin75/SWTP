@@ -10,9 +10,11 @@ public class ZombieTests
         EnemyHealth enemyHealth = new EnemyHealth();
         int initialHealth = enemyHealth.getCurrentHealth();
         int damage = 10;
+        bool isCrit = false;
+
 
         // Act
-        enemyHealth.TakeDamage(damage);
+        enemyHealth.TakeDamage(damage, isCrit);
 
         // Assert
         Assert.AreEqual(initialHealth - damage, enemyHealth.getCurrentHealth());
@@ -26,9 +28,10 @@ public class ZombieTests
         EnemyHealth enemyHealth = new EnemyHealth();
         int initialHealth = enemyHealth.getCurrentHealth();
         int damage = initialHealth;
+        bool isCrit = false;
 
         // Act
-        enemyHealth.TakeDamage(damage);
+        enemyHealth.TakeDamage(damage, isCrit);
 
         // Assert
         Assert.AreEqual(0, enemyHealth.getCurrentHealth());
@@ -44,9 +47,10 @@ public class ZombieTests
         enemyHealth.setKillCounter(killCounter);
         int initialKillCount = killCounter.GetKills();
         int damage = enemyHealth.getCurrentHealth();
+        bool isCrit = false;
 
         // Act
-        enemyHealth.TakeDamage(damage);
+        enemyHealth.TakeDamage(damage, isCrit);
 
         // Assert
         Assert.AreEqual(initialKillCount + 1, killCounter.GetKills());

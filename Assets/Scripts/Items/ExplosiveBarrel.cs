@@ -14,6 +14,8 @@ public class ExplosiveBarrel : MonoBehaviour
     private bool hasExploded = false;
     public int damage = 100;
     public GameObject explosionSfx;
+    private bool isCrit = false;
+
 
     void Start()
     {
@@ -46,7 +48,7 @@ public class ExplosiveBarrel : MonoBehaviour
         {
             if (enemy != null)
             {
-                enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+                enemy.GetComponent<EnemyHealth>().TakeDamage(damage, isCrit);
             }
         }
 

@@ -49,16 +49,26 @@ public class WeaponSG : MonoBehaviour
             return;
         }
 
+        float totalDeviation = maxDeviation * 2; // Gesamtwinkel, den du abdecken möchtest
+
+        // Berechne den Winkel zwischen den Schüssen
+        float angleBetweenShots = totalDeviation / (firePointCount - 1);
+
         for (int i = 0; i < firePointCount; i++)
         {
-            float deviationAngle = Random.Range(-maxDeviation, maxDeviation);
-            Vector2 bulletDirection = Quaternion.Euler(0f, 0f, deviationAngle) * firePoint.up;
+            // Berechne den Winkel des aktuellen Schusses
+            float currentAngle = -maxDeviation + i * angleBetweenShots;
+
+            // Drehe die Schussrichtung um den aktuellen Winkel
+            Vector2 bulletDirection = Quaternion.Euler(0f, 0f, currentAngle) * firePoint.up;
+
             float randomOffset = Random.Range(-0.2f, 0.2f);
             Vector3 spawnPosition = new Vector3(firePoint.position.x + randomOffset, firePoint.position.y, firePoint.position.z);
             GameObject newBullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
             newBullet.transform.right = bulletDirection;
             newBullet.GetComponent<Rigidbody2D>().AddForce(bulletDirection * fireForce, ForceMode2D.Impulse);
         }
+        shotSfx.Play();
         shotSfx.Play();
 
         if (muzzleParticles != null)

@@ -11,6 +11,7 @@ public class MineBehaviour : MonoBehaviour
     public ParticleSystem smokeParticles;
     public int damage = 50;
     public GameObject explosionSfx;
+    private bool isCrit = false;
 
 
     private void Start()
@@ -40,7 +41,7 @@ public class MineBehaviour : MonoBehaviour
         {
             if (enemy != null)
             {
-                enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+                enemy.GetComponent<EnemyHealth>().TakeDamage(damage, isCrit);
             }
         }
 
