@@ -2,4 +2,4 @@
 Softwaretechnik-Projekt
 
 # AUTOREN
-Akin, Ufuk, Andre, Martin
+Akin, Ufuk, Andre, Martin, Ratchanon
