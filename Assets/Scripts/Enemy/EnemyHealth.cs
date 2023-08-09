@@ -28,6 +28,7 @@ public class EnemyHealth : MonoBehaviour
     private CursorFeedback cursorFeedback;
     public ParticleSystem bloodPuddleHit;
     public GameObject deathSfx;
+    public GameObject damagePopupPrefab;
     
     private string weaponType = "";
     private SpriteRenderer sprite;
@@ -81,10 +82,23 @@ public class EnemyHealth : MonoBehaviour
         yield return null;
     }
 
+    private void ShowDamagePopup(int damage, Vector3 position, bool isCrit)
+    {
+        Vector3 popupPosition = position + Vector3.left * 2.5f; // Hier kannst du die X- und Y-Werte anpassen
 
-    public void TakeDamage(int damage)
+        GameObject damagePopupInstance = Instantiate(damagePopupPrefab, popupPosition, Quaternion.identity);
+        DamagePopup damagePopup = damagePopupInstance.GetComponent<DamagePopup>();
+        if (damagePopup != null)
+        {
+            damagePopup.Setup(damage, isCrit);
+        }
+    }
+
+
+    public void TakeDamage(int damage, bool isCrit)
     {
         currentHealth -= damage;
+        ShowDamagePopup(damage, gameObject.transform.position, isCrit);
         healthBar.SetHealth(currentHealth);
         //Debug.Log(gameObject);
         StartCoroutine(HitEffect());

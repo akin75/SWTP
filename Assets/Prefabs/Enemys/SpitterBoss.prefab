@@ -367,14 +367,17 @@ MonoBehaviour:
   damage: 5
   bloodSplatter: {fileID: 1371572389595951175, guid: 532043777f3df2a4987e4632115b0273, type: 3}
   deathParticles: {fileID: 1371572389595951175, guid: 8b7d87747b8567049aa30f7042c4d1d3, type: 3}
+  crawlerPrefab: {fileID: 0}
   rb: {fileID: 0}
   deadZombiePrefab: {fileID: 4372698498858929153, guid: 837b317608c0cfb4aa22760ca768afb1, type: 3}
+  transformationChance: 10
   itemDrop: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   dropChance: 25
   healthBar: {fileID: 8610740355228082374}
-  transformToCrawler: {fileID: 0}
+  canTransformToCrawler: 0
   bloodPuddleHit: {fileID: 1950607216614953820, guid: 52ec8f3c7f50e4247944d5d0885612eb, type: 3}
   deathSfx: {fileID: 676000828316244113, guid: d019fa8f6e05cbb45b303c43f87a442c, type: 3}
+  damagePopupPrefab: {fileID: 270520959622381128, guid: 5d6df407987d38449bc4a9ad4c5351f3, type: 3}
   experiencePoint: 0
 --- !u!114 &-5806012942085649495
 MonoBehaviour:

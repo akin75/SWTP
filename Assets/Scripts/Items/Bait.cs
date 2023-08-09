@@ -12,6 +12,7 @@ public class Bait : MonoBehaviour
     public ParticleSystem smokeParticles;
     public GameObject explosionSfx;
     public int damage = 50;
+    private bool isCrit = false;
 
 
     private Transform originalTarget; // Variable zur Speicherung des ursprünglichen Targets
@@ -106,7 +107,7 @@ public class Bait : MonoBehaviour
             {
                 if (enemyController != null && enemy != null)
                 {
-                    enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(damage, isCrit);
                     EnemyController enemyController = enemy.GetComponent<EnemyController>();
                     enemyController.SetTarget(originalTarget);
                 }
