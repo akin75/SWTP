@@ -37,9 +37,11 @@ This project is a top-down 2D shooter where the player must survive waves of var
 4. Run the main game file to start the game.
 
 **Contributing:**
+
 We welcome contributions to enhance the game. If you have ideas or wish to contribute to the development, fork the project, implement your changes, and then submit a pull request.
 
 **Authors**
+
 Akin, Ufuk, Andre, Martin, Ratchanon
 
 # TODOS
