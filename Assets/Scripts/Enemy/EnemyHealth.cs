@@ -16,7 +16,6 @@ public class EnemyHealth : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject deadZombiePrefab;
     public float transformationChance = 10;
-    private AchievementManager achievementManager;
 
     public GameObject itemDrop;
     public int dropChance;
@@ -30,7 +29,6 @@ public class EnemyHealth : MonoBehaviour
     public GameObject deathSfx;
     public GameObject damagePopupPrefab;
     
-    private string weaponType = "";
     private SpriteRenderer sprite;
     private Quaternion deathRotation; // Speichert die Rotation des Objekts vor der Zerstörung
     private Vector3 deathScale; // Speichert die Skalierung des Objekts vor der Zerstörung
@@ -42,8 +40,6 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        achievementManager = FindObjectOfType<AchievementManager>();
-        weaponType = "Pistol";
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         sprite = GetComponent<SpriteRenderer>();
@@ -55,7 +51,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void Update()
     {
-        weaponType = player.GetCurrentWeapon();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -108,7 +103,6 @@ public class EnemyHealth : MonoBehaviour
         {
             if (deadZombiePrefab != null)
             {
-                achievementManager.ZombieKilled(weaponType);
                 cursorFeedback.StartCursorFeedback(); // Starte die Coroutine für die Todesszene
                 GameObject deathSfx = Instantiate(this.deathSfx, transform.position, Quaternion.identity);
                 deathRotation = transform.rotation;

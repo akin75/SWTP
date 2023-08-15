@@ -56,6 +56,11 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        Debug.Log("Current Weapon: " + currentWeapon);
+    }
+
     public void TakeDamage(int damage) 
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
@@ -86,6 +91,7 @@ public class Player : MonoBehaviour
     public void ChangeWeapon(string newWeapon)
     {
         currentWeapon = newWeapon;
+        Debug.Log("Weapon changed to: " + currentWeapon);
     }
     
     public string GetCurrentWeapon()

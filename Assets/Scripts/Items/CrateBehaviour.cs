@@ -11,11 +11,18 @@ public class CrateBehaviour : MonoBehaviour
     public ParticleSystem crateDestroy;
     public GameObject coin;
     public GameObject heart;
+    public GameObject specialA;
+    public GameObject specialB;
+
+    private int specialACounter = 0;
+    private int specialBCounter = 0;
+    private bool specialAEnabled = true;
+    private bool specialBEnabled = true;
 
     private void Start()
     {
         playerDamage = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Weapon>().damage;
-       // sprite = gameObject.GetComponent<SpriteRenderer>();
+        // sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,11 +37,29 @@ public class CrateBehaviour : MonoBehaviour
             if (health <= 0)
             {
                 float randomValue = Random.value;
-                if (randomValue <= 0.5f)
+                if (randomValue <= 0.1f && specialAEnabled)
+                {
+                    Instantiate(specialA, transform.position, Quaternion.identity);
+                    specialACounter++;
+                    if (specialACounter >= 4)
+                    {
+                        specialAEnabled = false;
+                    }
+                }
+                else if (randomValue <= 0.2f && specialBEnabled)
+                {
+                    Instantiate(specialB, transform.position, Quaternion.identity);
+                    specialBCounter++;
+                    if (specialBCounter >= 4)
+                    {
+                        specialBEnabled = false;
+                    }
+                }
+                else if (randomValue <= 0.5f)
                 {
                     Instantiate(coin, transform.position, Quaternion.identity);
                 }
-                else
+                else if (randomValue <= 0.8f)
                 {
                     Instantiate(heart, transform.position, Quaternion.identity);
                 }
@@ -43,6 +68,7 @@ public class CrateBehaviour : MonoBehaviour
             }
         }
     }
+
     private IEnumerator HitEffect()
     {
         var color = sprite.color;

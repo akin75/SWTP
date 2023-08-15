@@ -23,7 +23,7 @@ public class PlayerSwitcher : MonoBehaviour
 
     private void Awake()
     {
-        player = FindObjectOfType<Player>().GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         // Den ersten Player auswählen
         currentPlayer = GameObject.FindGameObjectWithTag("Player");
@@ -47,54 +47,21 @@ public class PlayerSwitcher : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SwitchPlayer(0);
-            player.ChangeWeapon("Pistol");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2)&& playerClass.GetLevel() >= 2)
         {
             SwitchPlayer(1);
-            player.ChangeWeapon("DP");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && playerClass.GetLevel() >= 3)
         {
             SwitchPlayer(2);
-            player.ChangeWeapon("AR");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             SwitchPlayer(3);
-            player.ChangeWeapon("Shotgun");
         }
     }
-/*
-    private void SwitchPlayer(int index)
-    {
-        // Überprüfen, ob der Index gültig ist
-        GameObject newPlayer;
-        if (index >= 0 && index < playerPrefabs.Length)
-        {
-            // Den aktuellen Player zerstören, falls vorhanden
-            if (currentPlayer != null)
-            {
-                playerPosition = currentPlayer.transform.position;
-                playerRotation = currentPlayer.transform.rotation;
-            }
-            
-            // Das neue Player-Prefab instanziieren und als aktuellen Player setzen
-            currentPlayer.SetActive(false);
-            int health = currentPlayer.GetComponent<Player>().currentHealth;
-            currentPlayer = transform.GetComponentInChildren<Transform>().Find(playerPrefabs[index].name).gameObject;
-            currentPlayer.SetActive(true);
-            currentPlayer.transform.position = playerPosition;
-            currentPlayer.transform.rotation = playerRotation;
-            currentPlayer.GetComponent<Player>().currentHealth = health;
-            currentPlayer.GetComponent<Player>().healthBar.SetHealth(health);
 
-            //playerClass.SetPosition(currentPlayer.transform.position);
-            //camController.SetTarget(currentPlayer.transform);
-            //enemController.SetTarget(currentPlayer.transform);
-        }
-    }
-    */
     private void SwitchPlayer(int index)
     {
         // Überprüfen, ob der Index gültig ist
@@ -119,6 +86,9 @@ public class PlayerSwitcher : MonoBehaviour
             // Den neuen Player als den aktuellen Player setzen
             currentPlayer = newPlayer;
             UpdatePlayer();
+            var weaponName = newPlayer.GetComponentInChildren<Weapon>().gameObject.name.ToString();
+            Debug.Log("Weaponname: " + weaponName);
+            currentPlayer.GetComponent<Player>().ChangeWeapon(weaponName);
             // Kameracontroller auf den neuen Player ausrichten
             camController.SetTarget(currentPlayer.transform);
         }
@@ -131,7 +101,6 @@ public class PlayerSwitcher : MonoBehaviour
         currentPlayer.GetComponent<PlayerController>().moveSpeed = playerClass.GetMoveSpeed();
         player.SetMaxHealth(playerClass.GetMaxHealth());
         player.SetCurrentHealth(playerClass.GetCurrentHealth());
-        
     }
 
     public GameObject GetCurrentPlayer()

@@ -15,10 +15,12 @@ public class ExplosiveBarrel : MonoBehaviour
     public int damage = 100;
     public GameObject explosionSfx;
     private bool isCrit = false;
+    private AchievementManager achievementManager;
 
 
     void Start()
     {
+        achievementManager = FindObjectOfType<AchievementManager>();
         playerDamage = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Weapon>().damage;
     }
 
@@ -48,6 +50,10 @@ public class ExplosiveBarrel : MonoBehaviour
         {
             if (enemy != null)
             {
+                if (enemy.GetComponent<EnemyHealth>().getCurrentHealth() - damage <= 0)
+                {
+                    achievementManager.ZombieKilledByExplosion();
+                }
                 enemy.GetComponent<EnemyHealth>().TakeDamage(damage, isCrit);
             }
         }
