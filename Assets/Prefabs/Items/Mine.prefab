@@ -129,7 +129,7 @@ Transform:
   m_GameObject: {fileID: 319953661781575603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7325179847157230733}
@@ -4980,6 +4980,7 @@ MonoBehaviour:
   smokeParticles: {fileID: 306570466270053118, guid: 2ca1cd6169633254ca866b3bd3468986, type: 3}
   damage: 80
   explosionSfx: {fileID: 4215268554375360898, guid: 333631098f4c27a40b26df7432e20aba, type: 3}
+  _isLeveledUp: 0
 --- !u!50 &1649887273387563056
 Rigidbody2D:
   serializedVersion: 4

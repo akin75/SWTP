@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -30,6 +31,9 @@ public class Weapon : MonoBehaviour
     public AudioSource reloadSfx;
     public AudioSource shotSfx;
     public float delay;
+    public bool doubleFireEnabled = false;
+    public bool tripleFireEnabled = false;
+    public bool perfectAccuracy = false;
 
     private void Start()
     {
@@ -99,6 +103,11 @@ public class Weapon : MonoBehaviour
         {
             state = WeaponState.Reloading;
             StartCoroutine(Reload());
+        }
+
+        if (perfectAccuracy)
+        {
+            maxDeviation = 0;
         }
     }
 
@@ -172,13 +181,23 @@ public class Weapon : MonoBehaviour
 
         StartCoroutine(DelayShooting());
 
+        if (tripleFireEnabled)
+        {
+            doubleFireEnabled = false; // Deaktiviere doubleFire, wenn tripleFire aktiv ist
+            StartCoroutine(TripleFire());
+        }
+        else if (doubleFireEnabled)
+        {
+            StartCoroutine(DoubleFire());
+        }
+
         if (cameraController != null)
         {
             Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
             Vector2 shotDirection = (mousePosition - (Vector2)firePoint.position).normalized;
             cameraController.StartShaking(shotDirection);
         }
-        
+
         if (ammo == 0)
         {
             state = WeaponState.Reloading;
@@ -186,6 +205,38 @@ public class Weapon : MonoBehaviour
         }
     }
 
+
+    IEnumerator DoubleFire()
+    {
+        if (ammo <= 0)
+        {
+            state = WeaponState.Reloading;
+            StartCoroutine(Reload());
+            yield return null;
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.075f);
+            StartCoroutine(DelayShooting());
+        }
+    }
+
+    IEnumerator TripleFire()
+    {
+        if (ammo <= 0)
+        {
+            state = WeaponState.Reloading;
+            StartCoroutine(Reload());
+            yield return null;
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.075f);
+            StartCoroutine(DelayShooting());
+            yield return new WaitForSeconds(0.075f);
+            StartCoroutine(DelayShooting());
+        }
+    }
     IEnumerator Reload()
     {
         //Debug.Log("Reloading!");

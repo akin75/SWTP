@@ -227,3 +227,4 @@ MonoBehaviour:
   smokeParticles: {fileID: 306570466270053118, guid: 2739e7addb7ef5c4398641e5413916f0, type: 3}
   explosionSfx: {fileID: 4215268554375360898, guid: 333631098f4c27a40b26df7432e20aba, type: 3}
   damage: 50
+  _isLeveledUp: 0

@@ -13,12 +13,26 @@ public class Bait : MonoBehaviour
     public GameObject explosionSfx;
     public int damage = 50;
     private bool isCrit = false;
+    private AchievementManager achievementManager;
+    public bool _isLeveledUp = false;
+
 
 
     private Transform originalTarget; // Variable zur Speicherung des ursprünglichen Targets
 
     private void Start()
     {
+        if (_isLeveledUp)
+        {
+            damage = Mathf.RoundToInt(damage * 1.5f);
+            // Vergrößern des GameObjects
+            Vector3 newScale = transform.localScale * 1.5f;
+            transform.localScale = newScale;
+            // Vergrößern der Partikel
+            explosionParticles.transform.localScale *= 1.5f;
+            smokeParticles.transform.localScale *= 1.5f;
+        }
+        achievementManager = FindObjectOfType<AchievementManager>();
         StartCoroutine(ExplodeAfterDelay(baitTime));
     }
 
@@ -107,6 +121,10 @@ public class Bait : MonoBehaviour
             {
                 if (enemyController != null && enemy != null)
                 {
+                    if (enemy.GetComponent<EnemyHealth>().getCurrentHealth() - damage <= 0)
+                    {
+                        achievementManager.ZombieKilledByExplosion();
+                    }
                     enemy.GetComponent<EnemyHealth>().TakeDamage(damage, isCrit);
                     EnemyController enemyController = enemy.GetComponent<EnemyController>();
                     enemyController.SetTarget(originalTarget);

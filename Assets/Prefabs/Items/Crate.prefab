@@ -215,3 +215,5 @@ MonoBehaviour:
   crateDestroy: {fileID: 4287158554583824832, guid: 08731f0fa79f66b40b4226d645ebfbe8, type: 3}
   coin: {fileID: 4880716572121059630, guid: 25ce1d6f0424df245802941cbf721a42, type: 3}
   heart: {fileID: 4826616085402592726, guid: a3f8df026b81f3049a8b5d1fdff4fbbb, type: 3}
+  specialA: {fileID: 4880716572121059630, guid: 1a4cb816521b4db4c8e7af3c8700364a, type: 3}
+  specialB: {fileID: 4880716572121059630, guid: 58564fbcc7013ef4db14f9e489fc5eb0, type: 3}

@@ -12,11 +12,30 @@ public class MineBehaviour : MonoBehaviour
     public int damage = 50;
     public GameObject explosionSfx;
     private bool isCrit = false;
+    private AchievementManager achievementManager;
+    public bool _isLeveledUp = false;
+
 
 
     private void Start()
     {
+        explosionParticles.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        smokeParticles.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+        if (_isLeveledUp)
+        {
+            damage = Mathf.RoundToInt(damage * 1.5f);
+
+            // Vergrößern des GameObjects
+            Vector3 newScale = transform.localScale * 1.5f;
+            transform.localScale = newScale;
+            // Vergrößern der Partikel
+            explosionParticles.transform.localScale *= 1.5f;
+            smokeParticles.transform.localScale *= 1.5f;
+        }
+
+        achievementManager = FindObjectOfType<AchievementManager>();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -41,6 +60,10 @@ public class MineBehaviour : MonoBehaviour
         {
             if (enemy != null)
             {
+                if (enemy.GetComponent<EnemyHealth>().getCurrentHealth() - damage <= 0)
+                {
+                    achievementManager.ZombieKilledByExplosion();
+                }
                 enemy.GetComponent<EnemyHealth>().TakeDamage(damage, isCrit);
             }
         }
