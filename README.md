@@ -2,7 +2,7 @@
 
 **Description:**
 
-Welcome to the ReadMe for the "Zombie Mayhem" university project.
+Welcome to the ReadMe for the "YouAreNotSafe" university project.
 This project is a top-down 2D shooter where the player must survive waves of various zombie variations by defending themselves with different weapons.
 
 **Features:**
