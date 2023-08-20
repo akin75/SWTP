@@ -60,3 +60,12 @@ Akin, Ufuk, Andre, Martin, Ratchanon
 - [ ] Create Releases
 - [ ] Delete Branches
 - [ ] Improve CI
+
+# Future Ideas
+- Minigun and Grenadelauncher
+- Disable and Enable damage pop-up
+- WFC for forest (restyling of map)
+- Fix bridge bug
+- Fire Ammo ?
+- Game Menu and fonts restyling
+- Settings page
