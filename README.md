@@ -12,9 +12,9 @@ This project is a top-down 2D shooter where the player must survive waves of var
 
 - **Various Zombie Variations:** There are different types of zombies with varying abilities and behaviors. Some might be faster, while others could be more resilient.
 
-- **Arsenal of Weapons:** The player has access to five different weapons to defend against the zombie hordes. These weapons range from melee to ranged firearms.
+- **Arsenal of Weapons:** The player has access to five different weapons to defend against the zombie hordes.
 
-- **Upgrades:** Upgrades for weapons or field improvements can be collected in the game to give the player an advantage.
+- **Upgrades:** Upgrades for weapons or field improvements can be bought in the game to give the player an advantage.
 
 - **Scoring System:** The game tracks the player's score based on the number of defeated zombies and wave survival.
 
