@@ -60,6 +60,7 @@ Akin, Ufuk, Andre, Martin, Ratchanon
 - [ ] Create Releases
 - [ ] Delete Branches
 - [ ] Improve CI
+- [ ] Freeze Player in pause menu
 
 # Future Ideas
 - Minigun and Grenadelauncher
