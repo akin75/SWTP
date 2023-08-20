@@ -23,10 +23,13 @@ This project is a top-down 2D shooter where the player must survive waves of var
 
 - **Attack:** Mouse click to shoot.
 
-- **Action:** press E to interact with the shop and Right Click to place a mine.
+- **Action:** Press F to interact with the shop, Q to place a mine, E to place a bait and R to reload the weapon.
 
-- **Weapon Switching:** Number keys 1 to 5 to switch between available weapons.
+- **Weapon Switching:** Number keys 1 to 4 to switch between available weapons.
 
+- **Pause:** Press esc to pause the game.
+
+  
 **Installation and Execution:**
 1. Download the game project from GitHub or copy the project folder to your computer.
 
@@ -40,14 +43,14 @@ This project is a top-down 2D shooter where the player must survive waves of var
 
 We welcome contributions to enhance the game. If you have ideas or wish to contribute to the development, fork the project, implement your changes, and then submit a pull request.
 
-**Authors**
+**Authors:**
 
 Akin, Ufuk, Andre, Martin, Ratchanon
 
 # TODOS
 - [ ] Remove of commented and stapled Code
 - [ ] Remove of debug.log functions
-- [ ] Add .idea in gitignore
+- [x] Add .idea in gitignore
 - [ ] Use SerializedField instead of public
 - [ ] Code Documentation
 - [ ] Continue Wiki Documentation
