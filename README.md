@@ -4,7 +4,7 @@
 
 Welcome to the ReadMe for the "YouAreNotSafe" university project.
 This project is a top-down 2D shooter where the player must survive waves of various zombie variations by defending themselves with different weapons.
-In [Wiki](https://github.com/akin75/SWTP/wiki)
+In our [Wiki](https://github.com/akin75/SWTP/wiki) you can take a look at the software development process with the sprints and our decisions and plannings with images.
 
 **Features:**
 - **Top-Down Perspective:** The game is played from a top-down view, giving the player an overview of the game field.
