@@ -4,6 +4,7 @@
 
 Welcome to the ReadMe for the "YouAreNotSafe" university project.
 This project is a top-down 2D shooter where the player must survive waves of various zombie variations by defending themselves with different weapons.
+
 In our [Wiki](https://github.com/akin75/SWTP/wiki) you can take a look at the software development process with the sprints and our decisions and plannings with images.
 
 **Features:**
@@ -58,8 +59,8 @@ Akin, Ufuk, Andre, Martin, Ratchanon
 - [ ] Use Graphics und Diagrams for Wiki
 - [ ] Create Wiki for decisions and ideas (talk about them)
 - [ ] Link the Wiki and Documentation in the Readme
-- [ ] Create Releases
-- [ ] Delete Branches
+- [x] Create Releases
+- [x] Delete Branches
 - [ ] Improve CI
 - [ ] Freeze Player in pause menu
 
