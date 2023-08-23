@@ -12,12 +12,6 @@ public class CrateBehaviour : MonoBehaviour
     public GameObject coin;
     public GameObject heart;
     public GameObject specialA;
-    public GameObject specialB;
-
-    private int specialACounter = 0;
-    private int specialBCounter = 0;
-    private bool specialAEnabled = true;
-    private bool specialBEnabled = true;
 
     private void Start()
     {
@@ -37,29 +31,15 @@ public class CrateBehaviour : MonoBehaviour
             if (health <= 0)
             {
                 float randomValue = Random.value;
-                if (randomValue <= 0.1f && specialAEnabled)
+                if (randomValue <= 0.1f)
                 {
                     Instantiate(specialA, transform.position, Quaternion.identity);
-                    specialACounter++;
-                    if (specialACounter >= 4)
-                    {
-                        specialAEnabled = false;
-                    }
                 }
-                else if (randomValue <= 0.2f && specialBEnabled)
-                {
-                    Instantiate(specialB, transform.position, Quaternion.identity);
-                    specialBCounter++;
-                    if (specialBCounter >= 4)
-                    {
-                        specialBEnabled = false;
-                    }
-                }
-                else if (randomValue <= 0.5f)
+                else if (randomValue <= 0.4f)
                 {
                     Instantiate(coin, transform.position, Quaternion.identity);
                 }
-                else if (randomValue <= 0.8f)
+                else if (randomValue <= 0.7f)
                 {
                     Instantiate(heart, transform.position, Quaternion.identity);
                 }
