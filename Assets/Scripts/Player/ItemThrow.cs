@@ -33,7 +33,10 @@ public class ItemThrow : MonoBehaviour
             }
             else
             {
-                failSfx.Play();
+                if (failSfx != null)
+                {
+                    failSfx.Play();
+                }
             }
         }
 
@@ -45,7 +48,7 @@ public class ItemThrow : MonoBehaviour
                 throwSfx.Play();
                 baitCount--;
             }
-            else
+            if (failSfx != null)
             {
                 failSfx.Play();
             }

@@ -27,6 +27,7 @@ public class Weapon : MonoBehaviour
     private int level = 0;
     private WeaponSG newInstance;
     private WeaponUpgrade weaponUpgrade;
+    private ObjectUpgrade _objectUpgrade;
     public AudioSource draw;
     public AudioSource reloadSfx;
     public AudioSource shotSfx;
@@ -41,6 +42,7 @@ public class Weapon : MonoBehaviour
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraController = Camera.main.GetComponent<CameraController>();
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
+        _objectUpgrade = GameObject.Find("ObjectShop").GetComponent<ObjectUpgrade>();
         delay = timeBetweenShots / 2;
         Transform firePointChild = transform.Find("FirePoint");
         level = GetLevel();
@@ -86,7 +88,7 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
-        if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots && !weaponUpgrade.shopState)
+        if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots && !weaponUpgrade.shopState && !_objectUpgrade.shopState)
         {
             muzzleParticles.gameObject.SetActive(true);
             if (newInstance != null && transform.gameObject.name == "Shotgun")
