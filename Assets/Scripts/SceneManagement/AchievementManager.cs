@@ -14,6 +14,8 @@ public class AchievementManager : MonoBehaviour
     private int _zombiesKilledWithExplosions = 0;
     private int _pickedUpSpecialA = 0;    
     private int _pickedUpSpecialB = 0;
+    private bool _mineLeveledUp = false;
+    private bool _baitLeveledUp = false;
 
     private int _missedShots;
     private int _hitShots;
@@ -39,7 +41,11 @@ public class AchievementManager : MonoBehaviour
         _weaponType = _player.GetCurrentWeapon();
         _hitPercentage = CalculateHitPercentage();
         Debug.Log("accuracy percentage: " + (_hitPercentage * 100).ToString("0.00") + "%");
-
+        if (_hitPercentage >= 90)
+        {
+            _player.GetComponentInChildren<Weapon>().EnablePerfectAccuracy();
+            Debug.Log("Achievement Done: Perfect Accuracy Enabled");
+        }
         if (_zombieKillTimer > 0)
         {
             _zombieKillTimer -= Time.deltaTime;
@@ -48,6 +54,8 @@ public class AchievementManager : MonoBehaviour
                 // Zeit abgelaufen, setze den Timer zurück
                 _zombieKillTimer = 0;
                 _requiredZombiesKilledInTime = 10; // Setze die Anzahl der benötigten Zombies für das Achievement zurück
+                _baitLeveledUp = true;
+                Debug.Log("Achievement Done: Improved Bait Enabled");
             }
         }
     }
@@ -97,6 +105,7 @@ public class AchievementManager : MonoBehaviour
         
             // Markiere das Achievement als abgeschlossen, damit es nicht erneut freigeschaltet werden kann
             _zombieKillTimeAchievementCompleted = true;
+            _mineLeveledUp = true;
         }
     }
 
@@ -128,7 +137,54 @@ public class AchievementManager : MonoBehaviour
         {
             // Hier kannst du den Spieler belohnen oder eine Benachrichtigung anzeigen, dass er das Achievement erhalten hat
             Debug.Log("Achievement unlocked: " + achievementName);
+        }        
+        if (achievementName == "Pistol_Killer")
+        {
+            // Dual Pistol freischalten
+            Debug.Log("Achievement Done: Dual Pistol Enabled");
+        } 
+        else if (achievementName == "Pistol_Killer_x2")
+        {
+            _player.GetComponentInChildren<Weapon>().EnableDoubleFire();
+            Debug.Log("Achievement Done: Pistol Double Fire Enabled");
+        } 
+        else if (achievementName == "Pistol_Killer_x3")
+        {
+            _player.GetComponentInChildren<Weapon>().EnableTripleFire();
+            Debug.Log("Achievement Done: Pistol Tripe Fire Enabled");
         }
+        else if (achievementName == "AR_Master")
+        {
+            _player.GetComponentInChildren<Weapon>().EnableInfiniteAmmo();
+            Debug.Log("Achievement Done: AR Infinite Ammo Enabled");
+        }
+        else if (achievementName == "Shotgun_Slayer")
+        {
+            _player.GetComponentInChildren<WeaponSG>().SetFirePointCount(8);
+            Debug.Log("Achievement Done: SG Fouble Fire Point Enabled");
+        }
+        else if (achievementName == "DualPistol_Destroyer")
+        {
+            foreach (Weapon weaponComponent in _player.GetComponentsInChildren<Weapon>())
+            {
+                weaponComponent.EnableDoubleFire();
+            }
+            Debug.Log("Achievement Done: DP Double Fire Enabled");
+        }
+        else if (achievementName == "Explosion_Expert")
+        {
+            _mineLeveledUp = true;
+            Debug.Log("Achievement Done: Improved Mine Enabled");
+        }
+    }
+
+    public bool GetMineLevelUp()
+    {
+        return _mineLeveledUp;
+    }
+    public bool GetBaitLevelUp()
+    {
+        return _baitLeveledUp;
     }
 
     public void shotMissed()

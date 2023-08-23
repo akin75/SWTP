@@ -21,7 +21,7 @@ public class WeaponSG : MonoBehaviour
     private CameraController cameraController;
     private Recoil recoil;
     public ParticleSystem muzzleParticles;
-    public int firePointCount = 5;
+    public int firePointCount = 4;
     private int level = 0;
     public AudioSource reloadSfx;
     public AudioSource shotSfx;
@@ -108,6 +108,10 @@ public class WeaponSG : MonoBehaviour
         }
     }
 
+    public void SetFirePointCount(int newCount)
+    {
+        firePointCount = newCount;
+    }
     IEnumerator Reload()
     {
         Debug.Log("Reloading!");
