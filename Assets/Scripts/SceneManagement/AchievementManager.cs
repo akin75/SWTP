@@ -19,8 +19,15 @@ public class AchievementManager : MonoBehaviour
     private int _hitShots;
     private float _hitPercentage;
     private string _weaponType = "";
+    
+    private float _zombieKillTimer = 0f;
+    public int _requiredZombiesKilledInTime = 10;
+    public float requiredZombieKillTime = 10f;
+    private bool _zombieKillTimeAchievementCompleted = false;
 
     public int requiredPistolKills = 10;
+    public int requiredPistolKills2 = 20;
+    public int requiredPistolKills3 = 30;
     public int requiredSgKills = 10;
     public int requiredArKills = 10;
     public int requiredDpKills = 10;
@@ -32,6 +39,17 @@ public class AchievementManager : MonoBehaviour
         _weaponType = _player.GetCurrentWeapon();
         _hitPercentage = CalculateHitPercentage();
         Debug.Log("accuracy percentage: " + (_hitPercentage * 100).ToString("0.00") + "%");
+
+        if (_zombieKillTimer > 0)
+        {
+            _zombieKillTimer -= Time.deltaTime;
+            if (_zombieKillTimer <= 0)
+            {
+                // Zeit abgelaufen, setze den Timer zurück
+                _zombieKillTimer = 0;
+                _requiredZombiesKilledInTime = 10; // Setze die Anzahl der benötigten Zombies für das Achievement zurück
+            }
+        }
     }
 
     public void ZombieKilled()
@@ -40,24 +58,46 @@ public class AchievementManager : MonoBehaviour
         if (_weaponType == "Pistol")
         {
             _zombiesKilledWithPistol++;
-            CheckAchievement("Pistol_Killer", _zombiesKilledWithPistol, requiredPistolKills); // Name des Achievements, Fortschritt, benötigte Anzahl
+            CheckAchievement("Pistol_Killer", _zombiesKilledWithPistol, requiredPistolKills);
+            CheckAchievement("Pistol_Killer_x2", _zombiesKilledWithPistol, requiredPistolKills2);
+            CheckAchievement("Pistol_Killer_x3", _zombiesKilledWithPistol, requiredPistolKills3);
         }
         else if (_weaponType == "Shotgun")
         {
             _zombiesKilledWithSg++;
-            CheckAchievement("Shotgun_Slayer", _zombiesKilledWithSg, requiredSgKills); // Name des Achievements, Fortschritt, benötigte Anzahl
+            CheckAchievement("Shotgun_Slayer", _zombiesKilledWithSg, requiredSgKills);
         }
         else if (_weaponType == "AssaultRifle")
         {
             _zombiesKilledWithAr++;
-            CheckAchievement("AR_Master", _zombiesKilledWithAr, requiredArKills); // Name des Achievements, Fortschritt, benötigte Anzahl
+            CheckAchievement("AR_Master", _zombiesKilledWithAr, requiredArKills);
         }
         else if (_weaponType == "PistolR")
         {
             _zombiesKilledWithDp++;
-            CheckAchievement("DualPistol_Destroyer", _zombiesKilledWithDp, requiredDpKills); // Name des Achievements, Fortschritt, benötigte Anzahl
+            CheckAchievement("DualPistol_Destroyer", _zombiesKilledWithDp, requiredDpKills);
         }
+        
+        // Aktualisiere den Timer und die Anzahl der benötigten Zombies
+        _zombieKillTimer = requiredZombieKillTime;
+        _requiredZombiesKilledInTime--;
+
+        // Überprüfe, ob das Achievement erfüllt ist
+        CheckZombieKillTimeAchievement();
+        
         Debug.Log("Achievement++: " + _weaponType);
+    }
+    
+    private void CheckZombieKillTimeAchievement()
+    {
+        if (!_zombieKillTimeAchievementCompleted && _requiredZombiesKilledInTime <= 0)
+        {
+            // Hier kannst du den Spieler belohnen oder eine Benachrichtigung anzeigen, dass er das Achievement erhalten hat
+            Debug.Log("Achievement unlocked: Zombie_Kill_Time");
+        
+            // Markiere das Achievement als abgeschlossen, damit es nicht erneut freigeschaltet werden kann
+            _zombieKillTimeAchievementCompleted = true;
+        }
     }
 
     public void ZombieKilledByExplosion()
