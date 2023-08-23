@@ -22,6 +22,11 @@ public class Bait : MonoBehaviour
 
     private void Start()
     {
+        achievementManager = FindObjectOfType<AchievementManager>();
+        if (achievementManager.GetBaitLevelUp())
+        {
+            _isLeveledUp = true;
+        }
         if (_isLeveledUp)
         {
             damage = Mathf.RoundToInt(damage * 1.5f);
@@ -32,7 +37,6 @@ public class Bait : MonoBehaviour
             explosionParticles.transform.localScale *= 1.5f;
             smokeParticles.transform.localScale *= 1.5f;
         }
-        achievementManager = FindObjectOfType<AchievementManager>();
         StartCoroutine(ExplodeAfterDelay(baitTime));
     }
 

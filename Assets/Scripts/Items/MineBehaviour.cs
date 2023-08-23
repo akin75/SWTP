@@ -19,6 +19,11 @@ public class MineBehaviour : MonoBehaviour
 
     private void Start()
     {
+        achievementManager = FindObjectOfType<AchievementManager>();
+        if (achievementManager.GetMineLevelUp())
+        {
+            _isLeveledUp = true;
+        }
         explosionParticles.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         smokeParticles.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
         if (_isLeveledUp)
@@ -32,8 +37,6 @@ public class MineBehaviour : MonoBehaviour
             explosionParticles.transform.localScale *= 1.5f;
             smokeParticles.transform.localScale *= 1.5f;
         }
-
-        achievementManager = FindObjectOfType<AchievementManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
