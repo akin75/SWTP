@@ -139,7 +139,7 @@ public class WeaponUpgrade : MonoBehaviour
     {
         if (inRadius)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 if (!shopUI.activeSelf)
                 {
@@ -189,6 +189,7 @@ public class Upgrades
     [HideInInspector] public GameObject itemRef;
     public GameObject weapon;
     public int levelToBuy;
+    public int quantity;
     public string description;
     
 }
