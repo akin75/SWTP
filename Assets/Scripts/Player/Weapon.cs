@@ -34,6 +34,7 @@ public class Weapon : MonoBehaviour
     public bool doubleFireEnabled = false;
     public bool tripleFireEnabled = false;
     public bool perfectAccuracy = false;
+    public bool infiniteAmmo = false;
 
     private void Start()
     {
@@ -198,7 +199,7 @@ public class Weapon : MonoBehaviour
             cameraController.StartShaking(shotDirection);
         }
 
-        if (ammo == 0)
+        if (ammo == 0 && !infiniteAmmo)
         {
             state = WeaponState.Reloading;
             StartCoroutine(Reload());
@@ -220,7 +221,6 @@ public class Weapon : MonoBehaviour
             StartCoroutine(DelayShooting());
         }
     }
-
     IEnumerator TripleFire()
     {
         if (ammo <= 0)
@@ -236,6 +236,26 @@ public class Weapon : MonoBehaviour
             yield return new WaitForSeconds(0.075f);
             StartCoroutine(DelayShooting());
         }
+    }
+
+    public void EnableDoubleFire()
+    {
+        doubleFireEnabled = true;
+    }
+
+    public void EnableTripleFire()
+    {
+        tripleFireEnabled = true;
+    }
+
+    public void EnablePerfectAccuracy()
+    {
+        perfectAccuracy = true;
+    }
+
+    public void EnableInfiniteAmmo()
+    {
+        infiniteAmmo = true;
     }
     IEnumerator Reload()
     {
