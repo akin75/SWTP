@@ -43,9 +43,11 @@ public class PlayerController : MonoBehaviour
     
     void Aim()
     {
+        if(!pm.IsPaused()){
         Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePosition - rb.position).normalized;
         transform.up = direction;
+        }
     }
 
     public void SetMoveSpeed(int value)

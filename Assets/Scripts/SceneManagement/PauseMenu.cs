@@ -110,4 +110,8 @@ public void RestartGame()
         Application.Quit();
         
     }
+
+    public bool IsPaused(){
+        return gameIsPaused;        
+    }
 }
