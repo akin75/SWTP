@@ -10,43 +10,26 @@ public class KillCounter : MonoBehaviour
 
     private int killsCounter = 0;
 
-    [SerializeField]
-    private TextMeshProUGUI killCounterText;
+    [SerializeField] private TMP_Text killCounterText;
 
-    private Transform mainCameraTransform;
-    
-    // Start is called before the first frame update
     void Start()
     {
-        killCounterText = GetComponent<TextMeshProUGUI>();
-        UpdateKillCount();
-
-        // Finde die Hauptkamera und speichere ihre Transform-Komponente
-        mainCameraTransform = Camera.main.transform;
-
-    }
-
-    private void LateUpdate()
-    {
-        // Setze die Position des Textobjekts auf eine feste Position relativ zur Kamera
-        transform.position = mainCameraTransform.position + mainCameraTransform.forward * 2f;
-        transform.LookAt(mainCameraTransform);
+        killCounterText.SetText(""+killsCounter);
     }
 
     public void IncreaseKillCount()
     {
-            //Debug.Log("Increased Kill Count!");
             killsCounter++;
             UpdateKillCount();
     }
 
     public void UpdateKillCount()
     {
-        //Debug.Log("Updated Kill Count!");
-        killCounterText.text = "Kills: " + killsCounter.ToString();
+        killCounterText.SetText(""+killsCounter);
     }
 
-    public int GetKills(){
+    public int GetKills()
+    {
         return killsCounter;
     }
 }

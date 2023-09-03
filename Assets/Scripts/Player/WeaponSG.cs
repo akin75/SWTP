@@ -137,4 +137,9 @@ public class WeaponSG : MonoBehaviour
     {
         this.level += level;
     }
+
+    public int GetAmmo()
+    {
+        return ammo;
+    }
 }
