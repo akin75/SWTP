@@ -40,6 +40,8 @@ public class Highscore : MonoBehaviour
 
     public void SetHighscore()
     {
+        LoadHighscore();
+
         hs[0].kills = GameObject.Find("HUD").GetComponent<KillCounter>().GetKills();
         hs[0].wave = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>().GetWaveCounter();
         
