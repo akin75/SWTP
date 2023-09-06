@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private Quaternion initialRotation; // Speichert die Rotation des ursprünglichen Objekts
     private PlayerSwitcher playerManager;
 
+    private GameObject hud;
 
     private void Awake()
     {
@@ -54,11 +55,13 @@ public class Player : MonoBehaviour
         transform.GetComponent<PlayerController>().moveSpeed = playerClass.GetMoveSpeed();
         //Debug.Log("maxHealth " + maxHealth);
         rb = GetComponent<Rigidbody2D>();
+
+        //hud = GameObject.Find("HUD").GetComponent<KillCounter>()
     }
 
     private void Update()
     {
-        Debug.Log("Current Weapon: " + currentWeapon);
+
     }
 
     public void TakeDamage(int damage) 
@@ -76,7 +79,7 @@ public class Player : MonoBehaviour
             Instantiate(deadPlayer, transform.position, initialRotation); // Verwende die gespeicherte Rotation
             Time.timeScale = 0.0f;
             Destroy(gameObject);
-            
+            GameObject.Find("HUD").GetComponent<Highscore>().SetHighscore();
             pauseMenu.GameOver();
             
         }

@@ -32,7 +32,7 @@ public class WeaponUpgrade : MonoBehaviour
         text = Instantiate(upgradeTextPrefab, GameObject.Find("IconManager").transform);
         text.SetActive(false);
         weapon = player.GetComponentInChildren<Weapon>();
-        Debug.Log($"Test: {weapon.GetLevel()}");
+        //Debug.Log($"Test: {weapon.GetLevel()}");
 
         foreach (Upgrades upgrades in upgradesList)
         {

@@ -245,4 +245,8 @@ public class WaveSpawner : MonoBehaviour
          }
      }
    
+   public int GetWaveCounter()
+   {
+    return waveTracker + 1;
+   }
 }

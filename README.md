@@ -58,17 +58,8 @@ Akin, Ufuk, Andre, Martin, Ratchanon
 - [ ] Continue Wiki Documentation
 - [ ] Use Graphics und Diagrams for Wiki
 - [ ] Create Wiki for decisions and ideas (talk about them)
-- [ ] Link the Wiki and Documentation in the Readme
+- [x] Link the Wiki and Documentation in the Readme
 - [x] Create Releases
 - [x] Delete Branches
 - [ ] Improve CI
-- [ ] Freeze Player in pause menu
-
-# Future Ideas
-- Minigun and Grenadelauncher
-- Disable and Enable damage pop-up
-- WFC for forest (restyling of map)
-- Fix bridge bug
-- Fire Ammo ?
-- Game Menu and fonts restyling
-- Settings page
+- [x] Freeze Player in pause menu
