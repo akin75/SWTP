@@ -54,6 +54,13 @@ public class ItemThrow : MonoBehaviour
             }
         }
         
-    }   
-    
+    }
+    public int GetMineCount()
+    {
+        return mineCount;
+    }
+    public int GetBaitCount()
+    {
+        return baitCount;
+    }  
 }

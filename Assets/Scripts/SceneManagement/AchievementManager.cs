@@ -40,7 +40,7 @@ public class AchievementManager : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _weaponType = _player.GetCurrentWeapon();
         _hitPercentage = CalculateHitPercentage();
-        Debug.Log("accuracy percentage: " + (_hitPercentage * 100).ToString("0.00") + "%");
+        //Debug.Log("accuracy percentage: " + (_hitPercentage * 100).ToString("0.00") + "%");
         if (_hitPercentage >= 90)
         {
             _player.GetComponentInChildren<Weapon>().EnablePerfectAccuracy();

@@ -303,4 +303,8 @@ public class Weapon : MonoBehaviour
     {
         return level;
     }
+    public int GetAmmo()
+    {
+        return ammo;
+    }
 }
