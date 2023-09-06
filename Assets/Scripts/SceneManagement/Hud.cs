@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using TMPro;
+using TMPro;
 
 public class Hud : MonoBehaviour
 {   
     private PlayerSwitcher playerManager;
-    private PlayerClass player;
+    private PlayerClass playerClass;
     
     [System.Serializable]
     public class Weapon
@@ -16,12 +16,16 @@ public class Hud : MonoBehaviour
         public GameObject sg;
 
     }
-    public Weapon weapon;
+    [SerializeField] private Weapon weapon;
+
+    [SerializeField] private TMP_Text mine;
+    [SerializeField] private TMP_Text bait;
+    [SerializeField] private TMP_Text wave;
 
     private void Start()
     {
         playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
-        player = playerManager.playerClass;
+        playerClass = playerManager.playerClass;
     }
 
     // Update is called once per frame
@@ -53,5 +57,9 @@ public class Hud : MonoBehaviour
                 Debug.Log("no valid character found");
                 break;
         }
+
+        mine.SetText(""+playerManager.GetComponent<ItemThrow>().GetMineCount());
+        bait.SetText(""+playerManager.GetComponent<ItemThrow>().GetBaitCount());
+        wave.SetText(""+GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>().GetWaveCounter());
     }
 }
