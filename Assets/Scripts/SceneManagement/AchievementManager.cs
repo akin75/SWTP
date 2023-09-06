@@ -34,6 +34,24 @@ public class AchievementManager : MonoBehaviour
     public int requiredArKills = 10;
     public int requiredDpKills = 10;
     public int requiredExplosionKills = 10;
+    
+    private float[] progPercent = new float[11];
+
+    public float[] ComputeProgPercent(){
+        progPercent[0] = 10 - _requiredZombiesKilledInTime;
+        progPercent[1] = _zombiesKilledWithPistol;
+        progPercent[2] = _zombiesKilledWithPistol;
+        progPercent[3] = _zombiesKilledWithPistol;
+         progPercent[4] = _zombiesKilledWithExplosions;
+        progPercent[5] = _zombiesKilledWithSg;
+        progPercent[6] = _zombiesKilledWithAr;
+        progPercent[7] = _zombiesKilledWithDp;
+        progPercent[8] =_hitPercentage;
+        progPercent[9] = _pickedUpSpecialA;
+        progPercent[10] = _pickedUpSpecialB;      
+
+        return progPercent;
+    }
 
     private void Update()
     {
