@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class MapTest : MonoBehaviour
 {
@@ -12,34 +13,52 @@ public class MapTest : MonoBehaviour
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap output;
     [SerializeField] private Grid grid;
+    [SerializeField] private Vector3Int offset = new Vector3Int(0,0);
+    [SerializeField] private List<GameObject> treeObjects;
+    [SerializeField] private List<int> generateField;
+    [SerializeField] private Tile tileToIgnore;
+    [SerializeField] private List<GameObject> barrelObjects;
     private void Start()
     {
-        TileMapGenerator gen = new TileMapGenerator(mapSize, tileContacts, tilemap);
-        gen.SetTileCells();
-        GameObject tilemapGameObject = new GameObject("Collider");
+        GenerateMultipleMap(generateField);
+    }
 
-        // Get a reference to the Grid component in the scene
-        // Set the Grid as the parent of the Tilemap GameObject
-        tilemapGameObject.transform.SetParent(grid.transform);
-
-        // Add a Tilemap component to the GameObject
-        Tilemap collider = tilemapGameObject.AddComponent<Tilemap>();
-        tilemapGameObject.AddComponent<TilemapRenderer>();
-        tilemapGameObject.AddComponent<TilemapCollider2D>();
-        foreach (var v in gen.tileMapCells)
+    private void GenerateMultipleMap(List<int> genCount)
+    {
+        Vector3Int genOffset = new Vector3Int(0, 0);
+        foreach (var count in genCount)
         {
-            if (v.isCollider)
+            for (int i = 0; i < count; i++)
             {
-                //Debug.Log("Collider");
-                collider.SetTile(v.positionInMap, v.tileCell);
-            }
-            else
-            {
-                output.SetTile(v.positionInMap + new Vector3Int(-6, -9), v.tileCell);
+                TileMapGenerator gen = new TileMapGenerator(mapSize, tileContacts, tilemap);
+                gen.SetTileCells();
+                var rand = new System.Random();
+                foreach (var v in gen.tileMapCells)
+                {
+                    if (v.isCollider)
+                    {
+                        int randomIndex = rand.Next(0, treeObjects.Count);
+                        Instantiate(treeObjects[randomIndex], v.positionInMap + offset + genOffset, Quaternion.identity);
+                    }
+                    /*
+                    else
+                    {
+                        if (tileToIgnore.name == v.tileCell.name) continue;
+                        output.SetTile(v.positionInMap + offset + genOffset, v.tileCell);
+                        
+                    }
+                    */
+                }
+
+                genOffset.x += mapSize.x;
+                
             }
 
+            genOffset.y += mapSize.y;
+            genOffset.x = 0;
         }
     }
+    
     private void Rotate(int[] array, int rotationCount)
     {
         int length = array.Length;
