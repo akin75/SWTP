@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IWeapon
 {
     public enum WeaponSide { WeaponL, WeaponR }
     public WeaponSide weaponSide;
@@ -70,6 +70,9 @@ public class Weapon : MonoBehaviour
         recoil = GetComponentInParent<Recoil>();
         maxAmmo = ammo;
     }
+
+
+    
 
     private IEnumerator DrawWeaponSound(float delay)
     {
@@ -175,7 +178,7 @@ public class Weapon : MonoBehaviour
             yield return null;
         }
     }
-    private void Shoot()
+    public void Shoot()
     {
         if (state == WeaponState.Reloading)
         {
@@ -259,7 +262,7 @@ public class Weapon : MonoBehaviour
     {
         infiniteAmmo = true;
     }
-    IEnumerator Reload()
+    public IEnumerator Reload()
     {
         //Debug.Log("Reloading!");
         if (reloadSfx != null)
