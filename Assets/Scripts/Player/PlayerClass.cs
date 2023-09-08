@@ -18,6 +18,8 @@ public class PlayerClass
     public int maxHealth;
     private float moveSpeed;
     private AnimationCurve lvlCurve;
+    private float playerCritChance;
+    private float playerCritDamage;
     public PlayerClass(int maxHealth, GameObject prefab, float moveSpeed, AnimationCurve lvlCurve)
     {
         this.maxHealth = maxHealth;
@@ -29,6 +31,8 @@ public class PlayerClass
         toLevelUp = Mathf.RoundToInt(this.lvlCurve.Evaluate(playerLevel));
         expPoints = 0;
         currency = 100;
+        playerCritChance = 0.2f;
+        playerCritDamage = 1.5f;
         this.moveSpeed = moveSpeed;
         
     }
@@ -48,7 +52,27 @@ public class PlayerClass
     {
         return moveSpeed;
     }
+    
+    public void SetCritChance(float value)
+    {
+        playerCritChance = value;
+    }
 
+    public float GetCritChance()
+    {
+        return playerCritChance;
+    }
+    
+    public void SetCritDamage(float value)
+    {
+        playerCritDamage = value;
+    }
+
+    public float GetCritDamage()
+    {
+        return playerCritDamage;
+    }
+    
     public void SetPosition(Vector3 pos)
     {
         position.transform.position = pos;

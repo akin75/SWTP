@@ -18,22 +18,25 @@ public class Bullet : MonoBehaviour
     private bool _boolZombieKilled;
     private string _weaponType = "";
     private GameObject _player;
+    private PlayerClass _playerManager;
 
     public float critChance = 0.2f; // Crit Chance von 20%
     private bool isCrit = false;
+    private float critDamage = 1.5f;
 
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>().playerClass;
         _achievementManager = FindObjectOfType<AchievementManager>();
         _baseDamage = GetWeaponDamage();
         _adjustedDamage = Mathf.RoundToInt(ApplyDamageVariation(_baseDamage));
         
         // Überprüfe, ob der Treffer ein kritischer Treffer ist
-        isCrit = Random.value <= critChance;
+        isCrit = Random.value <= _playerManager.GetCritChance();
         if (isCrit)
         {
-            _adjustedDamage = Mathf.RoundToInt(_adjustedDamage * 1.5f); // Kritischer Treffer erhöht den Schaden um 50%
+            _adjustedDamage = Mathf.RoundToInt(_adjustedDamage * _playerManager.GetCritDamage()); // Kritischer Treffer erhöht den Schaden um 50%
         }
     }
 
@@ -59,6 +62,7 @@ public class Bullet : MonoBehaviour
     {
         return isCrit;
     }
+    
 
     public int GetAdjustedDamage()
     {

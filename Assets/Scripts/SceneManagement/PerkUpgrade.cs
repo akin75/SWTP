@@ -89,6 +89,19 @@ public class PerkUpgrade : MonoBehaviour
         playerManager.playerClass.SetMoveSpeed(player.GetComponent<PlayerController>().moveSpeed);
     }
 
+
+    private void CriticalChanceUpgrade()
+    {
+        PlayerClass instance = playerManager.playerClass;
+        instance.SetCritChance(instance.GetCritChance() + 0.05f);
+    }
+
+    private void CriticalDamageUpgrade()
+    {
+        PlayerClass instance = playerManager.playerClass;
+        instance.SetCritDamage(instance.GetCritDamage() + 0.2f);
+    }
+
     // Update is called once per frame
 
 
