@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine.UI;
+
 
 public class PauseMenu : MonoBehaviour
 {
@@ -18,11 +20,24 @@ public class PauseMenu : MonoBehaviour
     public Player player;
     public AudioSource testsound;
        
-    //public KillCounter kc;
-    //public TMP_Text heal;
+    [SerializeField]private AchievementManager AM;
+    [SerializeField]private GameObject AP1;//AchievementPage
+    [SerializeField]private GameObject AP2;
+    public int APActive = 1;
+
+    public Slider slider1;
+    public Slider slider2;
+    public Slider slider3;
+    public Slider slider4;
+    public Slider slider5;
+    public Slider slider6;
+    public Slider slider7;
+    public Slider slider8;
+    public Slider slider9;
+    public Slider slider10;
+    public Slider slider11;
+
     public TMP_Text coin;
-    //public TMP_Text kills;
-    //public TMP_Text ammo;
     [SerializeField] private Texture2D cursorSprite;
    private Vector2 cursorHotspot;
 
@@ -35,7 +50,8 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        //heal.SetText("Health: " + player.GetCurrentHealth());
+         if (Input.GetKeyDown("a")){SwitchAchievementPage(); }
+       
         coin.SetText(""+player.GetCoins());
         if (Input.GetKeyDown("escape"))
         {
@@ -49,12 +65,45 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
+    
+     public void DisplayAchievements(){
+       float[] ap= AM.ComputeProgPercent();
+        slider1.value= ap[0];
+        slider2.value= ap[1];
+        slider3.value= ap[2];
+        slider4.value= ap[3];
+        slider5.value= ap[4];
+        slider6.value= ap[5];
+        slider7.value= ap[6];
+        slider8.value= ap[7];
+        slider9.value= ap[8];
+        slider10.value= ap[9];
+        slider11.value= ap[10];
+    }
+
+    public void SwitchAchievementPage(){
+        if(APActive == 1){
+             APActive = 2;
+            AP2.SetActive(true);
+            AP1.SetActive(false);
+           
+            
+        }
+        else if(APActive == 2){
+            APActive = 1;
+            AP1.SetActive(true);
+            AP2.SetActive(false);
+            
+        }
+    }
+
     void Pause()
     {
         if (pauseMenuUI != null)
         {
             hud.SetActive(false);
             pauseMenuUI.SetActive(true);
+            DisplayAchievements();
         }        
         Time.timeScale = 0f;
         gameIsPaused = true;
