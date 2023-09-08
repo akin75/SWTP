@@ -36,9 +36,15 @@ public class Weapon : MonoBehaviour, IWeapon
     public bool tripleFireEnabled = false;
     public bool perfectAccuracy = false;
     public bool infiniteAmmo = false;
-
+    private IWeapon currentInstance;
     private void Start()
     {
+
+        if (currentInstance == null)
+        {
+            currentInstance = this;
+        }
+        
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraController = Camera.main.GetComponent<CameraController>();
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
@@ -61,6 +67,7 @@ public class Weapon : MonoBehaviour, IWeapon
         
         if (transform.gameObject.TryGetComponent<WeaponSG>(out WeaponSG instance))
         {
+            currentInstance = instance;
             newInstance = instance;
             newInstance.muzzleParticles = muzzleParticles;
             newInstance.damage = damage;
@@ -94,21 +101,13 @@ public class Weapon : MonoBehaviour, IWeapon
         if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots && !weaponUpgrade.shopState && !_objectUpgrade.shopState)
         {
             muzzleParticles.gameObject.SetActive(true);
-            if (newInstance != null && transform.gameObject.name == "Shotgun")
-            {
-                newInstance.Shoot();
-            }
-            else
-            {
-                Shoot();
-            }
-            
+            currentInstance.Shoot();
             timeSinceLastShot = 0f;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             state = WeaponState.Reloading;
-            StartCoroutine(Reload());
+            StartCoroutine(currentInstance.Reload());
         }
 
         if (perfectAccuracy)
@@ -217,7 +216,7 @@ public class Weapon : MonoBehaviour, IWeapon
         if (ammo <= 0)
         {
             state = WeaponState.Reloading;
-            StartCoroutine(Reload());
+            StartCoroutine(currentInstance.Reload());
             yield return null;
         }
         else
@@ -309,5 +308,10 @@ public class Weapon : MonoBehaviour, IWeapon
     public int GetAmmo()
     {
         return ammo;
+    }
+
+    public int GetDamage()
+    {
+        return damage;
     }
 }

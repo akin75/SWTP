@@ -49,11 +49,9 @@ public class TileMapGenerator
             //if(min.tileArray.Length== 0) Debug.Log("Position: " + min.positionInMap + "  Test: " + min.tileCell);
             
             var coords = rand.Next(0, min.tileContacts.Count);
-            Debug.Log("Coords;  " + min.positionInMap + " Collapse with piece" + min.tileContacts[coords].ContactTile.name);
             min.Collapse(coords); // Improvement Idea likely to select more path over than obstacles
             visited = new HashSet<Vector3Int>();
             Propagate(min);
-            Debug.Log("PASSED");
         }
     }
     
@@ -77,7 +75,7 @@ public class TileMapGenerator
         {
             var currentTile = stack[stack.Count - 1];
             stack.RemoveAt(stack.Count - 1);
-            Debug.Log(stack.Count);
+            //Debug.Log(stack.Count);
             //if (i == 10) break;
             foreach (var d in ValidNeighbours(tileMapCells[currentTile.y,currentTile.x]))
             {
@@ -91,7 +89,7 @@ public class TileMapGenerator
                 {
                     if (!possibleNeighbours.Contains(other.ContactTile))
                     {
-                        Debug.Log($"Selected Tile {tileMapCells[currentTile.y,currentTile.x].ToString()} \n   Other Tile {tileMapCells[d.y,d.x]}"  );
+                        //Debug.Log($"Selected Tile {tileMapCells[currentTile.y,currentTile.x].ToString()} \n   Other Tile {tileMapCells[d.y,d.x]}"  );
                         tileMapCells[d.y,d.x].Constrain(other);
                         if(!stack.Contains(tileMapCells[d.y,d.x].positionInMap)) stack.Add(tileMapCells[d.y,d.x].positionInMap);
                     }

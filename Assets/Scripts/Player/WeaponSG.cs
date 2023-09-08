@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class WeaponSG : MonoBehaviour
+public class WeaponSG : MonoBehaviour, IWeapon
 {
     public enum weaponState { READY, RELOADING };
     private weaponState state = weaponState.READY;
@@ -27,16 +27,6 @@ public class WeaponSG : MonoBehaviour
     public AudioSource shotSfx;
     public AudioSource shotgunPumpSfx;
     
-    
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            state = weaponState.RELOADING;
-            StartCoroutine(Reload());
-        }
-    }
-
     private void Start()
     {
         recoil = GetComponentInParent<Recoil>();
@@ -112,7 +102,7 @@ public class WeaponSG : MonoBehaviour
     {
         firePointCount = newCount;
     }
-    IEnumerator Reload()
+    public IEnumerator Reload()
     {
         Debug.Log("Reloading!");
         yield return new WaitForSeconds(reloadTime);
@@ -141,5 +131,20 @@ public class WeaponSG : MonoBehaviour
     public int GetAmmo()
     {
         return ammo;
+    }
+
+    public int GetLevel()
+    {
+        return this.level;
+    }
+
+    public void SetTimeBetweenShots(float value)
+    {
+        this.timeBetweenShots = value;
+    }
+
+    public int GetDamage()
+    {
+        return damage;
     }
 }

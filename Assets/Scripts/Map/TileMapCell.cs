@@ -24,16 +24,11 @@ public class TileMapCell
         tileContacts = tile;
         this.tilemap = tilemap;
         positionInMap = position;
-        tileArray = InitializeToTileArray(this.tilemap);
         //tileArray = RemoveDuplicate(tileArray);
         this.mapSize = mapSize;
         this.isCollapsed = false;
     }
-
-    private TileBase[] InitializeToTileArray(Tilemap tilemap1)
-    {
-        return tilemap1.GetTilesBlock(tilemap1.cellBounds);
-    }
+    
 
     public TileMapCell(int entropy)
     {
@@ -45,8 +40,8 @@ public class TileMapCell
         
         Debug.Log("TT" + piece + " DEbug : " + tileContacts.Count);
         tileCell = tileContacts[piece].ContactTile;
-        tileContacts.RemoveAll(x => x.ContactTile.name != tileCell.name);
-        SetCollider(tileContacts.Find(x => x.ContactTile.name == tileCell.name).isCollider);
+        tileContacts.RemoveAll(x => x.ContactTile != tileCell);
+        SetCollider(tileContacts.Find(x => x.ContactTile == tileCell).isCollider);
         isCollapsed = true;
         //Debug.Log("t; " + tileArray.Length);
     }
@@ -119,7 +114,6 @@ public class TileMapCell
         }
         //Debug.Log("Position: " + positionInMap.y + " , " + positionInMap.x + "  Length" + tileContacts.Count);
         tileContacts.Remove(toDelete);
-        Debug.Log(ToString());
         //Debug.Log("Length After: " + tileContacts.Count);
         if (tileContacts.Count == 1)
         {

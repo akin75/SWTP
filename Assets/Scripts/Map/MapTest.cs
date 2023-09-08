@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Unity.Collections;
+using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MapTest : MonoBehaviour
@@ -18,15 +22,18 @@ public class MapTest : MonoBehaviour
     [SerializeField] private List<int> generateField;
     [SerializeField] private Tile tileToIgnore;
     [SerializeField] private List<GameObject> barrelObjects;
+    private JobHandle handle;
     private void Start()
     {
-        GenerateMultipleMap(generateField);
+
+        StartCoroutine(GenerateMultipleMap());
+
     }
 
-    private void GenerateMultipleMap(List<int> genCount)
+    IEnumerator GenerateMultipleMap()
     {
         Vector3Int genOffset = new Vector3Int(0, 0);
-        foreach (var count in genCount)
+        foreach (var count in generateField)
         {
             for (int i = 0; i < count; i++)
             {
@@ -56,6 +63,7 @@ public class MapTest : MonoBehaviour
 
             genOffset.y += mapSize.y;
             genOffset.x = 0;
+            yield return null;
         }
     }
     
@@ -76,7 +84,7 @@ public class MapTest : MonoBehaviour
                 .ToArray()));
         Array.Copy(temp, array, length);
     }
-
+    
     
 }
 
