@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IWeapon
 {
     public enum WeaponSide { WeaponL, WeaponR }
     public WeaponSide weaponSide;
@@ -36,9 +36,15 @@ public class Weapon : MonoBehaviour
     public bool tripleFireEnabled = false;
     public bool perfectAccuracy = false;
     public bool infiniteAmmo = false;
-
+    private IWeapon currentInstance;
     private void Start()
     {
+
+        if (currentInstance == null)
+        {
+            currentInstance = this;
+        }
+        
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraController = Camera.main.GetComponent<CameraController>();
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
@@ -61,6 +67,7 @@ public class Weapon : MonoBehaviour
         
         if (transform.gameObject.TryGetComponent<WeaponSG>(out WeaponSG instance))
         {
+            currentInstance = instance;
             newInstance = instance;
             newInstance.muzzleParticles = muzzleParticles;
             newInstance.damage = damage;
@@ -70,6 +77,9 @@ public class Weapon : MonoBehaviour
         recoil = GetComponentInParent<Recoil>();
         maxAmmo = ammo;
     }
+
+
+    
 
     private IEnumerator DrawWeaponSound(float delay)
     {
@@ -91,21 +101,13 @@ public class Weapon : MonoBehaviour
         if (Input.GetButton("Fire1") && timeSinceLastShot >= timeBetweenShots && !weaponUpgrade.shopState && !_objectUpgrade.shopState)
         {
             muzzleParticles.gameObject.SetActive(true);
-            if (newInstance != null && transform.gameObject.name == "Shotgun")
-            {
-                newInstance.Shoot();
-            }
-            else
-            {
-                Shoot();
-            }
-            
+            currentInstance.Shoot();
             timeSinceLastShot = 0f;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             state = WeaponState.Reloading;
-            StartCoroutine(Reload());
+            StartCoroutine(currentInstance.Reload());
         }
 
         if (perfectAccuracy)
@@ -175,7 +177,7 @@ public class Weapon : MonoBehaviour
             yield return null;
         }
     }
-    private void Shoot()
+    public void Shoot()
     {
         if (state == WeaponState.Reloading)
         {
@@ -214,7 +216,7 @@ public class Weapon : MonoBehaviour
         if (ammo <= 0)
         {
             state = WeaponState.Reloading;
-            StartCoroutine(Reload());
+            StartCoroutine(currentInstance.Reload());
             yield return null;
         }
         else
@@ -259,7 +261,7 @@ public class Weapon : MonoBehaviour
     {
         infiniteAmmo = true;
     }
-    IEnumerator Reload()
+    public IEnumerator Reload()
     {
         //Debug.Log("Reloading!");
         if (reloadSfx != null)
@@ -306,5 +308,10 @@ public class Weapon : MonoBehaviour
     public int GetAmmo()
     {
         return ammo;
+    }
+
+    public int GetDamage()
+    {
+        return damage;
     }
 }
