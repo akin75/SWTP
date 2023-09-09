@@ -23,6 +23,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]private AchievementManager AM;
     [SerializeField]private GameObject AP1;//AchievementPage
     [SerializeField]private GameObject AP2;
+    [SerializeField] private Animator transition;
     public int APActive = 1;
 
     public Slider slider1;
@@ -124,25 +125,35 @@ public class PauseMenu : MonoBehaviour
         cameraController.enabled = true;
     }
 
-    
+           
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
-        Debug.Log("Bip Bop, Menü geladen.");
-        testsound.Play();
+         StartCoroutine(ChangeScene());
+    }
+ IEnumerator ChangeScene(){
+       transition.SetTrigger("GameStart");
         Resume();
+
+        yield return new WaitForSeconds(1);
+        
+         SceneManager.LoadScene("MainMenu"); 
+        
+
+        
+       
+        
     }
 
     public void GameOver()
     {
         hud.SetActive(false);
-        Debug.Log("Spieler Gestorben");
         gameOverScreen.SetActive(true);
         Time.timeScale = 0.0f;
         gameIsPaused = true;
     }
 
+   
 public void RestartGame()
     {
         Debug.Log("Spiel neugestartet");
@@ -155,7 +166,6 @@ public void RestartGame()
     }
     public void QuitGame()
     {
-        Debug.Log("Bip Bop, Spiel geschlossen.");
         Application.Quit();
         
     }
