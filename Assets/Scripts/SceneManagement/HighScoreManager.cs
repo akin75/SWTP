@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +15,7 @@ public class HighScoreManager : MonoBehaviour
     }
 
     [SerializeField] private GameObject HighscorePage;
-    public bool HSPIsEnabled = false; //HighscorePanel
+    [SerializeField] private bool HSPIsEnabled = false;
 
     [System.Serializable]
     public class HighscoreText
@@ -24,12 +26,9 @@ public class HighScoreManager : MonoBehaviour
     }
     [SerializeField] private HighscoreText[] ht;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    /// <summary>
+    /// Activate the Highscore UI and load the highscore from PlayerPrefs.
+    /// </summary>
     public void ToggleHighscorePanel(){
         for (int i=0; i<ht.Length; i++)
         {

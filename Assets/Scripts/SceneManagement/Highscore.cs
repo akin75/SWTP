@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,19 +15,9 @@ public class Highscore : MonoBehaviour
 
     [SerializeField] private HS[] hs;
 
-    void Start()
-    {   
-        LoadHighscore();
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            PlayerPrefs.DeleteAll();
-        }
-    }
-
+    /// <summary>
+    /// Load the saved highscore if possible from PlayerPrefs.
+    /// </summary>
     public void LoadHighscore()
     {
         for (int i=1; i<hs.Length; i++)
@@ -33,11 +25,13 @@ public class Highscore : MonoBehaviour
             if (PlayerPrefs.HasKey("HS"+i))
             {
                 hs[i] = JsonUtility.FromJson<HS>(PlayerPrefs.GetString("HS"+i));
-                Debug.Log("HS Position:"+i+" Kills:"+hs[i].kills+" Wave:"+hs[i].wave);
             }    
         }
     }
 
+    /// <summary>
+    /// Compare the new score with the old highscore, sort and save it to PlayerPrefs.
+    /// </summary>
     public void SetHighscore()
     {
         LoadHighscore();
