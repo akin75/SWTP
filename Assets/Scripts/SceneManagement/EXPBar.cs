@@ -1,13 +1,14 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class EXPBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public int maximum;
-    public int current;
-    public Image fill;
+    [SerializeField] private int maximum;
+    [SerializeField] private int current;
+    [SerializeField] private Image fill;
     private PlayerSwitcher playerManager;
     private PlayerClass player;
     
@@ -18,13 +19,14 @@ public class EXPBar : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         GetCurrentFill();
     }
 
-
+    /// <summary>
+    /// Set the experience bar to the current value
+    /// </summary>
     void GetCurrentFill()
     {
         maximum = player.GetMaximumExp();

@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +8,9 @@ using UnityEngine.UI;
 public class HPBar : MonoBehaviour
 {
 
-    public Slider hpslider;
-    public Gradient gradient;
-    public Image fill;
+    [SerializeField] private Slider hpslider;
+    [SerializeField] private Gradient gradient;
+    [SerializeField] private Image fill;
     private PlayerSwitcher playerManager;
     private PlayerClass player;
     
@@ -23,6 +25,9 @@ public class HPBar : MonoBehaviour
         GetCurrentFill();
     }
 
+    /// <summary>
+    /// Set the player healthbar slider to his current health value.
+    /// </summary>
     void GetCurrentFill()
     {
         hpslider.maxValue = player.GetMaxHealth();

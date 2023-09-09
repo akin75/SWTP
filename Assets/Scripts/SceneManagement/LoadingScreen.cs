@@ -7,16 +7,20 @@ public class LoadingScreen : MonoBehaviour
 {
     [SerializeField] private GameObject loadingCanva;
     [SerializeField] private Image loadingBarFill;
+    [SerializeField] private Animator transition;
+
 
 
     public void LoadScene(int sceneId)
-    {
+    {   transition.SetTrigger("GameStart"); 
         StartCoroutine(LoadSceneAsync(sceneId));
     }
 
 
     IEnumerator LoadSceneAsync(int sceneId)
     {
+       
+       
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
         loadingCanva.SetActive(true);
         while (!operation.isDone)
