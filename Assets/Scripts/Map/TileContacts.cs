@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
+
+/// <summary>
+/// Class <c>TileContacts</c> is for storing the tile to compare with
+/// </summary>
 [System.Serializable]
 public class TileContacts
 {

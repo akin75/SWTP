@@ -6,45 +6,44 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
+/// <summary>
+/// Class <c>TileMapCell</c> is the functionality of Wave Function Collapse
+/// </summary>
 public class TileMapCell
 {
-    // Start is called before the first frame update
     public List<TileContacts> tileContacts;
     public Vector3Int positionInMap;
-    private Tilemap tilemap;
-    public int entropy;
-    public TileBase[] tileArray;
     public Tile tileCell;
     private Vector2Int mapSize;
     public bool isCollider;
-    private List<TileBase[]> tileToJoin = new List<TileBase[]>();
     public bool isCollapsed;
     public TileMapCell(List<TileContacts> tile, Vector3Int position, Tilemap tilemap, Vector2Int mapSize)
     {
         tileContacts = tile;
-        this.tilemap = tilemap;
         positionInMap = position;
-        //tileArray = RemoveDuplicate(tileArray);
         this.mapSize = mapSize;
         this.isCollapsed = false;
     }
     
+    
 
-    public TileMapCell(int entropy)
-    {
-        this.entropy = entropy;
-    }
-
+    /// <summary>
+    /// Collapse a cell to a piece
+    /// </summary>
+    /// <param name="piece">Piece to collapse</param>
     public void Collapse(int piece)
     {
-        
-        Debug.Log("TT" + piece + " DEbug : " + tileContacts.Count);
         tileCell = tileContacts[piece].ContactTile;
         tileContacts.RemoveAll(x => x.ContactTile != tileCell);
         SetCollider(tileContacts.Find(x => x.ContactTile == tileCell).isCollider);
         isCollapsed = true;
-        //Debug.Log("t; " + tileArray.Length);
     }
+    
+    /// <summary>
+    /// Get adjacent map cell
+    /// </summary>
+    /// <returns>List of Vector3Int</returns>
 
     public List<Vector3Int> GetAdjacentMapCell()
     {
@@ -57,10 +56,21 @@ public class TileMapCell
     }
 
 
+    /// <summary>
+    /// Get possibilities which pieces can be chosen
+    /// </summary>
+    /// <returns>List of tiles</returns>
     public List<TileContacts> GetPossibilities()
     {
         return tileContacts;
     }
+    
+    
+    /// <summary>
+    /// Get all the possible neighbour/piece to this cell
+    /// </summary>
+    /// <param name="direction">The direction of the neighbour to get for this cell</param>
+    /// <returns>List of tiles</returns>
 
     public List<Tile> GetAllPossibleNeighbours(Vector3Int direction)
     {
@@ -79,7 +89,6 @@ public class TileMapCell
         }
         else
         {
-            // Debug.Log("TileContactsLength: " + tileContacts.Count);
             var contacts = tileContacts[0];
             if (direction == DirectionEnum.Forward) possibleNeighbours.Add(contacts.PosY.ToArray());
             if (direction == DirectionEnum.Right) possibleNeighbours.Add(contacts.PosX.ToArray());
@@ -90,31 +99,19 @@ public class TileMapCell
         return JoinArray(possibleNeighbours).ToList();
     }
 
-
-    public void FilterTileArray(HashSet<Tile> toFilter, bool toJoin) // TODO
-    {
-        
-    }
     
-
-    public TileBase[] RemoveDuplicate(TileBase[] sourceTile)
-    {
-        return sourceTile.ToList()
-            .GroupBy(x => x)
-            .Where(g => g.Count() > 1)
-            .Select(g => g.Key)
-            .ToArray();
-    }
-
+    
+    /// <summary>
+    /// Constrain or delete tiles from TileContacts
+    /// </summary>
+    /// <param name="toDelete">TileContacts to delete</param>
     public void Constrain(TileContacts toDelete)
     {
         if (isCollapsed)
         {
             return;
         }
-        //Debug.Log("Position: " + positionInMap.y + " , " + positionInMap.x + "  Length" + tileContacts.Count);
         tileContacts.Remove(toDelete);
-        //Debug.Log("Length After: " + tileContacts.Count);
         if (tileContacts.Count == 1)
         {
             Collapse(0);
@@ -137,7 +134,11 @@ public class TileMapCell
         return s;
     }
 
-
+/// <summary>
+/// Join all the array together
+/// </summary>
+/// <param name="toJoin">List of tile array to join</param>
+/// <returns>Tile Array </returns>
     private Tile[] JoinArray(List<Tile[]> toJoin) // todo
     {
         Tile[] temp = new Tile[]{};
@@ -152,14 +153,13 @@ public class TileMapCell
         return t.Distinct().ToArray();
     }
 
+    /// <summary>
+    /// Check if its a collider cell
+    /// </summary>
+    /// <param name="isCollider">Boolean statement if the cell is a collider</param>
     private void SetCollider(bool isCollider)
     {
         
         this.isCollider = isCollider;
     }
-    private void SetTileArray(TileBase[] tileBases)
-    {
-        tileArray = tileBases;
-    }
-    
 }

@@ -1,3 +1,4 @@
+/* created by: SWT-P_SS_23_akin75 */
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,11 +28,19 @@ public class DescriptionHandler : MonoBehaviour, IPointerEnterHandler, IPointerE
             descriptionText.text = "";
         }
     }
-
+    /// <summary>
+    /// Set the description text and update the UI
+    /// </summary>
+    /// <param name="description">Description to set</param>
     public void SetDescription(TextMeshProUGUI description)
     {
         descriptionText = description;
     }
+    
+    /// <summary>
+    /// Set to the current upgrade
+    /// </summary>
+    /// <param name="upgrades">Upgrade to set</param>
     
     public void SetUpgrades(Upgrades upgrades)
     {

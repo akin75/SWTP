@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,9 +8,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Class <c>WeaponUpgrade</c> defines the functionality of the Weapon Shop. Player can apply upgrade to its weapon.
+/// </summary>
 public class WeaponUpgrade : MonoBehaviour
 {
-    // Start is called before the first frame update
     private GameObject player;
     public GameObject upgradeTextPrefab;
     private GameObject text;
@@ -25,6 +29,22 @@ public class WeaponUpgrade : MonoBehaviour
     private PlayerSwitcher playerManager;
     public Sprite progressBar;
     private bool inRadius = false;
+    private static WeaponUpgrade _instance;
+
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -32,8 +52,6 @@ public class WeaponUpgrade : MonoBehaviour
         text = Instantiate(upgradeTextPrefab, GameObject.Find("IconManager").transform);
         text.SetActive(false);
         weapon = player.GetComponentInChildren<Weapon>();
-        //Debug.Log($"Test: {weapon.GetLevel()}");
-
         foreach (Upgrades upgrades in upgradesList)
         {
             GameObject item = Instantiate(shopItemPrefab, shopContent);
@@ -67,22 +85,29 @@ public class WeaponUpgrade : MonoBehaviour
     }
 
     
+    /// <summary>
+    /// In the UI shop player can buy an upgrade, depending on which weapon they choose the weapon will be upgraded.
+    /// </summary>
+    /// <param name="upgrades">The weapon to upgrade</param>
 
     public void BuyUpgrade(Upgrades upgrades)
     {
         var playerComponent = player.GetComponent<Player>();
         if (playerComponent.GetCoins() >= upgrades.cost)
         {
-            //Debug.Log("Test");
             playerComponent.setCurrency(-upgrades.cost);
             upgrades.weapon.GetComponentInChildren<Weapon>().AddLevel(1);
             upgrades.weapon.GetComponentInChildren<Weapon>().SetDamage(10);
             upgrades.weapon.GetComponentInChildren<Weapon>().SetTimeBetweenShots(0.005f);
-            Debug.Log($"Weapon Level {upgrades.weapon.GetComponentInChildren<Weapon>().GetLevel()}");
             ApplyUpgrade(upgrades);
 
         }
     }
+    
+    /// <summary>
+    /// Apply the upgrade to the chosen upgrade. Update the UI Shop
+    /// </summary>
+    /// <param name="upgrades">The chosen upgrade</param>
 
     private void ApplyUpgrade(Upgrades upgrades)
     {
@@ -100,8 +125,7 @@ public class WeaponUpgrade : MonoBehaviour
             }
         }
     }
-
-    // Update is called once per frame
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -115,6 +139,9 @@ public class WeaponUpgrade : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Update the shop if Player interacts with the shop
+    /// </summary>
 
     private void UpdateShop()
     {

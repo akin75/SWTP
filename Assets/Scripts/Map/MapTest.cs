@@ -9,6 +9,10 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+
+/// <summary>
+/// Class <c>MapTest</c> is a procedurally generated Map. This class is only for the forest
+/// </summary>
 public class MapTest : MonoBehaviour
 {
     [SerializeField] private Vector2Int mapSize = new Vector2Int(5, 5);
@@ -26,11 +30,15 @@ public class MapTest : MonoBehaviour
     private void Start()
     {
 
-        StartCoroutine(GenerateMultipleMap());
+        GenerateMultipleMap();
 
     }
 
-    IEnumerator GenerateMultipleMap()
+    
+    /// <summary>
+    /// Generate chunks of a map and put it together
+    /// </summary>
+    void GenerateMultipleMap()
     {
         Vector3Int genOffset = new Vector3Int(0, 0);
         foreach (var count in generateField)
@@ -47,14 +55,6 @@ public class MapTest : MonoBehaviour
                         int randomIndex = rand.Next(0, treeObjects.Count);
                         Instantiate(treeObjects[randomIndex], v.positionInMap + offset + genOffset, Quaternion.identity);
                     }
-                    /*
-                    else
-                    {
-                        if (tileToIgnore.name == v.tileCell.name) continue;
-                        output.SetTile(v.positionInMap + offset + genOffset, v.tileCell);
-                        
-                    }
-                    */
                 }
 
                 genOffset.x += mapSize.x;
@@ -63,28 +63,8 @@ public class MapTest : MonoBehaviour
 
             genOffset.y += mapSize.y;
             genOffset.x = 0;
-            yield return null;
         }
     }
-    
-    private void Rotate(int[] array, int rotationCount)
-    {
-        int length = array.Length;
-        int[] temp = new int[length];
-        
-        for (int i = 0; i < length; i++)
-        {
-            int rotatedIndex = (i + rotationCount) % length;
-            temp[rotatedIndex] = array[i];
-            
-        }
-        Debug.Log("Test = " +String.Join("",
-            new List<int>(temp)
-                .ConvertAll(i => i.ToString())
-                .ToArray()));
-        Array.Copy(temp, array, length);
-    }
-    
     
 }
 
