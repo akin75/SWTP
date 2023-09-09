@@ -1,7 +1,10 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
 
 public class Ammo : MonoBehaviour
 {
@@ -17,8 +20,15 @@ public class Ammo : MonoBehaviour
         playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        SetAmmoText();        
+    }
+
+    /// <summary>
+    /// Check the used Weapontype and set the ammo text in the gui.
+    /// </summary>
+    public void SetAmmoText()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         if (playerManager.GetCurrentPlayer().name == "CharacterSG")
@@ -31,6 +41,5 @@ public class Ammo : MonoBehaviour
             weapon = player.GetComponentInChildren<Weapon>();
             ammo.SetText(""+weapon.GetAmmo());
         }
-        
     }
 }

@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,20 +16,30 @@ public class KillCounter : MonoBehaviour
 
     void Start()
     {
-        killCounterText.SetText(""+killsCounter);
+        UpdateKillCount();
     }
 
+    /// <summary>
+    /// Increase the killcounter by one
+    /// </summary>
     public void IncreaseKillCount()
     {
             killsCounter++;
             UpdateKillCount();
     }
 
+    /// <summary>
+    /// Set the killcounter text in gui
+    /// </summary>
     public void UpdateKillCount()
     {
         killCounterText.SetText(""+killsCounter);
     }
 
+    /// <summary>
+    /// Get the current count of kills
+    /// </summary>
+    /// <returns>The number of current kills</returns>
     public int GetKills()
     {
         return killsCounter;

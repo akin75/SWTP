@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,8 +30,15 @@ public class Hud : MonoBehaviour
         playerClass = playerManager.playerClass;
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        UpdateHud();
+    }
+
+    /// <summary>
+    /// Check the current player to set the weapon icon and the mine, bait and wave count in the gui.
+    /// </summary>
+    public void UpdateHud()
     {
         switch (playerManager.GetCurrentPlayer().name)
         {
@@ -54,7 +63,6 @@ public class Hud : MonoBehaviour
                 weapon.pistol.SetActive(true);
                 break;
             default:
-                Debug.Log("no valid character found");
                 break;
         }
 

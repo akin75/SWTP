@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,16 +31,16 @@ public class WaveSpawner : MonoBehaviour
         public int count;
     }
 
-    public Wave[] waves;
+    [SerializeField] private Wave[] waves;
     private int nextWave = 0;
 
-    public Transform[] spawnPoints;
+    [SerializeField] private Transform[] spawnPoints;
     
     public float timeBetweenWaves = 7f;
     private float waveCountdown;
     public int waveTracker = 0;
     private float searchCountdown = 1f;
-    public List<Enemys> bossEnemy;
+    [SerializeField] private List<Enemys> bossEnemy;
     [SerializeField] private AnimationCurve waveSpawner;
     [SerializeField] private AnimationCurve damageMultiplier;
     [SerializeField] private AnimationCurve healthMultiplier;
@@ -52,9 +54,6 @@ public class WaveSpawner : MonoBehaviour
             Debug.LogError("No Spawn Points!");
         }
         waveCountdown = timeBetweenWaves;
-
-
-
     }
 
     void Update()
@@ -90,6 +89,10 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if there are enemys alive
+    /// </summary>
+    /// <returns>true or false if still enemys alive</returns>
     public bool enemyIsAlive()
     {   
         searchCountdown -= Time.deltaTime;
@@ -104,9 +107,13 @@ public class WaveSpawner : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_wave"></param>
+    /// <returns></returns>
     IEnumerator spawnWave(Wave _wave)
     {
-        Debug.Log("Spawn Wave: " + _wave.waveName);
         state = spawnState.SPAWNING;
         int i = 0;
         SetEnemyCount(_wave);
@@ -140,9 +147,11 @@ public class WaveSpawner : MonoBehaviour
         yield break;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     void waveCompleted()
     {
-        Debug.Log("Wave Completed!");
         state = spawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
 
@@ -150,7 +159,6 @@ public class WaveSpawner : MonoBehaviour
         {
             nextWave = 0;
             state = spawnState.COMPLETE;
-            Debug.Log("All Waves Complete!");
         }
         else
         {
@@ -168,6 +176,9 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void SetNearestSpawnerToActive()
     {
         GameObject player = GameObject.FindWithTag("Player");
@@ -200,27 +211,39 @@ public class WaveSpawner : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public bool IsAnySpawnerActive()
     {
         return spawnPoints.ToList().FindAll(x => x.gameObject.activeSelf).Count != 0;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_enemy"></param>
+    /// <param name="_spawner"></param>
     void spawnEnemy(Transform _enemy, Transform _spawner)
     {
-        Debug.Log("Spawning Enemy" + _enemy.name);
-
-        
         Transform enemy = Instantiate(_enemy, _spawner.position, _spawner.rotation);
         enemy.gameObject.GetComponent<EnemyHealth>().SetDamage(Mathf.RoundToInt(damageMultiplier.Evaluate(waveTracker)));
         enemy.gameObject.GetComponent<EnemyHealth>().AddHealth(Mathf.RoundToInt(healthMultiplier.Evaluate(waveTracker)));
-        Debug.Log($"Enemy Health {enemy.gameObject.GetComponent<EnemyHealth>().maxHealth}");
     }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
      public float GetWaveInfo (){
         return (int)waveCountdown;
     }
      
-
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
      public List<Transform> GetActiveSpawnPoints()
      {
          List<Transform> newSpawner = new List<Transform>();
@@ -232,11 +255,13 @@ public class WaveSpawner : MonoBehaviour
          return newSpawner;
      }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_wave"></param>
      void SetEnemyCount(Wave _wave)
      {
          int enemyToSpawn = Mathf.RoundToInt(waveSpawner.Evaluate(waveTracker));
-         Debug.Log($"Enemy Count {enemyToSpawn}");
          var rand = new System.Random();
          for (int i = 0; i < enemyToSpawn; i++)
          {
@@ -245,6 +270,10 @@ public class WaveSpawner : MonoBehaviour
          }
      }
    
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <returns></returns>
    public int GetWaveCounter()
    {
     return waveTracker + 1;
