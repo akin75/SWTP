@@ -57,9 +57,9 @@ Akin, Ufuk, Andre, Martin, Ratchanon
 - [x] Add .idea in gitignore
 - [ ] Use SerializedField instead of public
 - [ ] Code Documentation
-- [ ] Continue Wiki Documentation
-- [ ] Use Graphics und Diagrams for Wiki
-- [ ] Create Wiki for decisions and ideas (talk about them)
+- [x] Continue Wiki Documentation
+- [x] Use Graphics und Diagrams for Wiki
+- [x] Create Wiki for decisions and ideas (talk about them)
 - [x] Link the Wiki and Documentation in the Readme
 - [x] Create Releases
 - [x] Delete Branches
