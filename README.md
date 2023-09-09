@@ -7,6 +7,8 @@ This project is a top-down 2D shooter where the player must survive waves of var
 
 In our [Wiki](https://github.com/akin75/SWTP/wiki) you can take a look at the software development process with the sprints and our decisions and plannings with images.
 
+[Code Documentation](https://rawcdn.githack.com/akin75/SWTP/4a8c9dc4197c229a21d7f1202579a4175ad6172d/CodeDocu/html/index.html)
+
 **Features:**
 - **Top-Down Perspective:** The game is played from a top-down view, giving the player an overview of the game field.
 
