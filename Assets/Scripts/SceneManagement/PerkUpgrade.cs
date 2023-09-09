@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,28 +8,44 @@ using TMPro;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
+/// <summary>
+/// Class <c>PerkUpgrade</c> defines the functionality of the Perk in game.
+/// </summary>
 public class PerkUpgrade : MonoBehaviour
 {
-    // Start is called before the first frame update
-     private GameObject player;
+    private GameObject player;
      private GameObject text;
     private Vector3 offset = new Vector3(0, -2.5f);
-    public TextMeshProUGUI levelText;
-    public GameObject shopUI;
-    public List<Perks> upgradesList;
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private GameObject shopUI;
+    [SerializeField] private List<Perks> upgradesList; 
     public bool shopState = false;
-    public GameObject shopItemPrefab;
-    public Transform shopContent;
+    [SerializeField] private GameObject shopItemPrefab;
+    [SerializeField] private Transform shopContent;
     private Weapon weapon;
     private PlayerSwitcher playerManager;
     private decimal constantMultiplier = 0.2m;
+    private static PerkUpgrade _instance;
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+
     void Start()
     {
-        
         playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
         player = playerManager.GetCurrentPlayer();
         weapon = player.GetComponentInChildren<Weapon>();
-        //Debug.Log($"Test: {weapon.GetLevel()}");
 
         foreach (Perks upgrades in upgradesList)
         {
@@ -60,27 +78,40 @@ public class PerkUpgrade : MonoBehaviour
     }
 
     
+    /// <summary>
+    /// In the UI Perk upgrade player can choose an upgrade, depending on which perk they choose the status will be added to the player.
+    /// </summary>
+    /// <param name="upgrades">The perk to upgrade</param>
 
     public void BuyUpgrade(Perks upgrades)
     {
         ApplyUpgrade(upgrades);
     }
 
+    /// <summary>
+    /// Apply the upgrade to the chosen perk. Update the UI Perk upgrade
+    /// </summary>
+    /// <param name="upgrades">The chosen perk</param>
     private void ApplyUpgrade(Perks upgrades)
     {
         upgrades.perkLevel++;
         Invoke(upgrades.name + "Upgrade", 0f);
-        //Temporarily
         shopUI.SetActive(false);
         Time.timeScale = 1;
     }
 
+    /// <summary>
+    /// Add max health to the player upon choosing this Upgrade
+    /// </summary>
     private void MaxHealthUpgrade()
     {
         decimal multiplier = playerManager.playerClass.maxHealth * constantMultiplier;
         player.GetComponent<Player>().setMaxHealth((int)Math.Round(multiplier));
     }
 
+    /// <summary>
+    /// Add speed to the player upon choosing this Upgrade
+    /// </summary>
     private void SpeedUpgrade()
     {
         var speed = player.GetComponent<PlayerController>().moveSpeed;
@@ -89,13 +120,25 @@ public class PerkUpgrade : MonoBehaviour
         playerManager.playerClass.SetMoveSpeed(player.GetComponent<PlayerController>().moveSpeed);
     }
 
-    // Update is called once per frame
-
-
-    private void UpdateShop()
+    /// <summary>
+    /// Add critical chance to the player upon choosing this Upgrade
+    /// </summary>
+    private void CriticalChanceUpgrade()
     {
-        return;
+        PlayerClass instance = playerManager.playerClass;
+        instance.SetCritChance(instance.GetCritChance() + 0.05f);
     }
+
+    /// <summary>
+    /// Add critical damage to the player upon choosing this Upgrade
+    /// </summary>
+    private void CriticalDamageUpgrade()
+    {
+        PlayerClass instance = playerManager.playerClass;
+        instance.SetCritDamage(instance.GetCritDamage() + 0.2f);
+    }
+
+    
     private void OnGUI()
     {
         if (player != null)

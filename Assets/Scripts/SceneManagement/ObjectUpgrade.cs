@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,9 +8,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Class <c>ObjectUpgrade</c> defines the functionality of object shop in the game
+/// </summary>
 public class ObjectUpgrade : MonoBehaviour
 {
-    // Start is called before the first frame update
     private GameObject player;
     public GameObject upgradeTextPrefab;
     private GameObject text;
@@ -25,15 +29,28 @@ public class ObjectUpgrade : MonoBehaviour
     private PlayerSwitcher playerManager;
     public Sprite progressBar;
     private bool inRadius = false;
+    private static ObjectUpgrade _instance;
     [SerializeField] private Sprite noEXPBar;
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerManager = GameObject.Find("PlayerSwitcher").GetComponent<PlayerSwitcher>();
         text = Instantiate(upgradeTextPrefab, GameObject.Find("IconManager").transform);
         text.SetActive(false);
-        
-
         foreach (Upgrades upgrades in upgradesList)
         {
             GameObject item = Instantiate(shopItemPrefab, shopContent);
@@ -67,6 +84,11 @@ public class ObjectUpgrade : MonoBehaviour
 
     
 
+    /// <summary>
+    /// In the UI shop player can buy an object, depending on which object they choose the object will be added.
+    /// </summary>
+    /// <param name="upgrades">The object to buy</param>
+
     public void BuyUpgrade(Upgrades upgrades)
     {
         var playerComponent = player.GetComponent<Player>();
@@ -88,6 +110,11 @@ public class ObjectUpgrade : MonoBehaviour
 
         }
     }
+    
+    /// <summary>
+    /// Apply the item to the chosen object. Update the UI Shop
+    /// </summary>
+    /// <param name="upgrades">The chosen object</param>
 
     private void ApplyUpgrade(Upgrades upgrades)
     {
@@ -101,8 +128,7 @@ public class ObjectUpgrade : MonoBehaviour
             childProgressBar.GetChild(upgrades.quantity).GetComponent<Image>().sprite = this.progressBar;
         }
     }
-
-    // Update is called once per frame
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -117,6 +143,9 @@ public class ObjectUpgrade : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Update the UI Shop if the Player interact with the shop
+    /// </summary>
     private void UpdateShop()
     {
         foreach (Upgrades upgrades in upgradesList)

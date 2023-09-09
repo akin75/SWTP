@@ -5,6 +5,11 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
+
+/// <summary>
+/// Class <c>TileMapGenerator</c> is a Wave Function Collapse class.
+/// </summary>
 public class TileMapGenerator
 {
     // Start is called before the first frame update
@@ -23,6 +28,9 @@ public class TileMapGenerator
         InitializeCellsArray();
     }
 
+    /// <summary>
+    /// Initialize the <c>TileMapCell</c> class
+    /// </summary>
     private void InitializeCellsArray()
     {
         for (int i = 0; i < mapSize.y; i++)
@@ -34,6 +42,9 @@ public class TileMapGenerator
         }
     }
 
+    /// <summary>
+    /// Start of the Wave Function Collapse algorithm. Check if everythin is collapsed if not get the minimum Entropy of a tile and collapse it
+    /// </summary>
     public void SetTileCells()
     {
         var rand = new System.Random();
@@ -55,6 +66,12 @@ public class TileMapGenerator
         }
     }
     
+    /// <summary>
+    /// Get the possible neighbour of a TileMapCell
+    /// </summary>
+    /// <param name="tile">The tile to get the neighbour</param>
+    /// <param name="a"> the direction to get</param>
+    /// <returns>List of tile for possible neighbours of the TileMapCell</returns>
 
     private List<Tile> PossibleNeighbours(TileMapCell tile, Vector3Int a)
     {
@@ -66,6 +83,10 @@ public class TileMapGenerator
     }
 
    
+    /// <summary>
+    /// Propagate methods updates all the adjacent TileMapCell and deletes all the possibilities that the rules is set
+    /// </summary>
+    /// <param name="tileMapCell">Cell to propagate</param>
 
     private void Propagate(TileMapCell tileMapCell)
     {
@@ -99,20 +120,12 @@ public class TileMapGenerator
             i++;
         }
     }
-
-    private String toString(List<Tile> tile)
-    {
-        List<string> c = new List<string>();
-
-        foreach (var t in tile)
-        {
-            c.Add(t.name);
-        }
-
-        return string.Join(" ,", c);
-    }
-
-
+    
+    /// <summary>
+    /// Check if the tile map cell adjacent is a valid neighbour
+    /// </summary>
+    /// <param name="tileMapCell">Cell to look at </param>
+    /// <returns>List of the position or Vector3Int</returns>
     private List<Vector3Int> ValidNeighbours(TileMapCell tileMapCell)
     {
         var adj = tileMapCell.GetAdjacentMapCell();
@@ -129,6 +142,10 @@ public class TileMapGenerator
         return valid;
     }
     
+    /// <summary>
+    /// Get the minimum Entropy of a TileMapCell. A minimum entropy is defined by how many piece a tilemapcell can collapse to
+    /// </summary>
+    /// <returns></returns>
     public TileMapCell GetMinEntropy()
     {
         List<TileMapCell> minEntropy = new List<TileMapCell>();
@@ -137,6 +154,10 @@ public class TileMapGenerator
         return t.Where(x => !x.isCollapsed && x.tileContacts.Count > 1).OrderBy(x => x.tileContacts.Count).FirstOrDefault();
     }
 
+    /// <summary>
+    /// Check if every tilemapcell is collapsed
+    /// </summary>
+    /// <returns>Booleand statement. Returns True if every TileMapCell is collapsed</returns>
     private bool CheckIfEverythingCollapsed()
     {
         return tileMapCells.Cast<TileMapCell>().All((x) => x.isCollapsed);

@@ -108,7 +108,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    ///  Spawn a wave of enemy, can also spawn Boss enemy.
     /// </summary>
     /// <param name="_wave"></param>
     /// <returns></returns>
@@ -148,7 +148,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Check if wave is completed
     /// </summary>
     void waveCompleted()
     {
@@ -177,7 +177,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Check for the nearest Spawner to the Player and set it active.
     /// </summary>
     public void SetNearestSpawnerToActive()
     {
@@ -212,16 +212,16 @@ public class WaveSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Check if any of the spawner is active
     /// </summary>
-    /// <returns></returns>
+    /// <returns>boolean statement if any spawner is active</returns>
     public bool IsAnySpawnerActive()
     {
         return spawnPoints.ToList().FindAll(x => x.gameObject.activeSelf).Count != 0;
     }
 
     /// <summary>
-    /// 
+    /// Spawn an enemy. Adjust health and damage according to the level
     /// </summary>
     /// <param name="_enemy"></param>
     /// <param name="_spawner"></param>
@@ -241,7 +241,7 @@ public class WaveSpawner : MonoBehaviour
     }
      
     /// <summary>
-    /// 
+    /// Get the active Spawn points
     /// </summary>
     /// <returns></returns>
      public List<Transform> GetActiveSpawnPoints()
@@ -256,7 +256,7 @@ public class WaveSpawner : MonoBehaviour
      }
 
     /// <summary>
-    /// 
+    /// Set enemy count to spawn, this function will be necessarily for spawnWave
     /// </summary>
     /// <param name="_wave"></param>
      void SetEnemyCount(Wave _wave)

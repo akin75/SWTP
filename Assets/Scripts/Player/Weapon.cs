@@ -1,10 +1,21 @@
+/* created by: SWT-P_SS_23_akin75 */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+
+
+/// <summary>
+/// Class <c>Weapon</c> is the functionality how the weapon works
+/// </summary>
 public class Weapon : MonoBehaviour, IWeapon
 {
+    
+    
+    
     public enum WeaponSide { WeaponL, WeaponR }
     public WeaponSide weaponSide;
 
@@ -37,14 +48,22 @@ public class Weapon : MonoBehaviour, IWeapon
     public bool perfectAccuracy = false;
     public bool infiniteAmmo = false;
     private IWeapon currentInstance;
-    private void Start()
-    {
 
+    private void Awake()
+    {
         if (currentInstance == null)
         {
             currentInstance = this;
         }
-        
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         cameraController = Camera.main.GetComponent<CameraController>();
         weaponUpgrade = GameObject.Find("CartBox").GetComponent<WeaponUpgrade>();
@@ -177,6 +196,11 @@ public class Weapon : MonoBehaviour, IWeapon
             yield return null;
         }
     }
+    
+    
+    /// <summary>
+    /// <c>Shoot</c> methods, defines how weapon shoots 
+    /// </summary>
     public void Shoot()
     {
         if (state == WeaponState.Reloading)
@@ -261,6 +285,11 @@ public class Weapon : MonoBehaviour, IWeapon
     {
         infiniteAmmo = true;
     }
+    
+    /// <summary>
+    /// <c>Reload</c> methods, defines how a weapon reloads
+    /// </summary>
+    /// <returns>Nothing, since the method is a <c>IEnumerator</c></returns>
     public IEnumerator Reload()
     {
         //Debug.Log("Reloading!");
@@ -277,6 +306,12 @@ public class Weapon : MonoBehaviour, IWeapon
         state = WeaponState.Ready;
         yield break;
     }
+    
+    
+    /// <summary>
+    /// Sets the damage of the weapon
+    /// </summary>
+    /// <param name="value">Valute to sets the damage of the weapon</param>
 
     public void SetDamage(int value)
     {
@@ -286,6 +321,11 @@ public class Weapon : MonoBehaviour, IWeapon
             newInstance.damage = damage;
         }
     }
+    
+    /// <summary>
+    /// Sets the time between shots for the weapon
+    /// </summary>
+    /// <param name="value">Value to sets the time between shots</param>
 
     public void SetTimeBetweenShots(float value)
     {
@@ -295,21 +335,40 @@ public class Weapon : MonoBehaviour, IWeapon
             newInstance.timeBetweenShots = timeBetweenShots;
         }
     }
+    
+    /// <summary>
+    /// Add a level to a Weapon
+    /// </summary>
+    /// <param name="level">Value to add the level</param>
 
     public void AddLevel(int level)
     {
         this.level += level;
     }
 
+    /// <summary>
+    /// Get the level of the weapon
+    /// </summary>
+    /// <returns><c>level</c> of the weapon</returns>
     public int GetLevel()
     {
         return level;
     }
+    
+    
+    /// <summary>
+    /// Gets the ammo of the weapon
+    /// </summary>
+    /// <returns><c>ammo</c> of the weapon</returns>
     public int GetAmmo()
     {
         return ammo;
     }
 
+    /// <summary>
+    /// Gets the damage of the weapon
+    /// </summary>
+    /// <returns><c>damage</c> of the weapon</returns>
     public int GetDamage()
     {
         return damage;
