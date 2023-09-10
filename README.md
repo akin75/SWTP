@@ -63,5 +63,5 @@ Akin, Ufuk, Andre, Martin, Ratchanon
 - [x] Link the Wiki and Documentation in the Readme
 - [x] Create Releases
 - [x] Delete Branches
-- [ ] Improve CI
+- [x] Improve CI
 - [x] Freeze Player in pause menu
