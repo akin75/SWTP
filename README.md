@@ -52,11 +52,11 @@ We welcome contributions to enhance the game. If you have ideas or wish to contr
 Akin, Ufuk, Andre, Martin, Ratchanon
 
 # TODOS
-- [ ] Remove of commented and stapled Code
-- [ ] Remove of debug.log functions
+- [x] Remove of commented and stapled Code
+- [x] Remove of debug.log functions
 - [x] Add .idea in gitignore
-- [ ] Use SerializedField instead of public
-- [ ] Code Documentation
+- [x] Use SerializedField instead of public
+- [x] Code Documentation
 - [x] Continue Wiki Documentation
 - [x] Use Graphics und Diagrams for Wiki
 - [x] Create Wiki for decisions and ideas (talk about them)
