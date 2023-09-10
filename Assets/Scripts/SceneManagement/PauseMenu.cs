@@ -112,7 +112,7 @@ public class PauseMenu : MonoBehaviour
     /// <summary>
     /// Pauses the game.
     /// <summary>
-    void Pause()
+    public void Pause()
     {
         if (pauseMenuUI != null)
         {
