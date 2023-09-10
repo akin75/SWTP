@@ -28,7 +28,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Animator transition;
     public int APActive = 1;
 
-    //public Slider slider1;
     public Slider slider2;
     public Slider slider3;
     public Slider slider4;
@@ -37,6 +36,7 @@ public class PauseMenu : MonoBehaviour
     public Slider slider7;
     public Slider slider8;
     public Slider slider9;
+
 
     public TMP_Text coin;
     [SerializeField] private Texture2D cursorSprite;

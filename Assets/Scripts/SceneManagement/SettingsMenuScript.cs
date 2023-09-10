@@ -69,9 +69,8 @@ public static bool HealthBarOn = true;
 
 		else
         HealthBarOn = false;
-//
-       if  (something.isOn);
-		//doo something
+
+
 
     SceneManager.LoadScene("MainMenu");//Ruft die Szene in der Klammer auf
      }
