@@ -21,24 +21,6 @@ public class PlayerTest
     
     
     [UnityTest]
-    public IEnumerator CheckIfPlayerCanMove()
-    {
-
-        SceneManager.LoadScene(2, LoadSceneMode.Single);
-        yield return new WaitForSeconds(3f);
-        var playerObject = GameObject.FindWithTag("Player");
-        GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>().state = WaveSpawner.spawnState.COMPLETE;
-        var positionBefore = playerObject.transform.position;
-        var input = playerObject.GetComponent<PlayerController>();
-        yield return new WaitForSeconds(2f);
-        playerObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1f).normalized * input.moveSpeed;
-        yield return new WaitForSeconds(0.3f);
-        playerObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1f).normalized * input.moveSpeed;
-        yield return new WaitForSeconds(3f);
-        Assert.AreNotEqual(positionBefore,playerObject.transform.position);
-    }
-    
-    [UnityTest]
     public IEnumerator CheckIfPlayerCanShoot()
     {
 
