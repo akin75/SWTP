@@ -4,8 +4,8 @@ using UnityEngine.Rendering.Universal;
 
 public class FlashlightFlicker : MonoBehaviour
 {
-    public float minFlickerSpeed = 0.02f;
-    public float maxFlickerSpeed = 0.3f;
+    [SerializeField] private float minFlickerSpeed = 0.02f;
+    [SerializeField] private float maxFlickerSpeed = 0.3f;
     private float intensity;
 
     private Light2D lightComponent;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CrawlerAnimation : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer; // Referenz auf den SpriteRenderer des GameObjects
-    public ParticleSystem bloodPuddle;
+    [SerializeField] private ParticleSystem bloodPuddle;
 
     private void Start()
     {

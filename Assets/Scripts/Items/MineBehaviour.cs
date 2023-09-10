@@ -5,15 +5,15 @@ using UnityEngine;
 public class MineBehaviour : MonoBehaviour
 {
     private List<GameObject> enemiesInDamageArea = new List<GameObject>();
-    public Collider2D trigger;
-    public Collider2D damageArea;
-    public ParticleSystem explosionParticles;
-    public ParticleSystem smokeParticles;
-    public int damage = 50;
-    public GameObject explosionSfx;
+    [SerializeField] private Collider2D trigger;
+    [SerializeField] private Collider2D damageArea;
+    [SerializeField] private ParticleSystem explosionParticles;
+    [SerializeField] private ParticleSystem smokeParticles;
+    [SerializeField] private int damage = 50;
+    [SerializeField] private GameObject explosionSfx;
     private bool isCrit = false;
     private AchievementManager achievementManager;
-    public bool _isLeveledUp = false;
+    [SerializeField] private bool _isLeveledUp = false;
 
 
 

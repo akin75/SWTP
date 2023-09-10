@@ -5,21 +5,21 @@ using UnityEngine;
 
 public class ExploderBoss : MonoBehaviour
 {
-    public ParticleSystem explosionParticlesBoss;
-    public ParticleSystem smokeParticlesBoss;
-    public SpriteRenderer enemySr;
-    public Rigidbody2D exploder;
-    public Collider2D explosionRadius;
-    public Collider2D blinkingRadius;
-    public GameObject hB;
-    public GameObject trail;
+    [SerializeField] private ParticleSystem explosionParticlesBoss;
+    [SerializeField] private ParticleSystem smokeParticlesBoss;
+    [SerializeField] private SpriteRenderer enemySr;
+    [SerializeField] private Rigidbody2D exploder;
+    [SerializeField] private Collider2D explosionRadius;
+    [SerializeField] private Collider2D blinkingRadius;
+    [SerializeField] private GameObject hB;
+    [SerializeField] private GameObject trail;
     private SpriteRenderer spriteRenderer;
     private bool isBlinking = false;
-    public GameObject zombieMini;
-    public int spawnCount;
-    public int explosionDamage = 40;
+    [SerializeField] private GameObject zombieMini;
+    [SerializeField] private int spawnCount;
+    [SerializeField] private int explosionDamage = 40;
     private Rigidbody2D rb;
-    public GameObject explosionSfx;
+    [SerializeField] private GameObject explosionSfx;
 
     private void Start()
     {

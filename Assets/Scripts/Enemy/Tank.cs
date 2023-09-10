@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
-    public EnemyHealth enemyHealth;
+    [SerializeField] private EnemyHealth enemyHealth;
     private GameObject armor;
 
     // Start is called before the first frame update

@@ -7,25 +7,25 @@ public class WeaponSG : MonoBehaviour, IWeapon
 {
     public enum weaponState { READY, RELOADING };
     private weaponState state = weaponState.READY;
-    public float fireForce = 25f;
-    public GameObject bulletPrefab;
-    public Transform firePoint;
+    [SerializeField] private float fireForce = 25f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firePoint;
     private Camera cam;
     public float timeBetweenShots = 0.5f;
-    public float maxDeviation = 20f;
+    [SerializeField] private float maxDeviation = 20f;
     public int damage = 10;
-    public int ammo = 8;
+    [SerializeField] private int ammo = 8;
     private int maxAmmo = 8;
-    public int reloadTime = 2;
+    [SerializeField] private int reloadTime = 2;
     private float timeSinceLastShot = Mathf.Infinity; // Anfangswert auf unendlich setzen
     private CameraController cameraController;
     private Recoil recoil;
     public ParticleSystem muzzleParticles;
-    public int firePointCount = 4;
-    private int level = 0;
-    public AudioSource reloadSfx;
-    public AudioSource shotSfx;
-    public AudioSource shotgunPumpSfx;
+    [SerializeField] private int firePointCount = 4;
+    [SerializeField] private int level = 0;
+    [SerializeField] private AudioSource reloadSfx;
+    [SerializeField] private AudioSource shotSfx;
+    [SerializeField] private AudioSource shotgunPumpSfx;
     
     private void Start()
     {

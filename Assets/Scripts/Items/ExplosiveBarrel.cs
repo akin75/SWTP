@@ -6,14 +6,14 @@ using UnityEngine;
 public class ExplosiveBarrel : MonoBehaviour
 {
     private List<GameObject> enemiesInDamageArea = new List<GameObject>();
-    public Collider2D damageArea;
-    public float health;
+    [SerializeField] private Collider2D damageArea;
+    [SerializeField] private float health;
     private float playerDamage;
-    public ParticleSystem explosionParticles;
-    public ParticleSystem smokeParticles;
+    [SerializeField] private ParticleSystem explosionParticles;
+    [SerializeField] private ParticleSystem smokeParticles;
     private bool hasExploded = false;
-    public int damage = 100;
-    public GameObject explosionSfx;
+    [SerializeField] private int damage = 100;
+    [SerializeField] private GameObject explosionSfx;
     private bool isCrit = false;
     private AchievementManager achievementManager;
 

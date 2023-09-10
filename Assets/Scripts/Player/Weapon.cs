@@ -17,20 +17,20 @@ public class Weapon : MonoBehaviour, IWeapon
     
     
     public enum WeaponSide { WeaponL, WeaponR }
-    public WeaponSide weaponSide;
+    [SerializeField] private WeaponSide weaponSide;
 
     private enum WeaponState { Ready, Reloading };
     private WeaponState state = WeaponState.Ready;
-    public float fireForce = 40f;
-    public GameObject bulletPrefab;
-    public Transform firePoint;
+    [SerializeField] private float fireForce = 40f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firePoint;
     private Camera cam;
-    public float timeBetweenShots = 0.02f;
-    public float maxDeviation = 10f;
+    [SerializeField] private float timeBetweenShots = 0.02f;
+    [SerializeField] private float maxDeviation = 10f;
     public int damage = 20;
-    public int ammo = 20;
+    [SerializeField] private int ammo = 20;
     private int maxAmmo;
-    public int reloadTime = 2;
+    [SerializeField] private int reloadTime = 2;
     private float timeSinceLastShot = 0f;
     private CameraController cameraController;
     private Recoil recoil;
@@ -39,14 +39,14 @@ public class Weapon : MonoBehaviour, IWeapon
     private WeaponSG newInstance;
     private WeaponUpgrade weaponUpgrade;
     private ObjectUpgrade _objectUpgrade;
-    public AudioSource draw;
-    public AudioSource reloadSfx;
-    public AudioSource shotSfx;
-    public float delay;
-    public bool doubleFireEnabled = false;
-    public bool tripleFireEnabled = false;
-    public bool perfectAccuracy = false;
-    public bool infiniteAmmo = false;
+    [SerializeField] private AudioSource draw;
+    [SerializeField] private AudioSource reloadSfx;
+    [SerializeField] private AudioSource shotSfx;
+    [SerializeField] private float delay;
+    [SerializeField] private bool doubleFireEnabled = false;
+    [SerializeField] private bool tripleFireEnabled = false;
+    [SerializeField] private bool perfectAccuracy = false;
+    [SerializeField] private bool infiniteAmmo = false;
     private IWeapon currentInstance;
 
     private void Awake()
