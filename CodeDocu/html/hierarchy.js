@@ -56,7 +56,6 @@ var hierarchy =
       [ "PlayerController", "class_player_controller.html", null ],
       [ "PlayerSwitcher", "class_player_switcher.html", null ],
       [ "Recoil", "class_recoil.html", null ],
-      [ "SceneChanger", "class_scene_changer.html", null ],
       [ "SettingsMenuScript", "class_settings_menu_script.html", null ],
       [ "Spit", "class_spit.html", null ],
       [ "Spitter", "class_spitter.html", null ],
