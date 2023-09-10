@@ -45,6 +45,10 @@ public class Bullet : MonoBehaviour
         _weaponType = _player.GetComponent<Player>().GetCurrentWeapon();
     }
 
+    /// <summary>
+    /// gets weapon damage
+    /// </summary>
+    /// <returns>weapon damage</returns>
     private int GetWeaponDamage()
     {
         _weaponType = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetCurrentWeapon();
@@ -58,24 +62,38 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// gets crit bool
+    /// </summary>
+    /// <returns></returns>
     public bool GetIsCrit()
     {
         return isCrit;
     }
     
-
+/// <summary>
+/// gets adjusted damage
+/// </summary>
+/// <returns>ajdusted damage</returns>
     public int GetAdjustedDamage()
     {
         return _adjustedDamage;
     }
-
+/// <summary>
+/// Applies damage variation
+/// </summary>
+/// <param name="damage">base damage</param>
+/// <returns>adjusted damage</returns>
     private float ApplyDamageVariation(float damage)
     {
         float minDamage = damage * 0.8f; // 80% of the original damage
         float maxDamage = damage * 1.2f; // 120% of the original damage
         return Random.Range(minDamage, maxDamage);
     }
-
+/// <summary>
+/// defines what happens when bullet hits an enemy or an object
+/// </summary>
+/// <param name="collision">object that has been hit</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))

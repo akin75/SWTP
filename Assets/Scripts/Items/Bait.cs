@@ -39,7 +39,10 @@ public class Bait : MonoBehaviour
         }
         StartCoroutine(ExplodeAfterDelay(baitTime));
     }
-
+/// <summary>
+/// Defines what happens when entering the different colliders
+/// </summary>
+/// <param name="collision"></param>
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -70,7 +73,9 @@ public class Bait : MonoBehaviour
             }
         }
     }
-
+/// <summary>
+/// Damages every enemy in the damage Area
+/// </summary>
     private void BaitBehaviour()
     {
         Transform tempTarget = originalTarget; // Temporäre Variable zur Speicherung des ursprünglichen Targets
@@ -87,7 +92,11 @@ public class Bait : MonoBehaviour
 
 
 
-
+/// <summary>
+/// Destroys the object after delay
+/// </summary>
+/// <param name="delay">time where bait is active</param>
+/// <returns></returns>
     private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -107,7 +116,11 @@ public class Bait : MonoBehaviour
         }
         Destroy(gameObject);
     }
-    
+    /// <summary>
+    /// Explodes and make damage after delay
+    /// </summary>
+    /// <param name="delay">time where bait is active</param>
+    /// <returns></returns>
     private IEnumerator ExplodeAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);

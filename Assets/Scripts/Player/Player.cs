@@ -64,11 +64,14 @@ public class Player : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// defines what happens when player takes damage
+    /// </summary>
+    /// <param name="damage">damage that has been dealt</param>
     public void TakeDamage(int damage) 
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
         Debug.Log("currentHealth " + GetCurrentHealth());
-        ApplyImpact(damage * impactForceMultiplier);
         StartCoroutine(HitFlash());
         playerHitSfx.Play();
         if (GetCurrentHealth() <= 0)
@@ -85,41 +88,72 @@ public class Player : MonoBehaviour
         }
         impactForceBool = false;
     }
+    /// <summary>
+    /// increases the health
+    /// </summary>
+    /// <param name="value">health increase value</param>
     public void heal(int value) 
     {
         SetCurrentHealth(GetCurrentHealth() + value);
         StartCoroutine(HealFlash());
     }
 
+    /// <summary>
+    /// changes the weapon
+    /// </summary>
+    /// <param name="newWeapon">new weapon</param>
     public void ChangeWeapon(string newWeapon)
     {
         currentWeapon = newWeapon;
         Debug.Log("Weapon changed to: " + currentWeapon);
     }
     
+    /// <summary>
+    /// returns current weapon
+    /// </summary>
+    /// <returns>current weapon</returns>
     public string GetCurrentWeapon()
     {
         return currentWeapon;
     }
     
-
+/// <summary>
+/// returns whether player is dead or not
+/// </summary>
+/// <returns></returns>
     public bool GetIsDead()
     {
         return isDead;
     }
 
+/// <summary>
+/// returns current health
+/// </summary>
+/// <returns>current health</returns>
     public int GetCurrentHealth()
     {
         return playerManager.playerClass.GetCurrentHealth();
     }
-    
+    /// <summary>
+    /// returns max health
+    /// </summary>
+    /// <returns>max health</returns>
      public int GetMaxHealth(){
         return playerManager.playerClass.GetMaxHealth();
     }
+    
+    /// <summary>
+    /// returns number of coins
+    /// </summary>
+    /// <returns>coins</returns>
     public int GetCoins()
     {
         return playerManager.playerClass.GetCurrency();
     }
+    /// <summary>
+    /// changes color of player when being hit
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator HitFlash()
     {
         playerHead.color = hitColor;
@@ -136,6 +170,10 @@ public class Player : MonoBehaviour
         playerLal.color = Color.white;
         playerBody.color = Color.white;
     }
+    /// <summary>
+    /// changes color of player when healing
+    /// </summary>
+    /// <returns></returns>
         private IEnumerator HealFlash()
     {
         playerHead.color = Color.green;
@@ -154,45 +192,38 @@ public class Player : MonoBehaviour
     }
     
 
-    private void ApplyImpact(float force)
-    {
-        this.impactForceBool = true;
-        //Debug.Log(this.impactForceBool);
-        Vector2 impactDirection = -transform.up; // Richtung, in die der Player zurückgeworfen wird
-        Vector2 impactForce = impactDirection * force;
-
-        // Den absoluten Wert der Impact Force verwenden
-        impactForce = new Vector2(Mathf.Abs(impactForce.x), Mathf.Abs(impactForce.y));
-
-        //Debug.Log("Impact Force: " + impactForce);
-        rb.AddForce(impactForce, ForceMode2D.Impulse);
-    }
-
-    public bool GetImpactForceBool()
-    {
-        return impactForceBool;
-    }
-
-
+/// <summary>
+/// sets the current health of player
+/// </summary>
+/// <param name="currentHealth">player health</param>
     public void SetCurrentHealth(int currentHealth){
         
         playerManager.playerClass.SetHealth(currentHealth);
         healthBar.SetHealth(currentHealth);
     }
-
+/// <summary>
+/// sets the current currency of the player
+/// </summary>
+/// <param name="value">number of coins</param>
     public void setCurrency(int value) {
         currency = currency + value;
         playerManager.playerClass.SetCurrency(currency);
         //Debug.Log("Currency: " + currency);
     }
-
+/// <summary>
+/// sets the max health of the player
+/// </summary>
+/// <param name="value">max health</param>
     public void setMaxHealth(int value) {
         healthBar.SetMaxHealth(maxHealth);
         SetMaxHealth(GetMaxHealth() + value);
         SetCurrentHealth(GetCurrentHealth() + value);
         Debug.Log($"CurrentHealth is {GetCurrentHealth()}");
     }
-
+/// <summary>
+/// sets the max health of the player
+/// </summary>
+/// <param name="value">max health</param>
     public void SetMaxHealth(int maxHealth)
     {
         playerManager.playerClass.SetMaxHealth(maxHealth);

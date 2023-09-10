@@ -11,6 +11,10 @@ public class MineTrigger : MonoBehaviour
     
     private bool hasExploded = false;
 
+    /// <summary>
+    /// triggers the explosion
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !hasExploded)
@@ -19,7 +23,9 @@ public class MineTrigger : MonoBehaviour
             hasExploded = true;
         }
     }
-
+/// <summary>
+/// handles the explosion
+/// </summary>
     private void Explode()
     {
         //Debug.Log("Boom");
@@ -36,6 +42,9 @@ public class MineTrigger : MonoBehaviour
         }
     }
     
+/// <summary>
+/// destroys the object after explosion
+/// </summary>
     void DestroyObj()
     {
         Destroy(mineSr);

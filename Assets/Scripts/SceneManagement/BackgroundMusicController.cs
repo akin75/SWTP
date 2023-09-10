@@ -25,7 +25,10 @@ public class BackgroundMusicController : MonoBehaviour
             Debug.LogWarning("No sound effects assigned to the array!");
         }
     }
-
+/// <summary>
+/// plays a random sfx for atmosphere
+/// </summary>
+/// <param name="index"></param>
     private void PlayRandomSfx(int index)
     {
         if (audioSource != null && sfxArray.Length > index)

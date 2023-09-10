@@ -27,6 +27,10 @@ public class ExploderBoss : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    /// <summary>
+    /// Defines what happens on Collision
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -47,7 +51,9 @@ public class ExploderBoss : MonoBehaviour
             }
         }
     }
-
+/// <summary>
+/// Spawns mini zombies when exploded
+/// </summary>
     private void SpawningMinis()
     {
         float spawnRadius = 1f; // Radius des Spawnbereichs
@@ -58,13 +64,19 @@ public class ExploderBoss : MonoBehaviour
             Instantiate(zombieMini, spawnPosition, Quaternion.identity);
         }
     }
+/// <summary>
+/// Starts the blinking coroutine
+/// </summary>
     private void StartBlinking()
     {
         // Starte das Blinken, indem du die Farbe des Sprites änderst
         StartCoroutine(BlinkCoroutine());
     }
     
-
+/// <summary>
+/// Blinking Coroutine handler
+/// </summary>
+/// <returns></returns>
     private IEnumerator BlinkCoroutine()
     {
         while (isBlinking && spriteRenderer != null)
@@ -81,7 +93,9 @@ public class ExploderBoss : MonoBehaviour
     }
 
 
-
+/// <summary>
+/// Handles the explosion of the Enemy
+/// </summary>
     private void Explode()
     {
         //Debug.Log("Boom");
@@ -92,7 +106,9 @@ public class ExploderBoss : MonoBehaviour
         SpawningMinis();
         DestroyObj();
     }
-
+/// <summary>
+/// Destroys Object
+/// </summary>
     void DestroyObj()
     {
         GetComponent<EnemyHealth>().currentHealth = 0;

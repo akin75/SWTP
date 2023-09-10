@@ -24,6 +24,10 @@ public class ExplosiveBarrel : MonoBehaviour
         playerDamage = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Weapon>().damage;
     }
 
+    /// <summary>
+    /// defines what happens when player shots on barrel
+    /// </summary>
+    /// <param name="collision">collision with bullet</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
@@ -38,6 +42,9 @@ public class ExplosiveBarrel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// handles the explosion of the barrel and makes damage
+    /// </summary>
     private void Explode()
     {
         Instantiate(explosionParticles, transform.position, Quaternion.identity);
@@ -63,6 +70,10 @@ public class ExplosiveBarrel : MonoBehaviour
         Destroy(gameObject);
     }
     
+    /// <summary>
+    /// handles which enemys to damage
+    /// </summary>
+    /// <param name="collision">enemys in the trigger</param>
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -79,7 +90,10 @@ public class ExplosiveBarrel : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// enemys leaving the area
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -89,14 +103,6 @@ public class ExplosiveBarrel : MonoBehaviour
                 enemiesInDamageArea.Remove(collision.gameObject);
                 //Debug.Log("Enemy exited DamageArea: " + collision.gameObject.name);
             }
-        }
-    }
-    
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            //Debug.Log("Collision with Enemy");
         }
     }
 }

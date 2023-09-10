@@ -21,6 +21,9 @@ public class ItemThrow : MonoBehaviour
         ThrowItem();
     }
 
+    /// <summary>
+    /// places mine and bait
+    /// </summary>
     private void ThrowItem()
     {
         if (Input.GetKeyDown("q"))
@@ -55,10 +58,18 @@ public class ItemThrow : MonoBehaviour
         }
         
     }
+    /// <summary>
+    /// returns number of mines
+    /// </summary>
+    /// <returns>mine count</returns>
     public int GetMineCount()
     {
         return mineCount;
     }
+    /// <summary>
+    /// returns number of bait
+    /// </summary>
+    /// <returns>bait count</returns>
     public int GetBaitCount()
     {
         return baitCount;

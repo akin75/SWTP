@@ -95,7 +95,11 @@ public class Weapon : MonoBehaviour, IWeapon
 
 
     
-
+/// <summary>
+/// plays the sound when player draws weapon
+/// </summary>
+/// <param name="delay"></param>
+/// <returns></returns>
     private IEnumerator DrawWeaponSound(float delay)
     {
         if (weaponSide == WeaponSide.WeaponR)
@@ -131,6 +135,10 @@ public class Weapon : MonoBehaviour, IWeapon
         }
     }
 
+    /// <summary>
+    /// Delays the shoot when player has dual weapon
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator DelayShooting()
     {
         float delay = timeBetweenShots / 2;
@@ -195,7 +203,7 @@ public class Weapon : MonoBehaviour, IWeapon
     
     
     /// <summary>
-    /// <c>Shoot</c> methods, defines how weapon shoots 
+    /// defines how weapon shoots 
     /// </summary>
     public void Shoot()
     {
@@ -231,6 +239,10 @@ public class Weapon : MonoBehaviour, IWeapon
     }
 
 
+    /// <summary>
+    /// shoots two bullets
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DoubleFire()
     {
         if (ammo <= 0)
@@ -245,6 +257,11 @@ public class Weapon : MonoBehaviour, IWeapon
             StartCoroutine(DelayShooting());
         }
     }
+    
+    /// <summary>
+    /// shoots three bullets
+    /// </summary>
+    /// <returns></returns>
     IEnumerator TripleFire()
     {
         if (ammo <= 0)
@@ -283,9 +300,9 @@ public class Weapon : MonoBehaviour, IWeapon
     }
     
     /// <summary>
-    /// <c>Reload</c> methods, defines how a weapon reloads
+    /// defines how a weapon reloads
     /// </summary>
-    /// <returns>Nothing, since the method is a <c>IEnumerator</c></returns>
+    /// <returns></returns>
     public IEnumerator Reload()
     {
         //Debug.Log("Reloading!");

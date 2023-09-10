@@ -45,7 +45,10 @@ public class Recoil : MonoBehaviour
             weapon2OriginalPosition = weapon2.transform.localPosition;
     }
 
-    
+    /// <summary>
+    /// changes the transform of the limbs when player shoots. simulates a recoil
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator RecoilCoroutine()
     {
         
@@ -118,6 +121,9 @@ public class Recoil : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// starts the coroutine 
+    /// </summary>
     public void StartRecoil()
     {
         StartCoroutine("RecoilCoroutine");

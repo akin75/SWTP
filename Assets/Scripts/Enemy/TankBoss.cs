@@ -21,6 +21,10 @@ public class TankBoss : MonoBehaviour
         tankSprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
+    /// <summary>
+    /// Starts coroutine when player is in range
+    /// </summary>
+    /// <param name="other">player param</param>
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !isCooldown)
@@ -28,7 +32,10 @@ public class TankBoss : MonoBehaviour
             StartCoroutine(ChargeCoroutine());
         }
     }
-
+/// <summary>
+/// Enemy increases speed and charges to the player
+/// </summary>
+/// <returns></returns>
     private IEnumerator ChargeCoroutine()
     {
         Instantiate(chargeSfx, transform.position, Quaternion.identity);
@@ -47,6 +54,10 @@ public class TankBoss : MonoBehaviour
         tankSprite.color = Color.white;
     }
 
+/// <summary>
+/// Enemy has a cooldown when he can charge again
+/// </summary>
+/// <returns></returns>
     private IEnumerator CooldownCoroutine()
     {
         isCooldown = true;
