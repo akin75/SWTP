@@ -15,8 +15,8 @@ public class DamagePopup : MonoBehaviour
     private Color _textColor;
 
     // Neue Variablen für kritische Treffer
-    public Color critColor = Color.red;
-    public Vector3 critScale = new Vector3(1.5f, 1.5f, 1.5f);
+    [SerializeField] private Color critColor = Color.red;
+    [SerializeField] private Vector3 critScale = new Vector3(1.5f, 1.5f, 1.5f);
     
     public void Awake()
     {

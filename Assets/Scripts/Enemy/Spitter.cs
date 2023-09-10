@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class Spitter : MonoBehaviour
 {
-    public GameObject projectilePrefab; // Prefab des Projektils
-    public Transform firePoint; // Punkt, an dem das Projektil erscheinen soll
-    public float projectileSpeed = 10f; // Geschwindigkeit des Projektils
-    public float shootingInterval = 1f; // Zeitabstand zwischen den Schüssen
-    public int damage;
-    public Rigidbody2D rb;
-    public Collider2D shootingRange;
-    public Collider2D standingRange;
-    public Player player;
-    public GameObject spitSfx;
+    [SerializeField] private GameObject projectilePrefab; // Prefab des Projektils
+    [SerializeField] private Transform firePoint; // Punkt, an dem das Projektil erscheinen soll
+    [SerializeField] private float projectileSpeed = 10f; // Geschwindigkeit des Projektils
+    [SerializeField] private float shootingInterval = 1f; // Zeitabstand zwischen den Schüssen
+    [SerializeField] private int damage;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Collider2D shootingRange;
+    [SerializeField] private Collider2D standingRange;
+    [SerializeField] private Player player;
+    [SerializeField] private GameObject spitSfx;
 
     private Transform playerTransform; // Referenz auf den Spieler
     private float lastShotTime; // Variable, um den letzten Zeitpunkt des Schusses zu speichern

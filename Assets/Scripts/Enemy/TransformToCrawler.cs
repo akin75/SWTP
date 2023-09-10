@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class TransformToCrawler : MonoBehaviour
 {
-    public GameObject crawlerPrefab;
-    public GameObject deadEnemyPrefab;
-    public float transformationChance = 10;
+    [SerializeField] private GameObject crawlerPrefab;
+    [SerializeField] private GameObject deadEnemyPrefab;
+    [SerializeField] private float transformationChance = 10;
     private Quaternion enemyRotation;
     private Vector3 deathScale;
     

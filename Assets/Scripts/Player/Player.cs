@@ -10,21 +10,21 @@ public class Player : MonoBehaviour
     public int currentHealth;
     public static int currency = 100;
 
-    public HealthBar healthBar;
-    public SpriteRenderer playerBody;
-    public SpriteRenderer playerHead;
-    public SpriteRenderer playerRau;
-    public SpriteRenderer playerRal;
-    public SpriteRenderer playerLau;
-    public SpriteRenderer playerLal;
-    public GameObject deadPlayer;
-    public PauseMenu pauseMenu;
-    public Color hitColor = new Color(1f, 0.5f, 0.5f);
-    public float hitDuration = 0.2f;
-    public ParticleSystem smallBloodPuddle;
-    public ParticleSystem bigBloodPuddle;
-    public float impactForceMultiplier = 1f;
-    public AudioSource playerHitSfx;
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private SpriteRenderer playerBody;
+    [SerializeField] private SpriteRenderer playerHead;
+    [SerializeField] private SpriteRenderer playerRau;
+    [SerializeField] private SpriteRenderer playerRal;
+    [SerializeField] private SpriteRenderer playerLau;
+    [SerializeField] private SpriteRenderer playerLal;
+    [SerializeField] private GameObject deadPlayer;
+    [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private Color hitColor = new Color(1f, 0.5f, 0.5f);
+    [SerializeField] private float hitDuration = 0.2f;
+    [SerializeField] private ParticleSystem smallBloodPuddle;
+    [SerializeField] private ParticleSystem bigBloodPuddle;
+    [SerializeField] private float impactForceMultiplier = 1f;
+    [SerializeField] private AudioSource playerHitSfx;
     
     private string currentWeapon = "Pistol"; // Setze hier den initialen Waffentyp
     private Rigidbody2D rb;

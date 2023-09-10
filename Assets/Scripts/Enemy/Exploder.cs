@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class Exploder : MonoBehaviour
 {
-    public ParticleSystem explosionParticles;
-    public ParticleSystem smokeParticles;
-    public SpriteRenderer enemySr;
-    public Rigidbody2D exploder;
-    public Collider2D explosionRadius;
-    public Collider2D blinkingRadius;
-    public Collider2D fastBlinkingRadius;
-    public GameObject hB;
-    public GameObject trail;
+    [SerializeField] private ParticleSystem explosionParticles;
+    [SerializeField] private ParticleSystem smokeParticles;
+    [SerializeField] private SpriteRenderer enemySr;
+    [SerializeField] private Rigidbody2D exploder;
+    [SerializeField] private Collider2D explosionRadius;
+    [SerializeField] private Collider2D blinkingRadius;
+    [SerializeField] private Collider2D fastBlinkingRadius;
+    [SerializeField] private GameObject hB;
+    [SerializeField] private GameObject trail;
     private SpriteRenderer spriteRenderer;
     private bool isBlinking = false;
-    public int explosionDamage = 40;
-    public GameObject explosionSfx;
+    [SerializeField] private int explosionDamage = 40;
+    [SerializeField] private GameObject explosionSfx;
 
     private void Start()
     {
