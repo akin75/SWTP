@@ -28,7 +28,9 @@ public class audioController : MonoBehaviour
             Debug.LogWarning("No sound effects assigned to the array!");
         }
     }
-
+    /// <summary>
+    /// plays random Sfx from the list
+    /// </summary>
     private void PlayRandomSfx(int index)
     {
         audioSource.volume = volume;
@@ -41,6 +43,9 @@ public class audioController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroys object after sound is finished
+    /// </summary>
     private IEnumerator DestroyAfterSound(float delay)
     {
         yield return new WaitForSeconds(delay);

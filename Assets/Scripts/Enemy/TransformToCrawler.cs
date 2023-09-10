@@ -11,6 +11,9 @@ public class TransformToCrawler : MonoBehaviour
     private Quaternion enemyRotation;
     private Vector3 deathScale;
     
+    /// <summary>
+    /// Enemy has a small chance to transform into a crawler when destroyed
+    /// </summary>
     public void Transformation()
     {
         enemyRotation = transform.rotation;

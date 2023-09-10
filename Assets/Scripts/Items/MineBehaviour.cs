@@ -39,6 +39,10 @@ public class MineBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// defines which enemies to damage
+    /// </summary>
+    /// <param name="collision">enemies in damage area</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -51,6 +55,9 @@ public class MineBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// damages enemies in damage area
+    /// </summary>
     private void Explode()
     {
         //Debug.Log("Boom");
@@ -106,7 +113,9 @@ public class MineBehaviour : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// clears the list of enemies to damage
+    /// </summary>
     private void OnDestroy()
     {
         // Beim Zerstören der Mine den Status der Enemys im DamageArea-Kollider zurücksetzen

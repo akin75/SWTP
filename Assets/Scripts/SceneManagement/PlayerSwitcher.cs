@@ -17,10 +17,12 @@ public class PlayerSwitcher : MonoBehaviour
     public PlayerClass playerClass;
     private float damageAR;
     private Player player;
+    private AchievementManager _achievementManager;
     [SerializeField] private AnimationCurve expController;
 
     private void Awake()
     {
+        _achievementManager = FindObjectOfType<AchievementManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         camController = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         currentPlayer = GameObject.FindGameObjectWithTag("Player");

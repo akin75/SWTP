@@ -32,6 +32,9 @@ public class WeaponSG : MonoBehaviour, IWeapon
         recoil = GetComponentInParent<Recoil>();
     }
 
+    /// <summary>
+    /// handles the shooting of the Shotgun
+    /// </summary>
     public void Shoot()
     {
         if (state == weaponState.RELOADING)
@@ -98,10 +101,18 @@ public class WeaponSG : MonoBehaviour, IWeapon
         }
     }
 
+    /// <summary>
+    /// sets the number of fire pooints
+    /// </summary>
+    /// <param name="newCount">number of new fire points</param>
     public void SetFirePointCount(int newCount)
     {
         firePointCount = newCount;
     }
+    /// <summary>
+    /// reloading shotgun
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator Reload()
     {
         Debug.Log("Reloading!");
@@ -111,38 +122,64 @@ public class WeaponSG : MonoBehaviour, IWeapon
         reloadSfx.Play();
         yield break;
     }
-
+    /// <summary>
+    /// plays pump sound of shotgun
+    /// </summary>
+    /// <param name="delay">plays sound after the shot sound</param>
+    /// <returns></returns>
     IEnumerator PlayShotgunPumpSound(float delay)
     {
         yield return new WaitForSeconds(delay);
         shotgunPumpSfx.Play();
     }
 
+    /// <summary>
+    /// sets damage
+    /// </summary>
+    /// <param name="value">damage</param>
     public void SetDamage(int value)
     {
         damage = damage + value;
     }
 
+    /// <summary>
+    /// increases level
+    /// </summary>
+    /// <param name="level"></param>
     public void AddLevel(int level)
     {
         this.level += level;
     }
 
+    /// <summary>
+    /// returns ammo
+    /// </summary>
+    /// <returns>ammo</returns>
     public int GetAmmo()
     {
         return ammo;
     }
-
+/// <summary>
+/// returns level
+/// </summary>
+/// <returns>level</returns>
     public int GetLevel()
     {
         return this.level;
     }
 
+/// <summary>
+/// sets time between shots
+/// </summary>
+/// <param name="value">time between shots</param>
     public void SetTimeBetweenShots(float value)
     {
         this.timeBetweenShots = value;
     }
-
+/// <summary>
+/// returns damage
+/// </summary>
+/// <returns></returns>
     public int GetDamage()
     {
         return damage;

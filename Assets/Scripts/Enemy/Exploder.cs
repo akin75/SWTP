@@ -24,6 +24,9 @@ public class Exploder : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    /// <summary>
+    /// defines what happens at collisions
+    /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -53,24 +56,35 @@ public class Exploder : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// stops blinking when player exits the danger zone
+    /// </summary>
     private void OnTriggerExit2D(Collider2D other)
     {
         //Debug.Log("Blinking area exited");
         StopBlinking();
     }
 
+    /// <summary>
+    /// starts blinking when player exits the danger zone
+    /// </summary>
     private void StartBlinking()
     {
         // Starte das Blinken, indem du die Farbe des Sprites änderst
         StartCoroutine(BlinkCoroutine());
     }
 
+    /// <summary>
+    /// starts blinking faster when player exits the danger zone
+    /// </summary>
     private void StartFastBlinking()
     {
         StartCoroutine(FastBlinkCoroutine());
     }
 
+    /// <summary>
+    /// stops blinking when player exits the danger zone
+    /// </summary>
     private void StopBlinking()
     {
         // Stoppe das Blinken, indem du die Koroutine beendest und die Farbe des Sprites zurücksetzt
@@ -79,6 +93,9 @@ public class Exploder : MonoBehaviour
         //spriteRenderer.color = Color.white;
     }
 
+    /// <summary>
+    /// handles the Coroutine of the blinking
+    /// </summary>
     private IEnumerator BlinkCoroutine()
     {
         while (isBlinking && spriteRenderer != null)
@@ -93,7 +110,11 @@ public class Exploder : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
     }
-
+    
+    /// <summary>
+    /// handles the Coroutine of the fast blinking
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator FastBlinkCoroutine()
     {
         while (isBlinking && spriteRenderer != null)
@@ -109,7 +130,9 @@ public class Exploder : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Handles what happens, when the enemy explodes
+    /// </summary>
     private void Explode()
     {
         StopBlinking();
@@ -123,7 +146,10 @@ public class Exploder : MonoBehaviour
         DestroyObj();
         //Destroy(gameObject);
     }
-
+    
+    /// <summary>
+    /// Destroys enemy
+    /// </summary>
     void DestroyObj()
     {
         GetComponent<EnemyHealth>().currentHealth = 0;

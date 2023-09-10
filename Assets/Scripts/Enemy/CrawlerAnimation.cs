@@ -13,6 +13,9 @@ public class CrawlerAnimation : MonoBehaviour
         InvokeRepeating("FlipSprite", 0f, 0.2f); // Starte die Flipp-Funktion mit einer Wiederholungsrate von 1 Sekunde
     }
 
+    /// <summary>
+    /// flips the sprite in x axis
+    /// </summary>
     private void FlipSprite()
     {
         spriteRenderer.flipX = !spriteRenderer.flipX; // Flipping des Sprites in horizontaler Richtung (X-Achse)

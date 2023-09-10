@@ -12,8 +12,6 @@ public class ItemDrop : MonoBehaviour
     {
         coin,
         heal,
-        specialA,
-        specialB
     };
     public ItemType itemType;
     public int value;
@@ -23,6 +21,10 @@ public class ItemDrop : MonoBehaviour
         _achievementManager = FindObjectOfType<AchievementManager>();
     }
 
+    /// <summary>
+    /// picks up items
+    /// </summary>
+    /// <param name="trigger"></param>
     private void OnTriggerEnter2D(Collider2D trigger)
     {
         if (trigger.gameObject.CompareTag("Player"))
@@ -38,14 +40,6 @@ public class ItemDrop : MonoBehaviour
                 case ItemType.heal:
                     GameObject medikitCollectSfx = Instantiate(this.medikitCollectSfx, transform.position, Quaternion.identity);
                     trigger.gameObject.GetComponent<Player>().heal(value);
-                    break;
-                case ItemType.specialA:
-                    GameObject specialCollectSfxA = Instantiate(this.itemCollectSfx, transform.position, Quaternion.identity);
-                    _achievementManager.SpecialItemPickedUp("A");
-                    break;
-                case ItemType.specialB:
-                    GameObject specialCollectSfxB = Instantiate(this.itemCollectSfx, transform.position, Quaternion.identity);
-                    _achievementManager.SpecialItemPickedUp("B");
                     break;
                 default:
                     break;

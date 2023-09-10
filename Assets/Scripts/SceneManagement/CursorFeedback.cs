@@ -12,7 +12,9 @@ public class CursorFeedback : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         Cursor.SetCursor(whiteCursor, Vector2.zero, CursorMode.Auto);
     }
-
+/// <summary>
+/// turns the cursor red when enemy is defeated
+/// </summary>
     public void StartCursorFeedback()
     {
         gameObject.SetActive(true);

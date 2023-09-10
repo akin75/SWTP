@@ -39,7 +39,9 @@ public class EnemyController : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, 0.5f); // Aktualisierung des Pfads alle 0,5 Sekunden
     }
 
-
+    /// <summary>
+    /// updates path of enemy
+    /// </summary>
     private void UpdatePath()
     {
         if (seeker.IsDone())
@@ -50,7 +52,9 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// defines what happens when current path is completed
+    /// </summary>
     private void OnPathComplete(Path p)
     {
         if (!p.error)
@@ -86,12 +90,16 @@ public class EnemyController : MonoBehaviour
             currentWaypoint++; // Erhöhen des aktuellen Wegpunkts, wenn der nächste erreicht wurde
         }
     }
-    
+    /// <summary>
+    /// sets target of enemy
+    /// </summary>
     public void SetTarget(Transform t)
     {
         target = t;
     }
-
+    /// <summary>
+    /// returns target of enemy
+    /// </summary>
     public Transform GetTarget()
     {
         return target;

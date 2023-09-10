@@ -28,7 +28,9 @@ public class Spitter : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// Checks wether enemy can shoot or not
+    /// </summary>
     private void CheckShootingConditions()
     {
         if (!player.GetIsDead())
@@ -72,49 +74,10 @@ public class Spitter : MonoBehaviour
         }
     }
     
-    
-    
-    
-    /*
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Überprüfen, ob es sich beim kollidierenden Objekt um den Player handelt
-        if (collision.CompareTag("Player"))
-        {
-            Vector2 direction = playerTransform.position - firePoint.position;
-
-            // Erstellen einer Layer-Mask, die den Layer "Enemy" ausschließt
-            LayerMask enemyLayerMask = LayerMask.GetMask("Enemy");
-            enemyLayerMask = ~enemyLayerMask;
-
-            RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, Mathf.Infinity, enemyLayerMask);
-
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
-            {
-                Debug.DrawLine(firePoint.position, hit.point, Color.green, 0.1f);
-
-                if (shootingRange.IsTouching(collision))
-                {
-                    Debug.Log("Shooting Range");
-                    InvokeRepeating("ShootProjectile", shootingInterval, shootingInterval);
-                }
-
-                if (standingRange.IsTouching(collision) && !player.GetIsDead())
-                {
-                    Debug.Log("Standing Range");
-                    rb.constraints = RigidbodyConstraints2D.FreezePosition;
-                }
-            }
-        }
-    }
-    */
-
-
-
-
-
-
-
+/// <summary>
+/// enemy cant shoot when player is not in range
+/// </summary>
+/// <param name="other"></param>
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -127,7 +90,9 @@ public class Spitter : MonoBehaviour
             }
         }
     }
-
+/// <summary>
+/// Shoots the projectile in the player direction
+/// </summary>
     private void ShootProjectile()
     {
         //Collider2D[] result = new Collider2D[] { GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>() };

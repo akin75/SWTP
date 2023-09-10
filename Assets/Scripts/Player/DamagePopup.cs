@@ -41,7 +41,11 @@ public class DamagePopup : MonoBehaviour
             }
         }
     }
-
+/// <summary>
+/// sets up the damage popup. handles the size and the color
+/// </summary>
+/// <param name="damage"></param>
+/// <param name="isCrit"></param>
     public void Setup(int damage, bool isCrit)
     {
         _displayedDamage = damage;

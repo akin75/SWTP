@@ -49,10 +49,10 @@ public class EnemyHealth : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    private void Update()
-    {
-    }
 
+    /// <summary>
+    /// defines what happens at collisions
+    /// </summary>
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -63,7 +63,9 @@ public class EnemyHealth : MonoBehaviour
             }
         }
     }
-
+    /// <summary>
+    /// Handles collision with player
+    /// </summary>
     private IEnumerator PlayerTakesDamage(Collision2D collision)
     {
         if (playerCanTakeDamage && player != null) // Überprüfe, ob 'player' nicht null ist
@@ -77,6 +79,9 @@ public class EnemyHealth : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// Shows damage popup
+    /// </summary>
     private void ShowDamagePopup(int damage, Vector3 position, bool isCrit)
     {
         Vector3 popupPosition = position + Vector3.left * 2.5f; // Hier kannst du die X- und Y-Werte anpassen
@@ -89,7 +94,9 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Handles the taken damage on the enemy
+    /// </summary>
     public void TakeDamage(int damage, bool isCrit)
     {
         currentHealth -= damage;
@@ -142,6 +149,9 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shows a visual effect for damage
+    /// </summary>
     private IEnumerator HitEffect()
     {
         Color originalColor = sprite.color; // Speichere die ursprüngliche Farbe des Sprites
@@ -150,26 +160,41 @@ public class EnemyHealth : MonoBehaviour
         sprite.color = originalColor;
     }
 
+    /// <summary>
+    /// returns current health of enemy
+    /// </summary>
     public int getCurrentHealth()
     {
         return currentHealth;
     }
-
+    
+    /// <summary>
+    /// sets the damage of the enemy
+    /// </summary>
     public void SetDamage(int damage)
     {
         this.damage = damage;
     }
 
+    /// <summary>
+    /// returns, wether the enemy obejct is destroyed or not
+    /// </summary>
     public bool IsDestroyed()
     {
         return isDestroyed;
     }
 
+    /// <summary>
+    /// sets the kill counter
+    /// </summary>
     public void setKillCounter(KillCounter counter)
     {
         killCounter = counter;
     }
 
+    /// <summary>
+    /// adds health to enemys current health
+    /// </summary>
     public void AddHealth(int health)
     {
         maxHealth += health;

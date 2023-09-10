@@ -19,6 +19,10 @@ public class CrateBehaviour : MonoBehaviour
         // sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
+    /// <summary>
+    /// crate has health like enemys or player. When health <= 0 crate is being destroyed and item is popping up
+    /// </summary>
+    /// <param name="collision">collision with bullet</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
@@ -31,15 +35,11 @@ public class CrateBehaviour : MonoBehaviour
             if (health <= 0)
             {
                 float randomValue = Random.value;
-                if (randomValue <= 0.1f)
-                {
-                    Instantiate(specialA, transform.position, Quaternion.identity);
-                }
-                else if (randomValue <= 0.4f)
+                if (randomValue <= 0.4f)
                 {
                     Instantiate(coin, transform.position, Quaternion.identity);
                 }
-                else if (randomValue <= 0.7f)
+                else if (randomValue <= 0.8f)
                 {
                     Instantiate(heart, transform.position, Quaternion.identity);
                 }
@@ -49,6 +49,10 @@ public class CrateBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// particle effect when crate is being hit
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator HitEffect()
     {
         var color = sprite.color;
