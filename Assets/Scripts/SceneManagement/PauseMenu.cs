@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Animator transition;
     public int APActive = 1;
 
-    public Slider slider1;
+    //public Slider slider1;
     public Slider slider2;
     public Slider slider3;
     public Slider slider4;
@@ -37,8 +37,6 @@ public class PauseMenu : MonoBehaviour
     public Slider slider7;
     public Slider slider8;
     public Slider slider9;
-    public Slider slider10;
-    public Slider slider11;
 
     public TMP_Text coin;
     [SerializeField] private Texture2D cursorSprite;
@@ -78,7 +76,6 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
      public void DisplayAchievements(){
        float[] ap= AM.ComputeProgPercent();
-        slider1.value= ap[0];
         slider2.value= ap[1];
         slider3.value= ap[2];
         slider4.value= ap[3];
@@ -87,8 +84,7 @@ public class PauseMenu : MonoBehaviour
         slider7.value= ap[6];
         slider8.value= ap[7];
         slider9.value= ap[8];
-        slider10.value= ap[9];
-        slider11.value= ap[10];
+
     }
 
     /// <summary>
