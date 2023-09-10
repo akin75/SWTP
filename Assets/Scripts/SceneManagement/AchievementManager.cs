@@ -109,40 +109,40 @@ public class AchievementManager : MonoBehaviour
     {
         if (progress >= requiredAmount)
         {
-            // Hier kannst du den Spieler belohnen oder eine Benachrichtigung anzeigen, dass er das Achievement erhalten hat
-        }        
-        if (achievementName == "Pistol_Killer")
-        {
-            // Dual Pistol freischalten
-        } 
-        else if (achievementName == "Pistol_Killer_x2")
-        {
-            _player.GetComponentInChildren<Weapon>().EnableDoubleFire();
-        } 
-        else if (achievementName == "Pistol_Killer_x3")
-        {
-            _player.GetComponentInChildren<Weapon>().EnableTripleFire();
-        }
-        else if (achievementName == "AR_Master")
-        {
-            _player.GetComponentInChildren<Weapon>().EnableInfiniteAmmo();
-        }
-        else if (achievementName == "Shotgun_Slayer")
-        {
-            _player.GetComponentInChildren<WeaponSG>().SetFirePointCount(8);
-        }
-        else if (achievementName == "DualPistol_Destroyer")
-        {
-            foreach (Weapon weaponComponent in _player.GetComponentsInChildren<Weapon>())
+            if (achievementName == "Pistol_Killer")
             {
-                weaponComponent.EnableDoubleFire();
+                // Dual Pistol freischalten
+            } 
+            else if (achievementName == "Pistol_Killer_x2")
+            {
+                _player.GetComponentInChildren<Weapon>().EnableDoubleFire();
+            } 
+            else if (achievementName == "Pistol_Killer_x3")
+            {
+                _player.GetComponentInChildren<Weapon>().EnableTripleFire();
             }
-        }
-        else if (achievementName == "Explosion_Expert")
-        {
-            _mineLeveledUp = true;
-            _baitLeveledUp = true;
-        }
+            else if (achievementName == "AR_Master")
+            {
+                _player.GetComponentInChildren<Weapon>().EnableInfiniteAmmo();
+            }
+            else if (achievementName == "Shotgun_Slayer")
+            {
+                _player.GetComponentInChildren<WeaponSG>().SetFirePointCount(8);
+            }
+            else if (achievementName == "DualPistol_Destroyer")
+            {
+                foreach (Weapon weaponComponent in _player.GetComponentsInChildren<Weapon>())
+                {
+                    weaponComponent.EnableDoubleFire();
+                }
+            }
+            else if (achievementName == "Explosion_Expert")
+            {
+                _mineLeveledUp = true;
+                _baitLeveledUp = true;
+            }
+        }        
+
     }
 /// <summary>
 /// returns mine level
