@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,13 +14,13 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
 
-    public GameObject pauseMenuUI;
-    public GameObject hud;
-    public CameraController cameraController;
-    public GameObject gameOverScreen;
-    public HealthBar healthBar;
-    public Player player;
-    public AudioSource testsound;
+    [SerializeField] GameObject pauseMenuUI;
+    [SerializeField] GameObject hud;
+    [SerializeField] CameraController cameraController;
+    [SerializeField] GameObject gameOverScreen;
+    [SerializeField] HealthBar healthBar;
+    [SerializeField] Player player;
+    [SerializeField] AudioSource testsound;
        
     [SerializeField]private AchievementManager AM;
     [SerializeField]private GameObject AP1;//AchievementPage
@@ -67,6 +69,13 @@ public class PauseMenu : MonoBehaviour
         }
     }
     
+/// <summary>
+    ///Methods used for navigating in and UI elements associated with the pause menu in game.
+    /// </summary>
+
+/// <summary>
+    /// Update the visual achievements and displays them in the pause screen.
+    /// </summary>
      public void DisplayAchievements(){
        float[] ap= AM.ComputeProgPercent();
         slider1.value= ap[0];
@@ -82,6 +91,9 @@ public class PauseMenu : MonoBehaviour
         slider11.value= ap[10];
     }
 
+    /// <summary>
+    /// Switches between the achievements pages.
+    /// <summary>
     public void SwitchAchievementPage(){
         if(APActive == 1){
              APActive = 2;
@@ -97,8 +109,10 @@ public class PauseMenu : MonoBehaviour
             
         }
     }
-
-    void Pause()
+    /// <summary>
+    /// Pauses the game.
+    /// <summary>
+    public void Pause()
     {
         if (pauseMenuUI != null)
         {
@@ -110,7 +124,9 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = true;
         cameraController.enabled = false;
     }
-    
+    /// <summary>
+    /// Resumes to the game.
+    /// <summary>
     public void Resume()
     {
         if (pauseMenuUI != null)
@@ -126,7 +142,9 @@ public class PauseMenu : MonoBehaviour
     }
 
            
-
+    /// <summary>
+    /// Returns to the main menu.
+    /// <summary>
     public void LoadMainMenu()
     {
          StartCoroutine(ChangeScene());
@@ -134,9 +152,10 @@ public class PauseMenu : MonoBehaviour
  IEnumerator ChangeScene(){
        transition.SetTrigger("GameStart");
         Resume();
+         
 
         yield return new WaitForSeconds(1);
-        
+        //Time.timeScale = 0f;
          SceneManager.LoadScene("MainMenu"); 
         
 
@@ -144,7 +163,9 @@ public class PauseMenu : MonoBehaviour
        
         
     }
-
+    /// <summary>
+    /// When the player dies, a game over screen will be shown.
+    /// <summary>
     public void GameOver()
     {
         hud.SetActive(false);
@@ -153,10 +174,12 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = true;
     }
 
-   
+   /// <summary>
+    /// When the player dies, he can restart the game to start a new round.
+    /// <summary>
 public void RestartGame()
     {
-        Debug.Log("Spiel neugestartet");
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         hud.SetActive(true);
         gameOverScreen.SetActive(false);
@@ -164,12 +187,18 @@ public void RestartGame()
         Time.timeScale = 1f;
         gameIsPaused = false;
     }
+
+    /// <summary>
+    /// To quit the game.
+    /// <summary>
     public void QuitGame()
     {
         Application.Quit();
         
     }
-
+    /// <summary>
+    /// Returns a boolean if the game is paused at the moment.
+    /// <summary>
     public bool IsPaused(){
         return gameIsPaused;        
     }
