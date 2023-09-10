@@ -17,19 +17,20 @@ public class FlashlightFlicker : MonoBehaviour
     {
         // Starten Sie das Flackern des Lichts
         spawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
-        Debug.Log("Flicker activated");
         scriptCalled = true;
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(StartFlicker());
     }
-
+/// <summary>
+/// Starts the flicker of Flashlight
+/// </summary>
+/// <returns></returns>
     private IEnumerator StartFlicker()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         var instance = player.GetComponentInChildren<Light2D>();
         if (instance == null)
         {
-            Debug.Log("Failed");
             yield break;
         }
         intensity = instance.intensity;

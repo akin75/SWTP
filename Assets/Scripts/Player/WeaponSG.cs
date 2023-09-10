@@ -70,7 +70,6 @@ public class WeaponSG : MonoBehaviour, IWeapon
         }
         else
         {
-            Debug.Log("Muzzle Particles Missing");
         }
 
         if (cameraController != null)
@@ -86,7 +85,6 @@ public class WeaponSG : MonoBehaviour, IWeapon
         }
         else
         {
-            Debug.Log("Recoil missing in ChSG");
         }
 
         ammo -= 1;
@@ -115,7 +113,6 @@ public class WeaponSG : MonoBehaviour, IWeapon
     /// <returns></returns>
     public IEnumerator Reload()
     {
-        Debug.Log("Reloading!");
         yield return new WaitForSeconds(reloadTime);
         ammo = maxAmmo;
         state = weaponState.READY;

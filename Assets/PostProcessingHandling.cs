@@ -27,6 +27,9 @@ public class PostProcessingHandling : MonoBehaviour
         HeartBeat();
     }
     
+    /// <summary>
+    /// post processing effects when health is low
+    /// </summary>
     private void LowHealthEffect()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -46,6 +49,9 @@ public class PostProcessingHandling : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// heartbeat sfx when health is low
+    /// </summary>
     private void HeartBeat()
     {
         float currentHealth = player.GetCurrentHealth();

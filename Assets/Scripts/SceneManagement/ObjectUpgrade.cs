@@ -89,7 +89,6 @@ public class ObjectUpgrade : MonoBehaviour
         var playerComponent = player.GetComponent<Player>();
         if (playerComponent.GetCoins() >= upgrades.cost && upgrades.quantity < 5)
         {
-            //Debug.Log("Test");
             playerComponent.setCurrency(-upgrades.cost);
             
             if (upgrades.weapon.gameObject.name == "Bait")

@@ -25,6 +25,9 @@ public class LowHealthFx : MonoBehaviour
         HeartBeat();
     }
 
+    /// <summary>
+    /// Post processing effects when player health is low
+    /// </summary>
     private void LowHealthEffect()
     {
         if (vignette != null)
@@ -47,6 +50,9 @@ public class LowHealthFx : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// heartbeat sfx when healt is low
+    /// </summary>
     private void HeartBeat()
     {
         Player player = currentPlayer.GetComponent<Player>();

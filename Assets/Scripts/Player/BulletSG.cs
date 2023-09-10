@@ -67,7 +67,6 @@ public class BulletSG : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Bullet"))
         {
-            //Debug.Log(collision.gameObject);
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 var enemy = collision.gameObject.GetComponent<EnemyHealth>();

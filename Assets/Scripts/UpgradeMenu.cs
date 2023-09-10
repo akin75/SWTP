@@ -66,7 +66,6 @@ public class UpgradeMenu : MonoBehaviour
         //    player.GetComponent<Weapon>().SetDamage(damageValue);
         //    player.GetComponent<Player>().setCurrency(-damageCost);
         //}
-        Debug.Log("Damage Upgrade");
     }
 
     public void MoveUpgrade()

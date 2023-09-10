@@ -49,7 +49,6 @@ public class MineBehaviour : MonoBehaviour
         {
             if (trigger.IsTouching(collision))
             {
-                //Debug.Log("Trigger entered");
                 Explode();
             }
         }
@@ -60,7 +59,6 @@ public class MineBehaviour : MonoBehaviour
     /// </summary>
     private void Explode()
     {
-        //Debug.Log("Boom");
         Instantiate(explosionParticles, transform.position, Quaternion.identity);
         Instantiate(smokeParticles, transform.position, Quaternion.identity);
         Instantiate(explosionSfx, transform.position, Quaternion.identity);
@@ -94,7 +92,6 @@ public class MineBehaviour : MonoBehaviour
                 if (!enemiesInDamageArea.Contains(collision.gameObject))
                 {
                     enemiesInDamageArea.Add(collision.gameObject);
-                    //Debug.Log("Enemy entered DamageArea: " + collision.gameObject.name);
                 }
             }
         }
@@ -108,7 +105,6 @@ public class MineBehaviour : MonoBehaviour
             if (enemiesInDamageArea.Contains(collision.gameObject))
             {
                 enemiesInDamageArea.Remove(collision.gameObject);
-                //Debug.Log("Enemy exited DamageArea: " + collision.gameObject.name);
             }
         }
     }
@@ -121,7 +117,6 @@ public class MineBehaviour : MonoBehaviour
         // Beim Zerstören der Mine den Status der Enemys im DamageArea-Kollider zurücksetzen
         foreach (var enemy in enemiesInDamageArea)
         {
-            //Debug.Log("Enemy reset: " + enemy.name);
         }
         enemiesInDamageArea.Clear();
     }

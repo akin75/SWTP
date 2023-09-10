@@ -74,7 +74,6 @@ public class Weapon : MonoBehaviour, IWeapon
         }
         else
         {
-            Debug.Log("Muzzle null");
         }
 
         delay = timeBetweenShots / 2;
@@ -158,7 +157,6 @@ public class Weapon : MonoBehaviour, IWeapon
             }
             else
             {
-                Debug.Log("Muzzle Particles Missing");
             }
             
             if (recoil != null)
@@ -167,7 +165,6 @@ public class Weapon : MonoBehaviour, IWeapon
             }
             else
             {
-                Debug.Log("Recoil Missing");
             }
             ammo -= 1;
         }
@@ -186,7 +183,6 @@ public class Weapon : MonoBehaviour, IWeapon
             }
             else
             {
-                Debug.Log("Muzzle Particles Missing");
             }
             if (recoil != null)
             {
@@ -194,7 +190,6 @@ public class Weapon : MonoBehaviour, IWeapon
             }
             else
             {
-                Debug.Log("Recoil Missing");
             }
             ammo -= 1;
             yield return null;
@@ -305,14 +300,12 @@ public class Weapon : MonoBehaviour, IWeapon
     /// <returns></returns>
     public IEnumerator Reload()
     {
-        //Debug.Log("Reloading!");
         if (reloadSfx != null)
         {
             reloadSfx.Play();
         }
         else
         {
-            Debug.Log("SFX missing");
         }
         yield return new WaitForSeconds(reloadTime);
         ammo = maxAmmo;

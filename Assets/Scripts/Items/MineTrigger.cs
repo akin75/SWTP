@@ -28,7 +28,6 @@ public class MineTrigger : MonoBehaviour
 /// </summary>
     private void Explode()
     {
-        //Debug.Log("Boom");
         if (smokeParticles != null)
         {
             var mainModule = smokeParticles.main;
@@ -37,7 +36,6 @@ public class MineTrigger : MonoBehaviour
             
             explosionParticles.Play();
             smokeParticles.Play();
-            //Destroy(mineSr);
             Invoke("DestroyObj", durE);
         }
     }

@@ -52,7 +52,6 @@ public class Recoil : MonoBehaviour
     private IEnumerator RecoilCoroutine()
     {
         
-        //Debug.Log("Start Recoil");
         //float elapsedTime = 0f;
         //Vector3 recoilOffset = Vector3.back * recoilDistance;
         Vector3 recoilDirection = new Vector3(0, -1f, 0).normalized / 100;
