@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.532, y: 15.126}
+  m_AnchoredPosition: {x: 10.532, y: 130}
   m_SizeDelta: {x: 719.28, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1643995542224773197
@@ -80,7 +80,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Kill 10 Zombies With The Pistol
+  m_Text: Kill 20 Zombies With The Pistol
 --- !u!1 &1086331638011400872
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 20
+  m_MaxValue: 35
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 10
+  m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -563,7 +563,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.532, y: -204.87}
+  m_AnchoredPosition: {x: 10.532, y: -89.996}
   m_SizeDelta: {x: 719.28, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2425652110511988852
@@ -607,7 +607,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Kill 30 Zombies With The Pistol
+  m_Text: Kill 50 Zombies With The Pistol
 --- !u!1 &3254799613307848562
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +806,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 30
+  m_MaxValue: 50
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -1191,7 +1191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.532, y: -94.87401}
+  m_AnchoredPosition: {x: 10.532, y: 19.999985}
   m_SizeDelta: {x: 719.28, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2537630666871581647
@@ -1235,7 +1235,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Kill 20 Zombies With The Pistol
+  m_Text: Kill 35 Zombies With The Pistol
 --- !u!1 &6979343356014691128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,7 +1546,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 5
+  m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -1624,7 +1624,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.532, y: -314.87}
+  m_AnchoredPosition: {x: 10.532, y: -199.996}
   m_SizeDelta: {x: 719.28, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3816968937718308273
@@ -1668,7 +1668,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Kill 5 Zombies With Explosions
+  m_Text: Kill 20 Zombies With Explosions
 --- !u!1001 &2253653042911626979
 PrefabInstance:
   m_ObjectHideFlags: 0
