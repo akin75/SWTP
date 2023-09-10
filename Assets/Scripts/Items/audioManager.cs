@@ -7,11 +7,10 @@ public class audioManager : MonoBehaviour
     private AudioSource sfx;
     private float sfxDur;
 
-    // Start is called before the first frame update
     void Start()
     {
         sfx = GetComponent<AudioSource>();
-        sfxDur = sfx.clip.length; // Annahme: Der AudioSource hat bereits einen AudioClip zugewiesen
+        sfxDur = sfx.clip.length; 
         StartCoroutine(DestroyAfterDelay(sfxDur));
     }
 

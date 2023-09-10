@@ -231,7 +231,6 @@ public class PlayerClass
         if (expPoints >= toLevelUp)
         {
             playerLevel++;
-            Debug.Log($"Level: {playerLevel}");
             SetExpPoints(0);
             SetLevelCurve(Mathf.RoundToInt(this.lvlCurve.Evaluate(GetLevel())));
             return true;

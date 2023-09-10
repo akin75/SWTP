@@ -17,7 +17,11 @@ public class LightFlicker : MonoBehaviour
         StartCoroutine(StartFlickering(light2D));
         
     }
-
+/// <summary>
+/// starts flicker of environment light
+/// </summary>
+/// <param name="light2D">All light objects</param>
+/// <returns></returns>
     private IEnumerator StartFlickering(Light2D light2D)
     {
         float intensity = light2D.intensity;

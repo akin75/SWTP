@@ -29,7 +29,6 @@ public class ItemDrop : MonoBehaviour
     {
         if (trigger.gameObject.CompareTag("Player"))
         {
-            Debug.Log("item collected");
             Destroy(gameObject);
             switch (itemType)
             {

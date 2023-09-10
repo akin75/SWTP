@@ -50,10 +50,8 @@ public class Player : MonoBehaviour
         PlayerClass playerClass = playerManager.playerClass;
         SetMaxHealth(GetMaxHealth());
         SetCurrentHealth(GetCurrentHealth());
-        //Debug.Log($"Max {GetMaxHealth()}  Current {GetCurrentHealth()}");
         currency = playerClass.GetCurrency();
         transform.GetComponent<PlayerController>().moveSpeed = playerClass.GetMoveSpeed();
-        //Debug.Log("maxHealth " + maxHealth);
         rb = GetComponent<Rigidbody2D>();
 
         //hud = GameObject.Find("HUD").GetComponent<KillCounter>()
@@ -71,7 +69,6 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage) 
     {
         SetCurrentHealth(GetCurrentHealth() - damage);
-        Debug.Log("currentHealth " + GetCurrentHealth());
         StartCoroutine(HitFlash());
         playerHitSfx.Play();
         if (GetCurrentHealth() <= 0)
@@ -105,7 +102,6 @@ public class Player : MonoBehaviour
     public void ChangeWeapon(string newWeapon)
     {
         currentWeapon = newWeapon;
-        Debug.Log("Weapon changed to: " + currentWeapon);
     }
     
     /// <summary>
@@ -208,7 +204,6 @@ public class Player : MonoBehaviour
     public void setCurrency(int value) {
         currency = currency + value;
         playerManager.playerClass.SetCurrency(currency);
-        //Debug.Log("Currency: " + currency);
     }
 /// <summary>
 /// sets the max health of the player
@@ -218,7 +213,6 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         SetMaxHealth(GetMaxHealth() + value);
         SetCurrentHealth(GetCurrentHealth() + value);
-        Debug.Log($"CurrentHealth is {GetCurrentHealth()}");
     }
 /// <summary>
 /// sets the max health of the player

@@ -52,7 +52,6 @@ public class Bait : MonoBehaviour
                 if (!enemiesInBaitArea.Contains(collision.gameObject))
                 {
                     enemiesInBaitArea.Add(collision.gameObject);
-                    Debug.Log("Enemy entered BaitArea: " + collision.gameObject.name);
 
                     // Reference the enemyController if not already referenced
                     if (enemyController == null)
@@ -112,7 +111,6 @@ public class Bait : MonoBehaviour
                     enemyController.SetTarget(originalTarget);
                 }
             }
-            Debug.Log("Target wieder player");
         }
         Destroy(gameObject);
     }
@@ -147,7 +145,6 @@ public class Bait : MonoBehaviour
                     enemyController.SetTarget(originalTarget);
                 }
             }
-            Debug.Log("Target wieder player");
         }
         Destroy(gameObject);
     }

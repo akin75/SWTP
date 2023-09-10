@@ -16,7 +16,6 @@ public class CrateBehaviour : MonoBehaviour
     private void Start()
     {
         playerDamage = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Weapon>().damage;
-        // sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     /// <summary>

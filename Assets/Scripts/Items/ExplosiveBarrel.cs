@@ -32,7 +32,6 @@ public class ExplosiveBarrel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            //Debug.Log("Hit Barrel");
             playerDamage = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Weapon>().damage;
             health = health - playerDamage;
             if (health <= 0)
@@ -83,8 +82,7 @@ public class ExplosiveBarrel : MonoBehaviour
                 if (!enemiesInDamageArea.Contains(collision.gameObject))
                 {
                     enemiesInDamageArea.Add(collision.gameObject);
-                    //Debug.Log(enemiesInDamageArea);
-                    //Debug.Log("Enemy entered DamageArea: " + collision.gameObject.name);
+                  
                 }
             }
         }
@@ -101,7 +99,6 @@ public class ExplosiveBarrel : MonoBehaviour
             if (enemiesInDamageArea.Contains(collision.gameObject))
             {
                 enemiesInDamageArea.Remove(collision.gameObject);
-                //Debug.Log("Enemy exited DamageArea: " + collision.gameObject.name);
             }
         }
     }

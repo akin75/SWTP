@@ -22,7 +22,6 @@ public class BackgroundMusicController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No sound effects assigned to the array!");
         }
     }
 /// <summary>

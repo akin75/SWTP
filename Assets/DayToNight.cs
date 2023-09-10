@@ -16,6 +16,10 @@ public class DayToNight : MonoBehaviour
         spawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
     }
 
+    /// <summary>
+    /// decreases light when wave increases
+    /// </summary>
+    /// <param name="value"></param>
     public void DecreaseLight(float value)
     {
         if (light2D.intensity > 0)
@@ -32,6 +36,10 @@ public class DayToNight : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// sets intensity of lights
+    /// </summary>
+    /// <param name="value">new light intensity</param>
     private void SetIntensity(float value)
     {
         light2D.intensity = value;
