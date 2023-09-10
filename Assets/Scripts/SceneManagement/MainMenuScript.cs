@@ -1,3 +1,5 @@
+/* created by: SWT-P_SS_23_akin75 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,16 +17,23 @@ public class MainMenuScript : MonoBehaviour
     }
 
    
-
+    /// <summary>
+    /// In the main menu, the player has the option to start the game.
+    /// <summary>
     public void StartGame(){
+         Time.timeScale = 1f;
      SceneManager.LoadScene("StreetPlayer");//Ruft die Scene in der Klammer auf
      }
-
+    /// <summary>
+    /// With this option he can open the settings menu.
+    /// <summary>
     public void OpenSettings(){
     SceneManager.LoadScene("SettingsMenu");//Ruft die Scene in der Klammer auf
      }
- 
- public void QuitGame()
+    /// <summary>
+    /// To quit the game.
+    /// <summary>
+    public void QuitGame()
     {
         Application.Quit();
         
