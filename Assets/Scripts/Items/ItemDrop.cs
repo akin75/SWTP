@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
-    public GameObject itemCollectSfx;
-    public GameObject medikitCollectSfx;
+    [SerializeField] private GameObject itemCollectSfx;
+    [SerializeField] private GameObject medikitCollectSfx;
     private AchievementManager _achievementManager;
     public enum ItemType
     {

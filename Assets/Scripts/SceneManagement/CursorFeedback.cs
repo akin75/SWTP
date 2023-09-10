@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CursorFeedback : MonoBehaviour
 {
-    public Texture2D redCursor;
-    public Texture2D whiteCursor;
+    [SerializeField] private Texture2D redCursor;
+    [SerializeField] private Texture2D whiteCursor;
     private IEnumerator Feedback()
     {
         Cursor.SetCursor(redCursor, Vector2.zero, CursorMode.Auto);

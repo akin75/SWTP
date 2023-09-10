@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class BulletSG : MonoBehaviour
 {
-    public ParticleSystem hitObjectParticles;
+    [SerializeField] private ParticleSystem hitObjectParticles;
     
     private PlayerClass _playerManager;
 

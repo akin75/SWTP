@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Spit : MonoBehaviour
 {
-    public int damage = 10;
-    public GameObject hitSfx;
+    [SerializeField] private int damage = 10;
+    [SerializeField] private GameObject hitSfx;
     private void Start()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

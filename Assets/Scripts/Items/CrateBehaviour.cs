@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CrateBehaviour : MonoBehaviour
 {
-    public float health;
+    [SerializeField] private float health;
     private float playerDamage;
-    public SpriteRenderer sprite;
-    public ParticleSystem crateHit;
-    public ParticleSystem crateDestroy;
-    public GameObject coin;
-    public GameObject heart;
-    public GameObject specialA;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private ParticleSystem crateHit;
+    [SerializeField] private ParticleSystem crateDestroy;
+    [SerializeField] private GameObject coin;
+    [SerializeField] private GameObject heart;
+    [SerializeField] private GameObject specialA;
 
     private void Start()
     {

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ItemThrow : MonoBehaviour
 {
-    public GameObject bait;
-    public GameObject mine;
+    [SerializeField] private GameObject bait;
+    [SerializeField] private GameObject mine;
     public int baitCount;
     public int mineCount;
 

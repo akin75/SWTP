@@ -7,12 +7,12 @@ public class TankBoss : MonoBehaviour
 {
     private AIPath aiPath;
     private float originalMaxSpeed;
-    public float chargeSpeed = 3;
-    public float chargeDuration = 10f;
-    public float cooldownDuration = 5f;
+    [SerializeField] private float chargeSpeed = 3;
+    [SerializeField] private float chargeDuration = 10f;
+    [SerializeField] private float cooldownDuration = 5f;
     private bool isCooldown = false;
     private SpriteRenderer tankSprite;
-    public GameObject chargeSfx;
+    [SerializeField] private GameObject chargeSfx;
 
     private void Start()
     {

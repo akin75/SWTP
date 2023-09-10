@@ -8,12 +8,12 @@ public class Recoil : MonoBehaviour
     private GameObject lArmL;
     private GameObject rArmL;
     private GameObject rArmU;
-    public GameObject weapon1;
-    public GameObject weapon2;
-    public float recoilDistance = 5;
-    public float recoilDuration = 0.05f;
-    public bool isDual = false;
-    public bool leftRecoilDone = false;
+    [SerializeField] private GameObject weapon1;
+    [SerializeField] private GameObject weapon2;
+    [SerializeField] private float recoilDistance = 5;
+    [SerializeField] private float recoilDuration = 0.05f;
+    [SerializeField] private bool isDual = false;
+    [SerializeField] private bool leftRecoilDone = false;
     
     private Vector3 lArmUOriginalPosition;
     private Vector3 lArmLOriginalPosition;

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Bait : MonoBehaviour
 {
-    public Collider2D baitArea;
+    [SerializeField] private Collider2D baitArea;
     private List<GameObject> enemiesInBaitArea = new List<GameObject>();
     private EnemyController enemyController;
-    public float baitTime = 3f;
-    public ParticleSystem explosionParticles;
-    public ParticleSystem smokeParticles;
-    public GameObject explosionSfx;
-    public int damage = 50;
+    [SerializeField] private float baitTime = 3f;
+    [SerializeField] private ParticleSystem explosionParticles;
+    [SerializeField] private ParticleSystem smokeParticles;
+    [SerializeField] private GameObject explosionSfx;
+    [SerializeField] private int damage = 50;
     private bool isCrit = false;
     private AchievementManager achievementManager;
-    public bool _isLeveledUp = false;
+    [SerializeField] private bool _isLeveledUp = false;
 
 
 

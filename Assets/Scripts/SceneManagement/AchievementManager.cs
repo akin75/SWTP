@@ -23,15 +23,14 @@ public class AchievementManager : MonoBehaviour
     private string _weaponType = "";
     
     private float _zombieKillTimer = 0f;
-    public float requiredZombieKillTime = 10f;
 
-    public int requiredPistolKills = 10;
-    public int requiredPistolKills2 = 20;
-    public int requiredPistolKills3 = 30;
-    public int requiredSgKills = 10;
-    public int requiredArKills = 10;
-    public int requiredDpKills = 10;
-    public int requiredExplosionKills = 10;
+    [SerializeField] private int requiredPistolKills = 10;
+    [SerializeField] private int requiredPistolKills2 = 20;
+    [SerializeField] private int requiredPistolKills3 = 30;
+    [SerializeField] private int requiredSgKills = 10;
+    [SerializeField] private int requiredArKills = 10;
+    [SerializeField] private int requiredDpKills = 10;
+    [SerializeField] private int requiredExplosionKills = 10;
 
     private float[] progPercent = new float[11];
 

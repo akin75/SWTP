@@ -6,8 +6,8 @@ using UnityEngine.Rendering.Universal;
 public class LightFlicker : MonoBehaviour
 {
     private Light2D light2D;
-    public float minFlickerSpeed = 0.02f;
-    public float maxFlickerSpeed = 0.3f;
+    [SerializeField] private float minFlickerSpeed = 0.02f;
+    [SerializeField] private float maxFlickerSpeed = 0.3f;
     // Start is called before the first frame update
     private WaveSpawner spawner;
     void Start()

@@ -11,8 +11,8 @@ public class EnemyController : MonoBehaviour
     private Transform target; // Das Ziel, auf das der Gegner zuläuft
     private Path path; // Der Pfad, den der Gegner folgt
     private Seeker seeker; // Das Objekt, das den Pfad findet
-    public Player playerController;
-    public GameObject zombieInstSfx;
+    [SerializeField] private Player playerController;
+    [SerializeField] private GameObject zombieInstSfx;
 
     private Rigidbody2D rb; // Rigidbody2D-Komponente des Gegners
 

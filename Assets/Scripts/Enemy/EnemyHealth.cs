@@ -8,26 +8,26 @@ public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
-    public int damage;
+    [SerializeField] private int damage;
 
-    public ParticleSystem bloodSplatter;
-    public ParticleSystem deathParticles;
-    public GameObject crawlerPrefab;
-    public Rigidbody2D rb;
-    public GameObject deadZombiePrefab;
-    public float transformationChance = 10;
+    [SerializeField] private ParticleSystem bloodSplatter;
+    [SerializeField] private ParticleSystem deathParticles;
+    [SerializeField] private GameObject crawlerPrefab;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private GameObject deadZombiePrefab;
+    [SerializeField] private float transformationChance = 10;
 
-    public GameObject itemDrop;
-    public int dropChance;
+    [SerializeField] private GameObject itemDrop;
+    [SerializeField] private int dropChance;
 
     private bool playerCanTakeDamage = true;
 
-    public HealthBar healthBar;
-    public bool canTransformToCrawler = false;
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private bool canTransformToCrawler = false;
     private CursorFeedback cursorFeedback;
-    public ParticleSystem bloodPuddleHit;
-    public GameObject deathSfx;
-    public GameObject damagePopupPrefab;
+    [SerializeField] private ParticleSystem bloodPuddleHit;
+    [SerializeField] private GameObject deathSfx;
+    [SerializeField] private GameObject damagePopupPrefab;
     
     private SpriteRenderer sprite;
     private Quaternion deathRotation; // Speichert die Rotation des Objekts vor der Zerstörung

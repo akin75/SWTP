@@ -6,12 +6,12 @@ using Random = UnityEngine.Random;
 
 public class Bullet : MonoBehaviour
 {
-    public ParticleSystem hitObjectParticles;
-    public GameObject zombieHitSfx;
-    public GameObject zombieMissSfx;
-    public GameObject woodHitSfx;
-    public GameObject metalHitSfx;
-    public GameObject damagePopupPrefab;
+    [SerializeField] private ParticleSystem hitObjectParticles;
+    [SerializeField] private GameObject zombieHitSfx;
+    [SerializeField] private GameObject zombieMissSfx;
+    [SerializeField] private GameObject woodHitSfx;
+    [SerializeField] private GameObject metalHitSfx;
+    [SerializeField] private GameObject damagePopupPrefab;
     private int _baseDamage;
     private int _adjustedDamage;
     private AchievementManager _achievementManager;
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     private GameObject _player;
     private PlayerClass _playerManager;
 
-    public float critChance = 0.2f; // Crit Chance von 20%
+    [SerializeField] private float critChance = 0.2f; // Crit Chance von 20%
     private bool isCrit = false;
     private float critDamage = 1.5f;
 

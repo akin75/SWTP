@@ -10,7 +10,7 @@ public class LowHealthFx : MonoBehaviour
     private Vignette vignette;
     [SerializeField] private AnimationCurve vignetteIntensityCurve;
     private GameObject currentPlayer; // Referenz auf den aktuellen Player
-    public AudioSource fastHeartBeatSfx;
+    [SerializeField] private AudioSource fastHeartBeatSfx;
     
     private void Start()
     {

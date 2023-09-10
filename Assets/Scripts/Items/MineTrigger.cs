@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class MineTrigger : MonoBehaviour
 {
-    public SpriteRenderer mineSr;
-    public ParticleSystem explosionParticles;
-    public ParticleSystem smokeParticles;
+    [SerializeField] private SpriteRenderer mineSr;
+    [SerializeField] private ParticleSystem explosionParticles;
+    [SerializeField] private ParticleSystem smokeParticles;
     
     private bool hasExploded = false;
 

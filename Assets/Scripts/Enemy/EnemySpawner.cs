@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; 
+    [SerializeField] private GameObject enemyPrefab; 
     public float spawnRate = 2f;
     // spawnCount 0 = unendlich
-    public int spawnCount = 0; 
+    [SerializeField] private int spawnCount = 0; 
     private bool endless = false;
     private float nextSpawnTime;
     private Player player;
