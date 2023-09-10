@@ -38,11 +38,6 @@ public class WeaponUpgrade : MonoBehaviour
         {
             _instance = this;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
     }
 
     void Start()

@@ -33,11 +33,6 @@ public class PerkUpgrade : MonoBehaviour
         {
             _instance = this;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
     }
 
 

@@ -55,11 +55,7 @@ public class Weapon : MonoBehaviour, IWeapon
         {
             currentInstance = this;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
+        
     }
 
     private void Start()
